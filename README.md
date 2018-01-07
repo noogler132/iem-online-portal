@@ -30,4 +30,4 @@ This README would normally document whatever steps are necessary to get your app
 
 
 # Major Project
-riyan roy added
+rajdeep added
