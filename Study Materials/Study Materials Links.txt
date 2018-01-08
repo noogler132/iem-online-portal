@@ -1,0 +1,15 @@
+1. javascript.info (Javascript Basics) - Part 1 only.
+2. node.js - https://youtu.be/-u-j7uqU7sI
+3. MongoDB Basics - https://youtu.be/1uFY60CESlM
+4. AngularJS 5 - https://youtu.be/0eWrpsCLMJQ
+5. ExpressJS - https://youtu.be/gnsO8-xJ8rs
+
+
+
+MEAN Stack Tutorials Links 
+
+1. https://www.youtube.com/playlist?list=PLv0_xHrR0PuE6Ab4Yz6dLxtsP7owwmiq8
+2. https://www.youtube.com/playlist?list=PL3vQyqzqjZ637sWpKvniMCxdqZhnMJC1d
+3. https://www.youtube.com/playlist?list=PLW1OMpQZxu7wstVOlWx2NBFvCZDGkK2CH
+4. https://www.youtube.com/playlist?list=PLgPJX9sVy92ywOAYayY7MnljGCaNY-8v5
+5. https://www.youtube.com/playlist?list=PLC3y8-rFHvwj200LLotCYum_9wmGeTJx9
