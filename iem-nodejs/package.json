@@ -1,0 +1,24 @@
+{
+  "name": "iem-nodejs",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "TextBelt": "github:typpo/textbelt",
+    "body-parser": "~1.18.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "ejs": "~2.5.7",
+    "express": "~4.15.5",
+    "express-session": "^1.15.6",
+    "getmac": "^1.4.0",
+    "morgan": "~1.9.0",
+    "mysql": "^2.15.0",
+    "nodemailer": "^4.6.2",
+    "sendtext": "^1.8.0",
+    "serve-favicon": "~2.4.5",
+    "textbelt": "0.0.3"
+  }
+}
