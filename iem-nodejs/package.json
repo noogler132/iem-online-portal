@@ -16,9 +16,10 @@
     "getmac": "^1.4.0",
     "morgan": "~1.9.0",
     "mysql": "^2.15.0",
-    "nodemailer": "^4.6.2",
+    "nodemailer": "^4.6.3",
     "sendtext": "^1.8.0",
     "serve-favicon": "~2.4.5",
+    "sqlite3": "^4.0.0",
     "textbelt": "0.0.3"
   }
 }
