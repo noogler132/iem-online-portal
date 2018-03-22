@@ -9,7 +9,7 @@ var mysql = require('mysql');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var login = require('./routes/login');
-var sqlite3 = require('sqlite3').verbose();
+//var sqlite3 = require('sqlite3').verbose();
 var app = express();
 
 // view engine setup
@@ -46,23 +46,23 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-// dbcon = mysql.createConnection({
-//     host: "localhost",
-//     user: "root",
-//     password: "mysql",
-//     database: "student"
-// });
-//
-// dbcon.connect(function(err) {
-//     if (err) throw err;
-//     console.log("Connected!");
-// });
+db = mysql.createConnection({
+    host: 'sql12.freemysqlhosting.net',
+    user: 'sql12227644',
+    password: '7tYVzbipQi',
+    database: 'sql12227644'
+});
+
+db.connect(function(err) {
+    if (err) throw err;
+    console.log("Connected!");
+});
 
 //console.log(con);
 //app.con = con;
 
 
-var db = new sqlite3.Database('iem-package');
+//var db = new sqlite3.Database('iem-package');
 
 
 module.exports = app;
