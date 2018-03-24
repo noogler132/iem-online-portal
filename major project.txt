@@ -1,7 +1,5 @@
 student portal +
 
-alumni portal + 
-
 notes/study materials +
  
 online test system +

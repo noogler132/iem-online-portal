@@ -1,5 +1,10 @@
-1. sms api (enrollment number and password)
+1. sms api (enrollment number and password) - mailchimp, sendgrid
 2. Login page and change password
 3. Registration Page(personal and academic details)
 4. Homepage
 5. 
+
+
+
+
+
