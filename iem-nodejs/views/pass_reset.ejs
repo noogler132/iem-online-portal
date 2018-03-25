@@ -16,12 +16,16 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <br>
     <br>
     <br>
-    <form action="/login" method="POST">
+    <form action="/login/password_reset" method="POST">
         <strong>
             <label for="password1">Enter your password:
                 <input type="password" name="password1"></label><br><br>
             <label for="password2">Enter your password again:
                 <input type="password" name="password2"></label><br><br>
+            <% if(err){ %>
+            <%= err %>
+            <br>
+            <% } %>
             <input type="submit">
         </strong>
     </form>
