@@ -4,9 +4,11 @@ var router = express.Router();
 
 /* GET login page. */
 router.get('/', function(req, res, next) {
-    res.render('login', { title: req.method });
+    res.render('login', { title: 'the Students Portal' });
 
 });
+
+/* POST login page. */
 
 router.post('/', function(req, res, next) {
     var user = req.body.username;
@@ -19,6 +21,7 @@ router.post('/', function(req, res, next) {
             console.log("Empty/////////////////////");
             res.redirect('www.google.com');
         }
+
         console.log(result[0].password);
         console.log(pass);
 
@@ -32,11 +35,14 @@ router.post('/', function(req, res, next) {
             console.log("no match");
             res.redirect('/login');
         }
-
     });
+});
 
+/* GET password reset page. */
+router.get('/password_reset', function(req, res, next) {
+    res.render('pass_reset');
 
 });
 
-
 module.exports = router;
+

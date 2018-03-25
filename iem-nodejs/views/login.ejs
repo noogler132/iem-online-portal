@@ -1,23 +1,31 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <% include header.ejs %>
 </head>
 <body>
-<h1>Welcome to <%= title %></h1>
-<p>Welcome to <%= title %></p>
-<br>
-<form action="/login" method="POST">
-    <strong>
-    <label for="Username">Username:
-        <input type="text" name="username"></label><br>
-    <label for="Password">Password:
-        <input type="password" name="password"></label>
+<hr>
+    <center>
+        <h1>Welcome to <%= title %></h1>
         <br>
-        <input type="submit">
-    </strong>
-
-</form>
+        <br>
+        <br>
+        <form action="/login" method="POST">
+                <strong>
+                <label for="Username">Username:
+                    <input type="text" name="username"></label><br><br>
+                <label for="Password">Password:
+                    <input type="password" name="password"></label><br><br>
+                    <input type="submit">
+                </strong>
+        </form>
+    </center>
+    <script src="/index/js/bootstrap.js"></script>
 </body>
 </html>

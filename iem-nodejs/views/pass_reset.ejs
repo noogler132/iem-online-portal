@@ -1,0 +1,31 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include header.ejs %>
+</head>
+<body>
+<hr>
+<center>
+    <h1>Reset your password</h1>
+    <br>
+    <br>
+    <br>
+    <form action="/login" method="POST">
+        <strong>
+            <label for="password1">Enter your password:
+                <input type="password" name="password1"></label><br><br>
+            <label for="password2">Enter your password again:
+                <input type="password" name="password2"></label><br><br>
+            <input type="submit">
+        </strong>
+    </form>
+</center>
+<script src="/index/js/bootstrap.js"></script>
+</body>
+</html>

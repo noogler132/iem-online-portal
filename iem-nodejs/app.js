@@ -9,7 +9,6 @@ var mysql = require('mysql');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var login = require('./routes/login');
-//var sqlite3 = require('sqlite3').verbose();
 var app = express();
 
 // view engine setup
@@ -60,9 +59,6 @@ db.connect(function(err) {
 
 //console.log(con);
 //app.con = con;
-
-
-//var db = new sqlite3.Database('iem-package');
 
 
 module.exports = app;
