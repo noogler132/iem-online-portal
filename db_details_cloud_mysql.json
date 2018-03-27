@@ -1,6 +1,12 @@
+// {
+//   host: 'sql12.freemysqlhosting.net',
+//   user: 'sql12227644',
+//   password: '7tYVzbipQi',
+//   database: 'sql12227644'
+// }
 {
-  host: 'sql12.freemysqlhosting.net',
-  user: 'sql12227644',
-  password: '7tYVzbipQi',
-  database: 'sql12227644'
+  host: 'johnny.heliohost.org',
+  user: 'suman007_iem',
+  password: 'password123',
+  database: 'suman007_iem_ashram',
 }
