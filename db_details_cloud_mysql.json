@@ -10,3 +10,11 @@
   password: 'password123',
   database: 'suman007_iem_ashram',
 }
+
+
+{
+  host: 'iemweb.heliohost.org',
+  user: 'iemweb',
+  password: 'IEMweb141132',
+  database: '',
+}
