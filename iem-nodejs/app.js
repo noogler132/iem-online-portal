@@ -5,6 +5,10 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mysql = require('mysql');
+var passport = require('passport');
+var session = require('express-session');
+var flash    = require('connect-flash');
+
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -14,6 +18,8 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+// require('./config/passport')(passport); // pass passport for configuration
 
 // uncomment after placing your favicon in /public
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -49,7 +55,7 @@ db = mysql.createConnection({
     host: 'johnny.heliohost.org',
     user: 'iemweb_141132',
     password: 'password14131',
-    database: 'iemweb_database',
+    database: 'iemweb_database'
 });
 
 db.connect(function(err) {
@@ -59,6 +65,12 @@ db.connect(function(err) {
 
 //console.log(con);
 //app.con = con;
+
+// required for passport
+app.use(session({ secret: 'iemwebportal', resave: true, saveUninitialized: true })); // session secret
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+app.use(flash()); // use connect-flash for flash messages stored in session
 
 
 module.exports = app;

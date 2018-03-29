@@ -33,8 +33,8 @@ CREATE TABLE IF NOT EXISTS `student_auth` (
   `u_roll` bigint(11) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(20) NOT NULL,
-  PRIMARY KEY (`email`),
-  UNIQUE KEY `u_roll` (`u_roll`)
+  PRIMARY KEY (`u_roll`),
+  UNIQUE KEY `u_roll` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
