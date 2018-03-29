@@ -46,10 +46,10 @@ app.use(function(err, req, res, next) {
 });
 
 db = mysql.createConnection({
-    host: 'sql12.freemysqlhosting.net',
-    user: 'sql12227644',
-    password: '7tYVzbipQi',
-    database: 'sql12227644'
+    host: 'johnny.heliohost.org',
+    user: 'iemweb_141132',
+    password: 'password14131',
+    database: 'iemweb_database',
 });
 
 db.connect(function(err) {

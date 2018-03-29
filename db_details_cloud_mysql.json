@@ -13,8 +13,8 @@
 
 
 {
-  host: 'iemweb.heliohost.org',
-  user: 'iemweb',
-  password: 'IEMweb141132',
-  database: '',
+  host: 'johnny.heliohost.org',
+  user: 'iemweb_dbuser',
+  password: 'webuser141132',
+  database: 'iemweb_database'
 }
