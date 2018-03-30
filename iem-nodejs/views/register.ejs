@@ -1,23 +1,56 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <% include header.ejs %>
+    <link rel='stylesheet' href='http://codepen.io/assets/libs/fullpage/jquery-ui.css'>
+
+    <link rel="stylesheet" href="/index/css/registerStyle.css" media="screen" type="text/css" />
 </head>
 <body>
-<h1>Welcome to <%= title %></h1>
-<p>Welcome to <%= title %></p>
-<br>
-<form action="/login" method="POST">
-    <strong>
-        <label for="Username">Username:
-            <input type="text" name="username"></label><br>
-        <label for="Password">Password:
-            <input type="password" name="password"></label>
-        <br>
-        <input type="submit">
-    </strong>
+<hr>
+<center>
+    <h1>Welcome to <%= title %></h1>
+    <br>
+    <br>
+    <br>
 
-</form>
+    <!--<form action="/login" method="POST">-->
+    <!--<strong>-->
+    <!--<label for="Username">Username:-->
+    <!--<input type="text" name="username"></label><br><br>-->
+    <!--<label for="Password">Password:-->
+    <!--<input type="password" name="password"></label><br><br>-->
+    <!--<input type="submit">-->
+    <!--</strong>-->
+    <!--</form>-->
+    <div class="login-card">
+        <h2>Register</h2><br>
+        <form>
+            <input type="email" name="email" placeholder="Email">
+            <input type="text" name="f_name" placeholder="First Name">
+            <input type="text" name="l_name" placeholder="Last Name">
+            <input type="text" name="dob" placeholder="Date of Birth">
+            <input type="text" name="contact" placeholder="Phone Number">
+            <input type="submit" name="login" class="login login-submit" value="Register">
+        </form>
+
+        <!--<div class="login-help">-->
+            <!--<a href="#">Register</a> • <a href="#">Forgot Password</a>-->
+        <!--</div>-->
+    </div>
+
+    <!-- <div id="error"><img src="https://dl.dropboxusercontent.com/u/23299152/Delete-icon.png" /> Your caps-lock is on.</div> -->
+
+    <script src='http://codepen.io/assets/libs/fullpage/jquery_and_jqueryui.js'></script>
+
+
+</center>
+<script src="/index/js/bootstrap.js"></script>
 </body>
 </html>
