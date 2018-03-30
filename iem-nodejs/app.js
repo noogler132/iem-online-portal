@@ -51,17 +51,17 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-db = mysql.createConnection({
-    host: 'johnny.heliohost.org',
-    user: 'iemweb_141132',
-    password: 'password14131',
-    database: 'iemweb_database'
-});
-
-db.connect(function(err) {
-    if (err) throw err;
-    console.log("Connected!");
-});
+// db = mysql.createConnection({
+//     host: 'johnny.heliohost.org',
+//     user: 'iemweb_141132',
+//     password: 'password14131',
+//     database: 'iemweb_database'
+// });
+//
+// db.connect(function(err) {
+//     if (err) throw err;
+//     console.log("Connected!");
+// });
 
 //console.log(con);
 //app.con = con;
