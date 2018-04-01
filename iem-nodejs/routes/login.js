@@ -29,6 +29,10 @@ router.post('/', function(req, res, next) {
             if(r)
             {
                 console.log("match");
+                console.log(req.session());
+                req.session.username = user;
+                req.session.password = pass;
+
                 res.redirect('/');
             }
             else

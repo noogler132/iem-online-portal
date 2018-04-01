@@ -61,7 +61,7 @@ app.use(function(err, req, res, next) {
 });
 
 // required for passport
-app.use(session({ secret: 'iemwebportal', resave: true, saveUninitialized: true })); // session secret
+app.use(session({ secret: 'iemwebportal', resave: true, saveUninitialized: true, cookie: { maxAge: 21600000} }));
 //app.use(passport.initialize());
 //app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
