@@ -6,7 +6,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 // var mysql = require('mysql');
-var passport = require('passport');
+// var passport = require('passport');
 var session = require('express-session');
 var flash    = require('connect-flash');
 
@@ -21,7 +21,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 /* PASSPORT CONFIG */
-require('./config/passport')(passport); // pass passport for configuration
+//require('./config/passport')(passport); // pass passport for configuration
 
 /* DATABASE CONFIG */
 db = require('./config/dbconfig');
@@ -62,8 +62,8 @@ app.use(function(err, req, res, next) {
 
 // required for passport
 app.use(session({ secret: 'iemwebportal', resave: true, saveUninitialized: true })); // session secret
-app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
+//app.use(passport.initialize());
+//app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 
