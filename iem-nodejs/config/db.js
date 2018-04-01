@@ -13,8 +13,8 @@ var u = '10401215076';
 // });
 
 
-bcrypt.genSalt(8, function(err, salt) {
-    bcrypt.hash('12345678', salt, function(err, hash) {
+
+    bcrypt.hash('00000000', 8, function(err, hash) {
         // Store hash in your password DB.
         db.query("UPDATE student_auth SET password = ? WHERE u_roll = 10401215076", hash, function (err, r) {
             if (err) throw err;
@@ -22,4 +22,16 @@ bcrypt.genSalt(8, function(err, salt) {
         })
 
     });
-});
+
+
+
+// db.query("SELECT * FROM student_auth WHERE u_roll = ?", u, function (err, result) {
+//     if (err) throw err;
+//     var p = result[0];
+//     var a  = p.password;
+//     console.log(a);
+//     bcrypt.compare('00000000', a, function(err, res) {
+//         console.log(res);
+//     });
+// });
+

@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var ValidatePassword = require('validate-password');
+var bcrypt = require('bcrypt');
 // var passwordValidator = require('password-validator');
 
 
@@ -20,23 +21,22 @@ router.post('/', function(req, res, next) {
         if (err) throw err;
         if (result.length === 0)
         {
-            console.log("Empty/////////////////////");
-            res.redirect('www.google.com');
+            console.log("Incorrect Username");
+            //Message for incorrect username
         }
-
         console.log(result[0].password);
-        console.log(pass);
-
-        if(result[0].password === pass)
-        {
-            console.log("match");
-            res.redirect('/');
-        }
-        else
-        {
-            console.log("no match");
-            res.redirect('/login');
-        }
+        bcrypt.compare(pass, result[0].password, function(err, r) {
+            if(r)
+            {
+                console.log("match");
+                res.redirect('/');
+            }
+            else
+            {
+                console.log("no match");
+                res.redirect('/login');
+            }
+        });
     });
 });
 
