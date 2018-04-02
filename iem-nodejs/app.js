@@ -33,6 +33,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({ secret: 'iemwebportal', resave: true, saveUninitialized: true, cookie: { maxAge: 21600000} }));
+
 
 /* APP ROUTES URLS */
 app.use('/', index);
@@ -60,8 +62,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-// required for passport
-app.use(session({ secret: 'iemwebportal', resave: true, saveUninitialized: true })); // session secret
 //app.use(passport.initialize());
 //app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session

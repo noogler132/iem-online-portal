@@ -22,6 +22,4 @@ db.query("SELECT * FROM student_auth WHERE u_roll = ?", user, function (err, res
     var u = result[0];
     if (err) throw err;
     console.log(u);
-    console.log(u.password);
-    console.log(u.u_roll);
 });

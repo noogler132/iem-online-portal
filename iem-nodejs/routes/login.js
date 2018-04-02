@@ -23,21 +23,38 @@ router.post('/', function(req, res, next) {
         {
             console.log("Incorrect Username");
             //Message for incorrect username
+            res.redirect('/login');
         }
-        console.log(result[0].password);
-        bcrypt.compare(pass, result[0].password, function(err, r) {
-            if(r)
-            {
-                console.log("match");
-                res.redirect('/');
-            }
-            else
-            {
-                console.log("no match");
-                res.redirect('/login');
-            }
-        });
+        else {
+            console.log(result[0].password);
+            bcrypt.compare(pass, result[0].password, function (err, r) {
+                if (r) {
+                    console.log("match");
+                    console.log(req.session);
+                    req.session.username = user;
+                    req.session.password = result[0].password;
+                    console.log(req.session);
+
+                    res.redirect('/');
+                }
+                else {
+                    console.log("no match");
+                    res.redirect('/login');
+                }
+            });
+        }
     });
+});
+
+/* GET password reset page. */
+router.get('/logout', function(req, res, next) {
+    console.log(req.session);
+    req.session.destroy(function(err) {
+        // cannot access session here
+        if(err) throw err;
+    });
+    console.log(req.session);
+    res.redirect('/');
 });
 
 /* GET password reset page. */
