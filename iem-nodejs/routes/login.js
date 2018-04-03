@@ -2,13 +2,30 @@ var express = require('express');
 var router = express.Router();
 var ValidatePassword = require('validate-password');
 var bcrypt = require('bcrypt');
+var checkSession = require('./isLoggedIn');
 // var passwordValidator = require('password-validator');
+
+
+/* GET temp test. */
+router.get('/temp', function(req, res, next) {
+    if(req.session.username) {
+        res.render('temp');
+    }
+    else{
+        res.redirect('/login');
+    }
+});
 
 
 /* GET login page. */
 router.get('/', function(req, res, next) {
-    res.render('login', { title: 'the Students Portal'});
-
+    var user = checkSession(req);
+    if(!user.isLoggedIn) {
+        res.render('login', {title: 'the Students Portal', isLoggedIn: false, user: user });
+    }
+    else{
+        res.redirect('/');
+    }
 });
 
 
@@ -75,12 +92,18 @@ router.post('/password_reset', function(req, res, next) {
     };
     var validator = new ValidatePassword(options);
     var pass1 = req.body.password1;
+    var pass2 = req.body.password2;
     var passwordData = validator.checkPassword(pass1);
     if (!passwordData.isValid)
     {
         res.render('pass_reset', { err: passwordData.validationMessage });
     }
-    var pass2 = req.body.password2;
+    else if(pass1!==pass2){
+        res.render('pass_reset', { err: 'Passwords do not match' });
+    }
+    else{
+
+    }
 });
 
 
