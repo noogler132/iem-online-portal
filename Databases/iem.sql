@@ -119,7 +119,7 @@ CREATE TABLE IF NOT EXISTS `student_details` (
   `dob` date NOT NULL,
   `dept` varchar(5) NOT NULL,
   `contact` bigint(10) NOT NULL,
-  KEY `u_roll` (`u_roll`),
+   PRIMARY KEY `u_roll` (`u_roll`),
   KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

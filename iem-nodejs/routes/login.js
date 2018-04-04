@@ -33,7 +33,6 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
     var user = req.body.username;
     var pass = req.body.password;
-
     db.query("SELECT password FROM student_auth WHERE u_roll = ?", user, function (err, result, fields) {
         if (err) throw err;
         if (result.length === 0)
@@ -43,16 +42,18 @@ router.post('/', function(req, res, next) {
             res.redirect('/login');
         }
         else {
-            console.log(result[0].password);
-            bcrypt.compare(pass, result[0].password, function (err, r) {
-                if (r) {
-                    console.log("match");
-                    console.log(req.session);
-                    req.session.username = user;
-                    req.session.password = result[0].password;
-                    console.log(req.session);
-
-                    res.redirect('/');
+            bcrypt.compare(pass, result[0].password, function (err, r)
+            {
+                if(r)
+                {
+                    db.query("SELECT * FROM student_details WHERE u_roll = ?", user, function (err, resultName) {
+                        req.session.username = resultName[0].f_name;
+                        req.session.uroll = user;
+                        req.session.password = result[0].password;
+                        req.session.save();
+                        console.log(req.session);
+                        res.redirect('/');
+                    });
                 }
                 else {
                     console.log("no match");
