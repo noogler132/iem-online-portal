@@ -64,7 +64,7 @@ router.post('/', function(req, res, next) {
     });
 });
 
-/* GET password reset page. */
+/* GET logout page. */
 router.get('/logout', function(req, res, next) {
     console.log(req.session);
     req.session.destroy(function(err) {
@@ -77,8 +77,13 @@ router.get('/logout', function(req, res, next) {
 
 /* GET password reset page. */
 router.get('/password_reset', function(req, res, next) {
-    res.render('pass_reset', { err: '' });
-
+    var user = checkSession(req);
+    if(!user.isLoggedIn) {
+        res.render('pass_reset', {err: '', user: user});
+    }
+    else{
+        res.render('pass_reset', {err: '', user: user});
+    }
 });
 
 /* POST password reset page. */
