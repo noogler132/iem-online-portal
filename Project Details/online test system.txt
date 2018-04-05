@@ -1,0 +1,73 @@
+---------- upload file --------------------
+https://www.w3schools.com/nodejs/nodejs_uploadfiles.asp
+
+--------- excel - cvs -----------------
+https://www.npmjs.com/package/excelcsv
+
+------- csv to mysql ------------------
+https://stackoverflow.com/questions/31651931/how-to-import-excel-file-xlsx-to-mysql-using-nodejs/31690138#31690138
+
+
+var express = require('express');
+var app = express();
+var bodyParser = require('body-parser');
+var path = require('path');
+var http = require('http');
+var formidable = require('formidable');
+var fs = require('fs');
+var csvParser = require('csv-parse');
+var cm = require('csv-mysql');
+var connection=require('./config');
+
+// Create application/x-www-form-urlencoded parser
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
+
+app.use(express.static('public'));
+app.get('/csvupload.html', function (req, res) {
+    res.sendFile(path.resolve("../view/csvupload.html"));
+})
+
+app.post('/csvfileupload', urlencodedParser, function (req, res) {
+
+    if (req.url == '/csvfileupload') {
+        var form = new formidable.IncomingForm();
+        form.parse(req, function (err, fields, files) 
+        {
+            var oldpath = files.filetoupload.path;
+            var newpath = 'C:/xampp/htdocs/nodejs/mvc/csvupload/uploads/' + files.filetoupload.name;
+            fs.rename(oldpath, newpath, function (err) {
+                if (err) throw err;
+                res.write('File uploaded and moved!');
+                res.end();
+            });
+            fs.readFile(oldpath, { encoding: 'utf-8' }, function(err, csvData) {
+
+                if (err) 
+                {
+                    console.log(err);
+                }
+
+
+                csvParser(csvData, { delimiter: ',' }, function(err, data) {
+                    if (err)
+                    {
+                        console.log(err);
+                    } 
+                    else 
+                    {      
+                    console.log(data);    
+                        var sql = "INSERT INTO customer (id,name,address,designation) VALUES ?";
+                        connection.query(sql, [data], function(err) {
+                        if (err) throw err;
+                        conn.end();
+                        });   
+
+                    }
+                });
+            });
+        });
+
+    } 
+
+
+}).listen(8080); 
