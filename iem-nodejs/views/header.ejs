@@ -30,7 +30,9 @@
                 <div class="navbar-header navbar-left wthree">
                     <h1><a href="/">IEM<span>Good Education. Good Jobs.</span></a></h1>
                     <!--<a href="index.html"><img src="/images/IEM.jpg" style="width: 300px; height: 200px; padding-top: 50px;"></a>-->
+
                 </div>
+
                 <!-- navigation -->
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
@@ -58,6 +60,7 @@
 
                     </div>
                 </div>
+
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
 
@@ -97,7 +100,7 @@
                         <% if(user.isLoggedIn){ %>
                         <li><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <%= user.username %> <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="/login/logout">Logout</a></li>
+                                <li><a class="agile-icon" href="/login/logout"><i class="glyphicon glyphicon-log-out"></i> Logout</a></li>
                             </ul>
                         </li>
                         <% } %>
