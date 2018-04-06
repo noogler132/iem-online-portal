@@ -10,4 +10,9 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'IEM', user: user });
 });
 
+router.get('/syllabus', function(req, res, next) {
+    var user = checkSession(req);
+    res.render('syllabus', { title: 'IEM', user: user });
+});
+
 module.exports = router;
