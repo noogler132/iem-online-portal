@@ -9,7 +9,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <head>
     <%- include('header', {user: user}); %>
     <link rel='stylesheet' href='http://codepen.io/assets/libs/fullpage/jquery-ui.css'>
-
     <link rel="stylesheet" href="/index/css/loginStyle.css" media="screen" type="text/css" />
 </head>
 <body>
@@ -29,24 +28,36 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <!--<input type="submit">-->
                 <!--</strong>-->
         <!--</form>-->
+        <% if(err){ %>
+        </div>
+        <div class="alert alert-danger" role="alert" style="width: 350px">
+            <strong><%= err %></strong>
+        </div>
+        <% } %>
         <div class="login-card">
             <h2>Log-in</h2><br>
             <form action="/login" method="POST">
+                <div class="input-group input-group-lg w3_w3layouts">
+                    <span class="input-group-addon" id="sizing-addon1">@</span>
+                    <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1" name="username">
+                </div>
+                <div class="input-group input-group-lg w3_w3layouts">
+                    <input type="password" class="form-control" placeholder="Password" aria-describedby="sizing-addon1" name="password">
+                    <span class="input-group-btn">
+                        <input type="submit" name="login" class="btn btn-default" value="Go!">
+					</span>
+                </div>
+                <!--
                 <input type="text" name="username" placeholder="Username" autofocus="autofocus">
                 <input type="password" name="password" placeholder="Password">
                 <input type="submit" name="login" class="login login-submit" value="Login">
+                <button class="btn btn-default" type="submit">Go!</button>-->
             </form>
-
             <div class="login-help">
                  <a href="/login/password_reset">Forgot Password</a>
             </div>
-        </div>
-
         <!-- <div id="error"><img src="https://dl.dropboxusercontent.com/u/23299152/Delete-icon.png" /> Your caps-lock is on.</div> -->
-
         <script src='http://codepen.io/assets/libs/fullpage/jquery_and_jqueryui.js'></script>
-
-
     </center>
     <script src="/index/js/bootstrap.js"></script>
 </body>

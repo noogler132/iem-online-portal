@@ -21,7 +21,7 @@ router.get('/temp', function(req, res, next) {
 router.get('/', function(req, res, next) {
     var user = checkSession(req);
     if(!user.isLoggedIn) {
-        res.render('login', {title: 'the Students Portal', isLoggedIn: false, user: user });
+        res.render('login', {title: 'the Students Portal', isLoggedIn: false, user: user, err: '' });
     }
     else{
         res.redirect('/');
@@ -33,13 +33,13 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
     var user = req.body.username;
     var pass = req.body.password;
+    var session_user = checkSession(req);
     db.query("SELECT password FROM student_auth WHERE u_roll = ?", user, function (err, result, fields) {
         if (err) throw err;
         if (result.length === 0)
         {
-            console.log("Incorrect Username");
-            //Message for incorrect username
-            res.redirect('/login');
+            res.render('login', {title: 'the Students Portal', isLoggedIn: false, user: session_user, err: 'Incorrect Username or Password' });
+
         }
         else {
             bcrypt.compare(pass, result[0].password, function (err, r)
@@ -57,7 +57,7 @@ router.post('/', function(req, res, next) {
                 }
                 else {
                     console.log("no match");
-                    res.redirect('/login');
+                    res.render('login', {title: 'the Students Portal', isLoggedIn: false, user: session_user, err: 'Incorrect Username or Password' });;
                 }
             });
         }
