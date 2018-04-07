@@ -1,0 +1,40 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('header', {user: user}); %>
+    <link rel='stylesheet' href='http://codepen.io/assets/libs/fullpage/jquery-ui.css'>
+    <link rel="stylesheet" href="/index/css/loginStyle.css" media="screen" type="text/css" />
+</head>
+<body>
+<hr>
+<center>
+    <h1>Welcome to <%= title %></h1>
+    <br>
+    <br>
+    <br>
+
+
+    <div><center>
+            <form method="post" enctype="multipart/form-data">
+                <div>
+                    <label for="file"><strong>Choose file to upload</strong></label>
+                    <br><br><br>
+                    <input type="file" id="file" name="file">
+                </div><br><br>
+                <div>
+                    <button>Submit</button>
+                </div>
+            </form>
+        </center>
+    </div>
+
+</center>
+<script src="/index/js/bootstrap.js"></script>
+</body>
+</html>
