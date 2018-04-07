@@ -16,9 +16,4 @@ router.get('/syllabus', function(req, res, next) {
 });
 
 
-router.get('/up', function(req, res, next) {
-    var user = checkSession(req);
-    res.render('upload_form', { title: 'IEM', user: user });
-});
-
 module.exports = router;
