@@ -1,32 +1,4 @@
-.answers li { 
-    list-style: upper-alpha; 
-    } 
-    
-    label { 
-    margin-left: 0.5em; 
-    cursor: pointer; 
-    } 
-    
-    #results { 
-    background: #dddada; 
-    color: 000000; 
-    padding: 3px; 
-    text-align: center; 
-    width: 200px; 
-    cursor: pointer; 
-    border: 1px solid gray; 
-    }
-    
-    #results:hover { 
-    background: #3d91b8; 
-    color: #ffffff; 
-    padding: 3px; 
-    text-align: center; 
-    width: 200px; 
-    cursor: pointer; 
-    border: 1px solid gray; 
-    } 
-    
+  
     #categorylist { 
     margin-top: 6px; 
     display: none; 
@@ -40,3 +12,17 @@
     display: none;
     font-style: italic;
     }
+    .radio-pink [type="radio"]:checked+label:after {
+        border-color: #1e65e9;
+        background-color: #1ee928;
+    }
+    /*Gap*/
+    
+    .radio-pink-gap [type="radio"].with-gap:checked+label:before {
+        border-color: #e91e63;
+    }
+    
+    .radio-pink-gap [type="radio"]:checked+label:after {
+        border-color: #e91e63;
+        background-color: #e91e63;
+    }          
