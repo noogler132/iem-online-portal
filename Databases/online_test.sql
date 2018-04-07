@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 02, 2018 at 08:21 PM
+-- Generation Time: Apr 07, 2018 at 06:44 PM
 -- Server version: 5.7.19
 -- PHP Version: 5.6.31
 
@@ -30,6 +30,7 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `online_test`;
 CREATE TABLE IF NOT EXISTS `online_test` (
+  `Q_no` varchar(3) NOT NULL,
   `Question` text NOT NULL,
   `Option1` text NOT NULL,
   `Option2` text NOT NULL,
@@ -44,8 +45,8 @@ CREATE TABLE IF NOT EXISTS `online_test` (
 -- Dumping data for table `online_test`
 --
 
-INSERT INTO `online_test` (`Question`, `Option1`, `Option2`, `Option3`, `Option4`, `Solution`, `Remarks`, `subject_code`) VALUES
-('Is Suman Batman?', 'Yes', 'No', 'Cannot be determined', 'None of these', 'Yes', '', '101');
+INSERT INTO `online_test` (`Q_no`, `Question`, `Option1`, `Option2`, `Option3`, `Option4`, `Solution`, `Remarks`, `subject_code`) VALUES
+('', 'Is Suman Batman?', 'Yes', 'No', 'Cannot be determined', 'None of these', 'Yes', '', '101');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
