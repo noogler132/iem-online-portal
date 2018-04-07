@@ -4,7 +4,6 @@ var checkSession = require('./isLoggedIn');
 var formidable = require('formidable');
 var fs = require('fs');
 
-
 /* GET upload page for teachers. */
 router.get('/upload', function(req, res, next) {
   var user = checkSession(req);
