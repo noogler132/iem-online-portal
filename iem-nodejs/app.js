@@ -15,6 +15,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var login = require('./routes/login');
 var ots = require('./routes/ots');
+var pass_reset = require('./routes/password_reset');
 var app = express();
 
 // view engine setup
@@ -42,6 +43,7 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/login', login);
 app.use('/online-test', ots);
+app.use('/change-password', pass_reset);
 
 
 // catch 404 and forward to error handler

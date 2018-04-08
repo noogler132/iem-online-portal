@@ -34,7 +34,7 @@ router.post('/stu', function(req, res, next) {
     var user = req.body.username;
     var pass = req.body.password;
     var session_user = checkSession(req);
-    db.query("SELECT password FROM student_auth WHERE u_roll = ?", user, function (err, result, fields) {
+    db.query("SELECT password FROM auth WHERE u_id = ?", user, function (err, result, fields) {
         if (err) throw err;
         if (result.length === 0)
         {
@@ -83,7 +83,7 @@ router.post('/tch', function(req, res, next) {
     var user = req.body.username;
     var pass = req.body.password;
     var session_user = checkSession(req);
-    db.query("SELECT password FROM teacher WHERE tch_id = ?", user, function (err, result, fields) {
+    db.query("SELECT password FROM auth WHERE u_id = ?", user, function (err, result, fields) {
         if (err) throw err;
         if (result.length === 0)
         {
@@ -107,7 +107,7 @@ router.post('/tch', function(req, res, next) {
                 }
                 else {
                     console.log("no match");
-                    res.render('login', {title: 'the Teachers Portal', isLoggedIn: false, user: session_user, err: 'Incorrect Username or Password' });;
+                    res.render('login', {title: 'the Teachers Portal', isLoggedIn: false, user: session_user, err: 'Incorrect Username or Password' });
                 }
             });
         }
@@ -126,61 +126,6 @@ router.get('/logout', function(req, res, next) {
     res.redirect('/');
 });
 
-/* GET password reset page. */
-router.get('/password_reset', function(req, res, next) {
-    var user = checkSession(req);
-    if(!user.isLoggedIn) {
-        res.render('pass_reset', {err: '', user: user});
-    }
-    else{
-        res.render('pass_reset', {err: '', user: user});
-    }
-});
-
-/* POST password reset page. */
-router.post('/password_reset', function(req, res, next) {
-    var options = {
-        enforce: {
-            lowercase: true,
-            uppercase: true,
-            specialCharacters: false,
-            numbers: true
-        }
-    };
-    var validator = new ValidatePassword(options);
-    var pass1 = req.body.password1;
-    var pass2 = req.body.password2;
-    var passwordData = validator.checkPassword(pass1);
-    if (!passwordData.isValid)
-    {
-        res.render('pass_reset', { err: passwordData.validationMessage });
-    }
-    else if(pass1!==pass2){
-        res.render('pass_reset', { err: 'Passwords do not match' });
-    }
-    else{
-
-    }
-});
-
-
-// router.post('/password_reset', function(req, res, next) {
-//     var validator = new passwordValidator();
-//     validator
-//         .is().min(8)                                    // Minimum length 8
-//         .is().max(16)                                   // Maximum length 16
-//         .has().uppercase()                              // Must have uppercase letters
-//         // .has().lowercase()                              // Must have lowercase letters
-//         // .has().digits()                                 // Must have digits
-//         // .has().not().spaces();                          // Should not have spaces
-//         // .is().not().oneOf(['Password', 'Password123']); // Blacklist these values
-//     var pass1 = req.body.password1;
-//     if (validator.validate(pass1))
-//     {
-//         res.render('pass_reset', { err: 'Password must contain ..........'});
-//     }
-//     var pass2 = req.body.password2;
-// });
 
 module.exports = router;
 

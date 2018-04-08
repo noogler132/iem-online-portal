@@ -29,10 +29,11 @@ SET time_zone = "+00:00";
 --
 
 DROP TABLE IF EXISTS `student_auth`;
-CREATE TABLE IF NOT EXISTS `student_auth` (
-  `u_roll` bigint(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `auth` (
+  `u_id` bigint(11) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(20) NOT NULL,
+  `as` varchar(3) NOT NULL,
   PRIMARY KEY (`u_roll`),
   UNIQUE KEY `u_roll` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

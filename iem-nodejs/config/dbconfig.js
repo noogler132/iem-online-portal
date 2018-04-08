@@ -18,7 +18,7 @@ db.connect(function(err) {
 module.exports = db;
 
 var user = '10401215076';
-db.query("SELECT * FROM student_auth WHERE u_roll = ?", user, function (err, result) {
+db.query("SELECT * FROM auth WHERE u_id = ?", user, function (err, result) {
     var u = result[0];
     if (err) throw err;
     console.log(u);
