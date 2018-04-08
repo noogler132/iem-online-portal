@@ -48,7 +48,8 @@ router.post('/stu', function(req, res, next) {
                 {
                     db.query("SELECT * FROM student_details WHERE u_roll = ?", user, function (err, resultName) {
                         req.session.username = resultName[0].f_name;
-                        req.session.id = user;
+                        req.session.uid = user;
+                        req.session.as = 'stu';
                         req.session.password = result[0].password;
                         req.session.save();
                         console.log(req.session);
@@ -96,7 +97,8 @@ router.post('/tch', function(req, res, next) {
                 {
                     db.query("SELECT * FROM teacher WHERE tch_id = ?", user, function (err, resultName) {
                         req.session.username = resultName[0].f_name;
-                        req.session.id = user;
+                        req.session.uid = user;
+                        req.session.as = 'tch';
                         req.session.password = result[0].password;
                         req.session.save();
                         console.log(req.session);

@@ -68,6 +68,7 @@
 
                         <li><a href="/">Home</a></li>
                         <li><a href="/about">About</a></li>
+                        <% if(user.as === 'stu' || user.as === ''){ %>
                         <li><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Student <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="/register">Time Table</a></li>
@@ -77,9 +78,10 @@
                                 <li><a href="#">Student Feedback Form</a></li>
                             </ul>
                         </li>
+                        <% } %>
                         <!--<li><a href="#">Student Portal</a></li>-->
                         <!--<li><a href="portfolio.html">Teacher's Portal</a></li>-->
-
+                        <% if(user.as === 'tch'){ %>
                         <li><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Teacher<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#">Time Table</a></li>
@@ -88,6 +90,7 @@
                                 <li><a href="#">Notices</a></li>
                             </ul>
                         </li>
+                        <% } %>
                         <li><a href="/contact_us">Contact Us</a></li>
                         <% if(!user.isLoggedIn){ %>
                         <li><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login<span class="caret"></span></a>
