@@ -3,6 +3,8 @@ var router = express.Router();
 var checkSession = require('./isLoggedIn');
 var formidable = require('formidable');
 var fs = require('fs');
+var exceltocvs = require('../supporting codes/excel2csv.js');
+
 
 /* GET upload page for teachers. */
 router.get('/upload', function(req, res, next) {
@@ -27,7 +29,8 @@ router.post('/upload', function(req, res, next) {
            var oldpath = files.filetoupload.path;
            var newpath = 'D:\\iem-package\\iem-nodejs\\Uploads\\' + files.filetoupload.name;
            fs.rename(oldpath, newpath, function (err) {
-               if (err) throw err;z
+               if (err) throw err;
+               exceltocvs(newpath, files.filetoupload.name);
                res.render('upload_form', {title: 'IEM', user: user, progress: 100});
            });
         }

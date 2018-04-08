@@ -32,13 +32,15 @@ DROP TABLE IF EXISTS `teacher`;
 CREATE TABLE IF NOT EXISTS `teacher` (
   `tch_id` int(10) NOT NULL,
   `tch_name` varchar(50) NOT NULL,
-  `pwd` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
   `contact` int(10) NOT NULL,
   `email` varchar(100) NOT NULL,
   `facebook_id` varchar(100) NOT NULL,
   `googleplus_id` varchar(100) NOT NULL,
   `designation` varchar(10) NOT NULL,
-  `is_admin` tinyint(1) NOT NULL
+  `is_admin` tinyint(1) NOT NULL,
+  PRIMARY KEY `tch_id` (`tch_id`),
+  KEY `email` (`email`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 COMMIT;
 
