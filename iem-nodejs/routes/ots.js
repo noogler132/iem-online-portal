@@ -27,7 +27,7 @@ router.post('/upload', function(req, res, next) {
            var oldpath = files.filetoupload.path;
            var newpath = 'D:\\iem-package\\iem-nodejs\\Uploads\\' + files.filetoupload.name;
            fs.rename(oldpath, newpath, function (err) {
-               if (err) throw err;
+               if (err) throw err;z
                res.render('upload_form', {title: 'IEM', user: user, progress: 100});
            });
         }

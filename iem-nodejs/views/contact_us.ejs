@@ -1,0 +1,54 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('header', {user: user}); %>
+</head>
+<body>
+<hr>
+<!-- contact -->
+<div class="contact">
+    <div class="team-info w3-agileits">
+        <div class="container">
+            <div class="w3ls-title">
+                <h3 class="agileits-title w3title1">Contact Us</h3>
+            </div>
+            <div class="contact-form">
+                <form action="#" method="post">
+                    <input type="text" name="Name" placeholder="Name" required="">
+                    <input type="email" class="email" name="Email" placeholder="Email" required="">
+                    <input type="text" name="Phone" placeholder="Phone" required="">
+                    <textarea name="Message" placeholder="Message" required=""></textarea>
+                    <input type="submit" value="SUBMIT" >
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- //contact -->
+<!-- map -->
+
+<div class="map w3layouts">
+    <div class="col-md-8 map-left">
+        <iframe src="https://maps.google.com/maps?q=IEM ashram&t=&z=15&ie=UTF8&iwloc=&output=embed" allowfullscreen=""></iframe>
+    </div>
+    <div class="col-md-4 map-wthree-right">
+        <h4><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Address</h4>
+        <p>34/2, GN Block, Sector V, Salt Lake City, Kolkata</p>
+        <h4><span class="glyphicon glyphicon-phone" aria-hidden="true"></span>Phone</h4>
+        <p>  033 2357 2995 </p>
+        <h4><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>Email</h4>
+        <p class="agile-last"><a href="mailto:info@example.com">iem.portal141@gmail.com</a></p>
+    </div>
+    <div class="clearfix"> </div>
+</div>
+<!-- //map -->
+<%- include('footer'); %>
+<script src="/index/js/bootstrap.js"></script>
+</body>
+</html>

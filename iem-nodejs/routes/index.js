@@ -10,9 +10,15 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'IEM', user: user });
 });
 
+/* GET syllabus page */
 router.get('/syllabus', function(req, res, next) {
     var user = checkSession(req);
     res.render('syllabus', { title: 'IEM', user: user });
+});
+/* GET contact us page */
+router.get('/contact_us', function(req, res, next) {
+    var user = checkSession(req);
+    res.render('contact_us', { title: 'IEM', user: user });
 });
 
 

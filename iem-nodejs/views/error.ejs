@@ -11,10 +11,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </head>
 <body>
 <hr>
+<div style="height: 550px">
 <h1><%= message %></h1>
 <h2><%= error.status %></h2>
 <pre><%= error.stack %></pre>
-
+</div>
+<%- include('footer'); %>
 <script src="/index/js/bootstrap.js"></script>
 </body>
 </html>
