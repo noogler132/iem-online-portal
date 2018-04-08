@@ -1,7 +1,7 @@
 var details = {isLoggedIn: '', username: ''};
 
 module.exports = function (req){
-    if(!req.session.uroll) {
+    if(!req.session.username) {
         details = {isLoggedIn: false, username: ''}
     }
     else{

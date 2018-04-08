@@ -17,8 +17,8 @@ router.get('/temp', function(req, res, next) {
 });
 
 
-/* GET login page. */
-router.get('/', function(req, res, next) {
+/* GET students login page. */
+router.get('/stu', function(req, res, next) {
     var user = checkSession(req);
     if(!user.isLoggedIn) {
         res.render('login', {title: 'the Students Portal', isLoggedIn: false, user: user, err: '' });
@@ -29,8 +29,8 @@ router.get('/', function(req, res, next) {
 });
 
 
-/* POST login page. */
-router.post('/', function(req, res, next) {
+/* POST students login page. */
+router.post('/stu', function(req, res, next) {
     var user = req.body.username;
     var pass = req.body.password;
     var session_user = checkSession(req);
@@ -48,7 +48,7 @@ router.post('/', function(req, res, next) {
                 {
                     db.query("SELECT * FROM student_details WHERE u_roll = ?", user, function (err, resultName) {
                         req.session.username = resultName[0].f_name;
-                        req.session.uroll = user;
+                        req.session.id = user;
                         req.session.password = result[0].password;
                         req.session.save();
                         console.log(req.session);
@@ -63,6 +63,55 @@ router.post('/', function(req, res, next) {
         }
     });
 });
+
+
+/* GET teachers login page. */
+router.get('/tch', function(req, res, next) {
+    var user = checkSession(req);
+    if(!user.isLoggedIn) {
+        res.render('login', {title: 'the Teachers Portal', isLoggedIn: false, user: user, err: '' });
+    }
+    else{
+        res.redirect('/');
+    }
+});
+
+
+/* POST teachers login page. */
+router.post('/tch', function(req, res, next) {
+    var user = req.body.username;
+    var pass = req.body.password;
+    var session_user = checkSession(req);
+    db.query("SELECT password FROM teacher WHERE tch_id = ?", user, function (err, result, fields) {
+        if (err) throw err;
+        if (result.length === 0)
+        {
+            res.render('login', {title: 'the Teachers Portal', isLoggedIn: false, user: session_user, err: 'Incorrect Username or Password' });
+
+        }
+        else {
+            bcrypt.compare(pass, result[0].password, function (err, r)
+            {
+                if(r)
+                {
+                    db.query("SELECT * FROM teacher WHERE tch_id = ?", user, function (err, resultName) {
+                        req.session.username = resultName[0].f_name;
+                        req.session.id = user;
+                        req.session.password = result[0].password;
+                        req.session.save();
+                        console.log(req.session);
+                        res.redirect('/');
+                    });
+                }
+                else {
+                    console.log("no match");
+                    res.render('login', {title: 'the Teachers Portal', isLoggedIn: false, user: session_user, err: 'Incorrect Username or Password' });;
+                }
+            });
+        }
+    });
+});
+
 
 /* GET logout page. */
 router.get('/logout', function(req, res, next) {
