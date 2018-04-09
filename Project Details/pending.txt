@@ -2,6 +2,10 @@
 
 -------- database ----------------
 a new table to store active examination details
+1. sub_code
+2. sub_name
+3. test_number
+4. is_active
 ------------------------------------------------
 
 2: page to display a single question only

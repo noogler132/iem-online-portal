@@ -21,5 +21,12 @@ router.get('/contact_us', function(req, res, next) {
     res.render('contact_us', { title: 'IEM', user: user });
 });
 
+/* GET About us page */
+router.get('/about', function(req, res, next) {
+    var user = checkSession(req);
+    console.log(req.session);
+    res.render('about', { title: 'IEM', user: user });
+})
+
 
 module.exports = router;
