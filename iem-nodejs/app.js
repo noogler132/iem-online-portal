@@ -16,7 +16,7 @@ var users = require('./routes/users');
 var login = require('./routes/login');
 var ots = require('./routes/ots');
 var pass_reset = require('./routes/password_reset');
-var about = require('./routes/about');
+var about = require('./routes/index');
 var app = express();
 
 // view engine setup
