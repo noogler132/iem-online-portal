@@ -34,7 +34,8 @@ router.post('/stu', function(req, res, next) {
     var user = req.body.username;
     var pass = req.body.password;
     var session_user = checkSession(req);
-    db.query("SELECT password FROM auth WHERE u_id = ?", user, function (err, result, fields) {
+    var as = 'stu';
+    db.query("SELECT password FROM auth WHERE u_id = ? AND log_as = 'stu' ", user, function (err, result, fields) {
         if (err) throw err;
         if (result.length === 0)
         {
@@ -83,7 +84,7 @@ router.post('/tch', function(req, res, next) {
     var user = req.body.username;
     var pass = req.body.password;
     var session_user = checkSession(req);
-    db.query("SELECT password FROM auth WHERE u_id = ?", user, function (err, result, fields) {
+    db.query("SELECT password FROM auth WHERE u_id = ? AND log_as = 'tch' ", user, function (err, result, fields) {
         if (err) throw err;
         if (result.length === 0)
         {
