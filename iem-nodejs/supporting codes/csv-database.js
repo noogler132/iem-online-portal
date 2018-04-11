@@ -14,7 +14,7 @@ module.exports = function (data) {
             quote: null
         },
         table: 'online_test',
-        headers: ["Question", "Option1", "Option2", "Option3", "Option4", "Solution", "Remarks"],
+        // headers: ["Q_no", "Question", "Option1", "Option2", "Option3", "Option4", "Solution", "Remarks"],
         fixedData: {subject_code: 111}
     };
     console.log('--------------database starting');
