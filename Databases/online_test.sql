@@ -30,15 +30,16 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `online_test`;
 CREATE TABLE IF NOT EXISTS `online_test` (
-  `Q_no` varchar(3) NOT NULL,
-  `Question` text NOT NULL,
-  `Option1` text NOT NULL,
-  `Option2` text NOT NULL,
-  `Option3` text NOT NULL,
-  `Option4` text NOT NULL,
+  `subject_code` varchar(10) NOT NULL
+  `q_no` varchar(3) NOT NULL,
+  `question` text NOT NULL,
+  `option1` text NOT NULL,
+  `option2` text NOT NULL,
+  `option3` text NOT NULL,
+  `option4` text NOT NULL,
   `Solution` text NOT NULL,
   `Remarks` varchar(50) NOT NULL,
-  `subject_code` varchar(10) NOT NULL
+
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --

@@ -4,6 +4,7 @@ module.exports = function (fileIn, fileName) {
     var obj = xlsx.parse(fileIn); // parses a file
     var rows = [];
     var writeStr = "";
+    var upoadtodb = require('./csv-database');
 
     //looping through all sheets
     for (var i = 0; i < obj.length; i++) {
@@ -22,10 +23,18 @@ module.exports = function (fileIn, fileName) {
 
     //writes to a file, but you will presumably send the csv as a
     //response instead
-    fs.writeFile("D:\\iem-package\\iem-nodejs\\Uploads\\Excel to CVS\\" + fileName + ".csv", writeStr, function (err) {
+    var dir ="D:\\iem-package\\iem-nodejs\\Uploads\\Excel to CVS\\";
+    fs.writeFile(dir + fileName.split(".", 1) + ".csv", writeStr, function (err) {
         if (err) {
             return console.log(err);
         }
         console.log("test.csv was saved in the current directory!");
+        var path = dir + fileName.split(".",1) + ".csv";
+        console.log('-----------------csv done');
+        fs.readFile(path, function (err, data) {
+            if (err) throw err;
+            upoadtodb(data);
+        });
     });
+
 };
