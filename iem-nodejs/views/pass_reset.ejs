@@ -1,0 +1,46 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('header', {user: user}); %>
+    <link rel='stylesheet' href='http://codepen.io/assets/libs/fullpage/jquery-ui.css'>
+    <link rel="stylesheet" href="/index/css/loginStyle.css" media="screen" type="text/css" />
+</head>
+<body>
+<hr>
+<center>
+    <div style="height: 550px">
+    <% if(err){ %>
+    <div class="alert alert-danger" role="alert" style="width: 350px">
+        <strong><%= err %></strong>
+    </div>
+    <% } %>
+    <div class="login-card">
+        <h2>Reset Your Password</h2><br>
+        <form method="POST">
+            <div class="input-group input-group-lg w3_w3layouts">
+                <input type="password" class="form-control" placeholder="Password" aria-describedby="sizing-addon1" name="password">
+            </div>
+            <div class="input-group input-group-lg w3_w3layouts">
+                <input type="password" class="form-control" placeholder="Password" aria-describedby="sizing-addon1" name="password">
+            </div>
+            <div class="w3btns-agile">
+                <input type="submit" name="login" class="btn btn-default" value="Reset" style="width: 200px">
+            </div>
+            <!--
+            <input type="text" name="username" placeholder="Username" autofocus="autofocus">
+            <input type="password" name="password" placeholder="Password">
+            <input type="submit" name="login" class="login login-submit" value="Login">
+            <button class="btn btn-default" type="submit">Go!</button>-->
+        </form>
+    </div></div>
+</center>
+<%- include('footer'); %>
+<script src="/index/js/bootstrap.js"></script>
+</body>
+</html>

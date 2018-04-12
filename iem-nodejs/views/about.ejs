@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('header', {user: user}); %>
+
+        <link rel='stylesheet' href='http://codepen.io/assets/libs/fullpage/jquery-ui.css'>
+        <!-- Custom Theme files -->
+        <link href="index/css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
+        <link href="index/css/style.css" type="text/css" rel="stylesheet" media="all">
+        <link href="index/css/font-awesome.css" rel="stylesheet">
+        <!-- font-awesome icons -->
+        <!-- //Custom Theme files -->
+        <!-- js -->
+        <script src="index/js/jquery-2.2.3.min.js"></script>
+        <!-- //js -->
+        <!-- web-fonts -->
+        <link href="//fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i" rel="stylesheet">
+        <link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
+        <!-- //web-fonts -->
+</head>
+
+<body>
+    <br>
+    <!-- banner -->
+    <div class="banner-1">
+    </div>
+    <!-- //banner -->
+    <div class="about">
+        <div class="container">
+            <div class="w3ls-title">
+                <h3 class="agileits-title">About Us</h3>
+            </div>
+            <div class="about-w3ls-row">
+                <div class="col-md-5 about-left">
+                    <img src="/index/images/about.jpg" class="img-responsive" alt="" />
+                </div>
+                <div class="col-md-7 about-right">
+                    <div class="about-agile-row">
+                        <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+                            <ul id="myTab" class=" nav-tabs" role="tablist">
+                                <li role="presentation" class="active">
+                                    <a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">About</a>
+                                </li>
+                                <li role="presentation">
+                                    <a href="#carl" role="tab" id="carl-tab" data-toggle="tab" aria-controls="carl"> History</a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"> </div>
+                            <div id="myTabContent" class="tab-content">
+                                <div role="tabpanel" class="tab-pane fade in active" id="home" aria-labelledby="home-tab">
+                                    <div class="tabcontent-grids">
+                                        <p>The IEM group is an acclaimed educational group amongst the industry-centred academic
+                                            training organisations of today. IEM has set sublime standards in addressing
+                                            the technical and managerial resource shortage in the new era of dynamic globalisation.
+                                            It aims to serve the future generation as well as the Nation through its commitment
+                                            towards self sufficiency and unmatchable excellence. Awards Won by IEM are:
+                                        </p>
+                                        <ul>
+                                            <li>
+                                                <i class="fa fa-check-square-o"></i>
+                                                <strong>3rd Best Engineering College</strong> in West Bengal after IIT Kharagpur
+                                                and NIT Durgapur.</li>
+                                            <li>
+                                                <i class="fa fa-check-square-o"></i>
+                                                <strong>Jewel of the East</strong> by Telegraph. </li>
+                                            <li>
+                                                <i class="fa fa-check-square-o"></i>
+                                                <strong>Picture Perfect</strong> by ABP Group. </li>
+                                            <li>
+                                                <i class="fa fa-check-square-o"></i>
+                                                <strong>Best Institute of India</strong> in the Star News Award. </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane fade" id="carl" aria-labelledby="carl-tab">
+                                    <div class="tabcontent-grids">
+                                        <p>IEM is established in Kolkata in the IT hub of the state of West Bengal since 1989
+                                            as the first self-financed engineering college of the state, and since then IEM
+                                            has been socially accredited as the best self-financed engineering institute
+                                            of West Bengal and admits the best students from the top engineering merit list
+                                            of WBJEE and JEE Main.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <%- include('footer'); %>
+        <script src="/index/js/bootstrap.js"></script>
+</body>
+
+</html>

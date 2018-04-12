@@ -1,0 +1,55 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('header', {user: user}); %>
+    <link rel='stylesheet' href='http://codepen.io/assets/libs/fullpage/jquery-ui.css'>
+    <link rel="stylesheet" href="/index/css/loginStyle.css" media="screen" type="text/css" />
+</head>
+<body>
+<hr>
+<center><div style="height: 550px">
+    <h1>Welcome to <%= title %></h1>
+    <br>
+    <br>
+    <br>
+
+
+    <div><center>
+            <form method="post" enctype="multipart/form-data" action="/online-test/upload">
+                <div>
+                    <label for="file"><strong>Choose file to upload</strong></label>
+                    <br><br><br>
+                </div>
+                <% if( progress === 404){ %>
+                <div class="alert alert-danger" role="alert" style="width: 400px">
+                    <strong>Error:</strong> The file should be an .xls or .xlsx file.
+                </div>
+                <% } %>
+                <% if( progress > 0 && progress !== 404  ){ %>
+                <br>
+                <div class="progress" style="width: 400px">
+                    <div class="progress-bar progress-bar-success" style="width: <%= progress %>%">File Uploaded 100%</div>
+                </div><br>
+
+                <% } %>
+
+                <input type="file" id="file" name="filetoupload" class="btn btn-default dropdown-toggle" ><br><br>
+                <div>
+                    <button type="submit" class="fa fa-cloud-upload" > Upload</button>
+                </div>
+            </form>
+
+        </center>
+    </div>
+
+    </div></center>
+<%- include('footer'); %>
+<script src="/index/js/bootstrap.js"></script>
+</body>
+</html>
