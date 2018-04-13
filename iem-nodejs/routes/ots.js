@@ -41,4 +41,11 @@ router.post('/upload', function(req, res, next) {
     });
 });
 
+/* GET test homepage for students*/
+router.get('/', function(req, res, next) {
+    var user = checkSession(req);
+    res.render('test_homepage', { title: 'IEM', user: user });
+  });
+
+  
 module.exports = router;
