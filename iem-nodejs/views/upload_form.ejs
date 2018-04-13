@@ -10,6 +10,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <%- include('header', {user: user}); %>
     <link rel='stylesheet' href='http://codepen.io/assets/libs/fullpage/jquery-ui.css'>
     <link rel="stylesheet" href="/index/css/loginStyle.css" media="screen" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 </head>
 <body>
 <hr>
@@ -20,7 +21,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <br>
 
 
-    <div><center>
+    <div class="upload_section"><center>
             <form method="post" enctype="multipart/form-data" action="/online-test/upload">
                 <div>
                     <label for="file"><strong>Choose file to upload</strong></label>
@@ -41,7 +42,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
                 <input type="file" id="file" name="filetoupload" class="btn btn-default dropdown-toggle" ><br><br>
                 <div>
-                    <button type="submit" class="fa fa-cloud-upload" > Upload</button>
+                    <button type="submit" class="fa fa-cloud-upload" id="button"> Upload</button>
                 </div>
             </form>
 
