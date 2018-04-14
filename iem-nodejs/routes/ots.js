@@ -3,14 +3,29 @@ var router = express.Router();
 var checkSession = require('./isLoggedIn');
 var formidable = require('formidable');
 var fs = require('fs');
-var exceltocvs = require('../supporting codes/excel2csv.js');
+var exceltocvs = require('../supporting_codes/excel2csv.js');
 
 
 /* GET upload page for teachers. */
 router.get('/upload', function(req, res, next) {
   var user = checkSession(req);
-  res.render('upload_form', { title: 'IEM', user: user, progress: 0 });
-});
+
+  // if(user.isLoggedIn && user.as === 'tch') {
+  //     res.render('upload_form', {title: 'IEM', user: user, progress: 0, file: true});
+  // }
+  // else{
+  //     res.redirect('404');
+  // }
+        res.render('upload_form', {
+            title: 'Upload Excel File Here',
+            error:'',
+            user: user,
+            progress: 0,
+            file: true,
+            text: false,
+            multiple: false,
+            subject: false});
+  });
 
 
 /* POST processing for upload page for teachers */
@@ -21,8 +36,8 @@ router.post('/upload', function(req, res, next) {
     form.keepExtensions = true;
     form.uploadDir = 'D:\\iem-package\\iem-nodejs\\Uploads\\';
     form.parse(req, function (err, fields, files) {
-        console.log('________________');
-        console.log(files.filetoupload.type);
+        // console.log('________________');
+        // console.log(files.filetoupload.type);
         //if(excel_extensions.includes(files.type))
         if(files.filetoupload.name.match(/\.(xls|xlsx)$/i))
         {
@@ -31,12 +46,30 @@ router.post('/upload', function(req, res, next) {
            fs.rename(oldpath, newpath, function (err) {
                if (err) throw err;
                exceltocvs(newpath, files.filetoupload.name);
-               res.render('upload_form', {title: 'IEM', user: user, progress: 100});
+               res.render('upload_form', {
+                   title: 'Upload Excel File Here',
+                   error: '',
+                   user: user,
+                   progress: 100,
+                   file: true,
+                   text: false,
+                   multiple: false,
+                   subject: false
+               });
            });
         }
         else {
            fs.unlink(files.filetoupload.path);
-           res.render('upload_form', {title: 'IEM', user: user, progress: 404});
+           res.render('upload_form', {
+               title: 'Upload Excel File Here',
+               error: 'The file should be an .xls or .xlsx file.',
+               user: user,
+               progress: 404,
+               file: true,
+               text: false,
+               multiple: false,
+               subject: false
+           });
        }
     });
 });

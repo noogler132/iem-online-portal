@@ -15,23 +15,48 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <body>
 <hr>
 <center><div style="height: 550px">
-    <h1>Welcome to <%= title %></h1>
+    <h1><%= title %></h1>
     <br>
     <br>
     <br>
+    <div><center>
+            <form method="post" enctype="multipart/form-data">
 
+                <% if(subject){ %>
+                <span class="input-group-addon" id="sizing-addon1" style="width: 600px">Enter the subject here</span><br>
+                <div class="input-group input-group-lg w3_w3layouts" style=" width: 600px">
+                    <!--<input type="text" class="form-control" placeholder="Subject" aria-describedby="sizing-addon1" name="subject" autofocus="autofocus">-->
+                    <input type="text" name="subject" autofocus="autofocus" placeholder="Subject">
+                </div>
+                <% } %>
 
+<<<<<<< Updated upstream
     <div class="upload_section"><center>
             <form method="post" enctype="multipart/form-data" action="/online-test/upload">
+=======
+                <% if(text){ %>
+                <span class="input-group-addon" id="sizing-addon1" style="width: 600px">Enter the details here</span><br>
+                <div class="input-group input-group-lg w3_w3layouts" style=" width: 600px">
+                    <input type="text" class="form-control" placeholder="Text" aria-describedby="sizing-addon1" name="text">
+                </div>
+                <% } %>
+
+                <% if(file){ %>
+>>>>>>> Stashed changes
                 <div>
                     <label for="file"><strong>Choose file to upload</strong></label>
                     <br><br><br>
                 </div>
+
+
                 <% if( progress === 404){ %>
                 <div class="alert alert-danger" role="alert" style="width: 400px">
-                    <strong>Error:</strong> The file should be an .xls or .xlsx file.
+                    <strong>Error:</strong> <%= error %>
                 </div>
                 <% } %>
+
+
+
                 <% if( progress > 0 && progress !== 404  ){ %>
                 <br>
                 <div class="progress" style="width: 400px">
@@ -40,10 +65,23 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
                 <% } %>
 
-                <input type="file" id="file" name="filetoupload" class="btn btn-default dropdown-toggle" ><br><br>
+
+
+
+                <% if(multiple){ %>
+                <input type="file" id="file" name="filetoupload" class="btn btn-default dropdown-toggle" multiple><br>
+                <% } %>
+                <% if(!multiple){ %>
+                <input type="file" id="file" name="filetoupload" class="btn btn-default dropdown-toggle">
+                <% } %>
+                <% } %>
+
+
                 <div>
                     <button type="submit" class="fa fa-cloud-upload" id="button"> Upload</button>
                 </div>
+
+
             </form>
 
         </center>

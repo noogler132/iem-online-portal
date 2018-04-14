@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var ValidatePassword = require('validate-password');
 var bcrypt = require('bcryptjs');
 var checkSession = require('./isLoggedIn');
 // var passwordValidator = require('password-validator');
