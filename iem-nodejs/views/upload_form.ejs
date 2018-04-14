@@ -15,30 +15,30 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <body>
 <hr>
 <center>
-    <div style="height: 550px">
+    <div style="height: inherit">
         <h1><%= title %></h1>
         <br><br><br>
         <div>
-            <form method="post">
+            <form method="post" enctype="multipart/form-data">
 
                 <% if(subject){ %>
                 <span class="input-group-addon" id="sizing-addon1" style="width: 600px">Enter the subject here</span><br>
                 <div class="input-group input-group-lg w3_w3layouts" style=" width: 600px">
                     <!--<input type="text" class="form-control" placeholder="Subject" aria-describedby="sizing-addon1" name="subject" autofocus="autofocus">-->
-                    <input type="text" name="subject" autofocus="autofocus" placeholder="Subject">
+                    <input type="text" name="subject" autofocus="autofocus" class="form-control" placeholder="Subject" aria-describedby="sizing-addon1">
                 </div>
                 <% } %>
 
                 <% if(text){ %>
                 <span class="input-group-addon" id="sizing-addon1" style="width: 600px">Enter the details here</span><br>
                 <div class="input-group input-group-lg w3_w3layouts" style=" width: 600px">
-                    <input type="text" class="form-control" placeholder="Text" aria-describedby="sizing-addon1" name="text">
+                    <textarea name="text" class="form-control" placeholder="Text" aria-describedby="sizing-addon1"></textarea>
                 </div>
                 <% } %>
 
                 <% if(file){ %>
                 <div class="upload_section">
-                    <form method="post" enctype="multipart/form-data" action="/online-test/upload">
+                    <!--<form method="post" enctype="multipart/form-data">-->
                         <div>
                             <label for="file"><strong>Choose file to upload</strong></label><br><br>
                         </div>
@@ -74,12 +74,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 </div>
 
 
-                    </form>
+                    <!--</form>-->
                 </div>
             </form>
         </div>
     </div>
 </center>
+<br><br>
 <%- include('footer'); %>
 <script src="/index/js/bootstrap.js"></script>
 </body>

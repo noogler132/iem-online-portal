@@ -67,47 +67,66 @@ router.post('/notice_upload', function(req, res, next) {
     };
 
 
-    maildata.subject = req.body.subject;
-    maildata.text = req.body.text;
-    console.log(req.body);
-    console.log(req.body.text);
-
     var moment = require('moment');
     var user = checkSession(req);
     var form = new formidable.IncomingForm();
     var mailer = require('../supporting_codes/mailer');
-
-
 
     form.encoding = 'utf-8';
     form.keepExtensions = true;
     form.uploadDir = 'D:\\iem-package\\iem-nodejs\\Uploads\\';
     form.multiples = true;
 
+    console.log('time to parse------');
 
     form.parse(req, function (err, fields, files) {
 
-        maildata.sendfile = files.filetoupload.length;
-        console.log(maildata.sendfile);
-        maildata.file.length = maildata.sendfile;
+        var length = 0;
 
-        for(var i=0; i< files.filetoupload.length; i++ ){
+        if(files.filetoupload.size === 0)
+        {
+            length = 0;
+            console.log(length);
+        }
+        else if(files.filetoupload.length === undefined)
+        {
+            length = 1;
+        }
+        else {
+            length = files.filetoupload.length;
+        }
+        maildata.subject = fields.subject;
+        maildata.text = fields.text;
+        maildata.sendfile = length;
+        maildata.file.length = length;
 
-            var oldpath = files.filetoupload[i].path;
-            var newpath = 'D:\\iem-package\\iem-nodejs\\Uploads\\Notices\\' +  user.username + '_' + moment().format('YYYY-MM-DD') + '_' + files.filetoupload[i].name;
+        if(length>1) {
+            for (var i = 0; i < length; i++) {
+                var oldpath = files.filetoupload[i].path;
+                var newpath = 'D:\\iem-package\\iem-nodejs\\Uploads\\Notices\\' + user.username + '_' + moment().format('YYYY-MM-DD') + '_' + files.filetoupload[i].name;
+                filedata.name = files.filetoupload[i].name;
+                filedata.path = newpath;
+                maildata.file[i] = filedata;
 
 
-            filedata.name  = files.filetoupload[i].name;
+                fs.rename(oldpath, newpath, function (err) {
+                    if (err) throw err;
+                });
+            }
+        }
+        else{
+            var oldpath = files.filetoupload.path;
+            var newpath = 'D:\\iem-package\\iem-nodejs\\Uploads\\Notices\\' + user.username + '_' + moment().format('YYYY-MM-DD') + '_' + files.filetoupload.name;
+            filedata.name = files.filetoupload.name;
             filedata.path = newpath;
-            maildata.file[i] = filedata;
+            maildata.file[0] = filedata;
 
 
             fs.rename(oldpath, newpath, function (err) {
                 if (err) throw err;
             });
         }
-
-
+        mailer(maildata);
         res.render('upload_form', {
             title: 'Upload Notice',
             error: '',
