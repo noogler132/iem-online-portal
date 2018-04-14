@@ -14,13 +14,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </head>
 <body>
 <hr>
-<center><div style="height: 550px">
-    <h1><%= title %></h1>
-    <br>
-    <br>
-    <br>
-    <div><center>
-            <form method="post" enctype="multipart/form-data">
+<center>
+    <div style="height: 550px">
+        <h1><%= title %></h1>
+        <br><br><br>
+        <div>
+            <form method="post">
 
                 <% if(subject){ %>
                 <span class="input-group-addon" id="sizing-addon1" style="width: 600px">Enter the subject here</span><br>
@@ -30,10 +29,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 </div>
                 <% } %>
 
-<<<<<<< Updated upstream
-    <div class="upload_section"><center>
-            <form method="post" enctype="multipart/form-data" action="/online-test/upload">
-=======
                 <% if(text){ %>
                 <span class="input-group-addon" id="sizing-addon1" style="width: 600px">Enter the details here</span><br>
                 <div class="input-group input-group-lg w3_w3layouts" style=" width: 600px">
@@ -42,52 +37,49 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <% } %>
 
                 <% if(file){ %>
->>>>>>> Stashed changes
-                <div>
-                    <label for="file"><strong>Choose file to upload</strong></label>
-                    <br><br><br>
-                </div>
+                <div class="upload_section">
+                    <form method="post" enctype="multipart/form-data" action="/online-test/upload">
+                        <div>
+                            <label for="file"><strong>Choose file to upload</strong></label><br><br>
+                        </div>
 
 
-                <% if( progress === 404){ %>
-                <div class="alert alert-danger" role="alert" style="width: 400px">
-                    <strong>Error:</strong> <%= error %>
-                </div>
-                <% } %>
+                        <% if( progress === 404){ %>
+                        <div class="alert alert-danger" role="alert" style="width: 400px">
+                            <strong>Error:</strong> <%= error %>
+                        </div>
+                        <% } %>
 
 
+                        <% if( progress > 0 && progress !== 404  ){ %>
+                    <br>
+                    <div class="progress" style="width: 400px">
+                        <div class="progress-bar progress-bar-success" style="width: <%= progress %>%">File Uploaded 100%</div>
+                    </div><br>
 
-                <% if( progress > 0 && progress !== 404  ){ %>
-                <br>
-                <div class="progress" style="width: 400px">
-                    <div class="progress-bar progress-bar-success" style="width: <%= progress %>%">File Uploaded 100%</div>
-                </div><br>
-
-                <% } %>
-
+                    <% } %>
 
 
+                        <% if(multiple){ %>
+                    <input type="file" id="file" name="filetoupload" class="btn btn-default dropdown-toggle" multiple><br>
+                    <% } %>
+                        <% if(!multiple){ %>
+                    <input type="file" id="file" name="filetoupload" class="btn btn-default dropdown-toggle">
+                    <% } %>
 
-                <% if(multiple){ %>
-                <input type="file" id="file" name="filetoupload" class="btn btn-default dropdown-toggle" multiple><br>
-                <% } %>
-                <% if(!multiple){ %>
-                <input type="file" id="file" name="filetoupload" class="btn btn-default dropdown-toggle">
-                <% } %>
-                <% } %>
+                        <% } %>
 
-
-                <div>
+                        <div>
                     <button type="submit" class="fa fa-cloud-upload" id="button"> Upload</button>
                 </div>
 
 
+                    </form>
+                </div>
             </form>
-
-        </center>
+        </div>
     </div>
-
-    </div></center>
+</center>
 <%- include('footer'); %>
 <script src="/index/js/bootstrap.js"></script>
 </body>
