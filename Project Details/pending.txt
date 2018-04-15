@@ -10,4 +10,22 @@ a new table to store active examination details
 
 2: page to display a single question only
 3: online test home page with link for subjects examination
-4: 
+
+4: database -
+	1. change name of teacher table 
+	2. screenshot of structures of tables
+	3. value entry in student and teachers table (4)
+	4. Create subject table in database.
+	5. 2 tables for super-admin (auth & details)
+	6. frontend for super admin like heliohost
+		i. Update, Delete , Insert (button)
+		ii. Name of the tables of database (onclick view)
+		//iii. Upload student or teacher data and insert to database option
+		
+Subject table fields
+1. Sem code
+2. sub code
+3. sub name
+
+
+5. Frontend for teachers on upload question paper (select sem and subject)
