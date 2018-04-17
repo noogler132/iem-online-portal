@@ -9,7 +9,7 @@ var checkSession = require('./isLoggedIn');
 router.get('/', function(req, res, next) {
     var user = checkSession(req);
     if(!req.session.uid) {
-        res.render('forgot_password', {err: '', user: user});
+        res.render('login/forgot_password', {err: '', user: user});
     }
     else{
         res.redirect('/change-password/reset');
@@ -23,7 +23,7 @@ router.post('/', function(req, res, next) {
     var username = req.body.username;
     db.query("SELECT * FROM auth WHERE u_id = ?", username, function (err, result) {
         if(result.length === 0){
-            res.render('forgot_password', {err: 'Invalid Username', user: user});
+            res.render('login/forgot_password', {err: 'Invalid Username', user: user});
         }
         else{
             req.session.uid = username;
@@ -41,7 +41,7 @@ router.get('/reset', function(req, res, next) {
         res.redirect('/change-password');
     }
     else{
-        res.render('pass_reset', {err: '', user: user});
+        res.render('login/pass_reset', {err: '', user: user});
     }
 });
 
@@ -65,7 +65,7 @@ router.post('/reset', function(req, res, next) {
         res.render('pass_reset', { err: passwordData.validationMessage });
     }
     else if(pass1!==pass2){
-        res.render('pass_reset', { err: 'Passwords do not match' });
+        res.render('login/pass_reset', { err: 'Passwords do not match' });
     }
     else{
 

@@ -8,7 +8,7 @@ var checkSession = require('./isLoggedIn');
 /* GET temp test. */
 router.get('/temp', function(req, res, next) {
     if(req.session.username) {
-        res.render('temp');
+        res.render('login/temp');
     }
     else{
         res.redirect('/login');
@@ -20,7 +20,7 @@ router.get('/temp', function(req, res, next) {
 router.get('/', function(req, res, next) {
     var user = checkSession(req);
     if(!user.isLoggedIn) {
-        res.render('login', {title: 'the Portal', isLoggedIn: false, user: user, err: '' });
+        res.render('login/login', {title: 'the Portal', isLoggedIn: false, user: user, err: '' });
     }
     else{
         if(req.session.redirect !== ''){
@@ -43,7 +43,7 @@ router.post('/', function(req, res, next) {
         if (err) throw err;
         if (result.length === 0)
         {
-            res.render('login', {title: 'the Portal', isLoggedIn: false, user: session_user, err: 'Incorrect Username or Password' });
+            res.render('login/login', {title: 'the Portal', isLoggedIn: false, user: session_user, err: 'Incorrect Username or Password' });
 
         }
         else {
@@ -75,7 +75,7 @@ router.post('/', function(req, res, next) {
                 }
                 else {
                     console.log("no match");
-                    res.render('login', {title: 'the Portal', isLoggedIn: false, user: session_user, err: 'Incorrect Username or Password' });
+                    res.render('login/login', {title: 'the Portal', isLoggedIn: false, user: session_user, err: 'Incorrect Username or Password' });
                 }
             });
         }

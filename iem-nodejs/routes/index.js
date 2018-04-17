@@ -10,20 +10,20 @@ router.get('/', function(req, res, next) {
   var user = checkSession(req);
   console.log('____________');
   console.log( req.session);
-  res.render('index', { title: 'IEM', user: user });
+  res.render('index/index', { title: 'IEM', user: user });
 });
 
 /* GET syllabus page */
 router.get('/syllabus', function(req, res, next) {
     var user = checkSession(req);
-    res.render('syllabus', { title: 'IEM', user: user });
+    res.render('index/syllabus', { title: 'IEM', user: user });
 });
 
 
 /* GET contact us page */
 router.get('/contact_us', function(req, res, next) {
     var user = checkSession(req);
-    res.render('contact_us', { title: 'IEM', user: user });
+    res.render('index/contact_us', { title: 'IEM', user: user });
 });
 
 
@@ -31,7 +31,7 @@ router.get('/contact_us', function(req, res, next) {
 router.get('/about', function(req, res, next) {
     var user = checkSession(req);
     console.log(req.session);
-    res.render('about', { title: 'IEM', user: user });
+    res.render('index/about', { title: 'IEM', user: user });
 });
 
 

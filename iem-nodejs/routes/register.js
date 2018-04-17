@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
         res.redirect('/login');
     }
     else {
-        res.render('register', { title: 'IEM', user: user });
+        res.render('login/register', { title: 'IEM', user: user });
     }
 });
 
@@ -21,7 +21,7 @@ router.get('/', function(req, res, next) {
 router.get('/', function(req, res, next) {
     var user = checkSession(req);
     if(!user.isLoggedIn) {
-        res.render('register', {title: 'IEM', user: user});
+        res.render('login/register', {title: 'IEM', user: user});
     }
     });
 
