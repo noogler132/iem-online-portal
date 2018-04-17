@@ -15,8 +15,8 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var login = require('./routes/login');
 var ots = require('./routes/ots');
+var register = require('./routes/register');
 var pass_reset = require('./routes/password_reset');
-var about = require('./routes/index');
 var app = express();
 
 // view engine setup
@@ -45,7 +45,7 @@ app.use('/users', users);
 app.use('/login', login);
 app.use('/online-test', ots);
 app.use('/change-password', pass_reset);
-app.use('./about', about);
+app.use('./register', register);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
