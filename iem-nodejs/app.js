@@ -45,7 +45,8 @@ app.use('/users', users);
 app.use('/login', login);
 app.use('/online-test', ots);
 app.use('/change-password', pass_reset);
-app.use('./register', register);
+app.use('' +
+    '/register', register);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
