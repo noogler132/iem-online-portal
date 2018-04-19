@@ -1,4 +1,4 @@
-module.exports = function (data) {
+module.exports = function (table, subcode, data) {
     console.log('__________data:');
     console.log(data);
     var cm = require('csv-mysql');
@@ -13,9 +13,9 @@ module.exports = function (data) {
             comment: '#',
             quote: null
         },
-        table: 'online_test',
+        table: table,
         // headers: ["Q_no", "Question", "Option1", "Option2", "Option3", "Option4", "Solution", "Remarks"],
-        fixedData: {subject_code: 111}
+        //fixedData: {sub_code: subcode}
     };
     console.log('--------------database starting');
     cm.import(options, data, function (err, rows) {

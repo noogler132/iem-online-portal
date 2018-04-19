@@ -1,0 +1,41 @@
+sem_code,sub_code,sub_name
+1,BCA101,Digital Electronics
+1,BCA102,Business Systems and Applications
+1,BCA103,Introduction to Programming
+1,BM101,Mathematics
+1,BCA104,PC Software
+1,BCA194,PC Software Lab
+1,BCA193,Programming Lab (C/ Pascal)
+2,BCA201,Computer Architecture and Systems Software
+2,BCA202,Information Systems Analysis & Design
+2,BCA203,Computer Programming
+2,BM201,Mathematics
+2,HU201,English Language and Communication
+2,BCA293,Programming Lab (Visual Basic)
+2,HU 291,Business Presentation and Language Lab
+3,BCA301,Operating Systems
+3,BCA302,Data Structures with C
+3,BCA303,Graphics & Internet
+3,BM301,Mathematics for Computing
+3,BBA301,Management & Accounting
+3,BCA393,Internet & Computer Graphics Lab
+3,BCA392,Programming Lab  (Data Structure with C)
+4,BCA401,Data Base Management System
+4,BCA402,Object-Oriented Programming with C++
+4,BCA403,Software Project Management and Quality Assurance
+4,BM401, Numerical Methods & Algorithms
+4,HU401,Environment and Ecology
+4,BCA491,Database Lab (Oracle)
+4,BM491,Computing Lab
+5,BCA501,Data Communication & Computer Networks
+5,BCA502,Unix and Shell Programming
+5,BCA503,Windows Programming
+5,BCA E501/A/B/C,Elective 1
+5,HU501,Values and Ethics of Profession
+5,BCA591,Unix & Networking
+5,BCA592,Minor Project
+6,E601/A/B/C,Elective 2
+6,E602/A/B/C,Elective 3
+6,BCA693,Major project
+6,BCA694,Seminar
+6,BCA 695,Comprehensive Viva-Voce

@@ -32,6 +32,7 @@ router.get('/upload', function(req, res, next) {
 router.post('/upload', function(req, res, next) {
     var user = checkSession(req);
     var form = new formidable.IncomingForm();
+
     form.encoding = 'utf-8';
     form.keepExtensions = true;
     form.uploadDir = 'D:\\iem-package\\iem-nodejs\\Uploads\\';
@@ -45,7 +46,8 @@ router.post('/upload', function(req, res, next) {
            var newpath = 'D:\\iem-package\\iem-nodejs\\Uploads\\' + files.filetoupload.name;
            fs.rename(oldpath, newpath, function (err) {
                if (err) throw err;
-               exceltocvs(newpath, files.filetoupload.name);
+               var path = exceltocvs(newpath, files.filetoupload.name);
+
                res.render('upload_form', {
                    title: 'Upload Excel File Here',
                    error: '',

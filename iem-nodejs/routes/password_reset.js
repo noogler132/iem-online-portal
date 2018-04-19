@@ -16,6 +16,32 @@ router.get('/', function(req, res, next) {
     }
 });
 
+/* POST password reset email page. */
+router.get('/', function(req, res, next) {
+    var user = checkSession(req);
+    var OTP = Math.floor(Math.random() * 999999) + 105555;
+    var maildata = {
+        subject: '',
+        text: '',
+        sendfile: 0,
+        file: []
+    };
+    var mailer = require('../supporting_codes/mailer');
+
+
+    /* Set new OTP as user password */
+    bcrypt.hash(OTP, 8, function(err, hash) {
+        // Store hash in your password DB.
+        db.query("UPDATE auth SET password = ? WHERE u_id = ?", hash, req.session.username, function (err, result) {
+            if (err) throw err;
+            maildata.subject = 'Your Password Reset Code Is Here';
+            var OTPhash = result.affectedRows[0].password;
+            maildata.text = '';
+        })
+    });
+
+});
+
 
 /* POST password reset email page. */
 router.post('/', function(req, res, next) {

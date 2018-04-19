@@ -4,8 +4,7 @@ module.exports = function (fileIn, fileName) {
     var obj = xlsx.parse(fileIn); // parses a file
     var rows = [];
     var writeStr = "";
-    var upoadtodb = require('./csv-database');
-
+    var uploadtodb = require('../supporting_codes/csv-database');
     //looping through all sheets
     for (var i = 0; i < obj.length; i++) {
         var sheet = obj[i];
@@ -28,13 +27,12 @@ module.exports = function (fileIn, fileName) {
         if (err) {
             return console.log(err);
         }
-        console.log("test.csv was saved in the current directory!");
+        console.log("csv was saved in the current directory!");
         var path = dir + fileName.split(".",1) + ".csv";
         console.log('-----------------csv done');
         fs.readFile(path, function (err, data) {
             if (err) throw err;
-            upoadtodb(data);
+            uploadtodb('subjects', 'BCA101', data);
         });
     });
-
 };

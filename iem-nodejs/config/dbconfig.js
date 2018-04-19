@@ -18,6 +18,7 @@ db.connect(function(err) {
 module.exports = db;
 
 var user = '10401215076';
+var password = '$2a$08$mVxsmqHsoOwh123H2ErmSOdkCT52M43.1ViNTCMEx1tFAdxlDbISG';
 db.query("SELECT * FROM auth WHERE u_id = ?", user, function (err, result) {
     var u = result[0];
     if (err) throw err;
