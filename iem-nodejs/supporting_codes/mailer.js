@@ -37,7 +37,7 @@ module.exports = function (maildata) {
     //     ]
     // };
 
-    console.log(maildata)
+    console.log(maildata);
     if(maildata.subject){
         mailoptions.subject = maildata.subject;
     }

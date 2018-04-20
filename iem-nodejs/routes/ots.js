@@ -29,41 +29,64 @@ router.get('/upload', function(req, res, next) {
 router.get('/sem_select', function(req, res, next) {
     var user = checkSession(req);
     res.render('ots/sem_select', {title: 'the Portal', isLoggedIn: false, user: user, err: '' });
-})
+});
 
 
 
 
 /* POST processing for upload page for teachers */
 router.post('/upload', function(req, res, next) {
+
     var user = checkSession(req);
     var form = new formidable.IncomingForm();
-    // var dir = "D:\\iem-package\\iem-nodejs\\Uploads\\Excel to CVS\\";
     var dir = '../iem-nodejs/Uploads/Excel to CVS/';
     var uploadtodb = require('../supporting_codes/csv-database');
     var setActiveTest = require('../supporting_codes/setactivetest');
+
+
     form.encoding = 'utf-8';
     form.keepExtensions = true;
-    // form.uploadDir = 'D:\\iem-package\\iem-nodejs\\Uploads\\';
     form.uploadDir = '../iem-nodejs/Uploads/';
     form.parse(req, function (err, fields, files) {
-        // console.log('________________');
-        // console.log(files.filetoupload.type);
-        //if(excel_extensions.includes(files.type))
+
+        if(files.filetoupload.size === 0)
+        {
+            res.render('ots/tch_home', {
+                title: 'Upload Excel File Here',
+                error: 'No file selected',
+                user: user,
+                progress: 404,
+                file: true,
+                text: false,
+                multiple: false,
+                subject: false
+            });
+            return;
+        }
+
+
         if(files.filetoupload.name.match(/\.(xls|xlsx)$/i))
         {
            var oldpath = files.filetoupload.path;
-           // var newpath = 'D:\\iem-package\\iem-nodejs\\Uploads\\' + files.filetoupload.name;
-            var newpath = '../iem-nodejs/Uploads/' + files.filetoupload.name;
-           fs.rename(oldpath, newpath, function (err) {
+           var newpath = '../iem-nodejs/Uploads/' + files.filetoupload.name;
+
+           fs.rename(oldpath, newpath, function (err)
+           {
                if (err) throw err;
+
+               /* Transform to CSV */
                exceltocvs(newpath, files.filetoupload.name, dir);
+
+               /* Upload to Database */
                var path = dir + files.filetoupload.name.split(".",1) + ".csv";
                fs.readFile(path, function (err, data) {
                    if (err) throw err;
                    uploadtodb('test_questions', fields.subcode + '_' + fields.test_no, data);
                });
-                setActiveTest(fields.subcode, fields.test_no);
+               setActiveTest(fields.subcode, fields.test_no);
+               /* Database complete */
+
+
                res.render('upload_form', {
                    title: 'Upload Excel File Here',
                    error: '',
@@ -77,6 +100,7 @@ router.post('/upload', function(req, res, next) {
            });
         }
         else {
+            /* When file is not an excel file */
            fs.unlink(files.filetoupload.path);
            res.render('upload_form', {
                title: 'Upload Excel File Here',

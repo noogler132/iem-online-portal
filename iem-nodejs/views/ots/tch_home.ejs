@@ -15,23 +15,23 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <body>
     <hr>
     <center>
-        <div style="height: inherit">
+        <div style="height: inherit; width: inherit">
         <h1><%= title %></h1>
             <br><br>
             <form method="post" enctype="multipart/form-data">
             <div style="width: 400px">
                 <input type="text" class="form-control" placeholder="SUBJECT CODE" aria-describedby="basic-addon1" name="subcode"><br>
                 <input type="text" class="form-control" placeholder="TEST NUMBER" aria-describedby="basic-addon1" name="test_no"><br>
-            </div>
+
         <%- include('../upload_form_template', {
-        error:'',
+        error: error,
         user: user,
-        progress: 0,
-        file: true,
-        text: false,
-        multiple: false,
-        subject: false}); %>
-            </form>
+        progress: progress,
+        file: file,
+        text: text,
+        multiple: multiple,
+        subject: subject}); %>
+            </div></form>
         </div>
     </center>
     <br><br>
