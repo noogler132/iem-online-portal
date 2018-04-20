@@ -6,33 +6,32 @@ var fs = require('fs');
 var exceltocvs = require('../supporting_codes/excel2csv.js');
 
 
-/* GET upload page for teachers. */
 router.get('/upload', function(req, res, next) {
-  var user = checkSession(req);
-
-  // if(user.isLoggedIn && user.as === 'tch') {
-  //     res.render('upload_form', {title: 'IEM', user: user, progress: 0, file: true});
-  // }
-  // else{
-  //     res.redirect('404');
-  // }
-        res.render('upload_form', {
-            title: 'Upload Excel File Here',
-            error:'',
-            user: user,
-            progress: 0,
-            file: true,
-            text: false,
-            multiple: false,
-            subject: false});
-  });
-
+    var user = checkSession(req);
+    // if(user.isLoggedIn && user.as === 'tch') {
+    //     res.render('upload_form', {title: 'IEM', user: user, progress: 0, file: true});
+    // }
+    // else{
+    //     res.redirect('404');
+    // }
+    res.render('ots/tch_home', {
+        title: 'Upload Excel File Here',
+        error:'',
+        user: user,
+        progress: 0,
+        file: true,
+        text: false,
+        multiple: false,
+        subject: false});
+});
 
 /* POST processing for upload page for teachers */
 router.post('/upload', function(req, res, next) {
     var user = checkSession(req);
     var form = new formidable.IncomingForm();
-
+    var dir = "D:\\iem-package\\iem-nodejs\\Uploads\\Excel to CVS\\";
+    var uploadtodb = require('../supporting_codes/csv-database');
+    var setActiveTest = require('../supporting_codes/setactivetest');
     form.encoding = 'utf-8';
     form.keepExtensions = true;
     form.uploadDir = 'D:\\iem-package\\iem-nodejs\\Uploads\\';
@@ -46,8 +45,13 @@ router.post('/upload', function(req, res, next) {
            var newpath = 'D:\\iem-package\\iem-nodejs\\Uploads\\' + files.filetoupload.name;
            fs.rename(oldpath, newpath, function (err) {
                if (err) throw err;
-               var path = exceltocvs(newpath, files.filetoupload.name);
-
+               exceltocvs(newpath, files.filetoupload.name, dir);
+               var path = dir + files.filetoupload.name.split(".",1) + ".csv";
+               fs.readFile(path, function (err, data) {
+                   if (err) throw err;
+                   uploadtodb('test_questions', fields.subcode + '_' + fields.test_no, data);
+               });
+                setActiveTest(fields.subcode, fields.test_no);
                res.render('upload_form', {
                    title: 'Upload Excel File Here',
                    error: '',
@@ -79,7 +83,7 @@ router.post('/upload', function(req, res, next) {
 /* GET test homepage for students*/
 router.get('/', function(req, res, next) {
     var user = checkSession(req);
-    res.render('test_homepage', { title: 'IEM', user: user });
+    res.render('ots/test_homepage', { title: 'IEM', user: user });
   });
 
   

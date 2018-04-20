@@ -1,0 +1,41 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../header', {user: user}); %>
+    <link rel='stylesheet' href='http://codepen.io/assets/libs/fullpage/jquery-ui.css'>
+    <link rel="stylesheet" href="/index/css/loginStyle.css" media="screen" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    </head>
+<body>
+    <hr>
+    <center>
+        <div style="height: inherit">
+        <h1><%= title %></h1>
+            <br><br><br>
+            <form method="post" enctype="multipart/form-data">
+            <div style="width: 400px">
+                <input type="text" class="form-control" placeholder="SUBJECT CODE" aria-describedby="basic-addon1" name="subcode">
+                <input type="text" class="form-control" placeholder="TEST NUMBER" aria-describedby="basic-addon1" name="test_no">
+            </div>
+        <%- include('../upload_form_template', {
+        error:'',
+        user: user,
+        progress: 0,
+        file: true,
+        text: false,
+        multiple: false,
+        subject: false}); %>
+            </form>
+        </div>
+    </center>
+    <br><br>
+    <%- include('../footer'); %>
+    <script src="/index/js/bootstrap.js"></script>
+</body>
+</html>

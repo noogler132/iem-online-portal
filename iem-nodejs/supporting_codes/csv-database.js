@@ -1,4 +1,4 @@
-module.exports = function (table, subcode, data) {
+module.exports = function (table, test_key, data) {
     console.log('__________data:');
     console.log(data);
     var cm = require('csv-mysql');
@@ -15,11 +15,17 @@ module.exports = function (table, subcode, data) {
         },
         table: table,
         // headers: ["Q_no", "Question", "Option1", "Option2", "Option3", "Option4", "Solution", "Remarks"],
-        //fixedData: {sub_code: subcode}
+        fixedData: {test_key: test_key}
     };
+    // if(test_key && test_key !== '') {
+    //     options.fixedData = {
+    //         test_key: test_key
+    //     };
+    // }
+
     console.log('--------------database starting');
     cm.import(options, data, function (err, rows) {
-        if (err === null) err = false;
+        if (err) throw err;
         // expect(err).to.equal(false);
         // done();
         console.log('--------------database working');

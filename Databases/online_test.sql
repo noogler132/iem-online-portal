@@ -28,17 +28,17 @@ SET time_zone = "+00:00";
 -- Table structure for table `online_test`
 --
 
-DROP TABLE IF EXISTS `online_test`;
-CREATE TABLE IF NOT EXISTS `online_test` (
-  `subject_code` varchar(10) NOT NULL
-  `q_no` varchar(3) NOT NULL,
-  `question` text NOT NULL,
-  `option1` text NOT NULL,
-  `option2` text NOT NULL,
-  `option3` text NOT NULL,
-  `option4` text NOT NULL,
+DROP TABLE IF EXISTS `test_questions`;
+CREATE TABLE IF NOT EXISTS `test_questions` (
+  `test_key` varchar(100) NOT NULL,
+  `Q_no` varchar(10) NOT NULL,
+  `Question` text NOT NULL,
+  `Option1` text NOT NULL,
+  `Option2` text NOT NULL,
+  `Option3` text NOT NULL,
+  `Option4` text NOT NULL,
   `Solution` text NOT NULL,
-  `Remarks` varchar(50) NOT NULL,
+  `Remarks`  NOT NULL,
 
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 

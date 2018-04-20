@@ -6,7 +6,7 @@ var fs = require('fs');
 
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
   var user = checkSession(req);
   console.log('____________');
   console.log( req.session);
@@ -14,21 +14,21 @@ router.get('/', function(req, res, next) {
 });
 
 /* GET syllabus page */
-router.get('/syllabus', function(req, res, next) {
+router.get('/syllabus', function(req, res) {
     var user = checkSession(req);
     res.render('index/syllabus', { title: 'IEM', user: user });
 });
 
 
 /* GET contact us page */
-router.get('/contact_us', function(req, res, next) {
+router.get('/contact_us', function(req, res) {
     var user = checkSession(req);
     res.render('index/contact_us', { title: 'IEM', user: user });
 });
 
 
 /* GET About us page */
-router.get('/about', function(req, res, next) {
+router.get('/about', function(req, res) {
     var user = checkSession(req);
     console.log(req.session);
     res.render('index/about', { title: 'IEM', user: user });
@@ -36,7 +36,7 @@ router.get('/about', function(req, res, next) {
 
 
 /* GET Notice upload page */
-router.get('/notice_upload', function(req, res, next) {
+router.get('/notice_upload', function(req, res) {
     var user = checkSession(req);
     // if(user.isLoggedIn && user.as === 'tch') {
     //     res.render('upload_form', {title: 'IEM', user: user, progress: 0});
@@ -56,7 +56,7 @@ router.get('/notice_upload', function(req, res, next) {
 
 
 /* POST Notice upload page */
-router.post('/notice_upload', function(req, res, next) {
+router.post('/notice_upload', function(req, res) {
 
     var filedata = {name: '', path: ''};
     var maildata = {

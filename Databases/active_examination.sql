@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `active_examination`
 --
 
-DROP TABLE IF EXISTS `active_examination`;
+DROP TABLE IF EXISTS `active_tests`;
 CREATE TABLE IF NOT EXISTS `active_examination` (
   `sub_code` varchar(10) NOT NULL,
   `sub_name` varchar(100) NOT NULL,
