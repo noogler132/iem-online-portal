@@ -3,14 +3,14 @@
 
 <head>
     <%- include('../header', {user: user}); %>
-        <link rel='stylesheet' href='http://codepen.io/assets/libs/fullpage/jquery-ui.css'>
-        <link rel="stylesheet" href="/index/css/loginStyle.css" media="screen" type="text/css" />
+        <!-- <link rel='stylesheet' href='http://codepen.io/assets/libs/fullpage/jquery-ui.css'> -->
+        <!-- <link rel="stylesheet" href="/index/css/loginStyle.css" media="screen" type="text/css" /> -->
         <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
         <style>
             .column {
                 float: left;
                 width: 16.6666666667%;
-                padding: 10px 10px;
+                padding: 30px 10px;
                 height: 300px;
             }
 
@@ -21,26 +21,286 @@
                 display: table;
                 clear: both;
             }
+
+            /*Styling Selectbox*/
+
+            .dropdown {
+                width: 200px;
+                display: inline-block;
+                background-color: #fff;
+                border-radius: 5px;
+                box-shadow: 0 0 2px rgb(204, 204, 204);
+                transition: all .5s ease;
+                position: relative;
+                font-size: 16px;
+                color: #474747;
+                height: 15%;
+                text-align: center;
+            }
+
+            .dropdown .select {
+                cursor: pointer;
+                display: block;
+                padding: 10px
+            }
+
+            .dropdown .select>i {
+                font-size: 13px;
+                color: #888;
+                cursor: pointer;
+                transition: all .3s ease-in-out;
+                float: right;
+                line-height: 20px
+            }
+
+            .dropdown:hover {
+                box-shadow: 0 0 4px rgb(204, 204, 204)
+            }
+
+            .dropdown:active {
+                background-color: #f8f8f8
+            }
+
+            .dropdown.active:hover,
+            .dropdown.active {
+                box-shadow: 0 0 4px rgb(204, 204, 204);
+                border-radius: 5px 5px 0 0;
+                background-color: #f8f8f8
+            }
+
+            .dropdown.active .select>i {
+                transform: rotate(-90deg)
+            }
+
+            .dropdown .dropdown-menu {
+                position: absolute;
+                background-color: #fff;
+                width: 100%;
+                left: 0;
+                margin-top: 1px;
+                box-shadow: 0 1px 2px rgb(204, 204, 204);
+                border-radius: 0 1px 5px 5px;
+                overflow: hidden;
+                display: none;
+                max-height: 144px;
+                overflow-y: auto;
+                z-index: 9
+            }
+
+            .dropdown .dropdown-menu li {
+                padding: 10px;
+                transition: all .2s ease-in-out;
+                cursor: pointer
+            }
+
+            .dropdown .dropdown-menu {
+                padding: 0;
+                list-style: none
+            }
+
+            .dropdown .dropdown-menu li:hover {
+                background-color: #f2f2f2
+            }
+
+            .dropdown .dropdown-menu li:active {
+                background-color: #e2e2e2
+            }
+
+            .button {
+                display: inline-block;
+                border-radius: 4px;
+                background-color: #00b3fe;
+                border: none;
+                color: #FFFFFF;
+                text-align: center;
+                font-size: 16px;
+                padding: 5px;
+                width: 160px;
+                transition: all 0.5s;
+                cursor: pointer;
+                margin: 5px;
+                height: 40px;
+            }
+
+            .button span {
+                cursor: pointer;
+                display: inline-block;
+                position: relative;
+                transition: 0.5s;
+            }
+
+            .button span:after {
+                content: '\00bb';
+                position: absolute;
+                opacity: 0;
+                top: 0;
+                right: -20px;
+                transition: 0.5s;
+            }
+
+            .button:hover span {
+                padding-right: 25px;
+            }
+
+            .button:hover span:after {
+                opacity: 1;
+                right: 0;
+            }
+
+            .switch input {
+                display: none;
+            }
+
+            .slider {
+                position: absolute;
+                cursor: pointer;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: #ccc;
+                -webkit-transition: .4s;
+                transition: .4s;
+            }
+
+            .slider:before {
+                position: absolute;
+                content: "";
+                height: 26px;
+                width: 26px;
+                left: 4px;
+                bottom: 4px;
+                background-color: white;
+                -webkit-transition: .4s;
+                transition: .4s;
+            }
+
+            input:checked+.slider {
+                background-color: #2196F3;
+            }
+
+            input:focus+.slider {
+                box-shadow: 0 0 1px #2196F3;
+            }
+
+            input:checked+.slider:before {
+                -webkit-transform: translateX(26px);
+                -ms-transform: translateX(26px);
+                transform: translateX(65px);
+            }
+
+            /* Rounded sliders */
+
+            .slider.round {
+                border-radius: 34px;
+            }
+
+            .slider.round:before {
+                border-radius: 50%;
+            }
         </style>
 </head>
 
 <body>
     <hr>
     <div class="row">
-        <div class="column"><center>Semester No.</center></div>
-        <div class="column"><center>Subject Code</center></div>
-        <div class="column"><center>Test No</center></div>
-        <div class="column"><center>Upload Paper Button</center></div>
-        <div class="column"><center>Upload Status</center></div>
-        <div class="column"><center>Toggle button</center></div>
+        <div class="column" style="background-color : aqua; padding-left: 2%;">
+            <div class="dropdown">
+                <div class="select">
+                    <span>Select Semester</span>
+                    <i class="fa fa-chevron-down"></i>
+                </div>
+                <input type="hidden" name="gender">
+                <ul class="dropdown-menu">
+                    <li id="first">First</li>
+                    <li id="second">Second</li>
+                    <li id="third">Third</li>
+                    <li id="fourth">Fourth</li>
+                    <li id="fifth">Fifth</li>
+                    <li id="sixth">Sixth</li>
+                </ul>
+            </div>
+        </div>
+        <div class="column" style="background-color : aquamarine; padding-left: 2%;">
+            <div class="dropdown">
+                <div class="select">
+                    <span>Select Subject Code</span>
+                    <i class="fa fa-chevron-down"></i>
+                </div>
+                <input type="hidden" name="gender">
+                <ul class="dropdown-menu">
+                    <li id="first">bla</li>
+                    <li id="second">bla</li>
+                    <li id="third">blabla</li>
+                    <li id="fourth">bulbul</li>
+                    <li id="fifth">boxbox</li>
+                    <li id="sixth">pubg</li>
+                </ul>
+            </div>
+        </div>
+        <div class="column" style="background-color : lightblue; padding-left: 2%;">
+            <div class="dropdown">
+                <div class="select">
+                    <span>Select Test Number</span>
+                    <i class="fa fa-chevron-down"></i>
+                </div>
+                <input type="hidden" name="gender">
+                <ul class="dropdown-menu">
+                    <li id="first">1</li>
+                    <li id="second">2</li>
+                    <li id="third">3</li>
+                    <li id="fourth">4</li>
+                    <li id="fifth">5</li>
+                    <li id="sixth">6</li>
+                </ul>
+            </div>
+        </div>
+        <div class="column" style="background-color : blue; padding-left: 3%; padding-top: 1.5%;">
+            <button class="button">
+                <span>Upload </span>
+            </button>
+        </div>
+        <div class="column" style="background-color : rgb(51, 216, 22); padding-top: 0.5%;">
+            <!-- <center><span style="font-size: 16px;">Upload Status</span></center> -->
+            <span style="padding-top: 20px; font-size: 16px;" id="status">
+                <center style="padding-top: 12%; color:red;">Upload Pending</center>
+            </span>
+        </div>
+        <div class="column" style="background-color : rgb(212, 46, 96); padding-top: 1.75%; padding-left:3%;">
+            <label class="switch" style="position: relative; display: inline-block; width: 100px; height: 34px;">
+                <input type="checkbox" checked>
+                <span class="slider round"></span>
+                <span>Active Status</span>
+            </label>
+        </div>
     </div>
-
-
-
-
-
     <%- include('../footer'); %>
         <script src="/index/js/bootstrap.js"></script>
+        <script>
+            /*Dropdown Menu*/
+            $('.dropdown').click(function () {
+                $(this).attr('tabindex', 1).focus();
+                $(this).toggleClass('active');
+                $(this).find('.dropdown-menu').slideToggle(300);
+            });
+            $('.dropdown').focusout(function () {
+                $(this).removeClass('active');
+                $(this).find('.dropdown-menu').slideUp(300);
+            });
+            $('.dropdown .dropdown-menu li').click(function () {
+                $(this).parents('.dropdown').find('span').text($(this).text());
+                $(this).parents('.dropdown').find('input').attr('value', $(this).attr('id'));
+            });
+            /*End Dropdown Menu*/
+
+
+            $('.dropdown-menu li').click(function () {
+                var input = '<strong>' + $(this).parents('.dropdown').find('input').val() + '</strong>',
+                    msg = '<span class="msg">Hidden input value: ';
+                $('.msg').html(msg + input + '</span>');
+            }); 
+        </script>
+
 </body>
 
 </html>
