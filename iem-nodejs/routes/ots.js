@@ -38,12 +38,14 @@ router.get('/sem_select', function(req, res, next) {
 router.post('/upload', function(req, res, next) {
     var user = checkSession(req);
     var form = new formidable.IncomingForm();
-    var dir = "D:\\iem-package\\iem-nodejs\\Uploads\\Excel to CVS\\";
+    // var dir = "D:\\iem-package\\iem-nodejs\\Uploads\\Excel to CVS\\";
+    var dir = '../iem-nodejs/Uploads/Excel to CVS/';
     var uploadtodb = require('../supporting_codes/csv-database');
     var setActiveTest = require('../supporting_codes/setactivetest');
     form.encoding = 'utf-8';
     form.keepExtensions = true;
-    form.uploadDir = 'D:\\iem-package\\iem-nodejs\\Uploads\\';
+    // form.uploadDir = 'D:\\iem-package\\iem-nodejs\\Uploads\\';
+    form.uploadDir = '../iem-nodejs/Uploads/';
     form.parse(req, function (err, fields, files) {
         // console.log('________________');
         // console.log(files.filetoupload.type);
@@ -51,7 +53,8 @@ router.post('/upload', function(req, res, next) {
         if(files.filetoupload.name.match(/\.(xls|xlsx)$/i))
         {
            var oldpath = files.filetoupload.path;
-           var newpath = 'D:\\iem-package\\iem-nodejs\\Uploads\\' + files.filetoupload.name;
+           // var newpath = 'D:\\iem-package\\iem-nodejs\\Uploads\\' + files.filetoupload.name;
+            var newpath = '../iem-nodejs/Uploads/' + files.filetoupload.name;
            fs.rename(oldpath, newpath, function (err) {
                if (err) throw err;
                exceltocvs(newpath, files.filetoupload.name, dir);
