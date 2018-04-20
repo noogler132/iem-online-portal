@@ -25,6 +25,15 @@ router.get('/upload', function(req, res, next) {
         subject: false});
 });
 
+/* Processing for selecting sem and displaying the subjects accordingly */
+router.get('/sem_select', function(req, res, next) {
+    var user = checkSession(req);
+    res.render('ots/sem_select', {title: 'the Portal', isLoggedIn: false, user: user, err: '' });
+})
+
+
+
+
 /* POST processing for upload page for teachers */
 router.post('/upload', function(req, res, next) {
     var user = checkSession(req);
