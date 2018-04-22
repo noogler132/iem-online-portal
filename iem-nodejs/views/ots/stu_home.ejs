@@ -28,58 +28,62 @@
                     <div class="col col-3">Give Test</div>
                 </li>
                 <% for(var i = 0; i<subjects.length; i++){ %>
-                <li class="table-row">
-                    <div class="col col-1" data-label="Subject Code"><%= subjects[i].sub_code %></div>
-                    <div class="col col-2" data-label="Subject Name"><%= subjects[i].sub_name %></div>
-                    <% for(var j = 0; j<active.length; j++){ %>
-                    <% if(active[j].sub_code === subjects[i].sub_code){ %>
-                    <div class="col col-3" data-label="Give Test">
-                        <a href="#">Go to Test</a>
-                    </div>
-                    <% break; %>
-                    <% } %>
-                    <% if(active[j].sub_code !== subjects[i].sub_code){ %>
-                    <div class="col col-3" data-label="Give Test">
-                        No Test Available
-                    </div>
-                    <% break; %>
-                    <% } %>
-                    <% } %>
+                    <li class="table-row" style="font-family: 'Ubuntu';">
+                        <div class="col col-1" data-label="Subject Code">
+                            <%= subjects[i].sub_code %>
+                        </div>
+                        <div class="col col-2" data-label="Subject Name">
+                            <%= subjects[i].sub_name %>
+                        </div>
+                        <% for(var j = 0; j<active.length; j++){ %>
+                            <% if(active[j].sub_code === subjects[i].sub_code){ %>
+                                <div class="col col-3" data-label="Give Test">
+                                    <a href="#">Go to Test</a>
+                                </div>
+                                <% break; %>
+                                    <% } %>
+                                        <% if(active[j].sub_code !== subjects[i].sub_code){ %>
+                                            <div class="col col-3" data-label="Give Test">
+                                                No Test Available
+                                            </div>
+                                            <% break; %>
+                                                <% } %>
+                                                    <% } %>
 
-                </li>
-                <% } %>
-                <!--<li class="table-row">-->
-                    <!--<div class="col col-1" data-label="Subject Code">BCA-E602B</div>-->
-                    <!--<div class="col col-2" data-label="Subject Name">Object Oriented Programming with JAVA</div>-->
-                    <!--<div class="col col-3" data-label="Give Test">-->
+                    </li>
+                    <% } %>
+                        <!--<li class="table-row">-->
+                        <!--<div class="col col-1" data-label="Subject Code">BCA-E602B</div>-->
+                        <!--<div class="col col-2" data-label="Subject Name">Object Oriented Programming with JAVA</div>-->
+                        <!--<div class="col col-3" data-label="Give Test">-->
                         <!--<a href="#">Go to Test</a>-->
-                    <!--</div>-->
-                    <!--<div class="col col-4" data-label="Test Status">Pending</div>-->
-                <!--</li>-->
-                <!--<li class="table-row">-->
-                    <!--<div class="col col-1" data-label="Subject Code">BCA-693</div>-->
-                    <!--<div class="col col-2" data-label="Subject Name">Major Project</div>-->
-                    <!--<div class="col col-3" data-label="Give Test">-->
+                        <!--</div>-->
+                        <!--<div class="col col-4" data-label="Test Status">Pending</div>-->
+                        <!--</li>-->
+                        <!--<li class="table-row">-->
+                        <!--<div class="col col-1" data-label="Subject Code">BCA-693</div>-->
+                        <!--<div class="col col-2" data-label="Subject Name">Major Project</div>-->
+                        <!--<div class="col col-3" data-label="Give Test">-->
                         <!--<a href="#">Go to Test</a>-->
-                    <!--</div>-->
-                    <!--<div class="col col-4" data-label="Test Status">Pending</div>-->
-                <!--</li>-->
-                <!--<li class="table-row">-->
-                    <!--<div class="col col-1" data-label="Subject Code">BCA-694</div>-->
-                    <!--<div class="col col-2" data-label="Subject Name">Seminar</div>-->
-                    <!--<div class="col col-3" data-label="Give Test">-->
+                        <!--</div>-->
+                        <!--<div class="col col-4" data-label="Test Status">Pending</div>-->
+                        <!--</li>-->
+                        <!--<li class="table-row">-->
+                        <!--<div class="col col-1" data-label="Subject Code">BCA-694</div>-->
+                        <!--<div class="col col-2" data-label="Subject Name">Seminar</div>-->
+                        <!--<div class="col col-3" data-label="Give Test">-->
                         <!--<a href="#">Go to Test</a>-->
-                    <!--</div>-->
-                    <!--<div class="col col-4" data-label="Test Status">Pending</div>-->
-                <!--</li>-->
-                <!--<li class="table-row">-->
-                    <!--<div class="col col-1" data-label="Subject Code">BCA-695</div>-->
-                    <!--<div class="col col-2" data-label="Subject Name">Comprehensive Viva-Voce</div>-->
-                    <!--<div class="col col-3" data-label="Give Test">-->
+                        <!--</div>-->
+                        <!--<div class="col col-4" data-label="Test Status">Pending</div>-->
+                        <!--</li>-->
+                        <!--<li class="table-row">-->
+                        <!--<div class="col col-1" data-label="Subject Code">BCA-695</div>-->
+                        <!--<div class="col col-2" data-label="Subject Name">Comprehensive Viva-Voce</div>-->
+                        <!--<div class="col col-3" data-label="Give Test">-->
                         <!--<a href="#">Go to Test</a>-->
-                    <!--</div>-->
-                    <!--<div class="col col-4" data-label="Test Status">Pending</div>-->
-                <!--</li>-->
+                        <!--</div>-->
+                        <!--<div class="col col-4" data-label="Test Status">Pending</div>-->
+                        <!--</li>-->
             </ul>
         </center>
     </div>
