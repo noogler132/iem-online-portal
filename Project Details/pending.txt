@@ -29,3 +29,12 @@ Subject table fields
 
 
 5. Frontend for teachers on upload question paper (select sem and subject)
+
+
+
+6. timer & accidently submit
+7. auto submit after time completion
+8. view of marks teacher side 
+
+
+
