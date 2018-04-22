@@ -6,6 +6,55 @@ var fs = require('fs');
 var exceltocvs = require('../supporting_codes/excel2csv.js');
 
 
+/* GET test homepage for students*/
+router.get('/', function(req, res, next) {
+    var user = checkSession(req);
+    if(user.isLoggedIn && user.as === 'tch'){
+        res.redirect('/online-test/edit');
+        return;
+    }
+    var sem = 0;
+    db.query("SELECT * FROM student_details WHERE u_roll = ?", '10401215076', function (err, result)
+    {
+        var add_year = result[0].add_year;
+        var date = new Date();
+        var currentyear = date.getFullYear();
+        var stu_year = (currentyear - add_year);
+
+        if(date.getMonth() >= 0 && date.getMonth() <5){
+            sem = 2 * stu_year;
+        }
+        else if(date.getMonth() >= 5 && date.getMonth() <12) {
+            sem = 1 * stu_year;
+        }
+        console.log('Sem: ' + sem);
+        db.query("SELECT * FROM subjects WHERE sem_code = ?", sem, function (err, subjects)
+        {
+            console.log('Sub: ' + subjects.length);
+            var query = 'SELECT * FROM active_tests WHERE sub_code IN (\'';
+            query = query + subjects[0].sub_code;
+            for(i=1; i<subjects.length; i++)
+            {
+                query = query + "', '";
+                query = query + subjects[i].sub_code;
+                console.log(query);
+            }
+            query = query + "')";
+            db.query(query, function (err, active) {
+                res.render('ots/stu_home', {title: 'IEM', user: user, subjects: subjects, active: active});
+            });
+        });
+    });
+});
+
+
+/* Processing for selecting sem and displaying the subjects accordingly */
+router.get('/edit', function(req, res, next) {
+    var user = checkSession(req);
+    res.render('ots/sem_select', {title: 'the Portal', isLoggedIn: false, user: user, err: '' });
+});
+
+
 router.get('/upload', function(req, res, next) {
     var user = checkSession(req);
     // if(user.isLoggedIn && user.as === 'tch') {
@@ -25,14 +74,6 @@ router.get('/upload', function(req, res, next) {
         subject: false});
 });
 
-/* Processing for selecting sem and displaying the subjects accordingly */
-router.get('/sem_select', function(req, res, next) {
-    var user = checkSession(req);
-    res.render('ots/sem_select', {title: 'the Portal', isLoggedIn: false, user: user, err: '' });
-});
-
-
-
 
 /* POST processing for upload page for teachers */
 router.post('/upload', function(req, res, next) {
@@ -48,8 +89,7 @@ router.post('/upload', function(req, res, next) {
     form.keepExtensions = true;
     form.uploadDir = '../iem-nodejs/Uploads/';
     form.parse(req, function (err, fields, files) {
-
-        if(files.filetoupload.size === 0)
+        if(files.filetoupload.size === 0) // if no file selected
         {
             res.render('ots/tch_home', {
                 title: 'Upload Excel File Here',
@@ -63,9 +103,7 @@ router.post('/upload', function(req, res, next) {
             });
             return;
         }
-
-
-        if(files.filetoupload.name.match(/\.(xls|xlsx)$/i))
+        if(files.filetoupload.name.match(/\.(xls|xlsx)$/i)) //if file is an excel document
         {
            var oldpath = files.filetoupload.path;
            var newpath = '../iem-nodejs/Uploads/' + files.filetoupload.name;
@@ -116,11 +154,8 @@ router.post('/upload', function(req, res, next) {
     });
 });
 
-/* GET test homepage for students*/
-router.get('/', function(req, res, next) {
-    var user = checkSession(req);
-    res.render('ots/test_homepage', { title: 'IEM', user: user });
-  });
+
+
 
   
 module.exports = router;
