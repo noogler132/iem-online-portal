@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../header', {user: user}); %>
+        <link rel='stylesheet' href='http://codepen.io/assets/libs/fullpage/jquery-ui.css'>
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+        <link rel="stylesheet" href="/index/css/test_homepage.css" media="screen" type="text/css" />
+</head>
+
+<body>
+
+    <br>
+    <br>
+
+    <div class="container">
+        <h2><%= title %>
+            <!-- <small>Triggers on 767px</small> -->
+        </h2>
+        <br>
+        <br>
+
+        <center>
+            <ul class="responsive-table">
+                <li class="table-header">
+                    <div class="col col-1">Subject</div>
+                    <div class="col col-2">Test Number</div>
+                    <div class="col col-3">Status</div>
+                    <div class="col col-3">Take Test</div>
+                </li>
+                <% for(var i = 0; i<subjects.length; i++){ %>
+                <li class="table-row">
+                    <div class="col col-1" data-label="Subject Code"><%= subjects[i].sub_code %></div>
+                    <div class="col col-2" data-label="Subject Name"><%= subjects[i].sub_name %></div>
+                    <% for(var j = 0; j<active.length; j++){ %>
+                    <% if(active[j].sub_code === subjects[i].sub_code){ %>
+                    <div class="col col-3" data-label="Give Test">
+                        <a href="/online-test/res">Go to Test</a>
+                    </div>
+                    <% break; %>
+                    <% } %>
+                    <% if(active[j].sub_code !== subjects[i].sub_code){ %>
+                    <div class="col col-3" data-label="Give Test">
+                        No Test Available
+                    </div>
+                    <% break; %>
+                    <% } %>
+                    <% } %>
+                </li>
+                <% } %>
+                <form>
+                    <input type="hidden" name="Subject" value="">
+                </form>
+                <!--<li class="table-row">-->
+                    <!--<div class="col col-1" data-label="Subject Code">BCA-E602B</div>-->
+                    <!--<div class="col col-2" data-label="Subject Name">Object Oriented Programming with JAVA</div>-->
+                    <!--<div class="col col-3" data-label="Give Test">-->
+                        <!--<a href="#">Go to Test</a>-->
+                    <!--</div>-->
+                    <!--<div class="col col-4" data-label="Test Status">Pending</div>-->
+                <!--</li>-->
+                <!--<li class="table-row">-->
+                    <!--<div class="col col-1" data-label="Subject Code">BCA-693</div>-->
+                    <!--<div class="col col-2" data-label="Subject Name">Major Project</div>-->
+                    <!--<div class="col col-3" data-label="Give Test">-->
+                        <!--<a href="#">Go to Test</a>-->
+                    <!--</div>-->
+                    <!--<div class="col col-4" data-label="Test Status">Pending</div>-->
+                <!--</li>-->
+                <!--<li class="table-row">-->
+                    <!--<div class="col col-1" data-label="Subject Code">BCA-694</div>-->
+                    <!--<div class="col col-2" data-label="Subject Name">Seminar</div>-->
+                    <!--<div class="col col-3" data-label="Give Test">-->
+                        <!--<a href="#">Go to Test</a>-->
+                    <!--</div>-->
+                    <!--<div class="col col-4" data-label="Test Status">Pending</div>-->
+                <!--</li>-->
+                <!--<li class="table-row">-->
+                    <!--<div class="col col-1" data-label="Subject Code">BCA-695</div>-->
+                    <!--<div class="col col-2" data-label="Subject Name">Comprehensive Viva-Voce</div>-->
+                    <!--<div class="col col-3" data-label="Give Test">-->
+                        <!--<a href="#">Go to Test</a>-->
+                    <!--</div>-->
+                    <!--<div class="col col-4" data-label="Test Status">Pending</div>-->
+                <!--</li>-->
+            </ul>
+        </center>
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <%- include('../footer'); %>
+        <script src="/index/js/bootstrap.js"></script>
+</body>
+
+</html>

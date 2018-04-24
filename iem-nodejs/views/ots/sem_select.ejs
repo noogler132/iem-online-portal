@@ -7,27 +7,70 @@
         <!-- <link rel="stylesheet" href="/index/css/loginStyle.css" media="screen" type="text/css" /> -->
         <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
         <link rel="stylesheet" href="/index/css/sem_select.css" media="screen" type="text/css" />
-        <style>
-        </style>
+        <script>
+
+            // <!--document.getElementById("sub_code_ul").innerHTML = "";-->
+            // <!--document.getElementById("sem").value = sem;-->
+            // <!--var sub = document.getElementById("sub_code_ul");-->
+            // <!--var li = document.createElement('li');-->
+            // <!--alert('problem start');-->
+            // <!--li.value = '' ;-->
+            // <!--li.innerHTML = '' ;-->
+            // <!--alert('problem solved');alert(li);-->
+            // <!--document.getElementById("sub_code_ul").appendChild(li);-->
+            // <!--alert('problem solved');-->
+
+            function subject_display(value){
+
+                var sub = document.getElementById('sub_code_ul');
+                sub.innerHTML = "";
+                <% for(var i=0; i< subjects.length; i++ ){ %>
+                    if(value === parseInt('<%= subjects[i].sem_code %>')){
+                        var a = document.createElement('li');
+                        a.innerHTML = '<%= subjects[i].sub_code %>';
+                        sub.appendChild(a);
+                    }
+                <% } %>
+                set_value(value, '');
+            }
+
+            function test_display(value){
+                var sub = document.getElementById('sub_code_ul');
+                sub.innerHTML = "";
+                <% for(var i=0; i< subjects.length; i++ ){ %>
+                if(value === parseInt('<%= subjects[i].sem_code %>')){
+                    var a = document.createElement('li');
+                    a.innerHTML = '<%= subjects[i].sub_code %>';
+                    sub.appendChild(a);
+                }
+                <% } %>
+
+            }
+
+            function set_value(sem, sub_code) {
+                document.getElementById('sem').value = sem;
+                document.getElementById('sub_code').value = sub_code;
+            }
+        </script>
 </head>
 
-<body>
+<body onload="body_load()">
     <hr>
     <div class="row">
         <div class="column" style="padding-left: 35%; ">
-            <div class="dropdown">
+            <div class="dropdown" id="sem_div">
                 <div class="select">
                     <span>Select Semester</span>
                     <i class="fa fa-chevron-down"></i>
                 </div>
-                <input type="hidden" name="semester">
-                <ul class="dropdown-menu">
-                    <li id="first">First</li>
-                    <li id="second">Second</li>
-                    <li id="third">Third</li>
-                    <li id="fourth">Fourth</li>
-                    <li id="fifth">Fifth</li>
-                    <li id="sixth">Sixth</li>
+                <input type="hidden" name="semester" id="sem">
+                <ul class="dropdown-menu" id="sem_ul">
+                    <li id="sem_1" value="1" onclick="subject_display(value)">First</li>
+                    <li id="sem_2" value="2" onclick="subject_display(value)">Second</li>
+                    <li id="sem_3" value="3" onclick="subject_display(value)">Third</li>
+                    <li id="sem_4" value="4" onclick="subject_display(value)">Fourth</li>
+                    <li id="sem_5" value="5" onclick="subject_display(value)">Fifth</li>
+                    <li id="sem_6" value="6" onclick="subject_display(value)">Sixth</li>
                 </ul>
             </div>
         </div>
@@ -37,18 +80,14 @@
                     <span>Select Subject Code</span>
                     <i class="fa fa-chevron-down"></i>
                 </div>
-                <input type="hidden" name="sub_code">
-                <ul class="dropdown-menu">
-                    <li id="first">bla</li>
-                    <li id="second">bla</li>
-                    <li id="third">blabla</li>
-                    <li id="fourth">bulbul</li>
-                    <li id="fifth">boxbox</li>
-                    <li id="sixth">pubg</li>
+                <input type="hidden" name="sub_code_ul" id="sub_code">
+                <ul class="dropdown-menu" id="sub_code_ul">
+
                 </ul>
             </div>
         </div>
     </div>
+
     <div class="row">
         <center>
             <ul class="responsive-table">

@@ -51,7 +51,14 @@ router.get('/', function(req, res, next) {
 /* Processing for selecting sem and displaying the subjects accordingly */
 router.get('/edit', function(req, res, next) {
     var user = checkSession(req);
-    res.render('ots/sem_select', {title: 'the Portal', isLoggedIn: false, user: user, err: '' });
+    db.query("SELECT * FROM subjects", function (err, subjects)
+    {
+        db.query("SELECT * FROM active_tests", function (err, active)
+        {
+            console.log(subjects[0].sem_code);
+            res.render('ots/sem_select', {title: 'the Portal', isLoggedIn: false, user: user, err: '', subjects: subjects, active: active });
+        });
+    });
 });
 
 

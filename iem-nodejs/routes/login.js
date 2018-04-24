@@ -59,12 +59,39 @@ router.post('/', function(req, res, next) {
                         dbquery = "SELECT * FROM teacher_details WHERE  tch_id = ?";
                     }
                     db.query(dbquery, user, function (err, resultName) {
+                        if(result[0].log_as === 'stu'){
+                        var add_year = resultName[0].add_year;
+                        var date = new Date();
+                        var currentyear = date.getFullYear();
+                        var stu_year = (currentyear - add_year);
+                        var sem = 0;
+                        if(stu_year === 0)
+                        {
+                            if(date.getMonth() >= 0 && date.getMonth() <5){
+                                sem = 2;
+                                console.log(sem);
+                            }
+                            else if(date.getMonth() >= 5 && date.getMonth() <12) {
+                                sem = 1;
+                            }
+                        }
+                        else if(date.getMonth() >= 0 && date.getMonth() <5){
+                            sem = 2 * stu_year;
+                            console.log(sem);
+                        }
+                        else if(date.getMonth() >= 5 && date.getMonth() <12) {
+                            sem = 1 * stu_year;
+                        }
+                        console.log(sem);
+                        }
                         req.session.username = resultName[0].f_name;
                         req.session.uid = user;
                         req.session.as = result[0].log_as;
                         req.session.password = result[0].password;
+                        req.session.sem = sem;
                         req.session.save();
                         console.log(req.session);
+
                         if(req.session.redirect !== '' && req.session.redirect){
                             res.redirect(req.session.redirect)
                         }
