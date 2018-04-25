@@ -41,12 +41,22 @@ router.get('/', function(req, res, next) {
             }
             query = query + "')";
             db.query(query, function (err, active) {
-                res.render('ots/stu_home', {title: 'IEM', user: user, subjects: subjects, active: active});
+                res.render('ots/stu_home', {title: 'IEM', user: user, subjects: subjects, active: active, sem: sem});
             });
         });
     });
 });
 
+router.get('/:sem/:sub_code', function(req, res, next) {
+    var user = checkSession(req);
+    console.log(req.params.sem);
+    console.log(req.params.sub_code);
+});
+
+
+
+
+/* Teachers Routes */
 
 /* Processing for selecting sem and displaying the subjects accordingly */
 router.get('/edit', function(req, res, next) {
