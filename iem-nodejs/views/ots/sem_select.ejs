@@ -28,10 +28,11 @@
                     if(value === parseInt('<%= subjects[i].sem_code %>')){
                         var a = document.createElement('li');
                         a.innerHTML = '<%= subjects[i].sub_code %>';
+                        a.onclick = "test_display('<%= subjects[i].sub_code %>')";
                         sub.appendChild(a);
                     }
                 <% } %>
-                set_value(value, '');
+                sem_value(value);
             }
 
             function test_display(value){
@@ -47,15 +48,31 @@
 
             }
 
-            function set_value(sem, sub_code) {
+            function sem_value(sem) {
                 document.getElementById('sem').value = sem;
-                document.getElementById('sub_code').value = sub_code;
             }
+
+            function sub_code_value(sub_code) {
+                document.getElementById('sub__code').value = sub_code;
+            }
+
+            function body_load() {
+                <% if(sem !== 0){ %>
+                    document.getElementById('sem_<%= sem %>').click();
+                    document.getElementById('sem_<%= sem %>').click();
+                <% } %>
+                <% if(sub_code !== ''){ %>
+                    document.getElementById('<%= sub_code %>').click();
+                    document.getElementById('<%= sub_code %>').click();
+                <% } %>
+            }
+
         </script>
 </head>
 
 <body onload="body_load()">
     <hr>
+    <form id="form">
     <div class="row">
         <div class="column" style="padding-left: 35%; ">
             <div class="dropdown" id="sem_div">
@@ -90,7 +107,7 @@
 
     <div class="row">
         <center>
-            <ul class="responsive-table">
+            <ul class="responsive-table" id="tests_ul">
                 <li class="table-header">
                     <div class="col col-1">Test Number</div>
                     <div class="col col-2">Upload</div>
@@ -111,7 +128,7 @@
                     <div class="col col-4" data-label="Active Status">
                         <label class="switch" style="position: relative; display: inline-block; width: 50px; height: 25px;">
                             <input type="checkbox" checked>
-                            <span class="slider round"></span>
+                            <span class="slider round" onclick="document.getElementById('form').submit()"></span>
                         </label>
                     </div>
                     <div class="col col-5" data-label="View Result">
@@ -123,7 +140,7 @@
             </ul>
         </center>
     </div>
-
+    </form>
 
 
     <!-- <div class="column" style=" padding-left: 2%;">

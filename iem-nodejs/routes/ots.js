@@ -56,7 +56,7 @@ router.get('/edit', function(req, res, next) {
         db.query("SELECT * FROM active_tests", function (err, active)
         {
             console.log(subjects[0].sem_code);
-            res.render('ots/sem_select', {title: 'the Portal', isLoggedIn: false, user: user, err: '', subjects: subjects, active: active });
+            res.render('ots/sem_select', {title: 'the Portal', isLoggedIn: false, user: user, err: '', subjects: subjects, active: active, sem: 3, sub_code: 'BCA301' });
         });
     });
 });
