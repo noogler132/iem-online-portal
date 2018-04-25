@@ -28,6 +28,9 @@
                     if(value === parseInt('<%= subjects[i].sem_code %>')){
                         var a = document.createElement('li');
                         a.innerHTML = '<%= subjects[i].sub_code %>';
+                        a.value = '<%= i %>';
+                        a.index = '<%= i %>';
+                        a.id = '<%= subjects[i].sem_code %>';
                         a.onclick = "test_display('<%= subjects[i].sub_code %>')";
                         sub.appendChild(a);
                     }
@@ -36,15 +39,8 @@
             }
 
             function test_display(value){
-                var sub = document.getElementById('sub_code_ul');
-                sub.innerHTML = "";
-                <% for(var i=0; i< subjects.length; i++ ){ %>
-                if(value === parseInt('<%= subjects[i].sem_code %>')){
-                    var a = document.createElement('li');
-                    a.innerHTML = '<%= subjects[i].sub_code %>';
-                    sub.appendChild(a);
-                }
-                <% } %>
+                var sub = document.getElementById('sub_code').value;
+               alert(value);
 
             }
 
@@ -53,7 +49,7 @@
             }
 
             function sub_code_value(sub_code) {
-                document.getElementById('sub__code').value = sub_code;
+                document.getElementById('sub_code').value = sub_code;
             }
 
             function body_load() {
@@ -115,7 +111,8 @@
                     <div class="col col-4">Active Status</div>
                     <div class="col col-5">View Result</div>
                 </li>
-                <li class="table-row">
+                <% if(0){%>
+                <li class="table-row" id="test_li">
                     <div class="col col-1" data-label="Test Number">1</div>
                     <div class="col col-2" data-label="Upload">
                         <button class="button" style="padding-top: 2px;">
@@ -137,6 +134,7 @@
                         </button>
                     </div>
                 </li>
+                <% } %>
             </ul>
         </center>
     </div>
