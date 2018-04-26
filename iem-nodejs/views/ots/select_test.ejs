@@ -6,6 +6,7 @@
         <link rel='stylesheet' href='http://codepen.io/assets/libs/fullpage/jquery-ui.css'>
         <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
         <link rel="stylesheet" href="/index/css/test_homepage.css" media="screen" type="text/css" />
+        <link rel="stylesheet" href="/index/css/sem_select.css" media="screen" type="text/css" />
 </head>
 
 <body>
@@ -20,32 +21,22 @@
         <br>
         <br>
 
-        <center>
+        <center><%= subcode %>
             <ul class="responsive-table">
                 <li class="table-header">
-                    <div class="col col-1">Subject</div>
-                    <div class="col col-2">Test Number</div>
-                    <div class="col col-3">Status</div>
+                    <div class="col col-1">Test</div>
+                    <div class="col col-2">Status</div>
                     <div class="col col-3">Take Test</div>
                 </li>
-                <% for(var i = 0; i<subjects.length; i++){ %>
+                <% for(var i = 0; i<tests.length; i++){ %>
                 <li class="table-row">
-                    <div class="col col-1" data-label="Subject Code"><%= subjects[i].sub_code %></div>
-                    <div class="col col-2" data-label="Subject Name"><%= subjects[i].sub_name %></div>
-                    <% for(var j = 0; j<active.length; j++){ %>
-                    <% if(active[j].sub_code === subjects[i].sub_code){ %>
+                    <div class="col col-1" data-label="Test">Test <%= tests[i].test_no %></div>
+                    <div class="col col-2" data-label="Status">Pending</div>
                     <div class="col col-3" data-label="Give Test">
-                        <a href="/online-test/res">Go to Test</a>
+                        <button class="button" style="padding-top: 2px;">
+                            <span>Go to Test</span>
+                        </button>
                     </div>
-                    <% break; %>
-                    <% } %>
-                    <% if(active[j].sub_code !== subjects[i].sub_code){ %>
-                    <div class="col col-3" data-label="Give Test">
-                        No Test Available
-                    </div>
-                    <% break; %>
-                    <% } %>
-                    <% } %>
                 </li>
                 <% } %>
                 <form>

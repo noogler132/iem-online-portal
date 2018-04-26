@@ -13,21 +13,9 @@ router.get('/', function(req, res, next) {
         res.redirect('/online-test/edit');
         return;
     }
-    var sem = 0;
+    var sem = 6;
     db.query("SELECT * FROM student_details WHERE u_roll = ?", '10401215076', function (err, result)
     {
-        var add_year = result[0].add_year;
-        var date = new Date();
-        var currentyear = date.getFullYear();
-        var stu_year = (currentyear - add_year);
-
-        if(date.getMonth() >= 0 && date.getMonth() <5){
-            sem = 2 * stu_year;
-        }
-        else if(date.getMonth() >= 5 && date.getMonth() <12) {
-            sem = 1 * stu_year;
-        }
-        console.log('Sem: ' + sem);
         db.query("SELECT * FROM subjects WHERE sem_code = ?", sem, function (err, subjects)
         {
             console.log('Sub: ' + subjects.length);
@@ -47,10 +35,22 @@ router.get('/', function(req, res, next) {
     });
 });
 
-router.get('/:sem/:sub_code', function(req, res, next) {
+router.get('/:sem([1-6])/:subcode(\\w+)/', function(req, res, next) {
     var user = checkSession(req);
-    console.log(req.params.sem);
-    console.log(req.params.sub_code);
+    var sem = req.params.sem;
+    if(user.isLoggedIn && user.as === 'tch'){
+        res.redirect('/online-test/edit');
+        return;
+    }
+    var subcode = 'BCA101';
+    // if(!user.isLoggedIn && user.as !== 'stu' && user.sem !== sem){
+    //     res.redirect('/404');
+    //     return;
+    // }
+    db.query("SELECT * FROM active_tests WHERE sub_code = ?", req.params.subcode, function (err, result)
+    {
+        res.render('ots/select_test', {title: 'IEM', user: user, subcode: subcode ,sem: sem, tests: result});
+    });
 });
 
 
