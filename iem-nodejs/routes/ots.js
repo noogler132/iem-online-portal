@@ -13,7 +13,11 @@ router.get('/', function(req, res, next) {
         res.redirect('/online-test/edit');
         return;
     }
-    var sem = 6;
+    if(!user.isLoggedIn && user.as !== 'stu' && user.sem !== sem){
+        res.redirect('/404');
+        return;
+    }
+    var sem = req.session.sem;
     db.query("SELECT * FROM student_details WHERE u_roll = ?", '10401215076', function (err, result)
     {
         db.query("SELECT * FROM subjects WHERE sem_code = ?", sem, function (err, subjects)
@@ -50,11 +54,11 @@ router.get('/:sem([1-6])/:subcode(\\w+)/', function(req, res, next) {
         res.redirect('/online-test/edit');
         return;
     }
-    var subcode = 'BCA101';
-    // if(!user.isLoggedIn && user.as !== 'stu' && user.sem !== sem){
-    //     res.redirect('/404');
-    //     return;
-    // }
+    var subcode = req.params.subcode;
+    if(!user.isLoggedIn && user.as !== 'stu' && user.sem !== sem){
+        res.redirect('/404');
+        return;
+    }
     db.query("SELECT * FROM active_tests WHERE sub_code = ?", req.params.subcode, function (err, result)
     {
         res.render('ots/select_test', {title: 'IEM', user: user, subcode: subcode ,sem: sem, tests: result});
@@ -66,14 +70,19 @@ router.post('/:sem([1-6])/:subcode(\\w+)/', function(req, res, next) {
     var sub_code = req.body.sub_key;
     var date = new Date();
     var test_no = req.body.test_no;
-    req.session.test = {test_no: test_no, startTime: date, endTime: new Date(date.setMinutes(date.getMinutes()+33)) };
+    req.session.test = {sub_code: sub_code, test_no: test_no, startTime: date.getTime(), endTime: new Date(date.setMinutes(date.getMinutes()+33)).getTime() };
     console.log(req.session);
+    res.redirect('/online-test/start')
 });
 
 
-router.get('/exam', function(req, res, next) {
+router.get('/start', function(req, res, next) {
     var user = checkSession(req);
-    res.render('ots/exam', {title: 'IEM', user: user});
+    var test_key = req.session.test.sub_code + '_' + req.session.test.test_no;
+    db.query("SELECT * FROM test_questions WHERE test_key = ?", test_key, function (err, result)
+    {
+        res.render('ots/exam', {title: 'IEM', user: user, question: result});
+    });
 });
 
 

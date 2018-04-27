@@ -119,90 +119,35 @@
 
 <body>
 <form method="POST" action="" target="_blank" id="question_form">
+    <% for(var i=0; i<question.length; i++){ %>
     <div>
         <p>
-        <h2>1. What is the answer to this question? (use sql query to extract the question from the question column)</h2>
+        <h2><%= i +1 %>: <%= question[i].Question %></h2>
         </p>
         <label>
             <input type="radio" class="option-input radio" name="example" checked />
-            <strong>Answer 1  &emsp;</strong>
+            <strong><%= question[i].Option1 %> &emsp;</strong>
         </label>
         <label>
             <input type="radio" class="option-input radio" name="example" />
-            <strong>Answer 2  &emsp;</strong>
+            <strong><%= question[i].Option2 %> &emsp;</strong>
         </label>
         <label>
             <input type="radio" class="option-input radio" name="example" />
-            <strong>Answer 3  &emsp;</strong>
+            <strong><%= question[i].Option3 %>  &emsp;</strong>
         </label>
         <label>
             <input type="radio" class="option-input radio" name="example" />
-            <strong>Answer 4  &emsp;</strong>
+            <strong><%= question[i].Option4 %>  &emsp;</strong>
         </label>
     </div>
-
-
-    <br>
-    <br>
-    <br>
-
-
-    <div>
-        <p>
-        <h2>2. What is the answer to this question? (use sql query to extract the serial number of the question from the serial_no column)
-        </h2>
-        </p>
-
-        <div>
-            <label>
-                <input type="radio" class="option-input radio" name="example2" />
-                <strong>Answer 1 &emsp;</strong>
-            </label>
-            <label>
-                <input type="radio" class="option-input radio" name="example2" checked />
-                <strong>Answer 2 &emsp;</strong>
-            </label>
-            <label>
-                <input type="radio" class="option-input radio" name="example2" />
-                <strong>Answer 3 &emsp;</strong>
-            </label>
-            <label>
-                <input type="radio" class="option-input radio" name="example2" />
-                <strong>Answer 4 &emsp;</strong>
-            </label>
-        </div>
-
-    </div>
+    <% } %>
 
     <br>
     <br>
     <br>
 
 
-    <div>
-        <p>
-        <h2>3. What is the answer to this question? (used form to collect values, method=POST, change form attributes if needed)
-        </h2>
-        </p>
-
-        <div>
-            <label>
-                <input type="radio" class="option-input radio" name="example3" />
-                <strong>Answer 1 &emsp;</strong>
-            </label>
-            <label>
-                <input type="radio" class="option-input radio" name="example3" checked />
-                <strong>Answer 2 &emsp;</strong>
-            </label>
-            <label>
-                <input type="radio" class="option-input radio" name="example3" />
-                <strong>Answer 3 &emsp;</strong>
-            </label>
-            <label>
-                <input type="radio" class="option-input radio" name="example3" />
-                <strong>Answer 4 &emsp;</strong>
-            </label>
-        </div>
 
     </div>
 
