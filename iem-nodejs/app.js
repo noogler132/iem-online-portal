@@ -44,7 +44,7 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/login', login);
 app.use('/online-test', ots);
-app.use('/change-password', pass_reset);
+app.use('/password-reset', pass_reset);
 app.use('' +
     '/register', register);
 

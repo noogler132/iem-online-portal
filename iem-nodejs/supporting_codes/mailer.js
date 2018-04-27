@@ -1,5 +1,5 @@
 
-module.exports = function (maildata) {
+module.exports = function (maildata, toMail) {
 
     var nodemailer = require('nodemailer');
 
@@ -16,7 +16,7 @@ module.exports = function (maildata) {
 
     var mailoptions = {
         from: 'iem.portal141@gmail.com',
-        to: 'sachinagarwal132@gmail.com',
+        to: toMail,
         attachments: []
     };
 

@@ -8,16 +8,34 @@ var checkSession = require('./isLoggedIn');
 /* GET password reset email page. */
 router.get('/', function(req, res, next) {
     var user = checkSession(req);
-    if(!req.session.uid) {
-        res.render('login/forgot_password', {err: '', user: user});
+    if(!req.session.password) {
+        res.render('login/forgot_password_id', {err: '', user: user});
     }
-    else{
-        res.redirect('/change-password/reset');
+    else if(req.session.uid && req.session.password)
+    {
+        res.redirect('/password-reset/sendingOTP');
     }
 });
 
 /* POST password reset email page. */
-router.get('/', function(req, res, next) {
+router.post('/', function(req, res, next) {
+    var user = checkSession(req);
+    var u_id = req.body.username;
+    db.query("SELECT * FROM auth WHERE u_id = ?", u_id, function (err, result) {
+        if(result.length === 0){
+            res.render('login/forgot_password', {err: 'Invalid Username', user: user});
+        }
+        else{
+            req.session.uid = u_id;
+            req.session.mail = result[0].email;
+            console.log(req.session);
+            res.redirect('/password-reset/sendingOTP');
+        }
+    });
+});
+
+/* POST password reset email page. */
+router.post('/sendingOTP', function(req, res, next) {
     var user = checkSession(req);
     var OTP = Math.floor(Math.random() * 999999) + 105555;
     var maildata = {
@@ -28,36 +46,20 @@ router.get('/', function(req, res, next) {
     };
     var mailer = require('../supporting_codes/mailer');
 
-
     /* Set new OTP as user password */
     bcrypt.hash(OTP, 8, function(err, hash) {
         // Store hash in your password DB.
         db.query("UPDATE auth SET password = ? WHERE u_id = ?", hash, req.session.username, function (err, result) {
             if (err) throw err;
             maildata.subject = 'Your Password Reset Code Is Here';
-            var OTPhash = result.affectedRows[0].password;
-            maildata.text = '';
+            maildata.text = ' Enter this OTP to reset your password: '+ OPT;
+            mailer(maildata, req.session.mail);
+            res.render('login/forgot_password_id', {err: '', user: user, OTP: 0});
         })
     });
-
 });
 
 
-/* POST password reset email page. */
-router.post('/', function(req, res, next) {
-    var user = checkSession(req);
-    var username = req.body.username;
-    db.query("SELECT * FROM auth WHERE u_id = ?", username, function (err, result) {
-        if(result.length === 0){
-            res.render('login/forgot_password', {err: 'Invalid Username', user: user});
-        }
-        else{
-            req.session.uid = username;
-            console.log(req.session);
-            res.redirect('/change-password/reset');
-        }
-    });
-});
 
 
 /* GET password reset page. */
