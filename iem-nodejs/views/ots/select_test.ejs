@@ -7,6 +7,18 @@
         <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
         <link rel="stylesheet" href="/index/css/test_homepage.css" media="screen" type="text/css" />
         <link rel="stylesheet" href="/index/css/sem_select.css" media="screen" type="text/css" />
+    <script>
+
+        function form_submit(test_no) {
+            // var form = document.getElementById('test_form');
+            // var action = '/online-test/' + test_key;
+            // form.setAttribute('action', action );
+            document.getElementById('test_no').setAttribute('value', test_no);
+            document.getElementById('sub_key').setAttribute('value', '<%= subcode %>');
+            document.getElementById('test_form').submit();
+        }
+
+    </script>
 </head>
 
 <body>
@@ -33,7 +45,7 @@
                     <div class="col col-1" data-label="Test">Test <%= tests[i].test_no %></div>
                     <div class="col col-2" data-label="Status">Pending</div>
                     <div class="col col-3" data-label="Give Test">
-                        <button class="button" style="padding-top: 2px;">
+                        <button class="button" style="padding-top: 2px;" onclick="form_submit(<%= tests[i].test_no %>)" >
                             <span>Go to Test</span>
                         </button>
                     </div>
@@ -83,7 +95,10 @@
     <br>
     <br>
     <br>
-
+    <form id="test_form" method="post">
+        <input type="hidden" name="test_no" id="test_no">
+        <input type="hidden" name="sub_key" id="sub_key">
+    </form>
     <%- include('../footer'); %>
         <script src="/index/js/bootstrap.js"></script>
 </body>

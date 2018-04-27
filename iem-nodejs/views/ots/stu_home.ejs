@@ -10,16 +10,15 @@
     <script>
 
         function form_submit(sub_code) {
-            var form = document.getElementById('sub_code_form');
-            var action = '/online-test/<%= sem %>/' + sub_code +'/';
-            form.setAttribute('action', action );
+            document.getElementById('sub_key').setAttribute('value', sub_code);
+            document.getElementById('sem_key').setAttribute('value', '<%= sem %>');
             document.getElementById('sub_code_form').submit();
         }
 
     </script>
 </head>
 
-<body onpageshow="body_load()">
+<body>
 
     <br>
     <br>
@@ -69,7 +68,9 @@
             </ul>
         </center>
     </div>
-<form id="sub_code_form">
+<form id="sub_code_form" method="post">
+    <input type="hidden" name="sub_key" id="sub_key">
+    <input type="hidden" name="sem_key" id="sem_key">
 </form>
     <br>
     <br>

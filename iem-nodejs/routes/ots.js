@@ -35,6 +35,14 @@ router.get('/', function(req, res, next) {
     });
 });
 
+router.post('/', function(req, res, next) {
+    var user = checkSession(req);
+    var sem = req.body.sem_key;
+    var sub_code = req.body.sub_key;
+    var redirect_var = '/online-test/'+sem+'/'+sub_code+'/';
+    res.redirect(redirect_var);
+});
+
 router.get('/:sem([1-6])/:subcode(\\w+)/', function(req, res, next) {
     var user = checkSession(req);
     var sem = req.params.sem;
@@ -53,7 +61,20 @@ router.get('/:sem([1-6])/:subcode(\\w+)/', function(req, res, next) {
     });
 });
 
+router.post('/:sem([1-6])/:subcode(\\w+)/', function(req, res, next) {
+    var user = checkSession(req);
+    var sub_code = req.body.sub_key;
+    var date = new Date();
+    var test_no = req.body.test_no;
+    req.session.test = {test_no: test_no, startTime: date, endTime: new Date(date.setMinutes(date.getMinutes()+33)) };
+    console.log(req.session);
+});
 
+
+router.get('/exam', function(req, res, next) {
+    var user = checkSession(req);
+    res.render('ots/exam', {title: 'IEM', user: user});
+});
 
 
 /* Teachers Routes */
