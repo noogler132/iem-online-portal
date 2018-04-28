@@ -24,12 +24,16 @@
             function subject_display(value){
                 var sub = document.getElementById('sub_code');
                 sub.innerHTML = "";
+                var subPlaceholder = document.createElement("OPTION");
+                subPlaceholder.label = 'Select Subject';
+                subPlaceholder.id = 'subPlaceholder';
+                sub.add(subPlaceholder);
                 <% for(var i=0; i< subjects.length; i++ ){ %>
                     if(parseInt(value)=== parseInt('<%= subjects[i].sem_code %>')){
-                        var a = document.createElement("OPTION");
-                        a.value = '<%= subjects[i].sub_code %>';
-                        a.label = '<%= subjects[i].sub_code %>';
-                        sub.add(a);
+                        var option = document.createElement("OPTION");
+                        option.value = '<%= subjects[i].sub_code %>';
+                        option.label = '<%= subjects[i].sub_code %>';
+                        sub.add(option);
                     }
                 <% } %>
             }
@@ -42,6 +46,11 @@
                 <% if(sub_code !== ''){ %>
                 document.getElementById('sub_code').value = '<%= sub_code %>';
                 <% } %>
+            }
+
+            function toggle(test_key) {
+                document.getElementById('test_form').value = test_key;
+                document.getElementById('test_form').submit();
             }
         </script>
 </head>
@@ -93,7 +102,7 @@
                     <% if(active[j].is_active === 1){ %>
                     <div class="col col-4" data-label="Active Status">
                         <label class="switch" style="position: relative; display: inline-block; width: 50px; height: 25px;">
-                            <input type="checkbox" checked>
+                            <input type="checkbox" checked onclick="toggle('<%= active[j].test_key %>')">
                             <span class="slider round"></span>
                         </label>
                     </div>
@@ -101,7 +110,7 @@
                     <% if(active[j].is_active === 0){ %>
                     <div class="col col-4" data-label="Active Status">
                         <label class="switch" style="position: relative; display: inline-block; width: 50px; height: 25px;">
-                            <input type="checkbox">
+                            <input type="checkbox" onclick="toggle('<%= active[j].test_key %>')">
                             <span class="slider round"></span>
                         </label>
                     </div>
@@ -117,6 +126,9 @@
         </center>
     </div>
         <% } %>
+    </form>
+    <form id="test_form" action="online-test/toggle_test/" method="post">
+        <input type="hidden" name="test_key">
     </form>
 
 
