@@ -22,21 +22,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <% } %>
     <div class="login-card">
         <h2>Reset Your Password</h2><br>
-        <form method="POST">
+        <form method="POST" action="/password-reset/processing
+">
+
             <div class="input-group input-group-lg w3_w3layouts">
-                <input type="password" class="form-control" placeholder="Password" aria-describedby="sizing-addon1" name="password">
+                <input type="password" class="form-control" placeholder="Enter your Password" aria-describedby="sizing-addon1" name="password1">
             </div>
             <div class="input-group input-group-lg w3_w3layouts">
-                <input type="password" class="form-control" placeholder="Password" aria-describedby="sizing-addon1" name="password">
+                <input type="password" class="form-control" placeholder="Re-enter your Password" aria-describedby="sizing-addon1" name="password2"><br>
             </div>
-            <div class="w3btns-agile">
-                <input type="submit" name="login" class="btn btn-default" value="Reset" style="width: 200px">
-            </div>
-            <!--
-            <input type="text" name="username" placeholder="Username" autofocus="autofocus">
-            <input type="password" name="password" placeholder="Password">
-            <input type="submit" name="login" class="login login-submit" value="Login">
-            <button class="btn btn-default" type="submit">Go!</button>-->
+            <span class="input-group-btn">
+                <input type="submit" name="login" class="btn btn-default" value="Go!">
+            </span>
         </form>
     </div></div>
 </center>

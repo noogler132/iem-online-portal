@@ -116,7 +116,6 @@ router.post('/newPassword', function(req, res, next) {
 });
 
 
-
 /* POST password reset page. */
 router.post('/processing', function(req, res, next) {
     var options = {
@@ -133,13 +132,13 @@ router.post('/processing', function(req, res, next) {
     var passwordData = validator.checkPassword(pass1);
     if (!passwordData.isValid)
     {
-        res.render('pass_reset', { err: passwordData.validationMessage });
+        res.render('pass_reset', { err: passwordData.validationMessage , user: user });
     }
     else if(pass1!==pass2){
-        res.render('login/pass_reset', { err: 'Passwords do not match' });
+        res.render('login/pass_reset', { err: 'Passwords do not match' , user: user });
     }
     else{
-
+        
     }
 });
 
