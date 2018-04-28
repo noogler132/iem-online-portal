@@ -61,7 +61,7 @@ function sendOTP(u_id, mail) {
             var arr = [u_id, hash];
             db.query('SELECT * FROM otp_store WHERE u_id = ?', u_id, function (err, result) {
                 if(err) throw err;
-                if(result.length){
+                if(result.constructor === Array){
                     db.query('DELETE FROM otp_store WHERE u_id = ?', u_id, function (err, result) {
                         if(err) throw err;
                         doMail(arr, OTP, mail, maildata);
@@ -118,10 +118,11 @@ router.post('/newPassword', function(req, res, next) {
 
 /* POST password reset page. */
 router.post('/processing', function(req, res, next) {
+    var user = checkSession(req);
     var options = {
         enforce: {
             lowercase: true,
-            uppercase: true,
+            uppercase: false,
             specialCharacters: false,
             numbers: true
         }
@@ -132,13 +133,19 @@ router.post('/processing', function(req, res, next) {
     var passwordData = validator.checkPassword(pass1);
     if (!passwordData.isValid)
     {
-        res.render('pass_reset', { err: passwordData.validationMessage , user: user });
+        res.render('login/pass_reset', { err: passwordData.validationMessage , user: user });
     }
     else if(pass1!==pass2){
         res.render('login/pass_reset', { err: 'Passwords do not match' , user: user });
     }
     else{
-        
+        bcrypt.hash(pass1, 8, function(err, hash) {
+            // Store hash in your password DB.
+            db.query( 'UPDATE auth SET password = ? WHERE u_id= ?',[hash, req.session.uid], function (err, result) {
+                if(err) throw err;
+            });
+        });
+        res.redirect('/login/logout');
     }
 });
 
