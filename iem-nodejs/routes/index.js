@@ -19,6 +19,11 @@ router.get('/syllabus', function(req, res) {
     res.render('index/syllabus', { title: 'IEM', user: user });
 });
 
+/* GET timetable page */
+router.get('/timetable', function(req, res) {
+    var user = checkSession(req);
+    res.render('index/timetable', { title: 'IEM', user: user });
+});
 
 /* GET contact us page */
 router.get('/contact_us', function(req, res) {
