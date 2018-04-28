@@ -13,7 +13,10 @@ router.get('/', function(req, res, next) {
     }
     else if(req.session.uid && req.session.password)
     {
-        res.redirect('/password-reset/sendingOTP');
+        db.query("SELECT * FROM auth WHERE u_id = ?", req.session.uid, function (err, result) {
+            sendOTP(req.session.uid, result[0].email);
+        });
+        res.render('login/forgot_password_OTP', {err: '', user: user, uid: req.session.uid})
     }
 });
 
@@ -22,60 +25,100 @@ router.post('/', function(req, res, next) {
     var user = checkSession(req);
     var u_id = req.body.username;
     db.query("SELECT * FROM auth WHERE u_id = ?", u_id, function (err, result) {
+        if (err) throw err;
         if(result.length === 0){
-            res.render('login/forgot_password', {err: 'Invalid Username', user: user});
+            res.render('login/forgot_password_id', {err: 'Invalid Username', user: user});
         }
         else{
             req.session.uid = u_id;
             req.session.mail = result[0].email;
             console.log(req.session);
-            res.redirect('/password-reset/sendingOTP');
+            sendOTP(u_id, result[0].email);
+            res.render('login/forgot_password_OTP', {err: '', user: user, uid: req.session.uid})
         }
     });
 });
 
-/* POST password reset email page. */
-router.post('/sendingOTP', function(req, res, next) {
-    var user = checkSession(req);
-    var OTP = Math.floor(Math.random() * 999999) + 105555;
+/* Send OTP */
+function sendOTP(u_id, mail) {
+    console.log('OTP');
+    var OTP = Math.floor(Math.random() * 99999999) + 105555;
+    console.log('OTP done maildata starting');
     var maildata = {
         subject: '',
         text: '',
         sendfile: 0,
         file: []
     };
-    var mailer = require('../supporting_codes/mailer');
 
+    console.log('----------bcrypt: '+ OTP);
     /* Set new OTP as user password */
-    bcrypt.hash(OTP, 8, function(err, hash) {
-        // Store hash in your password DB.
-        db.query("UPDATE auth SET password = ? WHERE u_id = ?", hash, req.session.username, function (err, result) {
-            if (err) throw err;
-            maildata.subject = 'Your Password Reset Code Is Here';
-            maildata.text = ' Enter this OTP to reset your password: '+ OPT;
-            mailer(maildata, req.session.mail);
-            res.render('login/forgot_password_id', {err: '', user: user, OTP: 0});
-        })
+     var hash = bcrypt.hashSync(OTP.toString(), 8);
+            // Store hash in your password DB.
+            console.log('------hash:' + hash);
+            // Store hash in your password DB.
+            console.log('-------inside');
+            var arr = [u_id, hash];
+            db.query('SELECT * FROM otp_store WHERE u_id = ?', u_id, function (err, result) {
+                if(err) throw err;
+                if(result.length){
+                    db.query('DELETE FROM otp_store WHERE u_id = ?', u_id, function (err, result) {
+                        if(err) throw err;
+                        doMail(arr, OTP, mail, maildata);
+                    });
+                }
+                else{
+                    doMail(arr, OTP, mail, maildata);
+                }
+            });
+}
+/* mail function */
+function doMail(arr, OTP , mail, maildata){
+    db.query('INSERT INTO otp_store(u_id, OTP) VALUES(?,?)', arr, function (err, result) {
+        console.log('-----------update callback');
+        if (err) throw err;
+        var mailer = require('../supporting_codes/mailer');
+        console.log('---no err in callback');
+        maildata.subject = 'Your Password Reset Code Is Here';
+        maildata.text = ' Enter this OTP to reset your password: ' + OTP;
+        mailer(maildata, mail);
     });
-});
+}
 
-
-
-
-/* GET password reset page. */
-router.get('/reset', function(req, res, next) {
+/* POST OTP / after getting OTP. */
+router.post('/newPassword', function(req, res, next) {
     var user = checkSession(req);
     if(!req.session.uid) {
-        res.redirect('/change-password');
+        res.redirect('/password-reset');
+        return;
     }
-    else{
-        res.render('login/pass_reset', {err: '', user: user});
-    }
+    console.log('---------/newPassword');
+    var u_id = req.session.uid;
+    var OTP = req.body.OTP;
+    db.query("SELECT * FROM otp_store WHERE u_id = ?", u_id, function (err, result) {
+        if(err) throw err;
+        console.log('---------first query');
+        bcrypt.compare(OTP, result[0].OTP, function (err, bool){
+            console.log('---------bool:' + bool);
+            if(bool){
+                db.query('DELETE FROM otp_store WHERE u_id = ?', u_id, function (err, result) {
+                    if(err) throw err;
+                    console.log('---------2nd query');
+                });
+                res.render('login/pass_reset', { err: '', user: user });
+            }
+            else{
+                res.render('login/forgot_password_OTP', {err: 'Incorrect OTP', user: user, uid: req.session.uid})
+            }
+        });
+    });
+
 });
+
 
 
 /* POST password reset page. */
-router.post('/reset', function(req, res, next) {
+router.post('/processing', function(req, res, next) {
     var options = {
         enforce: {
             lowercase: true,

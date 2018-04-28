@@ -16,7 +16,7 @@ module.exports = function (maildata, toMail) {
 
     var mailoptions = {
         from: 'iem.portal141@gmail.com',
-        to: toMail,
+        to: '',
         attachments: []
     };
 
@@ -38,6 +38,20 @@ module.exports = function (maildata, toMail) {
     // };
 
     console.log(maildata);
+
+    if((toMail.constructor === Array) && toMail.length>0)
+    {
+        var strmail = "";
+        for(var i=0; i<toMail.length; i++){
+            strmail = strmail+ toMail[i].email + ",";
+        }
+        strmail = strmail + "'";
+        mailoptions.to = strmail;
+    }
+    else{
+        mailoptions.to = toMail;
+    }
+
     if(maildata.subject){
         mailoptions.subject = maildata.subject;
     }

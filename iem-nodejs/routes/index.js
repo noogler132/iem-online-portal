@@ -126,7 +126,9 @@ router.post('/notice_upload', function(req, res) {
                 if (err) throw err;
             });
         }
-        mailer(maildata);
+        db.query("SELECT email FROM student_details" , function (err, result) {
+            mailer(maildata, result);
+        });
         res.render('upload_form', {
             title: 'Upload Notice',
             error: '',
