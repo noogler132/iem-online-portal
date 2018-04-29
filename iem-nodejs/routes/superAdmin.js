@@ -10,3 +10,5 @@ var exceltocvs = require('../supporting_codes/excel2csv.js');
 router.get('/', function(req, res, next) {
     res.render('superAdmin/view', {});
 });
+
+module.exports=router;
