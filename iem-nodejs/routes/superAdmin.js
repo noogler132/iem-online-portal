@@ -16,6 +16,11 @@ router.get('/add-user', function(req, res, next) {
     res.render('superAdmin/add-user', {});
 });
 
+/* GET ADD USER */
+router.get('/add-user', function(req, res, next) {
+    res.render('superAdmin/add-user', {});
+});
+
 /* GET STUDENT DETAILS */
 router.get('/students', function(req, res, next) {
     res.render('superAdmin/student-table', {});
