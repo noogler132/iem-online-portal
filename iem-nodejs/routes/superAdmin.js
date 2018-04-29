@@ -8,7 +8,7 @@ var exceltocvs = require('../supporting_codes/excel2csv.js');
 
 /* GET superAdmin home page */
 router.get('/', function(req, res, next) {
-    res.render('superAdmin/view', {});
+    res.render('superAdmin/sections', {});
 });
 
 module.exports=router;
