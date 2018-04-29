@@ -46,11 +46,17 @@
                 <% if(sub_code !== ''){ %>
                 document.getElementById('sub_code').value = '<%= sub_code %>';
                 <% } %>
+                document.getElementById('test_key').value = '';
+                document.getElementById('action').value = '';
             }
 
-            function toggle(test_key) {
-                document.getElementById('test_form').value = test_key;
-                document.getElementById('test_form').submit();
+            function toggle(test_key, action) {
+                alert('called');
+                document.getElementById('test_key').value = test_key;
+                alert('setkey');
+                document.getElementById('action').value = action;
+                alert('setaction');
+                document.getElementById('form').submit();
             }
         </script>
 </head>
@@ -58,64 +64,70 @@
 <body onload="body_load()">
     <hr>
     <form id="form" method="POST">
-    <div class="row">
-        <div class="column" style="padding-left: 35%; ">
-            <select name="sem" id="sem" title="Select Semester" onchange="subject_display(value)"
-                    onclick="document.getElementById('semPlaceholder').remove()">
-                <option id="semPlaceholder">Select Semester</option>
-                <option id="sem_1" value="1">First</option>
-                <option id="sem_2" value="2">Second</option>
-                <option id="sem_3" value="3">Third</option>
-                <option id="sem_4" value="4">Fourth</option>
-                <option id="sem_5" value="5">Fifth</option>
-                <option id="sem_6" value="6">Sixth</option>
-            </select>
-        </div>
-        <div class="column" style="padding-left: 2.5%;">
-            <select name="sub_code" id="sub_code" title="Select Subject Code" onchange="document.getElementById('form').submit()">
-                <option id="subPlaceholder">Select Subject</option>
-            </select>
+        <div class="row">
+            <div class="column" style="padding-left: 35%; ">
+                <select name="sem" id="sem" title="Select Semester" onchange="subject_display(value)"
+                        onclick="document.getElementById('semPlaceholder')">
+                    <option id="semPlaceholder">Select Semester</option>
+                    <option id="sem_1" value="1">First</option>
+                    <option id="sem_2" value="2">Second</option>
+                    <option id="sem_3" value="3">Third</option>
+                    <option id="sem_4" value="4">Fourth</option>
+                    <option id="sem_5" value="5">Fifth</option>
+                    <option id="sem_6" value="6">Sixth</option>
+                </select>
+            </div>
+            <div class="column" style="padding-left: 2.5%;">
+                <select name="sub_code" id="sub_code" title="Select Subject Code" onchange="document.getElementById('form').submit()">
+                    <option id="subPlaceholder">Select Subject</option>
+                </select>
             </div>
         </div>
-<% if(active !== undefined){ %>
-    <div class="row">
+        <% if(active !== undefined){ %>
+        <div class="row">
         <center>
             <ul class="responsive-table" id="tests_ul">
                 <li class="table-header">
                     <div class="col col-1">Test Number</div>
-                    <div class="col col-2">Upload</div>
-                    <div class="col col-3">Upload Status</div>
-                    <div class="col col-4">Active Status</div>
-                    <div class="col col-5">View Result</div>
+                    <!--<div class="col col-2">Upload</div>-->
+                    <!--<div class="col col-3">Upload Status</div>-->
+                    <div class="col col-2">Active Status</div>
+                    <div class="col col-3">Delete</div>
+                    <div class="col col-4">View Result</div>
                 </li>
                 <% for(var j=0; j<active.length; j++){%>
                 <li class="table-row" id="test_li">
                     <div class="col col-1" data-label="Test Number"><%= active[j].test_no %></div>
-                    <div class="col col-2" data-label="Upload">
-                        <button class="button" style="padding-top: 2px;">
-                            <span>Upload </span>
-                        </button>
-                    </div>
-                    <div class="col col-3" data-label="Upload Status">
-                        <a href="#">Uploaded</a>
-                    </div>
+                    <!--<div class="col col-2" data-label="Upload">-->
+                        <!--<button class="button" style="padding-top: 2px;">-->
+                            <!--<span>Upload </span>-->
+                        <!--</button>-->
+                    <!--</div>-->
+                    <!--<div class="col col-3" data-label="Upload Status">-->
+                        <!--<a href="#">Uploaded</a>-->
+                    <!--</div>-->
                     <% if(active[j].is_active === 1){ %>
-                    <div class="col col-4" data-label="Active Status">
+                    <div class="col col-2" data-label="Active Status" style="padding-top: 2px">
                         <label class="switch" style="position: relative; display: inline-block; width: 50px; height: 25px;">
-                            <input type="checkbox" checked onclick="toggle('<%= active[j].test_key %>')">
+                            <input type="checkbox" checked onclick="toggle('<%= active[j].test_key %>', 'toggle')">
                             <span class="slider round"></span>
                         </label>
                     </div>
                     <% } %>
                     <% if(active[j].is_active === 0){ %>
-                    <div class="col col-4" data-label="Active Status">
+                    <div class="col col-2" data-label="Active Status" style="padding-top: 2px">
                         <label class="switch" style="position: relative; display: inline-block; width: 50px; height: 25px;">
-                            <input type="checkbox" onclick="toggle('<%= active[j].test_key %>')">
+                            <input type="checkbox" onclick="toggle('<%= active[j].test_key %>', 'toggle')">
                             <span class="slider round"></span>
                         </label>
                     </div>
                     <% } %>
-                    <div class="col col-5" data-label="View Result">
+                    <div class="col col-3" data-label="Delete Test">
+                        <button class="button" style="padding-top: 2px;" onclick="toggle('<%= active[j].test_key %>', 'delete')">
+                            <span>Delete </span>
+                        </button>
+                    </div>
+                    <div class="col col-4" data-label="View Result">
                         <button class="button" style="padding-top: 2px;">
                             <span>Result </span>
                         </button>
@@ -124,14 +136,12 @@
                 <% } %>
             </ul>
         </center>
-    </div>
+        </div>
         <% } %>
-    </form>
-    <form id="test_form" action="online-test/toggle_test/" method="post">
-        <input type="hidden" name="test_key">
-    </form>
 
-
+        <input type="hidden" name="test_key" id="test_key">
+        <input type="hidden" name="action" id="action">
+    </form>
     <!-- <div class="column" style=" padding-left: 2%;">
             <div class="dropdown">
                 <div class="select">

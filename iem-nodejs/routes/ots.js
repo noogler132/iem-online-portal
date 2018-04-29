@@ -104,37 +104,89 @@ router.get('/edit', function(req, res, next) {
     });
 });
 
-router.post('/edit', function(req, res, next) {
+router.post('/edit', function(req, res, next)
+{
     var user = checkSession(req);
     var sub_code = req.body.sub_code;
     var sem = req.body.sem;
-    db.query("SELECT * FROM subjects", function (err, subjects) {
-        db.query("SELECT * FROM active_tests where sub_code = ?", sub_code, function (err, result) {
-            if(result === undefined){
-                res.render('ots/sem_select', {
-                    title: 'the Portal',
-                    isLoggedIn: false,
-                    user: user, err: '',
-                    subjects: subjects,
-                    active: undefined,
-                    sem: 0,
-                    sub_code: '' });
-                return;
-            }
-            res.render('ots/sem_select', {
-                title: 'the Portal',
-                isLoggedIn: false,
-                user: user, err: '',
-                subjects: subjects,
-                active: result,
-                sem: sem,
-                sub_code: sub_code
+    var actionTaken = 0;
+    if(req.body.action !== ''){
+        actionTaken = takeAction(req.body.action, req.body.test_key)
+    }
+    else{
+        actionTaken = 1;
+    }
+            db.query("SELECT * FROM subjects", function (err, subjects) {
+                db.query("SELECT * FROM active_tests where sub_code = ?", sub_code, function (err, result) {
+                    if (result === undefined) {
+                        res.render('ots/sem_select', {
+                            title: 'the Portal',
+                            isLoggedIn: false,
+                            user: user, err: '',
+                            subjects: subjects,
+                            active: undefined,
+                            sem: 0,
+                            sub_code: ''
+                        });
+                        return;
+                    }
+                    res.render('ots/sem_select', {
+                        title: 'the Portal',
+                        isLoggedIn: false,
+                        user: user, err: '',
+                        subjects: subjects,
+                        active: result,
+                        sem: sem,
+                        sub_code: sub_code
+                    });
+                });
             });
-        });
-    });
+
+
 });
 
+/* Delete or toggle tests */
+function takeAction(action, test_key) {
+    var query = '';
+    console.log('--------' + action + test_key);
+    if(action === 'delete'){
+        console.log('delete');
+        query = 'DELETE FROM active_tests where test_key = ' + test_key;
+        db.query( query, function (err, result) {
+            if(err) throw err;
+            console.log('-------- deleted from active tests');
+            db.query('DELETE FROM test_questions where test_key = ?', test_key, function (err, result) {
+                if(err) throw err;
+                console.log('-------- deleted from ques bank');
+                return 1;
+            });
+        });
+    }
+    else if(action === 'toggle'){
+        console.log('toggle');
+        db.query('SELECT * from active_tests WHERE test_key = ?', test_key, function (err, result) {
+            if(err) throw err;
+            console.log('-------first query');
+            var active_state = 1;
+            if(result[0].is_active){
+                active_state = 0;
+            }
+            console.log('------'+active_state);
+            db.query( 'UPDATE active_tests SET is_active = ? WHERE test_key = ?',[active_state, test_key], function (err, result) {
+                if(err) throw err;
+                console.log('-------- toggle done');
+                return 1;
+            });
+        });
+    }
+    else{
+        console.log('noaction');
+        return 1;
+    }
+}
 
+
+/* GET upload page for teachers */
 router.get('/upload', function(req, res, next) {
     var user = checkSession(req);
     // if(user.isLoggedIn && user.as === 'tch') {
