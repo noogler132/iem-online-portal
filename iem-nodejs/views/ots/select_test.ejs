@@ -6,19 +6,31 @@
         <link rel='stylesheet' href='http://codepen.io/assets/libs/fullpage/jquery-ui.css'>
         <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
         <link rel="stylesheet" href="/index/css/test_homepage.css" media="screen" type="text/css" />
-        <link rel="stylesheet" href="/index/css/sem_select.css" media="screen" type="text/css" />
-    <script>
+        <!-- <link rel="stylesheet" href="/index/css/sem_select.css" media="screen" type="text/css" /> -->
+        <script>
 
-        function form_submit(test_no) {
-            // var form = document.getElementById('test_form');
-            // var action = '/online-test/' + test_key;
-            // form.setAttribute('action', action );
-            document.getElementById('test_no').setAttribute('value', test_no);
-            document.getElementById('sub_key').setAttribute('value', '<%= subcode %>');
-            document.getElementById('test_form').submit();
-        }
+            function form_submit(test_no) {
+                // var form = document.getElementById('test_form');
+                // var action = '/online-test/' + test_key;
+                // form.setAttribute('action', action );
+                document.getElementById('test_no').setAttribute('value', test_no);
+                document.getElementById('sub_key').setAttribute('value', '<%= subcode %>');
+                document.getElementById('test_form').submit();
+            }
 
-    </script>
+        </script>
+        <style>
+            .table-row .col-3 {
+                font-size: 16px;
+            }
+            .table-row .col-1{
+                font-size: 17px;
+            }
+            .table-row .col-2{
+                font-size: 17px;
+            }
+
+        </style>
 </head>
 
 <body>
@@ -27,66 +39,70 @@
     <br>
 
     <div class="container">
-        <h2><%= title %>
-            <!-- <small>Triggers on 767px</small> -->
+        <h2>
+            <%= title %>
+                <!-- <small>Triggers on 767px</small> -->
         </h2>
         <br>
         <br>
 
-        <center><%= subcode %>
-            <ul class="responsive-table">
-                <li class="table-header">
-                    <div class="col col-1">Test</div>
-                    <div class="col col-2">Status</div>
-                    <div class="col col-3">Action</div>
-                </li>
-                <% for(var i = 0; i<tests.length; i++){ %>
-                <li class="table-row">
-                    <div class="col col-1" data-label="Test">Test <%= tests[i].test_no %></div>
-                    <div class="col col-2" data-label="Status">Pending</div>
-                    <div class="col col-3" data-label="Give Test">
-                        <button class="button" style="padding-top: 2px;" onclick="form_submit(<%= tests[i].test_no %>)" >
-                            <span>Go to Test</span>
-                        </button>
-                    </div>
-                </li>
-                <% } %>
-                <form>
-                    <input type="hidden" name="Subject" value="">
-                </form>
-                <!--<li class="table-row">-->
-                    <!--<div class="col col-1" data-label="Subject Code">BCA-E602B</div>-->
-                    <!--<div class="col col-2" data-label="Subject Name">Object Oriented Programming with JAVA</div>-->
-                    <!--<div class="col col-3" data-label="Give Test">-->
-                        <!--<a href="#">Go to Test</a>-->
-                    <!--</div>-->
-                    <!--<div class="col col-4" data-label="Test Status">Pending</div>-->
-                <!--</li>-->
-                <!--<li class="table-row">-->
-                    <!--<div class="col col-1" data-label="Subject Code">BCA-693</div>-->
-                    <!--<div class="col col-2" data-label="Subject Name">Major Project</div>-->
-                    <!--<div class="col col-3" data-label="Give Test">-->
-                        <!--<a href="#">Go to Test</a>-->
-                    <!--</div>-->
-                    <!--<div class="col col-4" data-label="Test Status">Pending</div>-->
-                <!--</li>-->
-                <!--<li class="table-row">-->
-                    <!--<div class="col col-1" data-label="Subject Code">BCA-694</div>-->
-                    <!--<div class="col col-2" data-label="Subject Name">Seminar</div>-->
-                    <!--<div class="col col-3" data-label="Give Test">-->
-                        <!--<a href="#">Go to Test</a>-->
-                    <!--</div>-->
-                    <!--<div class="col col-4" data-label="Test Status">Pending</div>-->
-                <!--</li>-->
-                <!--<li class="table-row">-->
-                    <!--<div class="col col-1" data-label="Subject Code">BCA-695</div>-->
-                    <!--<div class="col col-2" data-label="Subject Name">Comprehensive Viva-Voce</div>-->
-                    <!--<div class="col col-3" data-label="Give Test">-->
-                        <!--<a href="#">Go to Test</a>-->
-                    <!--</div>-->
-                    <!--<div class="col col-4" data-label="Test Status">Pending</div>-->
-                <!--</li>-->
-            </ul>
+        <center>
+            <%= subcode %>
+                <ul class="responsive-table">
+                    <li class="table-header" style="font-weight: bold;">
+                        <div class="col col-1">Test</div>
+                        <div class="col col-2">Status</div>
+                        <div class="col col-3">Action</div>
+                    </li>
+                    <% for(var i = 0; i<tests.length; i++){ %>
+                        <li class="table-row">
+                            <div class="col col-1" data-label="Test">Test
+                                <%= tests[i].test_no %>
+                            </div>
+                            <div class="col col-2" data-label="Status">Pending</div>
+                            <div class="col col-3" data-label="Give Test">
+                                <button class="button" style="padding-top: 2px;" onclick="form_submit(<%= tests[i].test_no %>)">
+                                    <span>Go to Test</span>
+                                </button>
+                            </div>
+                        </li>
+                        <% } %>
+                            <form>
+                                <input type="hidden" name="Subject" value="">
+                            </form>
+                            <!--<li class="table-row">-->
+                            <!--<div class="col col-1" data-label="Subject Code">BCA-E602B</div>-->
+                            <!--<div class="col col-2" data-label="Subject Name">Object Oriented Programming with JAVA</div>-->
+                            <!--<div class="col col-3" data-label="Give Test">-->
+                            <!--<a href="#">Go to Test</a>-->
+                            <!--</div>-->
+                            <!--<div class="col col-4" data-label="Test Status">Pending</div>-->
+                            <!--</li>-->
+                            <!--<li class="table-row">-->
+                            <!--<div class="col col-1" data-label="Subject Code">BCA-693</div>-->
+                            <!--<div class="col col-2" data-label="Subject Name">Major Project</div>-->
+                            <!--<div class="col col-3" data-label="Give Test">-->
+                            <!--<a href="#">Go to Test</a>-->
+                            <!--</div>-->
+                            <!--<div class="col col-4" data-label="Test Status">Pending</div>-->
+                            <!--</li>-->
+                            <!--<li class="table-row">-->
+                            <!--<div class="col col-1" data-label="Subject Code">BCA-694</div>-->
+                            <!--<div class="col col-2" data-label="Subject Name">Seminar</div>-->
+                            <!--<div class="col col-3" data-label="Give Test">-->
+                            <!--<a href="#">Go to Test</a>-->
+                            <!--</div>-->
+                            <!--<div class="col col-4" data-label="Test Status">Pending</div>-->
+                            <!--</li>-->
+                            <!--<li class="table-row">-->
+                            <!--<div class="col col-1" data-label="Subject Code">BCA-695</div>-->
+                            <!--<div class="col col-2" data-label="Subject Name">Comprehensive Viva-Voce</div>-->
+                            <!--<div class="col col-3" data-label="Give Test">-->
+                            <!--<a href="#">Go to Test</a>-->
+                            <!--</div>-->
+                            <!--<div class="col col-4" data-label="Test Status">Pending</div>-->
+                            <!--</li>-->
+                </ul>
         </center>
     </div>
 
