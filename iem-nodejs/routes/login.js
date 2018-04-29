@@ -85,11 +85,13 @@ router.post('/', function(req, res, next) {
                             }
                             console.log(sem);
                             var f_name = resultName[0].f_name;
+                            var register = 0;
                         }
                         else
                         {
                             var sem =0;
                             var f_name = 'Undefined';
+                            var register = 1;
                         }
                         req.session.username = f_name;
                         req.session.uid = user;
@@ -98,7 +100,10 @@ router.post('/', function(req, res, next) {
                         req.session.sem = sem;
                         req.session.save();
                         console.log(req.session);
-
+                        if(register){
+                            res.redirect('/register');
+                            return;
+                        }
                         if(req.session.redirect !== '' && req.session.redirect){
                             res.redirect(req.session.redirect)
                         }
