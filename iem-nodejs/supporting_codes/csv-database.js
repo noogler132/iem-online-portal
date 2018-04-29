@@ -15,13 +15,13 @@ module.exports = function (table, test_key, data) {
         },
         table: table,
         // headers: ["Q_no", "Question", "Option1", "Option2", "Option3", "Option4", "Solution", "Remarks"],
-        fixedData: {test_key: test_key}
+        // fixedData: {test_key: test_key}
     };
-    // if(test_key && test_key !== '') {
-    //     options.fixedData = {
-    //         test_key: test_key
-    //     };
-    // }
+    if(test_key !==undefined && test_key !== '') {
+        options.fixedData = {
+            test_key: test_key
+        };
+    }
 
     console.log('--------------database starting');
     cm.import(options, data, function (err, rows) {

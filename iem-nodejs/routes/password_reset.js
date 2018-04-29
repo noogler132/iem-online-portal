@@ -92,18 +92,14 @@ router.post('/newPassword', function(req, res, next) {
         res.redirect('/password-reset');
         return;
     }
-    console.log('---------/newPassword');
     var u_id = req.session.uid;
     var OTP = req.body.OTP;
     db.query("SELECT * FROM otp_store WHERE u_id = ?", u_id, function (err, result) {
         if(err) throw err;
-        console.log('---------first query');
         bcrypt.compare(OTP, result[0].OTP, function (err, bool){
-            console.log('---------bool:' + bool);
             if(bool){
                 db.query('DELETE FROM otp_store WHERE u_id = ?', u_id, function (err, result) {
                     if(err) throw err;
-                    console.log('---------2nd query');
                 });
                 res.render('login/pass_reset', { err: '', user: user });
             }
