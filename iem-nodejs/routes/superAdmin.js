@@ -11,4 +11,8 @@ router.get('/', function(req, res, next) {
     res.render('superAdmin/sections', {});
 });
 
+router.get('/add-user', function(req, res, next) {
+    res.render('superAdmin/add-user', {});
+});
+
 module.exports=router;
