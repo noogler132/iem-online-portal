@@ -41,7 +41,11 @@ CREATE TABLE IF NOT EXISTS `active_tests` (
 
 INSERT INTO `active_tests` (`sub_code`, `test_no`, `is_active`, `test_key`) VALUES
 ('BCA693', 1, 1, 'BCA693_1'),
-('BCA101', 1, 1, 'BCA101_1');
+('BCA693', 2, 1, 'BCA693_2'),
+('BCA694', 1, 1, 'BCA694_1'),
+('BCA694', 2, 1, 'BCA694_2'),
+('BCA101', 2, 1, 'BCA101_2'),
+('BCA101', 1, 1, 'BCA101_1'),
 
 -- --------------------------------------------------------
 
@@ -228,7 +232,7 @@ INSERT INTO `teacher_details` (`tch_id`, `f_name`, `l_name`, `contact`, `email`,
 
 CREATE TABLE IF NOT EXISTS `test_questions` (
   `test_key` varchar(100) NOT NULL,
-  `Q_no` int(10) NOT NULL,
+  `Q_no` varchar(10) NOT NULL,
   `Question` text NOT NULL,
   `Option1` text NOT NULL,
   `Option2` text NOT NULL,
@@ -244,10 +248,66 @@ CREATE TABLE IF NOT EXISTS `test_questions` (
 --
 
 INSERT INTO `test_questions` (`test_key`, `Q_no`, `Question`, `Option1`, `Option2`, `Option3`, `Option4`, `Solution`, `Remarks`) VALUES
-('BCA101_1', 0, 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '2', 'Op2 is right because..'),
-('BCA101_1', 0, 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '3', 'Op3 is right because..'),
-('BCA693_1', 0, 'Question', 'Op1', 'Op2', 'Op3', 'Op4', 'Sol', 'Remarks'),
-('BCA693_1', 0, 'Question', 'Op1', 'Op2', 'Op3', 'Op4', 'Sol', 'Remarks');
+('BCA101_1', '1', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '2', 'Op2 is right because.'),
+('BCA101_1', '2', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '3', 'Op3 is right because.'),
+('BCA101_1', '3', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '2', 'Op2 is right because.'),
+('BCA101_1', '4', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '3', 'Op3 is right because.'),
+('BCA101_1', '5', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '2', 'Op2 is right because.'),
+('BCA101_1', '6', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '3', 'Op3 is right because..'),
+('BCA101_1', '7', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '2', 'Op2 is right because..'),
+('BCA101_1', '8', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '3', 'Op3 is right because..'),
+('BCA101_1', '9', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '2', 'Op2 is right because..'),
+('BCA101_1', '10', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '3', 'Op3 is right because..'),
+('BCA693_1', '1', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '2', 'Op2 is right because..'),
+('BCA693_1', '2', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '3', 'Op3 is right because..'),
+('BCA693_1', '3', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '2', 'Op2 is right because..'),
+('BCA693_1', '4', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '3', 'Op3 is right because..'),
+('BCA693_1', '5', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '2', 'Op2 is right because..'),
+('BCA693_1', '6', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '3', 'Op3 is right because..'),
+('BCA693_1', '7', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '2', 'Op2 is right because..'),
+('BCA693_1', '8', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '3', 'Op3 is right because..'),
+('BCA693_1', '9', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '2', 'Op2 is right because..'),
+('BCA693_1', '10', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '3', 'Op3 is right because..'),
+('BCA693_2', '1', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '2', 'Op2 is right because..'),
+('BCA693_2', '2', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '3', 'Op3 is right because..'),
+('BCA693_2', '3', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '2', 'Op2 is right because..'),
+('BCA693_2', '4', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '3', 'Op3 is right because..'),
+('BCA693_2', '5', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '2', 'Op2 is right because..'),
+('BCA693_2', '6', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '3', 'Op3 is right because..'),
+('BCA693_2', '7', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '2', 'Op2 is right because..'),
+('BCA693_2', '8', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '3', 'Op3 is right because..'),
+('BCA693_2', '9', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '2', 'Op2 is right because..'),
+('BCA693_2', '10', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '3', 'Op3 is right because..'),
+('BCA101_2', '1', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '2', 'Op2 is right because..'),
+('BCA101_2', '2', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '3', 'Op3 is right because..'),
+('BCA101_2', '3', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '2', 'Op2 is right because..'),
+('BCA101_2', '4', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '3', 'Op3 is right because..'),
+('BCA101_2', '5', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '2', 'Op2 is right because..'),
+('BCA101_2', '6', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '3', 'Op3 is right because..'),
+('BCA101_2', '7', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '2', 'Op2 is right because..'),
+('BCA101_2', '8', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '3', 'Op3 is right because..'),
+('BCA101_2', '9', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '2', 'Op2 is right because..'),
+('BCA101_2', '10', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '3', 'Op3 is right because..'),
+('BCA694_1', '1', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '2', 'Op2 is right because..'),
+('BCA694_1', '2', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '3', 'Op3 is right because..'),
+('BCA694_1', '3', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '2', 'Op2 is right because..'),
+('BCA694_1', '4', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '3', 'Op3 is right because..'),
+('BCA694_1', '5', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '2', 'Op2 is right because..'),
+('BCA694_1', '6', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '3', 'Op3 is right because..'),
+('BCA694_1', '7', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '2', 'Op2 is right because..'),
+('BCA694_1', '8', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '3', 'Op3 is right because..'),
+('BCA694_1', '9', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '2', 'Op2 is right because..'),
+('BCA694_1', '10', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '3', 'Op3 is right because..'),
+('BCA694_2', '1', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '2', 'Op2 is right because..'),
+('BCA694_2', '2', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '3', 'Op3 is right because..'),
+('BCA694_2', '3', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '2', 'Op2 is right because..'),
+('BCA694_2', '4', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '3', 'Op3 is right because..'),
+('BCA694_2', '5', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '2', 'Op2 is right because..'),
+('BCA694_2', '6', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '3', 'Op3 is right because..'),
+('BCA694_2', '7', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '2', 'Op2 is right because..'),
+('BCA694_2', '8', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '3', 'Op3 is right because..'),
+('BCA694_2', '9', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '2', 'Op2 is right because..'),
+('BCA694_2', '10', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '3', 'Op3 is right because..');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
