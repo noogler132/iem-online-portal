@@ -61,37 +61,39 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <!--<input type="submit">-->
             <!--</strong>-->
             <!--</form>-->
-            <div class="login-card">
+            <div class="login-card" style="width: 350px;">
                 <h2>Register</h2>
                 <br>
                 <form action="#">
                     <!-- <br>
                     <label for="u_roll">University Roll Number</label> -->
-                    <input type="text" id="roll" name="uni_roll" placeholder="Your University Roll Number">
+                    <input type="text" id="roll" name="uni_roll" placeholder="University Roll Number">
                     <!-- <br><br>
                     <label for="email">Email</label><br> -->
-                    <input type="email" id="emailAddress" name="email" placeholder="Your email ID">
+                    <input type="email" id="emailAddress" name="email" placeholder="Email ID">
                     <!-- <br><br>
                     <label for="u_roll">University Registration Number</label> -->
-                    <input type="text" id="registration" name="uni_registration" placeholder="Your University Registration Number">
+                    <input type="text" id="registration" name="uni_registration" placeholder="University Registration Number">
                     <!-- <br><br>
                     <label for="fname">First Name</label> -->
-                    <input type="text" id="fname" name="firstname" placeholder="Your first name..">
+                    <input type="text" id="fname" name="firstname" placeholder="First Name">
                     <!-- <br><br>
                     <label for="lname">Last Name</label> -->
-                    <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+                    <input type="text" id="lname" name="lastname" placeholder="Last Name">
                     <!-- <br><br>
                     <label for="bday">Date of Birth</label><br> -->
-                    <input type="date" id="dob" name="birthday" placeholder="Your Date of Birth">
+                    <input name="birthday" placeholder="Date of Birth" class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="dob">
                     <!-- <br><br>
                     <label for="department">Department</label> -->
-                    <select id="dept" name="department">
+                    <select id="dept" name="department" style="color: gray;">
+                        <option value="" disabled selected>Department</option>
                         <option value="BCA">BCA</option>
                         <option value="BBA">BBA</option>
                     </select>
                     <!-- <br><br>
                     <label for="adm_year">Admission Year</label> -->
-                    <select id="adm_year" name="admission_year">
+                    <select id="adm_year" name="admission_year" style="color: gray;">
+                        <option value="" disabled selected>Admission Year</option>
                         <option value="2015">2015</option>
                         <option value="2016">2016</option>
                         <option value="2017">2017</option>

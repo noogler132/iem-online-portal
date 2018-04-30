@@ -1,0 +1,111 @@
+<html>
+
+<head>
+    <%- include('./adminHeader', {}); %>
+        <hr style="height: 2px;">
+        <style>
+            .button {
+                display: inline-block;
+                border-radius: 4px;
+                background-color: #4d90fe;
+                border: none;
+                color: #FFFFFF;
+                text-align: center;
+                font-size: 20px;
+                padding: 10px;
+                width: 250px;
+                transition: all 0.5s;
+                cursor: pointer;
+                margin: 5px;
+                height: 50px;
+            }
+
+            .button span {
+                cursor: pointer;
+                display: inline-block;
+                position: relative;
+                transition: 0.5s;
+            }
+
+            .button span:after {
+                content: ' \21CA';
+                position: absolute;
+                opacity: 0;
+                top: 0;
+                right: -20px;
+                transition: 0.5s;
+            }
+
+            .button:hover span {
+                padding-right: 25px;
+            }
+
+            .button:hover span:after {
+                opacity: 1;
+                right: 0;
+            }
+
+            .upload_section {
+                width: 400px;
+                border: 2px solid #00b3fe;
+                padding: 20px 10px 20px 10px;
+                margin: 2px;
+            }
+
+            #button {
+                background-color: #00b3fe;
+                border: none;
+                color: white;
+                padding: 10px 24px;
+                text-align: center;
+                font-size: 14px;
+                margin: 2px 1px;
+                opacity: 0.6;
+                transition: 0.3s;
+                display: inline-block;
+                text-decoration: none;
+                cursor: pointer;
+                /* font-family: 'Ubuntu', sans-serif; */
+            }
+
+            #button:hover {
+                opacity: 1
+            }
+        </style>
+</head>
+
+<body>
+    <br>
+    <br>
+    <div style="height: 1000px;">
+        <center>
+            <div class="download_sample">
+                <button class="button" style="vertical-align:middle">
+                    <span>Download Sample xls</span>
+                </button>
+            </div>
+            <span style="color: orangered;">Download the Sample xls and Fill up the details for Bulk Add Users</span>
+
+            <br>
+            <div style="height: 100px;"></div>
+            <div class="upload_sample">
+                <div class="upload_section">
+                    <!--<form method="post" enctype="multipart/form-data">-->
+                    <div>
+                        <label for="file">
+                            <strong>Choose file to upload</strong>
+                        </label>
+                        <br>
+                        <br>
+                    </div>
+                    <div>
+                        <button type="submit" class="fa fa-cloud-upload" id="button"> Upload</button>
+                    </div>
+                </div>
+            </div>
+        </center>
+    </div>
+
+</body>
+
+</html>
