@@ -6,53 +6,126 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <%- include('../header', {user: user}); %>
 
-    <link rel='stylesheet' href='http://codepen.io/assets/libs/fullpage/jquery-ui.css'>
+        <link rel='stylesheet' href='http://codepen.io/assets/libs/fullpage/jquery-ui.css'>
 
-    <link rel="stylesheet" href="/index/css/registerStyle.css" media="screen" type="text/css" />
+        <link rel="stylesheet" href="/index/css/registerStyle.css" media="screen" type="text/css" />
+        <style>
+            #sub_btn {
+                padding: 10px 20px;
+                border-radius: 10px;
+                background-color: white;
+                color: black;
+                border: 2px solid #008CBA;
+                font-size: 16px;
+                cursor: pointer;
+                text-align: center;
+                width: 150px;
+                height: 50px;
+                ;
+            }
+
+            #sub_btn:hover {
+                box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+                background-color: #008CBA;
+                color: white;
+            }
+
+            #sub_btn:active {
+                background-color: #008CBA;
+                transform: translateY(4px);
+            }
+        </style>
 </head>
+
 <body>
-<hr>
-<center><div style="height: 550px">
-    <h1>Welcome to <%= title %></h1>
-    <br>
-    <br>
-    <br>
+    <hr>
+    <center>
+        <div style="height: 550px">
+            <h1>Welcome to
+                <%= title %>
+            </h1>
+            <br>
+            <br>
+            <br>
 
-    <!--<form action="/login" method="POST">-->
-    <!--<strong>-->
-    <!--<label for="Username">Username:-->
-    <!--<input type="text" name="username"></label><br><br>-->
-    <!--<label for="Password">Password:-->
-    <!--<input type="password" name="password"></label><br><br>-->
-    <!--<input type="submit">-->
-    <!--</strong>-->
-    <!--</form>-->
-    <div class="login-card">
-        <h2>Register</h2><br>
-        <form>
-            <input type="email" name="email" placeholder="Email">
-            <input type="text" name="f_name" placeholder="First Name">
-            <input type="text" name="l_name" placeholder="Last Name">
-            <input type="text" name="dob" placeholder="Date of Birth">
-            <input type="text" name="contact" placeholder="Phone Number">
-            <input type="submit" name="login" class="login login-submit" value="Register">
-        </form>
+            <!--<form action="/login" method="POST">-->
+            <!--<strong>-->
+            <!--<label for="Username">Username:-->
+            <!--<input type="text" name="username"></label><br><br>-->
+            <!--<label for="Password">Password:-->
+            <!--<input type="password" name="password"></label><br><br>-->
+            <!--<input type="submit">-->
+            <!--</strong>-->
+            <!--</form>-->
+            <div class="login-card">
+                <h2>Register</h2>
+                <br>
+                <form action="#">
+                    <!-- <br>
+                    <label for="u_roll">University Roll Number</label> -->
+                    <input type="text" id="roll" name="uni_roll" placeholder="Your University Roll Number">
+                    <!-- <br><br>
+                    <label for="email">Email</label><br> -->
+                    <input type="email" id="emailAddress" name="email" placeholder="Your email ID">
+                    <!-- <br><br>
+                    <label for="u_roll">University Registration Number</label> -->
+                    <input type="text" id="registration" name="uni_registration" placeholder="Your University Registration Number">
+                    <!-- <br><br>
+                    <label for="fname">First Name</label> -->
+                    <input type="text" id="fname" name="firstname" placeholder="Your first name..">
+                    <!-- <br><br>
+                    <label for="lname">Last Name</label> -->
+                    <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+                    <!-- <br><br>
+                    <label for="bday">Date of Birth</label><br> -->
+                    <input type="date" id="dob" name="birthday" placeholder="Your Date of Birth">
+                    <!-- <br><br>
+                    <label for="department">Department</label> -->
+                    <select id="dept" name="department">
+                        <option value="BCA">BCA</option>
+                        <option value="BBA">BBA</option>
+                    </select>
+                    <!-- <br><br>
+                    <label for="adm_year">Admission Year</label> -->
+                    <select id="adm_year" name="admission_year">
+                        <option value="2015">2015</option>
+                        <option value="2016">2016</option>
+                        <option value="2017">2017</option>
+                    </select>
+                    <!-- <br><br>
+                    <label for="contact">Contact No.</label> -->
+                    <input type="text" id="phn_no" name="contact" placeholder="Your Contact Number">
+                    <!-- <br><br> -->
+                    <input type="submit" value="Register" class="login login-submit">
+                    <br>
+                </form>
+                <!-- <form>
+                    <input type="email" name="email" placeholder="Email">
+                    <input type="text" name="f_name" placeholder="First Name">
+                    <input type="text" name="l_name" placeholder="Last Name">
+                    <input type="text" name="dob" placeholder="Date of Birth">
+                    <input type="text" name="contact" placeholder="Phone Number">
+                    <input type="submit" name="login" class="login login-submit" value="Register">
+                </form> -->
 
-        <!--<div class="login-help">-->
-            <!--<a href="#">Register</a> • <a href="#">Forgot Password</a>-->
-        <!--</div>-->
-    </div>
+                <!--<div class="login-help">-->
+                <!--<a href="#">Register</a> • <a href="#">Forgot Password</a>-->
+                <!--</div>-->
+            </div>
 
-    <!-- <div id="error"><img src="https://dl.dropboxusercontent.com/u/23299152/Delete-icon.png" /> Your caps-lock is on.</div> -->
+            <!-- <div id="error"><img src="https://dl.dropboxusercontent.com/u/23299152/Delete-icon.png" /> Your caps-lock is on.</div> -->
 
-    <script src='http://codepen.io/assets/libs/fullpage/jquery_and_jqueryui.js'></script>
+            <script src='http://codepen.io/assets/libs/fullpage/jquery_and_jqueryui.js'></script>
 
 
-</div></center>
-<%- include('../footer'); %>
-<script src="/index/js/bootstrap.js"></script>
+        </div>
+    </center>
+    <%- include('../footer'); %>
+        <script src="/index/js/bootstrap.js"></script>
 </body>
+
 </html>
