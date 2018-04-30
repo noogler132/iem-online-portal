@@ -22,7 +22,8 @@ router.get('/syllabus', function(req, res) {
 /* GET timetable page */
 router.get('/timetable', function(req, res) {
     var user = checkSession(req);
-    res.render('index/timetable', { title: 'IEM', user: user });
+    res.render('index/timetable', {title: 'IEM', user: user});
+
 });
 
 /* GET contact us page */

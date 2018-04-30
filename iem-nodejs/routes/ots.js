@@ -18,11 +18,8 @@ router.get('/', function(req, res, next) {
         return;
     }
     var sem = req.session.sem;
-    db.query("SELECT * FROM student_details WHERE u_roll = ?", '10401215076', function (err, result)
+    db.query("SELECT * FROM subjects WHERE sem_code = ?", sem, function (err, subjects)
     {
-        db.query("SELECT * FROM subjects WHERE sem_code = ?", sem, function (err, subjects)
-        {
-            console.log('Sub: ' + subjects.length);
             var query = 'SELECT * FROM active_tests WHERE sub_code IN (\'';
             query = query + subjects[0].sub_code;
             for(i=1; i<subjects.length; i++)
@@ -36,7 +33,6 @@ router.get('/', function(req, res, next) {
                 res.render('ots/stu_home', {title: 'IEM', user: user, subjects: subjects, active: active, sem: sem});
             });
         });
-    });
 });
 
 router.post('/', function(req, res, next) {
@@ -84,6 +80,10 @@ router.get('/start', function(req, res, next) {
         res.render('ots/exam', {title: 'IEM', user: user, question: result});
     });
 });
+
+
+
+
 
 
 /* Teachers Routes */
