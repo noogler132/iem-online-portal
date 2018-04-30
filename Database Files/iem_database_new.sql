@@ -51,7 +51,7 @@ INSERT INTO `active_tests` (`sub_code`, `test_no`, `is_active`, `test_key`) VALU
 --
 -- Table structure for table `admin_auth`
 --
-
+DROP TABLE IF EXISTS `super_auth`;
 DROP TABLE IF EXISTS `admin_auth`;
 CREATE TABLE IF NOT EXISTS `admin_auth` (
   `u_id` varchar(50) NOT NULL,
