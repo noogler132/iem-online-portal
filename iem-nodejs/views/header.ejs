@@ -71,7 +71,7 @@
                         <% if(user.as === 'stu' || user.as === ''){ %>
                         <li><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Student <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Time Table</a></li>
+                                <li><a href="/timetable">Time Table</a></li>
                                 <li><a href="/syllabus">Syllabus</a></li>
                                 <li><a href="#">Calendar</a></li>
                                 <% if(user.isLoggedIn === true){ %>
@@ -86,7 +86,7 @@
                         <% if(user.as === 'tch'){ %>
                         <li><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Teacher<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Time Table</a></li>
+                                <li><a href="/timetable">Time Table</a></li>
                                 <li><a href="#">Study Materials</a></li>
                                 <li><a href="/online-test/edit">Online Test</a></li>
                                 <li><a href="/notice_upload">Notices</a></li>
