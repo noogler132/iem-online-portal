@@ -18,6 +18,11 @@ router.get('/add-user', function(req, res, next) {
 });
 
 /* GET ADD USER */
+router.get('/add-user-uploadxls', function(req, res, next) {
+    res.render('superAdmin/add-user-uploadxls', {err: ''});
+});
+
+/* POST ADD USER */
 router.post('/add-user', function(req, res, next) {
     var u_id = req.body.u_id;
     var email = req.body.email;
