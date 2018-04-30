@@ -45,24 +45,24 @@
                         <div class="col col-2" data-label="Subject Name">
                             <%= subjects[i].sub_name %>
                         </div>
+                        <div class="col col-3" data-label="Give Test" onclick="tests('<%= subjects[i].sub_code %>')" id="test_button_<%= subjects[i].sub_code %>">
                         <% for(var j = 0; j<active.length; j++){ %>
-                            <% if(active[j].sub_code === subjects[i].sub_code){ %>
-                                <div class="col col-3" data-label="Give Test" onclick="tests('<%= subjects[i].sub_code %>')">
-                                    <button class="button" style="padding-top: 2px;" onclick="form_submit('<%= subjects[i].sub_code %>')">
-                                        <span>Go to Test</span>
-                                    </button>
-
-                                </div>
-                                <% break; %>
-                            <% } %>
                             <% if(active[j].sub_code !== subjects[i].sub_code){ %>
-                                <div class="col col-3" data-label="Give Test">
-                                    No Test Available
-                                </div>
+                            <script>
+                                document.getElementById('test_button_<%= subjects[i].sub_code %>').innerText = 'No Test Available';
+                            </script>
+                            <% } %>
+                            <% if(active[j].sub_code === subjects[i].sub_code){ %>
+                                <script>
+                                    document.getElementById('test_button_<%= subjects[i].sub_code %>').innerText = '';
+                                </script>
+                                <button class="button" style="padding-top: 2px;" onclick="form_submit('<%= subjects[i].sub_code %>')">
+                                    <span>Go to Test</span>
+                                </button>
                                 <% break; %>
                             <% } %>
                         <% } %>
-
+                        </div>
                     </li>
                     <% } %>
             </ul>
