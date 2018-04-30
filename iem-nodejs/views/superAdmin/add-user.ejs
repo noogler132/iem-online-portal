@@ -112,13 +112,19 @@
 <head>
     <%- include('./adminHeader', {}); %>
         <hr style="height: 2px;">
+        <link rel="stylesheet" href="/index/css/registerStyle.css" media="screen" type="text/css" />
 </head>
 
 <body>
+    <h1>
+        <center>
+            Add Single User
+        </center>
+    </h1>
     <br>
     <br>
     <center>
-        <div style="width:600px; height: inherit; background-color:aquamarine; padding:3% 3% 3% 3%;">
+        <div style="width:400px; height: inherit; padding:3% 3% 3% 3%;" class="login-card">
             <form method="post">
                 <br>
                 <label for="u_id">User Id</label>
@@ -134,9 +140,16 @@
                 <select id="log_as" name="log_as">
                     <option value="tch">Teacher</option>
                     <option value="stu">Student</option>
-                </select><br><br>
-                <input type="submit">
+                </select>
                 <br>
+                <br>
+                <br>
+                <input type="submit" name="Add" class="login login-submit" style="width: 100px;" value="Add">
+                <br>
+                <center>
+                    <a href="#">Add Multiple Users</a>
+                </center>
+
             </form>
         </div>
     </center>
