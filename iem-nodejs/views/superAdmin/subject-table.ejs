@@ -11,7 +11,7 @@
     <br>
     <br>
     <center>
-        <div style="height: 100px;" class="row">
+        <div style="height: inherit;" class="row">
             <div class="column">
 
             </div>
@@ -33,7 +33,7 @@
             </div>
         </div>
         <div class="row" style="height: 70px;"></div>
-        <div class="row" style="height: 800px; background-color: lightgray;">
+        <div class="row" style="height: inherit; background-color: lightgray;">
             <ul class="responsive-table" id="sub_table">
                 <li class="table-header" style="font-weight: bold;">
                     <div class="col col-1">Semester No</div>
@@ -42,16 +42,16 @@
                     <div class="col col-4">Update</div>
                     <div class="col col-5">Delete</div>
                 </li>
-
+                <% for(var i=0; i<subjects.length; i++){ %>
                 <li class="table-row" style="font-family: 'Ubuntu';">
                     <div class="col col-1" data-label="Semester No">
-                        bulbul
+                        <%= subjects[i].sem_code %>
                     </div>
                     <div class="col col-2" data-label="Subject Code">
-                        blabla
+                        <%= subjects[i].sub_code %>
                     </div>
                     <div class="col col-3" data-label="Subject Name">
-                        blabla
+                        <%= subjects[i].sem_name %>
                     </div>
 
                     <div class="col col-4" data-label="Update" style="padding-left: 5px;">
@@ -67,7 +67,7 @@
                     </div>
 
                 </li>
-
+                <% } %>
 
 
 

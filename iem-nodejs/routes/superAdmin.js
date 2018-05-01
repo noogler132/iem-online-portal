@@ -144,7 +144,10 @@ router.get('/teachers', function(req, res, next) {
 
 
 router.get('/subjects', function(req, res, next) {
-    res.render('superAdmin/subject-table', {});
+    db.query('Select * from subjects', function (err, result) {
+        if(err) throw err;
+        res.render('superAdmin/subject-table', {subjects: result});
+    });
 });
 
 
