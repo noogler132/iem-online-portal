@@ -12,6 +12,11 @@ router.get('/', function(req, res, next) {
     res.render('superAdmin/sections', {});
 });
 
+/* GET USER AUTH TABLE */
+router.get('/view-user', function(req, res, next) {
+    res.render('superAdmin/auth-table', {err: ''});
+});
+
 /* GET ADD USER */
 router.get('/add-user', function(req, res, next) {
     res.render('superAdmin/add-user', {err: ''});
