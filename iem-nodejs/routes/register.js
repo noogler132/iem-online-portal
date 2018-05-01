@@ -13,16 +13,17 @@ router.get('/', function(req, res, next) {
         res.redirect('/login');
     }
     else {
-        res.render('login/register', { title: 'IEM', user: user });
+        db.query("SELECT * FROM auth WHERE u_id = ?", req.session.uid, function (err, result, fields) {
+            if (err) throw err;
+            res.render('login/register', {title: 'IEM', user: user, email: result[0].email, u_id: result[0].u_id});
+        });
     }
 });
 
 /* POST registration page. */
 router.get('/', function(req, res, next) {
     var user = checkSession(req);
-    if(!user.isLoggedIn) {
-        res.render('login/register', {title: 'IEM', user: user});
-    }
+
     });
 
 

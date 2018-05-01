@@ -14,6 +14,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
         <link rel="stylesheet" href="/index/css/registerStyle.css" media="screen" type="text/css" />
         <style>
+
             #sub_btn {
                 padding: 10px 20px;
                 border-radius: 10px;
@@ -44,7 +45,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <body>
     <hr>
     <center>
-        <div style="height: 800px;">
+        <div style="height: inherit">
             <h1>Welcome to
                 <%= title %>
             </h1>
@@ -65,42 +66,42 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <h2>Register</h2>
                 <br>
                 <form action="#">
-                    <!-- <br>
-                    <label for="u_roll">University Roll Number</label> -->
-                    <input type="text" id="roll" name="uni_roll" placeholder="University Roll Number">
-                    <!-- <br><br>
-                    <label for="email">Email</label><br> -->
-                    <input type="email" id="emailAddress" name="email" placeholder="Email ID">
-                    <!-- <br><br>
-                    <label for="u_roll">University Registration Number</label> -->
-                    <input type="text" id="registration" name="uni_registration" placeholder="University Registration Number">
-                    <!-- <br><br>
-                    <label for="fname">First Name</label> -->
-                    <input type="text" id="fname" name="firstname" placeholder="First Name">
-                    <!-- <br><br>
-                    <label for="lname">Last Name</label> -->
-                    <input type="text" id="lname" name="lastname" placeholder="Last Name">
-                    <!-- <br><br>
-                    <label for="bday">Date of Birth</label><br> -->
-                    <input name="birthday" placeholder="Date of Birth" class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="dob">
-                    <!-- <br><br>
-                    <label for="department">Department</label> -->
-                    <select id="dept" name="department" style="color: gray;">
+                    <!--<br>-->
+                    <!--<label for="u_roll">University Roll Number</label>-->
+                    <input type="text" id="roll" name="u_id" value="<%= u_id %>" required disabled>
+                    <!--<br>-->
+                    <!--<label for="email">Email</label><br>-->
+                    <input type="email" id="emailAddress" name="email" value="<%= email %>" required disabled>
+                    <!--<br>-->
+                    <!--<label for="u_roll">University Registration Number</label>-->
+                    <input type="text" id="registration" name="u_reg" placeholder="University Registration Number" required>
+                    <!--<br>-->
+                    <!--<label for="fname">First Name</label>-->
+                    <input type="text" id="fname" name="f_name" placeholder="First Name" required>
+                    <!--<br>-->
+                    <!--<label for="lname">Last Name</label>-->
+                    <input type="text" id="lname" name="l_name" placeholder="Last Name" required>
+                    <!--<br>-->
+                    <!--<label for="bday">Date of Birth</label><br>-->
+                    <input name="dob" placeholder="Date of Birth" class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="dob" required>
+                    <!--<br>-->
+                    <!--<label for="department">Department</label>-->
+                    <select id="dept" name="dept" style="color: gray;" required>
                         <option value="" disabled selected>Department</option>
                         <option value="BCA">BCA</option>
                         <option value="BBA">BBA</option>
                     </select>
-                    <!-- <br><br>
-                    <label for="adm_year">Admission Year</label> -->
-                    <select id="adm_year" name="admission_year" style="color: gray;">
+                    <!--<br>-->
+                    <!--<label for="adm_year">Admission Year</label>-->
+                    <select id="add_year" name="admission_year" style="color: gray;" required>
                         <option value="" disabled selected>Admission Year</option>
                         <option value="2015">2015</option>
                         <option value="2016">2016</option>
                         <option value="2017">2017</option>
                     </select>
-                    <!-- <br><br>
-                    <label for="contact">Contact No.</label> -->
-                    <input type="text" id="phn_no" name="contact" placeholder="Your Contact Number">
+                    <!--<br>-->
+                    <!--<label for="contact">Contact No.</label>-->
+                    <input type="text" id="phn_no" name="contact" placeholder="Your Contact Number" required>
                     <!-- <br><br> -->
                     <input type="submit" value="Register" class="login login-submit">
                     <br>

@@ -14,12 +14,15 @@ module.exports = function (fileIn, fileName, newdir) {
             rows.push(sheet['data'][j]);
         }
     }
-    writeStr+= "'";
+
     //creates the csv string to write it to a file
     for (var i = 0; i < rows.length; i++) {
-        writeStr += rows[i].join("',") + "\n";
+        writeStr+= "'";
+        writeStr += rows[i].join("','");
+        writeStr += "'";
+        writeStr += "\n";
     }
-    writeStr += "'";
+
     //writes to a file, but you will presumably send the csv as a
     //response instead
     var dir = newdir;
