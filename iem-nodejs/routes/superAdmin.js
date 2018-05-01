@@ -27,12 +27,13 @@ router.post('/add-user', function(req, res, next) {
     var u_id = req.body.u_id;
     var email = req.body.email;
     var log_as = req.body.log_as;
-    if(u_id === '' || email === ''){
+    if(u_id === '' || email === '' || log_as !== 'stu' || log_as !== 'tch'){
         var err = 'All fields are mandatory';
         res.render('superAdmin/add-user', {err: err});
         return;
     }
     insertQuery(u_id, email, log_as);
+    res.render('superAdmin/add-user', {err: ''});
 });
 
 /* GET ADD USER */
@@ -113,7 +114,7 @@ function insertQuery(u_id, email, log_as) {
     db.query('INSERT INTO auth(u_id, email, password, log_as) VALUES (?,?,?,?) ', [u_id, email, hash, log_as], function (err, result) {
         if(err) throw err;
     });
-    doMail(email, password)
+    doMail(email, password);
 }
 
 /* mail function */
@@ -135,7 +136,27 @@ function doMail(mail, password){
 router.get('/students', function(req, res, next) {
     db.query('Select * from student_details', function (err, result) {
         if(err) throw err;
-        res.render('superAdmin/student-table', {student: result});
+        res.render('superAdmin/student-table', {student: result, dept: '', add_year: ''});
+    });
+});
+
+router.post('/students', function(req, res, next) {
+    var add_year = req.body.add_year;
+    var dept = req.body.dept;
+    var query = '';
+    if( add_year !== undefined && dept !== undefined){
+        query = 'Select * from student_details where dept = \''+dept+'\' and add_year = '+add_year+' ';
+    }
+    else if(add_year !== undefined && dept === undefined){
+        query = 'Select * from student_details where add_year = '+add_year+' ';
+    }
+    else if(add_year === undefined && dept !== undefined){
+        query = 'Select * from student_details where dept = \'' + dept +'\'' ;
+    }
+    console.log(query);
+    db.query(query, function (err, result) {
+        if(err) throw err;
+        res.render('superAdmin/student-table', {student: result, dept: dept, add_year: add_year});
     });
 });
 
@@ -155,5 +176,11 @@ router.get('/subjects', function(req, res, next) {
     });
 });
 
+router.get('/students/update/:u_roll', function(req, res, next) {
+    db.query('Select * from student_details', function (err, result) {
+        if(err) throw err;
+        res.render('superAdmin/student-table', {student: result, dept: '', add_year: ''});
+    });
+});
 
 module.exports=router;
