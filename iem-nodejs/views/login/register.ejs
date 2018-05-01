@@ -52,20 +52,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <br>
             <br>
             <br>
-
-            <!--<form action="/login" method="POST">-->
-            <!--<strong>-->
-            <!--<label for="Username">Username:-->
-            <!--<input type="text" name="username"></label><br><br>-->
-            <!--<label for="Password">Password:-->
-            <!--<input type="password" name="password"></label><br><br>-->
-            <!--<input type="submit">-->
-            <!--</strong>-->
-            <!--</form>-->
+            <% if(err){ %>
+            <div class="alert alert-danger" role="alert" style="width: 350px">
+                <strong><%= err %></strong>
+            </div>
+            <% } %>
             <div class="login-card" style="width: 350px;">
                 <h2>Register</h2>
                 <br>
-                <form action="#">
+                <form method="post">
                     <!--<br>-->
                     <!--<label for="u_roll">University Roll Number</label>-->
                     <input type="text" id="roll" name="u_id" value="<%= u_id %>" required disabled>
@@ -93,7 +88,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     </select>
                     <!--<br>-->
                     <!--<label for="adm_year">Admission Year</label>-->
-                    <select id="add_year" name="admission_year" style="color: gray;" required>
+                    <select id="add_year" name="add_year" style="color: gray;" required>
                         <option value="" disabled selected>Admission Year</option>
                         <option value="2015">2015</option>
                         <option value="2016">2016</option>
@@ -102,9 +97,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <!--<br>-->
                     <!--<label for="contact">Contact No.</label>-->
                     <input type="text" id="phn_no" name="contact" placeholder="Your Contact Number" required>
-                    <!-- <br><br> -->
+                    <!-- <br><br> --><br><br>
                     <input type="submit" value="Register" class="login login-submit">
-                    <br>
                 </form>
                 <!-- <form>
                     <input type="email" name="email" placeholder="Email">
@@ -119,8 +113,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <!--<a href="#">Register</a> • <a href="#">Forgot Password</a>-->
                 <!--</div>-->
             </div>
-
-            <!-- <div id="error"><img src="https://dl.dropboxusercontent.com/u/23299152/Delete-icon.png" /> Your caps-lock is on.</div> -->
 
             <script src='http://codepen.io/assets/libs/fullpage/jquery_and_jqueryui.js'></script>
 
