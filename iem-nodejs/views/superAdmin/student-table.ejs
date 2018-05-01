@@ -11,16 +11,23 @@
          <% if(dept !== ''){ %>
          document.getElementById('dept').value = '<%= dept %>';
          <% } %>
-         <% if(dept === ''){ %>
-         document.getElementById('add_year_placeholder').disabled = false;
-         document.getElementById('add_year').options.selectedIndex = 0;
-         document.getElementById('add_year_placeholder').disabled = 'disabled';
-         <% } %>
          <% if(add_year !== ''){ %>
          document.getElementById('add_year').value = '<%= add_year %>';
          <% } %>
      }
-        
+
+     function action(u_roll, action) {
+         alert('called');
+         document.getElementById('u_roll').value = u_roll;
+         alert('setkey');
+         document.getElementById('action').value = action;
+         alert('setaction');
+         if(action === 'delete'){
+             document.getElementById(u_roll).style.display = 'none';
+         }
+         document.getElementById('form').submit();
+     }
+
     </script>
 </head>
 
@@ -28,6 +35,8 @@
     <br>
     <br>
     <center><form id="form" method="post">
+            <input type="hidden" name="u_roll" id="u_roll">
+            <input type="hidden" name="action" id="action">
         <div style="height: inherit;" class="row">
             <div class="column">
             </div>
@@ -95,13 +104,13 @@
                     </div>
 
                     <div class="col col-10" data-label="Update" style="padding-left: 5px;">
-                        <button class="button" style="padding-top: 2px;">
+                        <button class="button" style="padding-top: 2px;" onclick="action('<%= student[i].u_roll %>', 'update')">
                             <span>Update</span>
                         </button>
 
                     </div>
                     <div class="col col-11" data-label="Delete" style="padding-left: 5px;">
-                        <button class="button" style="padding-top: 2px;">
+                        <button class="button" style="padding-top: 2px;" onclick="action('<%= student[i].u_roll %>', 'delete')">
                             <span>Delete</span>
                         </button>
                     </div>

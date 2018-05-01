@@ -176,5 +176,11 @@ router.get('/subjects', function(req, res, next) {
     });
 });
 
+router.get('/students/update/:u_roll', function(req, res, next) {
+    db.query('Select * from student_details', function (err, result) {
+        if(err) throw err;
+        res.render('superAdmin/student-table', {student: result, dept: '', add_year: ''});
+    });
+});
 
 module.exports=router;
