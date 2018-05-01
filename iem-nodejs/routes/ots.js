@@ -211,7 +211,7 @@ router.post('/upload', function(req, res, next) {
     var user = checkSession(req);
     var form = new formidable.IncomingForm();
     var dir = '../iem-nodejs/Uploads/Excel to CVS/';
-    var uploadtodb = require('../supporting_codes/csv-database-testquestions');
+    var uploadtodb = require('../supporting_codes/csv-database');
     var setActiveTest = require('../supporting_codes/setactivetest');
 
 

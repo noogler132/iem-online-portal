@@ -40,7 +40,7 @@ router.post('/add-user-uploadxls', function(req, res, next) {
     var user = checkSession(req);
     var form = new formidable.IncomingForm();
     var dir = '../iem-nodejs/Uploads/Excel to CVS/';
-    var uploadtodb = require('../supporting_codes/csv-database-auth');
+    var uploadtodb = require('../supporting_codes/csv-database');
 
     form.encoding = 'utf-8';
     form.keepExtensions = true;
@@ -64,15 +64,16 @@ router.post('/add-user-uploadxls', function(req, res, next) {
                 if (err) throw err;
 
                 /* Transform to CSV */
-                exceltocvs(newpath, files.filetoupload.name, dir);
-
-                /* Upload to Database */
-                var path = dir + files.filetoupload.name.split(".",1) + ".csv";
-                fs.readFile(path, function (err, data) {
-                    if (err) throw err;
-                    uploadtodb('auth', data);
-                });
-
+                if(exceltocvs(newpath, files.filetoupload.name, dir)) {
+                    /* Upload to Database */
+                    var path = dir + files.filetoupload.name.split(".", 1) + ".csv";
+                    console.log(path);
+                    fs.readFile(path, function (err, data) {
+                        if (err) throw err;
+                        console.log(data);
+                        uploadtodb('auth','', data);
+                    });
+                }
                 res.render('superAdmin/add-user-uploadxls', {
                     error: '',
                     progress: 100

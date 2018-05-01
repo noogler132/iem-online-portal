@@ -16,7 +16,7 @@ module.exports = function (fileIn, fileName, newdir) {
     }
 
     //creates the csv string to write it to a file
-    for (var i = 0; i < rows.length; i++) {
+    for (var i = 2; i < rows.length; i++) {
         writeStr+= "`";
         writeStr += rows[i].join("`,`");
         writeStr += "`";
@@ -25,17 +25,10 @@ module.exports = function (fileIn, fileName, newdir) {
 
     //writes to a file, but you will presumably send the csv as a
     //response instead
-    var dir = newdir;
-    fs.writeFile(dir + fileName.split(".", 1) + ".csv", writeStr, function (err) {
+    fs.writeFile(newdir + fileName.split(".", 1) + ".csv", writeStr, function (err) {
         if (err) {
             return console.log(err);
         }
-        console.log("csv was saved in the current directory!");
-        var path = dir + fileName.split(".",1) + ".csv";
-        console.log('-----------------csv done');
-        // fs.readFile(path, function (err, data) {
-        //     if (err) throw err;
-        //     uploadtodb('subjects', 'BCA101', data);
-        // });
     });
+    return 1;
 };
