@@ -1,20 +1,44 @@
 <html>
+
 <head>
     <%- include('./adminHeader', {}); %>
         <hr style="height: 2px;">
         <link rel="stylesheet" href="/index/css/registerStyle.css" media="screen" type="text/css" />
+        <style>
+            .column {
+                float: left;
+                padding: 25px 10px;
+                height: 90px;
+                
+            }
+
+            /* Clear floats after the columns */
+
+            .row:after {
+                content: "";
+                display: table;
+                clear: both;
+            }
+        </style>
 </head>
 
 <body>
-    <h1>
-        <center>
-            Add User
-        </center>
-    </h1>
+    <div class="row">
+        <div class="column" style="width: 80%;">
+            <h1>
+                <center>
+                    Add User
+                </center>
+            </h1>
+        </div>
+        <div class="column" style="width: 20%;">
+            <input type="submit" name="View" class="login login-submit" style="width: 100px; float: right;" value="View Users">
+        </div>
+    </div>
     <br>
     <br>
     <center>
-        <div style="width:400px; height: inherit; padding:3% 3% 3% 3%;" class="login-card" >
+        <div style="width:400px; height: inherit; padding:3% 3% 3% 3%;" class="login-card">
             <form method="post">
                 <br>
                 <label for="u_id">User Id</label>
@@ -37,7 +61,8 @@
                 <input type="submit" name="Add" class="login login-submit" style="width: 100px;" value="Add">
                 <br>
                 <center>
-                    <a href="/superAdmin/add-user-uploadxls">Add Multiple Users<br> (Upload xls)</a>
+                    <a href="/superAdmin/add-user-uploadxls">Add Multiple Users
+                        <br> (Upload xls)</a>
                 </center>
 
             </form>

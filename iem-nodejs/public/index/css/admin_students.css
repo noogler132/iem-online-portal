@@ -251,6 +251,14 @@ select::-ms-expand {
     padding-top: 8.5px;
 }
 
+.table-row .col-10 {
+    padding-top: 4px;
+}
+
+.table-row .col-11 {
+    padding-top: 4px;
+}
+
 .button {
     display: inline-block;
     border-radius: 4px;
