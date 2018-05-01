@@ -11,12 +11,12 @@ router.get('/', function(req, res, next) {
     if(!req.session.password) {
         res.render('login/forgot_password_id', {err: '', user: user});
     }
-    else if(req.session.uid && req.session.password)
+    else if(req.session.u_id && req.session.password)
     {
-        db.query("SELECT * FROM auth WHERE u_id = ?", req.session.uid, function (err, result) {
-            sendOTP(req.session.uid, result[0].email);
+        db.query("SELECT * FROM auth WHERE u_id = ?", req.session.u_id, function (err, result) {
+            sendOTP(req.session.u_id, result[0].email);
         });
-        res.render('login/forgot_password_OTP', {err: '', user: user, uid: req.session.uid})
+        res.render('login/forgot_password_OTP', {err: '', user: user, u_id: req.session.u_id})
     }
 });
 
@@ -30,11 +30,11 @@ router.post('/', function(req, res, next) {
             res.render('login/forgot_password_id', {err: 'Invalid Username', user: user});
         }
         else{
-            req.session.uid = u_id;
+            req.session.u_id = u_id;
             req.session.mail = result[0].email;
             console.log(req.session);
             sendOTP(u_id, result[0].email);
-            res.render('login/forgot_password_OTP', {err: '', user: user, uid: req.session.uid})
+            res.render('login/forgot_password_OTP', {err: '', user: user, u_id: req.session.u_id})
         }
     });
 });
@@ -88,11 +88,11 @@ function doMail(arr, OTP , mail, maildata){
 /* POST OTP / after getting OTP. */
 router.post('/newPassword', function(req, res, next) {
     var user = checkSession(req);
-    if(!req.session.uid) {
+    if(!req.session.u_id) {
         res.redirect('/password-reset');
         return;
     }
-    var u_id = req.session.uid;
+    var u_id = req.session.u_id;
     var OTP = req.body.OTP;
     db.query("SELECT * FROM otp_store WHERE u_id = ?", u_id, function (err, result) {
         if(err) throw err;
@@ -104,7 +104,7 @@ router.post('/newPassword', function(req, res, next) {
                 res.render('login/pass_reset', { err: '', user: user });
             }
             else{
-                res.render('login/forgot_password_OTP', {err: 'Incorrect OTP', user: user, uid: req.session.uid})
+                res.render('login/forgot_password_OTP', {err: 'Incorrect OTP', user: user, u_id: req.session.u_id})
             }
         });
     });
@@ -137,7 +137,7 @@ router.post('/processing', function(req, res, next) {
     else{
         bcrypt.hash(pass1, 8, function(err, hash) {
             // Store hash in your password DB.
-            db.query( 'UPDATE auth SET password = ? WHERE u_id= ?',[hash, req.session.uid], function (err, result) {
+            db.query( 'UPDATE auth SET password = ? WHERE u_id= ?',[hash, req.session.u_id], function (err, result) {
                 if(err) throw err;
             });
         });

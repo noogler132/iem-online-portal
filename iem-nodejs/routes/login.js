@@ -7,7 +7,7 @@ var checkSession = require('./isLoggedIn');
 
 /* GET temp test. */
 router.get('/temp', function(req, res, next) {
-    if(req.session.username) {
+    if(req.session.u_id) {
         res.render('login/temp');
     }
     else{
@@ -15,31 +15,39 @@ router.get('/temp', function(req, res, next) {
     }
 });
 
-
 /* GET students login page. */
 router.get('/', function(req, res, next) {
     var user = checkSession(req);
-    if(!user.isLoggedIn) {
-        res.render('login/login', {title: 'the Portal', isLoggedIn: false, user: user, err: '' });
-    }
-    else{
+    if(user.isLoggedIn) {
         if(req.session.redirect !== ''){
             res.redirect(req.session.redirect)
         }
         else {
             res.redirect('/');
         }
+        return;
     }
+    res.render('login/login', {title: 'the Portal', isLoggedIn: false, user: user, err: '' });
+
 });
 
 
 /* POST students login page. */
 router.post('/', function(req, res, next) {
+    var user = checkSession(req);
+    if(user.isLoggedIn) {
+        if(req.session.redirect !== ''){
+            res.redirect(req.session.redirect)
+        }
+        else {
+            res.redirect('/');
+        }
+        return;
+    }
     var user = req.body.username;
     var pass = req.body.password;
     var session_user = checkSession(req);
-    // var as = 'stu';
-    db.query("SELECT * FROM auth WHERE u_id = ?", user, function (err, result, fields) {
+    db.query("SELECT * FROM auth WHERE u_id = ?", user, function (err, result) {
         if (err) throw err;
         if (result.length === 0)
         {
@@ -81,9 +89,14 @@ router.post('/', function(req, res, next) {
                                 console.log(sem);
                             }
                             else if(date.getMonth() >= 5 && date.getMonth() <12) {
-                                sem = 1 * stu_year;
+                                sem = stu_year;
                             }
                             console.log(sem);
+                            var f_name = resultName[0].f_name;
+                            var register = 0;
+                        }
+                        else if(result[0].log_as === 'tch' && (resultName.length !== 0)){
+                            var sem = 0;
                             var f_name = resultName[0].f_name;
                             var register = 0;
                         }
@@ -94,7 +107,7 @@ router.post('/', function(req, res, next) {
                             var register = 1;
                         }
                         req.session.username = f_name;
-                        req.session.uid = user;
+                        req.session.u_id = user;
                         req.session.as = result[0].log_as;
                         req.session.password = result[0].password;
                         req.session.sem = sem;
@@ -106,16 +119,18 @@ router.post('/', function(req, res, next) {
                             return;
                         }
                         if(req.session.redirect !== '' && req.session.redirect){
-                            res.redirect(req.session.redirect)
+                            res.redirect(req.session.redirect);
+                            return;
                         }
                         else {
                             res.redirect('/');
+                            return;
                         }
                     });
                 }
                 else {
-                    console.log("no match");
                     res.render('login/login', {title: 'the Portal', isLoggedIn: false, user: session_user, err: 'Incorrect Username or Password' });
+                    return;
                 }
             });
         }
@@ -154,7 +169,7 @@ router.post('/', function(req, res, next) {
 //                 {
 //                     db.query("SELECT * FROM teacher WHERE tch_id = ?", user, function (err, resultName) {
 //                         req.session.username = resultName[0].f_name;
-//                         req.session.uid = user;
+//                         req.session.u_id = user;
 //                         req.session.as = 'tch';
 //                         req.session.password = result[0].password;
 //                         req.session.save();
@@ -170,7 +185,6 @@ router.post('/', function(req, res, next) {
 //         }
 //     });
 // });
-
 
 /* GET logout page. */
 router.get('/logout', function(req, res, next) {

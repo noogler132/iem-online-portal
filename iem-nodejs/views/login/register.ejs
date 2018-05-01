@@ -67,9 +67,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <!--<br>-->
                     <!--<label for="email">Email</label><br>-->
                     <input type="email" id="emailAddress" name="email" value="<%= email %>" required disabled>
+                    <% if(as === 'stu'){ %>
                     <!--<br>-->
                     <!--<label for="u_roll">University Registration Number</label>-->
                     <input type="text" id="registration" name="u_reg" placeholder="University Registration Number" required>
+                    <% } %>
                     <!--<br>-->
                     <!--<label for="fname">First Name</label>-->
                     <input type="text" id="fname" name="f_name" placeholder="First Name" required>
@@ -79,6 +81,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <!--<br>-->
                     <!--<label for="bday">Date of Birth</label><br>-->
                     <input name="dob" placeholder="Date of Birth" class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="dob" required>
+                    <% if(as === 'stu'){ %>
                     <!--<br>-->
                     <!--<label for="department">Department</label>-->
                     <select id="dept" name="dept" style="color: gray;" required>
@@ -94,6 +97,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <option value="2016">2016</option>
                         <option value="2017">2017</option>
                     </select>
+                    <% } %>
+                    <% if(as === 'tch'){ %>
+                    <!--<br>-->
+                    <!--<label for="fname">First Name</label>-->
+                    <input type="text" id="facebook_id" name="facebook_id" placeholder="Link to Facebook Id(Optional)">
+                    <!--<br>-->
+                    <!--<label for="fname">First Name</label>-->
+                    <input type="text" id="googleplus_id" name="googleplus_id" placeholder="Link to Google Plus Id(Optional)">
+                    <!--<br>-->
+                    <!--<label for="fname">First Name</label>-->
+                    <input type="text" id="designation" name="designation" placeholder="Designation">
+                    <% } %>
                     <!--<br>-->
                     <!--<label for="contact">Contact No.</label>-->
                     <input type="text" id="phn_no" name="contact" placeholder="Your Contact Number" required>

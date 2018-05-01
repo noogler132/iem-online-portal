@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('header', {user: user}); %>
+</head>
+<body>
+<hr>
+<div style="height: 550px">
+    <center>
+        <div class="alert alert-danger" role="alert" style="width: 350px">
+            <strong><%= message %></strong>
+        </div>
+    </center>
+</div>
+<%- include('footer'); %>
+<script src="/index/js/bootstrap.js"></script>
+</body>
+</html>

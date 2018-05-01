@@ -44,12 +44,14 @@ router.get('/about', function(req, res) {
 /* GET Notice upload page */
 router.get('/notice_upload', function(req, res) {
     var user = checkSession(req);
-    // if(user.isLoggedIn && user.as === 'tch') {
-    //     res.render('upload_form', {title: 'IEM', user: user, progress: 0});
-    // }
-    // else{
-    //     res.redirect('404');
-    // }
+    if(user.isLoggedIn && user.as === 'tch') {
+        res.render('upload_form', {title: 'IEM', user: user, progress: 0});
+        return;
+    }
+    else{
+        res.render('message', {user: user, message: 'You must Login to access this page'});
+        return;
+    }
     res.render('upload_form', {
         title: 'Upload Notice',
         error: '',
