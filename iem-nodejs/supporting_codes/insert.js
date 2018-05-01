@@ -1,4 +1,4 @@
-module.exports = function (fileIn, fileName, newdir) {
+module.exports = function (fileIn, fileName, tableName) {
     var xlsx = require('node-xlsx');
     var fs = require('fs');
     var obj = xlsx.parse(fileIn); // parses a file
@@ -14,9 +14,9 @@ module.exports = function (fileIn, fileName, newdir) {
             rows.push(sheet['data'][j]);
         }
     }
-
+    writeStr = 'insert into ' + tableName + '( ';
     //creates the csv string to write it to a file
-    for (var i = 0; i < rows.length; i++) {
+    for (var i = 1; i < rows.length; i++) {
         writeStr+= "`";
         writeStr += rows[i].join("`,`");
         writeStr += "`";

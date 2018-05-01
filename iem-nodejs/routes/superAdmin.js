@@ -17,11 +17,6 @@ router.get('/add-user', function(req, res, next) {
     res.render('superAdmin/add-user', {err: ''});
 });
 
-/* GET ADD USER */
-router.get('/add-user-uploadxls', function(req, res, next) {
-    res.render('superAdmin/add-user-uploadxls', {err: ''});
-});
-
 /* POST ADD USER */
 router.post('/add-user', function(req, res, next) {
     var u_id = req.body.u_id;
@@ -34,6 +29,68 @@ router.post('/add-user', function(req, res, next) {
     }
     insertQuery(u_id, email, log_as);
 });
+
+/* GET ADD USER */
+router.get('/add-user-uploadxls', function(req, res, next) {
+    res.render('superAdmin/add-user-uploadxls', {error: '', progress: 0});
+});
+
+router.post('/add-user-uploadxls', function(req, res, next) {
+    var formidable = require('formidable');
+    var user = checkSession(req);
+    var form = new formidable.IncomingForm();
+    var dir = '../iem-nodejs/Uploads/Excel to CVS/';
+    var uploadtodb = require('../supporting_codes/csv-database-auth');
+
+    form.encoding = 'utf-8';
+    form.keepExtensions = true;
+    form.uploadDir = '../iem-nodejs/Uploads/';
+    form.parse(req, function (err, fields, files) {
+        if(files.filetoupload.size === 0) // if no file selected
+        {
+            res.render('superAdmin/add-user-uploadxls', {
+                error: 'No file selected',
+                progress: 404
+            });
+            return;
+        }
+        if(files.filetoupload.name.match(/\.(xls|xlsx)$/i)) //if file is an excel document
+        {
+            var oldpath = files.filetoupload.path;
+            var newpath = '../iem-nodejs/Uploads/' + files.filetoupload.name;
+
+            fs.rename(oldpath, newpath, function (err)
+            {
+                if (err) throw err;
+
+                /* Transform to CSV */
+                exceltocvs(newpath, files.filetoupload.name, dir);
+
+                /* Upload to Database */
+                var path = dir + files.filetoupload.name.split(".",1) + ".csv";
+                fs.readFile(path, function (err, data) {
+                    if (err) throw err;
+                    uploadtodb('auth', data);
+                });
+
+                res.render('superAdmin/add-user-uploadxls', {
+                    error: '',
+                    progress: 100
+                });
+            });
+        }
+        else {
+            /* When file is not an excel file */
+            fs.unlink(files.filetoupload.path);
+            res.render('superAdmin/add-user-uploadxls', {
+                error: 'The file should be an .xls or .xlsx file.',
+                progress: 404
+            });
+        }
+    });
+
+});
+
 
 
 /* Send OTP */

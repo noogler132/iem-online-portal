@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var checkSession = require('./isLoggedIn');
-var formidable = require('formidable');
 var fs = require('fs');
 var exceltocvs = require('../supporting_codes/excel2csv.js');
 
@@ -208,11 +207,11 @@ router.get('/upload', function(req, res, next) {
 
 /* POST processing for upload page for teachers */
 router.post('/upload', function(req, res, next) {
-
+    var formidable = require('formidable');
     var user = checkSession(req);
     var form = new formidable.IncomingForm();
     var dir = '../iem-nodejs/Uploads/Excel to CVS/';
-    var uploadtodb = require('../supporting_codes/csv-database');
+    var uploadtodb = require('../supporting_codes/csv-database-testquestions');
     var setActiveTest = require('../supporting_codes/setactivetest');
 
 
