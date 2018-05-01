@@ -44,12 +44,12 @@ router.get('/about', function(req, res) {
 /* GET Notice upload page */
 router.get('/notice_upload', function(req, res) {
     var user = checkSession(req);
-    if(user.isLoggedIn && user.as === 'tch') {
-        res.render('upload_form', {title: 'IEM', user: user, progress: 0});
+    if(!user.isLoggedIn) {
+        res.render('message', {user: user, message: 'You must Login to access this page'});
         return;
     }
-    else{
-        res.render('message', {user: user, message: 'You must Login to access this page'});
+    else if(user.as !== 'tch'){
+        res.render('message', {user: user, message: 'Only Teachers has access to this page'});
         return;
     }
     res.render('upload_form', {
@@ -61,7 +61,6 @@ router.get('/notice_upload', function(req, res) {
         subject: true
     });
 });
-
 
 /* POST Notice upload page */
 router.post('/notice_upload', function(req, res) {

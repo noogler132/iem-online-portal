@@ -56,6 +56,9 @@
                 alert('setkey');
                 document.getElementById('action').value = action;
                 alert('setaction');
+                if(action === 'delete'){
+                    document.getElementById(test_key).style.display = 'none';
+                }
                 document.getElementById('form').submit();
             }
         </script>
@@ -96,7 +99,7 @@
                     <div class="col col-4">View Result</div>
                 </li>
                 <% for(var j=0; j<active.length; j++){%>
-                <li class="table-row" id="test_li">
+                <li class="table-row" id="<%= active[j].test_key %>">
                     <div class="col col-1" data-label="Test Number"><%= active[j].test_no %></div>
                     <!--<div class="col col-2" data-label="Upload">-->
                         <!--<button class="button" style="padding-top: 2px;">-->
@@ -124,7 +127,7 @@
                     <% } %>
                     <div class="col col-3" data-label="Delete Test">
                         <button class="button" style="padding-top: 2px;" onclick="toggle('<%= active[j].test_key %>', 'delete')">
-                            <span>Delete </span>
+                            <span>Delete</span>
                         </button>
                     </div>
                     <div class="col col-4" data-label="View Result">

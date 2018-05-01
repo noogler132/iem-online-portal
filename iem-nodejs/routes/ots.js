@@ -55,7 +55,7 @@ router.get('/:sem([1-6])/:subcode(\\w+)/', function(req, res, next) {
         res.redirect('/404');
         return;
     }
-    db.query("SELECT * FROM active_tests WHERE sub_code = ?", req.params.subcode, function (err, result)
+    db.query("SELECT * FROM active_tests WHERE sub_code = ? AND is_active = 1", req.params.subcode, function (err, result)
     {
         res.render('ots/select_test', {title: 'IEM', user: user, subcode: subcode ,sem: sem, tests: result});
     });
@@ -70,7 +70,6 @@ router.post('/:sem([1-6])/:subcode(\\w+)/', function(req, res, next) {
     console.log(req.session);
     res.redirect('/online-test/start')
 });
-
 
 router.get('/start', function(req, res, next) {
     var user = checkSession(req);
@@ -109,13 +108,14 @@ router.post('/edit', function(req, res, next)
     var user = checkSession(req);
     var sub_code = req.body.sub_code;
     var sem = req.body.sem;
-    var actionTaken = 0;
+    if(req.body.action === 'view'){
+        res.redirect('/view-paper');
+        return;
+    }
     if(req.body.action !== ''){
-        actionTaken = takeAction(req.body.action, req.body.test_key)
+        takeAction(req.body.action, req.body.test_key)
     }
-    else{
-        actionTaken = 1;
-    }
+
             db.query("SELECT * FROM subjects", function (err, subjects) {
                 db.query("SELECT * FROM active_tests where sub_code = ?", sub_code, function (err, result) {
                     if (result === undefined) {
@@ -151,8 +151,7 @@ function takeAction(action, test_key) {
     console.log('--------' + action + test_key);
     if(action === 'delete'){
         console.log('delete');
-        query = 'DELETE FROM active_tests where test_key = ' + test_key;
-        db.query( query, function (err, result) {
+        db.query( 'DELETE FROM active_tests where test_key = ? ', test_key, function (err, result) {
             if(err) throw err;
             console.log('-------- deleted from active tests');
             db.query('DELETE FROM test_questions where test_key = ?', test_key, function (err, result) {

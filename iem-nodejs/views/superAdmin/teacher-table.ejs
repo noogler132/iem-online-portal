@@ -22,7 +22,7 @@
                     <option value="bba">BBA</option>
 
                 </select>
-                <button type="submit" name="view" class="login login-submit" id="view_btn">View</button>
+                <!--<button type="submit" name="view" class="login login-submit" id="view_btn">View</button>-->
             </div>
             <div class="column">
 
@@ -38,56 +38,52 @@
                     <div class="col col-4">Contact</div>
                     <div class="col col-5">Email</div>
                     <div class="col col-6">Facebook ID</div>
-                    <div class="col col-7">LinkedIn ID</div>
+                    <div class="col col-7">Google Plus ID</div>
                     <div class="col col-8">Designation</div>
-                    <div class="col col-9">Department</div>
-                    <div class="col col-10">Update</div>
-                    <div class="col col-11">Delete</div>
+                    <div class="col col-9">Update</div>
+                    <div class="col col-10">Delete</div>
                 </li>
 
-                <li class="table-row" style="font-family: 'Ubuntu';">
+                <% for( var i=0; i<teacher.length; i++){ %>
+                <li class="table-row" style="font-family: 'Ubuntu';" id="<%= teacher[i].tch_id %>">
                     <div class="col col-1" data-label="Teacher ID">
-                        bulbul
+                        <%= teacher[i].tch_id %>
                     </div>
                     <div class="col col-2" data-label="First Name">
-                        blabla
+                        <%= teacher[i].f_name %>
                     </div>
                     <div class="col col-3" data-label="Last Name">
-                        blabla
+                        <%= teacher[i].l_name %>
                     </div>
                     <div class="col col-4" data-label="Contact">
-                        blabla
+                        <%= teacher[i].contact %>
                     </div>
                     <div class="col col-5" data-label="Email">
-                        blabla
+                        <%= teacher[i].email %>
                     </div>
                     <div class="col col-6" data-label="Facebook ID">
-                        blabla
+                        <%= teacher[i].facebook_id %>
                     </div>
-                    <div class="col col-7" data-label="LinkedIn ID">
-                        blabla
+                    <div class="col col-7" data-label="GooglePlus ID">
+                        <%= teacher[i].googleplus_id %>
                     </div>
                     <div class="col col-8" data-label="Designation">
-                        blabla
+                        <%= teacher[i].designation %>
                     </div>
-                    <div class="col col-9" data-label="Department">
-                        blabla
-                    </div>
-
-                    <div class="col col-10" data-label="Update" style="padding-left: 5px;">
+                    <div class="col col-9" data-label="Update" style="padding-left: 5px;">
                         <button class="button" style="padding-top: 2px;">
                             <span>Update</span>
                         </button>
 
                     </div>
-                    <div class="col col-11" data-label="Delete" style="padding-left: 5px;">
+                    <div class="col col-10" data-label="Delete" style="padding-left: 5px;">
                         <button class="button" style="padding-top: 2px;">
                             <span>Delete</span>
                         </button>
                     </div>
 
                 </li>
-
+                <% } %>
 
 
 

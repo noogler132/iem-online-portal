@@ -68,17 +68,20 @@ function doMail(mail, password){
 }
 
 
-
-
-
 /* GET STUDENT DETAILS */
 router.get('/students', function(req, res, next) {
-    res.render('superAdmin/student-table', {});
+    db.query('Select * from student_details', function (err, result) {
+        if(err) throw err;
+        res.render('superAdmin/student-table', {student: result});
+    });
 });
 
 /* GET TEACHERS DETAILS */
 router.get('/teachers', function(req, res, next) {
-    res.render('superAdmin/teacher-table', {});
+    db.query('Select * from teacher_details', function (err, result) {
+        if(err) throw err;
+        res.render('superAdmin/teacher-table', {teacher: result});
+    });
 });
 
 
