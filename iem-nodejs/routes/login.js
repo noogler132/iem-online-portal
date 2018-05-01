@@ -94,24 +94,27 @@ router.post('/', function(req, res, next) {
                             console.log(sem);
                             var f_name = resultName[0].f_name;
                             var register = 0;
+                            var dept = resultName[0].dept;
                         }
                         else if(result[0].log_as === 'tch' && (resultName.length !== 0)){
                             var sem = 0;
                             var f_name = resultName[0].f_name;
                             var register = 0;
+                            var dept = '';
                         }
                         else
                         {
                             var sem =0;
                             var f_name = 'Undefined';
                             var register = 1;
+                            var dept = '';
                         }
                         req.session.username = f_name;
                         req.session.u_id = user;
                         req.session.as = result[0].log_as;
                         req.session.password = result[0].password;
                         req.session.sem = sem;
-                        req.session.dept = resultName[0].dept;
+                        req.session.dept = dept;
                         req.session.email = result[0].email;
                         req.session.save();
                         console.log(req.session);
