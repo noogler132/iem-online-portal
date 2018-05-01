@@ -111,6 +111,7 @@ router.post('/', function(req, res, next) {
                         req.session.as = result[0].log_as;
                         req.session.password = result[0].password;
                         req.session.sem = sem;
+                        req.session.dept = resultName[0].dept;
                         req.session.email = result[0].email;
                         req.session.save();
                         console.log(req.session);

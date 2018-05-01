@@ -27,9 +27,12 @@
                 var subPlaceholder = document.createElement("OPTION");
                 subPlaceholder.label = 'Select Subject';
                 subPlaceholder.id = 'subPlaceholder';
+                subPlaceholder.disabled = 'disabled';
+                subPlaceholder.selected = true;
                 sub.add(subPlaceholder);
+                var dept = document.getElementById('dept').value;
                 <% for(var i=0; i< subjects.length; i++ ){ %>
-                    if(parseInt(value)=== parseInt('<%= subjects[i].sem_code %>')){
+                    if((parseInt(value)=== parseInt('<%= subjects[i].sem_code %>')) && '<%= subjects[i].dept %>' === dept){
                         var option = document.createElement("OPTION");
                         option.value = '<%= subjects[i].sub_code %>';
                         option.label = '<%= subjects[i].sub_code %>';
@@ -69,9 +72,17 @@
     <form id="form" method="POST">
         <div class="row">
             <div class="column" style="padding-left: 35%; ">
+                <select name="sem" id="dept" title="Select Semester" onchange="subject_display(value)"
+                        onclick="document.getElementById('semPlaceholder')">
+                    <option id="semPlaceholder" disabled selected>Select Department</option>
+                    <option id="sem_1" value="BCA">BCA</option>
+                    <option id="sem_2" value="BBA">BBA</option>
+                </select>
+            </div>
+            <div class="column" style="padding-left: 2.5%; ">
                 <select name="sem" id="sem" title="Select Semester" onchange="subject_display(value)"
                         onclick="document.getElementById('semPlaceholder')">
-                    <option id="semPlaceholder">Select Semester</option>
+                    <option id="semPlaceholder" disabled selected>Select Semester</option>
                     <option id="sem_1" value="1">First</option>
                     <option id="sem_2" value="2">Second</option>
                     <option id="sem_3" value="3">Third</option>
@@ -82,7 +93,7 @@
             </div>
             <div class="column" style="padding-left: 2.5%;">
                 <select name="sub_code" id="sub_code" title="Select Subject Code" onchange="document.getElementById('form').submit()">
-                    <option id="subPlaceholder">Select Subject</option>
+                    <option id="subPlaceholder" disabled selected>Select Subject</option>
                 </select>
             </div>
         </div>

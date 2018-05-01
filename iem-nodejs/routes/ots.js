@@ -116,7 +116,7 @@ router.post('/edit', function(req, res, next)
         takeAction(req.body.action, req.body.test_key)
     }
 
-            db.query("SELECT * FROM subjects", function (err, subjects) {
+            db.query("SELECT * FROM subjects", req.session.dept , function (err, subjects) {
                 db.query("SELECT * FROM active_tests where sub_code = ?", sub_code, function (err, result) {
                     if (result === undefined) {
                         res.render('ots/sem_select', {
