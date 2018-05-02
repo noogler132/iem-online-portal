@@ -32,6 +32,7 @@
              document.getElementById(u_roll).style.display = 'none';
          }
          document.getElementById('form').submit();
+
      }
 
     </script>
@@ -80,34 +81,6 @@
                     <div class="col col-11">Delete</div>
                 </li>
 
-
-                <li class="table-row" style="font-family: 'Ubuntu';" id="update">
-                    <input type="hidden" name="action" value="">
-                    <div class="col col-1"><input type="text" name="u_roll" id="u_roll"></div>
-                    <div class="col col-2"><input type="text" name="u_reg" id="u_reg"></div>
-                    <div class="col col-3"><input type="text" name="email" id="email"></div>
-                    <div class="col col-4"><input type="text" name="f_name" id="f_name"></div>
-                    <div class="col col-5"><input type="text" name="l_name" id="l_name"></div>
-                    <div class="col col-6">
-                        <input name="dob" placeholder="Date of Birth" class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="dob" required>
-                    </div>
-                    <div class="col col-7"><input type="text" name="dept"  id="dept"></div>
-                    <div class="col col-8"><input type="text" name="add_year" id="add_year"></div>
-                    <div class="col col-9"><input type="text" name="contact" id="contact"></div>
-
-                    <div class="col col-10" data-label="Update" style="padding-left: 5px;">
-                        <button class="button" style="padding-top: 2px;" onclick="document.getElementById('form').submit()">
-                            <span>Update</span>
-                        </button>
-
-                    </div>
-                    <div class="col col-11" data-label="Delete" style="padding-left: 5px;">
-                        <button class="button" style="padding-top: 2px;" disabled>
-                            <span>Delete</span>
-                        </button>
-                    </div>
-
-                </li>
 
                 <% for( var i=0; i<student.length; i++){ %>
                 <li class="table-row" style="font-family: 'Ubuntu';" id="<%= student[i].u_roll %>">
