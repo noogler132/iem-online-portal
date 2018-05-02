@@ -1,1 +1,135 @@
-/* view users */
+<html>
+
+<head>
+    <%- include('./adminHeader', {}); %>
+    <hr>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <link rel="stylesheet" href="/index/css/admin_students.css" media="screen" type="text/css" />
+    <script>
+
+        function chooseGroup(value) {
+            if(value === 'stu'){
+                document.getElementById('stu').style.display = 'block';
+                document.getElementById('tch').style.display = 'none';
+            }
+            else if(value === 'tch'){
+                document.getElementById('stu').style.display = 'none';
+                document.getElementById('tch').style.display = 'block';
+            }
+        }
+
+    </script>
+</head>
+
+<body onload="">
+<br>
+<br>
+<center><form id="form" method="post">
+        <input type="hidden" name="u_roll" id="u_roll">
+        <input type="hidden" name="action" id="action">
+        <div style="height: inherit;" class="row">
+            <div class="column">
+            </div>
+            <div class="column">
+                <select name="dept" id="dept" style="padding-right: 10px; width: 36%;" onchange="chooseGroup(value)">
+                    <option disabled selected>Choose Group</option>
+                    <option value="stu">Student</option>
+                    <option value="tch">Teachers</option>
+                </select>            </div>
+            <div class="column">
+            </div>
+        </div>
+        <div class="row" style="height: 70px;"></div>
+        <div class="row" style="height: inherit; background-color: lightgray;">
+            <ul class="responsive-table" id="sub_table">
+                <li class="table-header" style="font-weight: bold;">
+                    <div class="col col-1">User ID</div>
+                    <div class="col col-2">Email ID</div>
+                    <div class="col col-3">Group</div>
+                    <div class="col col-4">Password</div>
+                    <div class="col col-5">Delete</div>
+                </li>
+                <div id="stu">
+                <% for( var i=0; i<users.length; i++){ %>
+                    <% if(users[i].log_as === 'stu'){ %>
+                <li class="table-row" style="font-family: 'Ubuntu';" id="<%= users[i].u_id %>">
+                    <div class="col col-1" data-label="User ID">
+                        <%= users[i].u_id %>
+                    </div>
+                    <div class="col col-2" data-label="Email ID">
+                        <%= users[i].email %>
+                    </div>
+                    <div class="col col-3" data-label="Group">
+                        Student
+                    </div>
+                    <% if(users[i].password === ''){ %>
+                    <div class="col col-4" data-label="Group">
+                        Unset
+                    </div>
+                    <% } else { %>
+                    <div class="col col-4" data-label="Group">
+                        Set
+                    </div>
+                    <% } %>
+                    <!--<div class="col col-4" data-label="Update" style="padding-left: 5px;">-->
+                        <!--<button class="button" style="padding-top: 2px;" onclick="action('', 'update')">-->
+                            <!--<span>Update</span>-->
+                        <!--</button>-->
+
+                    <!--</div>-->
+                    <div class="col col-5" data-label="Delete" style="padding-left: 5px;">
+                        <button class="button" style="padding-top: 2px;" onclick="">
+                            <span>Delete</span>
+                        </button>
+                    </div>
+
+                </li>
+                    <% } %>
+                <% } %>
+                </div>
+                <div id="tch">
+                    <% for( var i=0; i<users.length; i++){ %>
+                    <% if( users[i].log_as === 'tch'){ %>
+                    <li class="table-row" style="font-family: 'Ubuntu';" id="<%= users[i].u_id %>">
+                        <div class="col col-1" data-label="User ID">
+                            <%= users[i].u_id %>
+                        </div>
+                        <div class="col col-2" data-label="Email ID">
+                            <%= users[i].email %>
+                        </div>
+                        <div class="col col-3" data-label="Group">
+                            Teachers
+                        </div>
+                        <!--<div class="col col-4" data-label="Update" style="padding-left: 5px;">-->
+                        <!--<button class="button" style="padding-top: 2px;" onclick="action('', 'update')">-->
+                        <!--<span>Update</span>-->
+                        <!--</button>-->
+
+                        <!--</div>-->
+                        <% if(users[i].password === ''){ %>
+                        <div class="col col-4" data-label="Group">
+                            Unset
+                        </div>
+                        <% } else { %>
+                        <div class="col col-4" data-label="Group">
+                            Set
+                        </div>
+                        <div class="col col-5" data-label="Delete" style="padding-left: 5px;">
+                            <button class="button" style="padding-top: 2px;" onclick="">
+                                <span>Delete</span>
+                            </button>
+                        </div>
+                        <% } %>
+
+                    </li>
+                    <% } %><% } %>
+                </div>
+
+
+
+            </ul>
+        </div>
+    </form></center>
+</body>
+
+</html>

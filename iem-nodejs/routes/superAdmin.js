@@ -14,7 +14,9 @@ router.get('/', function(req, res, next) {
 
 /* GET USER AUTH TABLE */
 router.get('/view-user', function(req, res, next) {
-    res.render('superAdmin/auth-table', {err: ''});
+    db.query('Select * from auth order by u_id', function (err, result) {
+        if(err) throw err;
+        res.render('superAdmin/auth-table', {err: '', users: result});    });
 });
 
 /* GET ADD USER */
@@ -134,7 +136,7 @@ function doMail(mail, password){
 
 /* GET STUDENT DETAILS */
 router.get('/students', function(req, res, next) {
-    db.query('Select * from student_details', function (err, result) {
+    db.query('Select * from student_details order by \'u_roll\'', function (err, result) {
         if(err) throw err;
         res.render('superAdmin/student-table', {student: result, dept: '', add_year: ''});
     });
@@ -145,13 +147,13 @@ router.post('/students', function(req, res, next) {
     var dept = req.body.dept;
     var query = '';
     if( add_year !== undefined && dept !== undefined){
-        query = 'Select * from student_details where dept = \''+dept+'\' and add_year = '+add_year+' ';
+        query = 'Select * from student_details where dept = \''+dept+'\' and add_year = '+add_year+' order by \'u_roll\'';
     }
     else if(add_year !== undefined && dept === undefined){
-        query = 'Select * from student_details where add_year = '+add_year+' ';
+        query = 'Select * from student_details where add_year = '+add_year+' order by \'u_roll\'';
     }
     else if(add_year === undefined && dept !== undefined){
-        query = 'Select * from student_details where dept = \'' + dept +'\'' ;
+        query = 'Select * from student_details where dept = \'' + dept +'\' order by \'u_roll\' ' ;
     }
     console.log(query);
     db.query(query, function (err, result) {
