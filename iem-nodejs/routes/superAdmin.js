@@ -181,6 +181,11 @@ router.get('/update-subject', function(req, res, next) {
     res.render('superAdmin/subject_update');
 });
 
+/* GET SUBJECT UPDATE PAGE */
+router.get('/add-subject', function(req, res, next) {
+    res.render('superAdmin/subject_add');
+});
+
 /* GET TEACHERS DETAILS */
 router.get('/teachers', function(req, res, next) {
     db.query('Select * from teacher_details', function (err, result) {

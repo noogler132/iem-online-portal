@@ -74,6 +74,7 @@ router.post('/:sem([1-6])/:subcode(\\w+)/', function(req, res, next) {
 router.get('/start', function(req, res, next) {
     var user = checkSession(req);
     var test_key = req.session.test.sub_code + '_' + req.session.test.test_no;
+    console.log(req.session);
     db.query("SELECT * FROM test_questions WHERE test_key = ?", test_key, function (err, result)
     {
         res.render('ots/exam', {title: 'IEM', user: user, question: result});
@@ -90,7 +91,9 @@ router.post('/start', function(req, res, next) {
     res.redirect('/');
 });
 
-
+router.get('/result', function(req, res, next) {
+        res.render('ots/result', {});
+});
 
 
 
