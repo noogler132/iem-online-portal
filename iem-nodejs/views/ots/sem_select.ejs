@@ -39,6 +39,8 @@
                         sub.add(option);
                     }
                 <% } %>
+                document.getElementById('sem').value = value;
+
             }
 
             function body_load() {
@@ -72,12 +74,12 @@
     <form id="form" method="POST">
         <div class="row">
             <div class="column" style="padding-left: 31%; padding-top: 2.15%;">
-                <select name="sem" id="dept" title="Select Semester" onchange="subject_display(value)" onclick="document.getElementById('semPlaceholder')">
-                    <option id="semPlaceholder" disabled selected>Select Department</option>
-                    <option id="sem_1" value="BCA">BCA</option>
-                    <option id="sem_2" value="BBA">BBA</option>
+                <select name="dept" id="dept" title="Select Department">
+                    <option disabled selected>Select Department</option>
+                    <option id="BCA" value="BCA">BCA</option>
+                    <option id="BBA" value="BBA">BBA</option>
                 </select>
-                <select name="sem" id="sem" title="Select Semester" onchange="subject_display(value)" onclick="document.getElementById('semPlaceholder')" style="margin-left: 35px;">
+                <select name="sem" id="sem" title="Select Semester" onchange="subject_display(value)" onclick="document.getElementById('semPlaceholder')" style="margin-left: 12%;">
                     <option id="semPlaceholder" disabled selected>Select Semester</option>
                     <option id="sem_1" value="1">First</option>
                     <option id="sem_2" value="2">Second</option>
@@ -89,7 +91,7 @@
                 
             </div>
             <div class="column" style="padding-left: 2%;">
-                <select name="sub_code" id="sub_code" title="Select Subject Code" onchange="document.getElementById('form').submit()" style="margin-bottom: 5px;">
+                <select name="sub_code" id="sub_code" title="Select Subject Code" onchange="document.getElementById('form').submit()" style="margin-bottom: 5%;">
                     <option id="subPlaceholder" disabled selected>Select Subject</option>
                 </select>
                 <button class="button" style="padding-top: 2px; margin-left:400px;">
