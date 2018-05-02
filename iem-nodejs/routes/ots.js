@@ -13,11 +13,12 @@ router.get('/', function(req, res, next) {
         return;
     }
     if(!user.isLoggedIn && user.as !== 'stu' && user.sem !== sem){
-        res.redirect('/404');
+        req.session.redirect = '/online-test';
+        res.redirect('/login');
         return;
     }
     var sem = req.session.sem;
-    db.query("SELECT * FROM subjects WHERE sem_code = ?", sem, function (err, subjects)
+    db.query("SELECT * FROM subjects WHERE sem_code = ? and dept = ?", [sem, req.session.dept] , function (err, subjects)
     {
             var query = 'SELECT * FROM active_tests WHERE sub_code IN (\'';
             query = query + subjects[0].sub_code;

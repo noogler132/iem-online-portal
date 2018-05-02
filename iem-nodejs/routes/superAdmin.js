@@ -138,7 +138,11 @@ function doMail(mail, password){
 router.get('/students', function(req, res, next) {
     db.query('Select * from student_details order by \'u_roll\'', function (err, result) {
         if(err) throw err;
-        res.render('superAdmin/student-table', {student: result, dept: '', add_year: ''});
+        res.render('superAdmin/student-table',
+            {
+                student: result,
+                dept: '',
+                add_year: ''});
     });
 });
 
@@ -162,6 +166,10 @@ router.post('/students', function(req, res, next) {
     });
 });
 
+
+
+
+
 /* GET TEACHERS DETAILS */
 router.get('/teachers', function(req, res, next) {
     db.query('Select * from teacher_details', function (err, result) {
@@ -178,11 +186,5 @@ router.get('/subjects', function(req, res, next) {
     });
 });
 
-router.get('/students/update/:u_roll', function(req, res, next) {
-    db.query('Select * from student_details', function (err, result) {
-        if(err) throw err;
-        res.render('superAdmin/student-table', {student: result, dept: '', add_year: ''});
-    });
-});
 
 module.exports=router;
