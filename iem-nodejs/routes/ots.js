@@ -99,7 +99,9 @@ router.get('/edit', function(req, res, next) {
                 subjects: subjects,
                 active: undefined,
                 sem: 0,
-                sub_code: '' });
+                sub_code: '',
+                dept: ''
+            });
     });
 });
 
@@ -108,6 +110,7 @@ router.post('/edit', function(req, res, next)
     var user = checkSession(req);
     var sub_code = req.body.sub_code;
     var sem = req.body.sem;
+    var dept = req.body.dept;
     if(req.body.action === 'view'){
         res.redirect('/view-paper');
         return;
@@ -117,7 +120,7 @@ router.post('/edit', function(req, res, next)
     }
 
             db.query("SELECT * FROM subjects", req.session.dept , function (err, subjects) {
-                db.query("SELECT * FROM active_tests where sub_code = ?", sub_code, function (err, result) {
+                db.query("SELECT * FROM active_tests where sub_code = ? order by test_no ", sub_code, function (err, result) {
                     if (result === undefined) {
                         res.render('ots/sem_select', {
                             title: 'the Portal',
@@ -126,7 +129,8 @@ router.post('/edit', function(req, res, next)
                             subjects: subjects,
                             active: undefined,
                             sem: 0,
-                            sub_code: ''
+                            sub_code: '',
+                            dept: ''
                         });
                         return;
                     }
@@ -137,7 +141,8 @@ router.post('/edit', function(req, res, next)
                         subjects: subjects,
                         active: result,
                         sem: sem,
-                        sub_code: sub_code
+                        sub_code: sub_code,
+                        dept: dept
                     });
                 });
             });
