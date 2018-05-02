@@ -1,0 +1,32 @@
+<html>
+
+<head>
+    <%- include('./adminHeader', {}); %>
+        <hr>
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+        <link rel="stylesheet" href="/index/css/update_stu_tch.css" media="screen" type="text/css" />
+</head>
+
+<body>
+    <br>
+    <br>
+    <div class="login-card" style="width: 350px;">
+        <h2>Update Teacher Data</h2>
+        <br>
+        <form method="post">
+
+            <input type="text" id="f_name" name="first_name" placeholder="First Name" required>
+            <input type="text" id="l_name" name="last_name" placeholder="Last Name" required>
+            <input type="number" maxlength="10" id="contact" name="contact" placeholder="Phone NUmber" required>
+            <input type="email" id="emailAddress" name="email" placeholder="Email ID" required>
+            <input type="text" id="facebook" name="facebook" placeholder="Facebook ID">
+            <input type="text" id="linkedin" name="linkedin" placeholder="LinkedIn ID">
+            <input type="text" id="designation" name="designation" placeholder="Designation">                    
+            <input type="submit" value="Update" class="login login-submit">
+            
+        </form>
+    </div>
+
+</body>
+
+</html>
