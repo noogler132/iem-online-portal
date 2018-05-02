@@ -22,24 +22,26 @@
             // <!--alert('problem solved');-->
 
             function subject_display(value) {
-                var sub = document.getElementById('sub_code');
-                sub.innerHTML = "";
-                var subPlaceholder = document.createElement("OPTION");
-                subPlaceholder.label = 'Select Subject';
-                subPlaceholder.id = 'subPlaceholder';
-                subPlaceholder.disabled = 'disabled';
-                subPlaceholder.selected = true;
-                sub.add(subPlaceholder);
-                var dept = document.getElementById('dept').value;
-                <% for (var i = 0; i < subjects.length; i++) { %>
-                    if ((parseInt(value) === parseInt('<%= subjects[i].sem_code %>')) && '<%= subjects[i].dept %>' === dept) {
-                        var option = document.createElement("OPTION");
-                        option.value = '<%= subjects[i].sub_code %>';
-                        option.label = '<%= subjects[i].sub_code %>';
-                        sub.add(option);
-                    }
-                <% } %>
-                document.getElementById('sem').value = value;
+                if(value !== ''){
+                    var sub = document.getElementById('sub_code');
+                    sub.innerHTML = "";
+                    var subPlaceholder = document.createElement("OPTION");
+                    subPlaceholder.label = 'Select Subject';
+                    subPlaceholder.id = 'subPlaceholder';
+                    subPlaceholder.disabled = 'disabled';
+                    subPlaceholder.selected = true;
+                    sub.add(subPlaceholder);
+                    var dept = document.getElementById('dept').value;
+                    <% for (var i = 0; i < subjects.length; i++) { %>
+                        if ((parseInt(value) === parseInt('<%= subjects[i].sem_code %>')) && '<%= subjects[i].dept %>' === dept) {
+                            var option = document.createElement("OPTION");
+                            option.value = '<%= subjects[i].sub_code %>';
+                            option.label = '<%= subjects[i].sub_code %>';
+                            sub.add(option);
+                        }
+                    <% } %>
+                    document.getElementById('sem').value = value;
+                }
 
             }
 
@@ -56,6 +58,13 @@
                 <% } %>
                 document.getElementById('test_key').value = '';
                 document.getElementById('action').value = '';
+            }
+
+            function changedept() {
+                var sem = document.getElementById('semPlaceholder');
+                sem.disabled = false;
+                sem.selected = true;
+                sem.disabled = 'disabled';
             }
 
             function toggle(test_key, action) {
@@ -76,13 +85,15 @@
     <hr>
     <form id="form" method="POST">
         <div class="row">
-            <div class="column" style="padding-left: 31%; padding-top: 2.15%;">
-                <select name="dept" id="dept" title="Select Department">
+            <center>
+            <div class="column">
+                <select name="dept" id="dept" title="Select Department" onchange="changedept()">
                     <option disabled selected>Select Department</option>
                     <option id="BCA" value="BCA">BCA</option>
                     <option id="BBA" value="BBA">BBA</option>
                 </select>
-                <select name="sem" id="sem" title="Select Semester" onchange="subject_display(value)" onclick="document.getElementById('semPlaceholder')" style="margin-left: 12%;">
+                <select name="sem" id="sem" title="Select Semester" onchange="subject_display(value)" onclick="document.getElementById('semPlaceholder')"
+                        style="">
                     <option id="semPlaceholder" disabled selected>Select Semester</option>
                     <option id="sem_1" value="1">First</option>
                     <option id="sem_2" value="2">Second</option>
@@ -91,20 +102,18 @@
                     <option id="sem_5" value="5">Fifth</option>
                     <option id="sem_6" value="6">Sixth</option>
                 </select>
-                
-            </div>
-            <div class="column" style="padding-left: 2%;">
-                <select name="sub_code" id="sub_code" title="Select Subject Code" onchange="document.getElementById('form').submit()" style="margin-bottom: 5%;">
+
+            <!--</div>-->
+            <!--<div class="column" style="padding-left: 2%;">-->
+                <select name="sub_code" id="sub_code" title="Select Subject Code" onchange="document.getElementById('form').submit()"
+                        style="margin-bottom: 5%;">
                     <option id="subPlaceholder" disabled selected>Select Subject</option>
                 </select>
-                <button class="button" style="padding-top: 2px; margin-left:400px;">
+                <button class="button" style="margin-left: ;">
                     <span>Add Test </span>
                 </button>
             </div>
-            <div class="column" style="padding-left: 2%;">
-
-            </div>
-        
+            </center>
         </div>
         <% if(active !== undefined){ %>
             <div class="row">

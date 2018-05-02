@@ -1,9 +1,10 @@
 .column {
     float: left;
-    width: 50%;
+    width: 100%;
     padding: 30px 10px;
-    height: 250px;
+    height: 30%;
 }
+
 
 /* Clear floats after the columns */
 
@@ -32,7 +33,7 @@
 .dropdown .select {
     cursor: pointer;
     display: block;
-    padding: 10px
+    padding: 10%
 }
 
 .dropdown .select>i {
@@ -216,7 +217,7 @@ select {
     overflow: hidden;
     padding-top: 2px;
     padding-bottom: 2px;
-    padding-left: 5px;
+    padding-left: 20px;
     text-overflow: ellipsis;
     white-space: nowrap;
     align-content: inherit;

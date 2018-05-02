@@ -18,44 +18,6 @@
     <link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
     <!-- //web-fonts -->
-
-
-
-
-    <!-- header -->
-    <div class="header">
-        <nav class="navbar navbar-default">
-            <div class="container">
-                <div class="navbar-header navbar-left wthree" id="test_details" style="width: 20%">
-                    <h4 style="padding-top: 55px;">
-                        <span>Subject Code: </span>
-                        <br>
-                        <span>Test Number: </span>
-                    </h4>
-                </div>
-                <div class="navbar-header navbar-center wthree" style="padding-left: 220px;">
-                    <h1>
-                        <a href="/">IEM
-                            <span>Good Education. Good Jobs.</span>
-                        </a>
-                    </h1>
-                    <!--<a href="index.html"><img src="/images/IEM.jpg" style="width: 300px; height: 200px; padding-top: 50px;"></a>-->
-
-                </div>
-                <div class="navbar-header navbar-right wthree" style="width:200px;" id="timer">
-                    <h4 style="padding-top: 55px;">
-                        <span>Remaining Time : 10:00
-                        </span>
-                    </h4>
-                </div>
-
-
-            </div>
-    </div>
-    <div class="clearfix"> </div>
-    </nav>
-    </div>
-    <hr style="height: 2px;">
     <style>
         * {
             font-family: 'Roboto', sans-serif;
@@ -169,10 +131,88 @@
             transform: translateY(4px);
         }
     </style>
+    <script language ="javascript" >
+        var tim;
+        var min = '<%= question.length %>';
+        var sec = '0';
+        var f = new Date();
+
+        function customSubmit(someValue){
+        	 document.getElementById('min').value = min;
+        	 document.getElementById('sec').value = sec;
+        	 document.getElementById('questionForm').submit();
+        	 }
+
+        function examTimer() {
+            if (parseInt(sec) > 9) {
+			    document.getElementById("showtime").innerHTML = "Remaining time : "+min+":" + sec;
+                sec = parseInt(sec) - 1;
+                tim = setTimeout("examTimer()", 1000);
+            }
+            else if (parseInt(sec) > 0) {
+                document.getElementById("showtime").innerHTML = "Remaining time : "+min+": 0" + sec;
+                sec = parseInt(sec) - 1;
+                tim = setTimeout("examTimer()", 1000);
+            }
+            else {
+
+			    if (parseInt(min)===0 && parseInt(sec)===0){
+			    	document.getElementById("showtime").innerHTML = "Remaining time : "+min+":" + sec;
+				     alert("Time Up");
+				     document.getElementById('min').value=0;
+				     document.getElementById('sec').value=0;
+				     document.getElementById('questionForm').submit();
+
+			     }
+
+                if (parseInt(sec) === 0) {
+				    document.getElementById("showtime").innerHTML = "Remaining time : "+min+":" + '00';
+                    min = parseInt(min) - 1;
+					sec=59;
+                    tim = setTimeout("examTimer()", 1000);
+                }
+
+            }
+        }
+    </script>
+
+
+    <!-- header -->
+    <div class="header">
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header navbar-left wthree" id="test_details" style="width: 20%">
+                    <h4 style="padding-top: 55px;">
+                        <span>Subject Code: </span>
+                        <br>
+                        <span>Test Number: </span>
+                    </h4>
+                </div>
+                <div class="navbar-header navbar-center wthree" style="padding-left: 220px;">
+                    <h1>
+                        <a href="/">IEM
+                            <span>Good Education. Good Jobs.</span>
+                        </a>
+                    </h1>
+                    <!--<a href="index.html"><img src="/images/IEM.jpg" style="width: 300px; height: 200px; padding-top: 50px;"></a>-->
+
+                </div>
+                <div class="navbar-header navbar-right wthree" style="width:200px;" >
+                    <h4 style="padding-top: 55px;">
+                        <span id="showtime">Remaining Time : 10:00
+                        </span>
+                    </h4>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <hr style="height: 2px;">
 </head>
 
-<body>
-    <form method="POST" action="" target="_blank" id="question_form" class="ots">
+<body onload="examTimer()">
+    <form method="POST" action="" target="_blank" id="questionForm" class="ots">
+        <input type="hidden" name="min" id="min">
+        <input type="hidden" name="sec" id="sec">
         <% for(var i=0; i<question.length; i++){ %>
             <div>
                 <p>
@@ -180,28 +220,29 @@
                         <%= question[i].Q_no %>:
                             <%= question[i].Question %>
                     </h3>
+                    <input type="hidden" name="answers" id="<%= question[i].Q_no %>">
                 </p>
                 <label>
-                    <input type="radio" class="option-input radio" name="example" />
+                    <input type="radio" class="option-input radio" name="example" value='1' onclick="document.getElementById('<%= question[i].Q_no %>').value = value;"/>
                     <strong>
                         <%= question[i].Option1 %> &emsp;</strong>
                 </label>
                 <br>
                 <label>
-                    <input type="radio" class="option-input radio" name="example" />
+                    <input type="radio" class="option-input radio" name="example"  value='2' onclick="document.getElementById('<%= question[i].Q_no %>').value = value;"/>
                     <strong>
                         <%= question[i].Option2 %> &emsp;</strong>
                 </label>
                 <br>
 
                 <label>
-                    <input type="radio" class="option-input radio" name="example" />
+                    <input type="radio" class="option-input radio" name="example"  value='3' onclick="document.getElementById('<%= question[i].Q_no %>').value = value;"/>
                     <strong>
                         <%= question[i].Option3 %> &emsp;</strong>
                 </label>
                 <br>
                 <label>
-                    <input type="radio" class="option-input radio" name="example" />
+                    <input type="radio" class="option-input radio" name="example"  value='4' onclick="document.getElementById('<%= question[i].Q_no %>').value = value;"/>
                     <strong>
                         <%= question[i].Option4 %> &emsp;</strong>
                 </label>
@@ -224,7 +265,7 @@
 
 
                 <div style="padding-left: 35%;">
-                    <button type="submit" form="question_form" value="Submit" id="sub_btn">
+                    <button type="submit" form="question_form" value="Submit" id="sub_btn" onclick="customSubmit()">
                         <strong>Submit Test</strong>
                     </button>
                     <br>
