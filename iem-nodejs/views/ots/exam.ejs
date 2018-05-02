@@ -1,7 +1,61 @@
 <html>
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- Custom Theme files -->
+    <link href="/index/css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
+    <link href="/index/css/style.css" type="text/css" rel="stylesheet" media="all">
+    <link href="/index/css/font-awesome.css" rel="stylesheet">
+    <!-- font-awesome icons -->
+    <!-- //Custom Theme files -->
+    <!-- js -->
+    <script src="/index/js/jquery-2.2.3.min.js"></script>
+    <!-- //js -->
+    <!-- web-fonts -->
+    <link href="//fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+    <!-- //web-fonts -->
 
+
+
+
+    <!-- header -->
+    <div class="header">
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header navbar-left wthree" id="test_details" style="width: 20%">
+                    <h4 style="padding-top: 55px;">
+                        <span>Subject Code: </span>
+                        <br>
+                        <span>Test Number: </span>
+                    </h4>
+                </div>
+                <div class="navbar-header navbar-center wthree" style="padding-left: 220px;">
+                    <h1>
+                        <a href="/">IEM
+                            <span>Good Education. Good Jobs.</span>
+                        </a>
+                    </h1>
+                    <!--<a href="index.html"><img src="/images/IEM.jpg" style="width: 300px; height: 200px; padding-top: 50px;"></a>-->
+
+                </div>
+                <div class="navbar-header navbar-right wthree" style="width:200px;" id="timer">
+                    <h4 style="padding-top: 55px;">
+                        <span>Remaining Time : 10:00
+                        </span>
+                    </h4>
+                </div>
+
+
+            </div>
+    </div>
+    <div class="clearfix"> </div>
+    </nav>
+    </div>
+    <hr style="height: 2px;">
     <style>
         * {
             font-family: 'Roboto', sans-serif;
@@ -86,11 +140,11 @@
             border-radius: 50%;
         }
 
-        body {
+        body .ots {
             width: 100%;
             height: 100%;
-            padding-left: 20%;
-            padding-top: 100px;
+            padding-left: 15%;
+            padding-top: 50px;
         }
 
         #sub_btn {
@@ -118,52 +172,68 @@
 </head>
 
 <body>
-<form method="POST" action="" target="_blank" id="question_form">
-    <% for(var i=0; i<question.length; i++){ %>
-    <div>
-        <p>
-        <h2><%= i +1 %>: <%= question[i].Question %></h2>
-        </p>
-        <label>
-            <input type="radio" class="option-input radio" name="example" checked />
-            <strong><%= question[i].Option1 %> &emsp;</strong>
-        </label>
-        <label>
-            <input type="radio" class="option-input radio" name="example" />
-            <strong><%= question[i].Option2 %> &emsp;</strong>
-        </label>
-        <label>
-            <input type="radio" class="option-input radio" name="example" />
-            <strong><%= question[i].Option3 %>  &emsp;</strong>
-        </label>
-        <label>
-            <input type="radio" class="option-input radio" name="example" />
-            <strong><%= question[i].Option4 %>  &emsp;</strong>
-        </label>
-    </div>
-    <% } %>
+    <form method="POST" action="" target="_blank" id="question_form" class="ots">
+        <% for(var i=0; i<question.length; i++){ %>
+            <div>
+                <p>
+                    <h3>
+                        <%= question[i].Q_no %>:
+                            <%= question[i].Question %>
+                    </h3>
+                </p>
+                <label>
+                    <input type="radio" class="option-input radio" name="example" />
+                    <strong>
+                        <%= question[i].Option1 %> &emsp;</strong>
+                </label>
+                <br>
+                <label>
+                    <input type="radio" class="option-input radio" name="example" />
+                    <strong>
+                        <%= question[i].Option2 %> &emsp;</strong>
+                </label>
+                <br>
 
-    <br>
-    <br>
-    <br>
+                <label>
+                    <input type="radio" class="option-input radio" name="example" />
+                    <strong>
+                        <%= question[i].Option3 %> &emsp;</strong>
+                </label>
+                <br>
+                <label>
+                    <input type="radio" class="option-input radio" name="example" />
+                    <strong>
+                        <%= question[i].Option4 %> &emsp;</strong>
+                </label>
+                <br>
+            </div>
+            <br>
+            <br>
+            <% } %>
+
+                <br>
+                <br>
+                <br>
 
 
 
-    </div>
+                </div>
 
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+                <br>
+                <br>
 
-    <div style="padding-left: 25%;">
-        <button type="submit" form="question_form" value="Submit" id="sub_btn">
-            <strong>Submit Test</strong>
-        </button>
-    </div>
 
-</form>
+                <div style="padding-left: 35%;">
+                    <button type="submit" form="question_form" value="Submit" id="sub_btn">
+                        <strong>Submit Test</strong>
+                    </button>
+                    <br>
+                    <br>
+                    <br>
+
+                </div>
+
+    </form>
 </body>
 
 </html>
