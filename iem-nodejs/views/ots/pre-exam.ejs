@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../header', {user: user}); %>
+    <link rel='stylesheet' href='http://codepen.io/assets/libs/fullpage/jquery-ui.css'>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <link rel="stylesheet" href="/index/css/test_homepage.css" media="screen" type="text/css" />
+    <script>
+        window.open('/online-test/start', '_blank', 'titlebar=0,status=0,toolbar=0,menubar=0');
+        window.open('/online-test', '_self');
+        window.close();
+    </script>
+
+</head>

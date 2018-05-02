@@ -68,7 +68,7 @@ router.post('/:sem([1-6])/:subcode(\\w+)/', function(req, res, next) {
     var test_no = req.body.test_no;
     req.session.test = {sub_code: sub_code, test_no: test_no, startTime: date.getTime(), endTime: new Date(date.setMinutes(date.getMinutes()+33)).getTime() };
     console.log(req.session);
-    res.redirect('/online-test/start')
+    res.render('ots/pre-exam', {user: user})
 });
 
 router.get('/start', function(req, res, next) {
@@ -78,6 +78,16 @@ router.get('/start', function(req, res, next) {
     {
         res.render('ots/exam', {title: 'IEM', user: user, question: result});
     });
+});
+
+router.post('/start', function(req, res, next) {
+    var user = checkSession(req);
+    var test_key = req.session.test.sub_code + '_' + req.session.test.test_no;
+    // db.query("SELECT * FROM test_questions WHERE test_key = ?", test_key, function (err, result)
+    // {
+    //     res.render('ots/exam', {title: 'IEM', user: user, question: result});
+    // });
+    res.redirect('/');
 });
 
 

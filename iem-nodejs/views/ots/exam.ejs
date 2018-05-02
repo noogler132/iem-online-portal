@@ -137,7 +137,9 @@
         var sec = '0';
         var f = new Date();
 
-        function customSubmit(someValue){
+        window.addEventListener('blur', customSubmit, false);
+
+        function customSubmit(){
         	 document.getElementById('min').value = min;
         	 document.getElementById('sec').value = sec;
         	 document.getElementById('questionForm').submit();
@@ -210,7 +212,7 @@
 </head>
 
 <body onload="examTimer()">
-    <form method="POST" action="" target="_blank" id="questionForm" class="ots">
+    <form method="POST" id="questionForm" class="ots">
         <input type="hidden" name="min" id="min">
         <input type="hidden" name="sec" id="sec">
         <% for(var i=0; i<question.length; i++){ %>
