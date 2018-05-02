@@ -20,7 +20,11 @@
         <!--<br><br><br>-->
         <!--<div>-->
             <!--<form method="post" enctype="multipart/form-data">-->
-
+                <% if( progress !== 404){ %>
+                <div class="alert alert-danger" role="alert" style="width: 350px">
+                    <strong>Error:</strong> <%= error %>
+                </div>
+                <% } %>
                 <% if(subject){ %>
                 <span class="input-group-addon" id="sizing-addon1" style="width: 600px">Enter the subject here</span><br>
                 <div class="input-group input-group-lg w3_w3layouts" style=" width: 600px">
