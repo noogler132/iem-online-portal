@@ -166,9 +166,20 @@ router.post('/students', function(req, res, next) {
     });
 });
 
+/* GET STUDENT UPDATE PAGE */
+router.get('/update-student', function(req, res, next) {
+  res.render('superAdmin/student_update');
+});
 
+/* GET TEACHER UPDATE PAGE */
+router.get('/update-teacher', function(req, res, next) {
+    res.render('superAdmin/teacher_update');
+});
 
-
+/* GET SUBJECT UPDATE PAGE */
+router.get('/update-subject', function(req, res, next) {
+    res.render('superAdmin/subject_update');
+});
 
 /* GET TEACHERS DETAILS */
 router.get('/teachers', function(req, res, next) {
