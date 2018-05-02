@@ -11,72 +11,79 @@
     <br>
     <br>
     <form>
-    <center>
-        <div style="height: inherit;" class="row">
-            <div class="column">
+        <center>
+            <div style="height: inherit;" class="row">
+                <div class="column">
 
-            </div>
-            <div class="column">
-                <select name="slct" id="sem" style="padding-right: 10px; width: 32%;">
-                    <option id="semPlaceholder" disabled selected>Select Semester</option>
-                    <option id="sem_1" value="1">First</option>
-                    <option id="sem_2" value="2">Second</option>
-                    <option id="sem_3" value="3">Third</option>
-                    <option id="sem_4" value="4">Fourth</option>
-                    <option id="sem_5" value="5">Fifth</option>
-                    <option id="sem_6" value="6">Sixth</option>
-                </select>
+                </div>
+                <div class="column">
+                    <select name="slct" id="department" style="padding-right: 10px; width: 32%;">
+                        <option id="semPlaceholder" disabled selected>Select Department</option>
+                        <option id="dept_bca" value="bca">BCA</option>
+                        <option id="dept_bba" value="bba">BBA</option>
+                    </select>
 
-                <button type="submit" name="view" class="login login-submit" id="view_btn">View</button>
-            </div>
-            <div class="column" style="float: right;padding-top: 2.5%; padding-left: 20%;">
+                    <select name="slct" id="sem" style="padding-right: 10px; width: 32%;">
+                        <option id="semPlaceholder" disabled selected>Select Semester</option>
+                        <option id="sem_1" value="1">First</option>
+                        <option id="sem_2" value="2">Second</option>
+                        <option id="sem_3" value="3">Third</option>
+                        <option id="sem_4" value="4">Fourth</option>
+                        <option id="sem_5" value="5">Fifth</option>
+                        <option id="sem_6" value="6">Sixth</option>
+                    </select>
+
+
+                </div>
+                <div class="column" style="float: right;padding-top: 2%; padding-left: 20%;">
                     <button type="submit" name="add_subject" class="login login-submit" id="view_btn">Add Subject</button>
+                </div>
             </div>
-        </div>
-        <div class="row" style="height: 70px;"></div>
-        <div class="row" style="height: inherit; background-color: lightgray;">
-            <ul class="responsive-table" id="sub_table">
-                <li class="table-header" style="font-weight: bold;">
-                    <div class="col col-1">Semester No</div>
-                    <div class="col col-2">Subject Code</div>
-                    <div class="col col-3">Subject Name</div>
-                    <div class="col col-4">Update</div>
-                    <div class="col col-5">Delete</div>
-                </li>
-                <% for(var i=0; i<subjects.length; i++){ %>
-                <li class="table-row" style="font-family: 'Ubuntu';">
-                    <div class="col col-1" data-label="Semester No">
-                        <%= subjects[i].sem_code %>
-                    </div>
-                    <div class="col col-2" data-label="Subject Code">
-                        <%= subjects[i].sub_code %>
-                    </div>
-                    <div class="col col-3" data-label="Subject Name">
-                        <%= subjects[i].sem_name %>
-                    </div>
+            <div class="row" style="height: 70px;"></div>
+            <div class="row" style="height: inherit; background-color: lightgray;">
+                <ul class="responsive-table" id="sub_table">
+                    <li class="table-header" style="font-weight: bold;">
+                        <div class="col col-1">Semester No</div>
+                        <div class="col col-2">Subject Code</div>
+                        <div class="col col-3">Subject Name</div>
+                        <div class="col col-4">Update</div>
+                        <div class="col col-5">Delete</div>
+                    </li>
+                    <% for(var i=0; i<subjects.length; i++){ %>
+                        <li class="table-row" style="font-family: 'Ubuntu';">
+                            <div class="col col-1" data-label="Semester No">
+                                <%= subjects[i].sem_code %>
+                            </div>
+                            <div class="col col-2" data-label="Subject Code">
+                                <%= subjects[i].sub_code %>
+                            </div>
+                            <div class="col col-3" data-label="Subject Name">
+                                <%= subjects[i].sem_name %>
+                            </div>
 
-                    <div class="col col-4" data-label="Update" style="padding-left: 5px;">
-                        <button class="button" style="padding-top: 2px;">
-                            <span>Update</span>
-                        </button>
+                            <div class="col col-4" data-label="Update" style="padding-left: 5px;">
+                                <button class="button" style="padding-top: 2px;">
+                                    <span>Update</span>
+                                </button>
 
-                    </div>
-                    <div class="col col-5" data-label="Delete" style="padding-left: 5px;">
-                        <button class="button" style="padding-top: 2px;">
-                            <span>Delete</span>
-                        </button>
-                    </div>
+                            </div>
+                            <div class="col col-5" data-label="Delete" style="padding-left: 5px;">
+                                <button class="button" style="padding-top: 2px;">
+                                    <span>Delete</span>
+                                </button>
+                            </div>
 
-                </li>
-                <% } %>
-
+                        </li>
+                        <% } %>
 
 
 
 
-            </ul>
-        </div>
-    </center></form>
+
+                </ul>
+            </div>
+        </center>
+    </form>
 </body>
 
 </html>
