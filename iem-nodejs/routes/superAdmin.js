@@ -10,10 +10,10 @@ var bcrypt = require('bcryptjs');
 /* GET superAdmin home page */
 router.get('/', function(req, res, next) {
     var user = checkSession(req);
-    if(!user.isLoggedIn || user.as !== 'admin') {
-        res.redirect('');
+    if(user.isLoggedIn && user.as !== 'admin') {
+        res.render('message', {user: user, message: 'Only Admins are allowed to access this page'})
     }
-    res.render('superAdmin/sections', {user: user});
+    res.render('superAdmin/sections', {user: user, err: ''});
 });
 
 /* GET USER AUTH TABLE */
@@ -203,6 +203,55 @@ router.get('/subjects', function(req, res, next) {
     db.query('Select * from subjects', function (err, result) {
         if(err) throw err;
         res.render('superAdmin/subject-table', {subjects: result});
+    });
+});
+
+
+
+
+
+
+/* POST students login page. */
+router.post('/login', function(req, res, next) {
+    var user = checkSession(req);
+    if (user.isLoggedIn) {
+        if (req.session.redirect !== '') {
+            res.redirect(req.session.redirect)
+        }
+        else {
+            res.redirect('/superAdmin/');
+        }
+        return;
+    }
+    var username = req.body.username;
+    var pass = req.body.password;
+    db.query("SELECT * FROM auth WHERE u_id = ? and log_as = 'admin' ", username, function (err, result) {
+        if (err) throw err;
+        if (result.length === 0) {
+            res.render('superAdmin/sections', {user: user, err:'Incorrect Username or Password'});
+        }
+        else {
+            bcrypt.compare(pass, result[0].password, function (err, pass) {
+                if (pass) {
+                    req.session.username = 'Admin';
+                    req.session.as = result[0].log_as;
+                    req.session.password = result[0].password;
+                    req.session.email = result[0].email;
+
+                    if (req.session.redirect !== '' && req.session.redirect) {
+                        res.redirect(req.session.redirect);
+                        return;
+                    }
+                    else {
+                        res.redirect('/');
+                        return;
+                    }
+                }
+                else{
+                    res.render('superAdmin/sections', {user: user, err:'Incorrect Username or Password'});
+                }
+            });
+        }
     });
 });
 
