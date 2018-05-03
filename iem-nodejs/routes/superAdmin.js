@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
     if(!user.isLoggedIn || user.as !== 'admin') {
         ;
     }
-    res.render('superAdmin/sections', {});
+    res.render('superAdmin/sections', {user: user});
 });
 
 /* GET USER AUTH TABLE */
