@@ -74,6 +74,7 @@ router.post('/', function(req, res, next) {
                             var currentyear = date.getFullYear();
                             var stu_year = (currentyear - add_year);
                             var sem = 0;
+                            var register = 0;
                             if(stu_year === 0)
                             {
                                 if(date.getMonth() >= 0 && date.getMonth() <5){
@@ -92,31 +93,46 @@ router.post('/', function(req, res, next) {
                                 sem = stu_year;
                             }
                             console.log(sem);
-                            var f_name = resultName[0].f_name;
-                            var register = 0;
-                            var dept = resultName[0].dept;
+                            // var f_name = resultName[0].f_name;
+                            // var dept = resultName[0].dept;
+                            req.session.username = resultName[0].f_name;
+                            req.session.u_id = user;
+                            req.session.as = result[0].log_as;
+                            req.session.password = result[0].password;
+                            req.session.sem = sem;
+                            req.session.dept = resultName[0].dept;
+                            req.session.email = result[0].email;
+                            req.session.save();
                         }
                         else if(result[0].log_as === 'tch' && (resultName.length !== 0)){
-                            var sem = 0;
-                            var f_name = resultName[0].f_name;
-                            var register = 0;
-                            var dept = '';
+                            // var f_name = resultName[0].f_name;
+                            // var dept = '';
+                            req.session.username = resultName[0].f_name;
+                            req.session.u_id = user;
+                            req.session.as = result[0].log_as;
+                            req.session.password = result[0].password;
+                            req.session.email = result[0].email;
+                            req.session.save();
                         }
                         else
                         {
-                            var sem =0;
-                            var f_name = 'Undefined';
-                            var register = 1;
-                            var dept = '';
+                            // var f_name = 'Unregistered';
+                            register = 1;
+                            // var dept = '';
+                            req.session.username = 'Unregistered';
+                            req.session.u_id = user;
+                            req.session.as = result[0].log_as;
+                            req.session.password = result[0].password;
+                            req.session.email = result[0].email;
                         }
-                        req.session.username = f_name;
-                        req.session.u_id = user;
-                        req.session.as = result[0].log_as;
-                        req.session.password = result[0].password;
-                        req.session.sem = sem;
-                        req.session.dept = dept;
-                        req.session.email = result[0].email;
-                        req.session.save();
+                        // req.session.username = f_name;
+                        // req.session.u_id = user;
+                        // req.session.as = result[0].log_as;
+                        // req.session.password = result[0].password;
+                        // req.session.sem = sem;
+                        // req.session.dept = dept;
+                        // req.session.email = result[0].email;
+                        // req.session.save();
                         console.log(req.session);
                         if(register){
                             res.redirect('/register');
