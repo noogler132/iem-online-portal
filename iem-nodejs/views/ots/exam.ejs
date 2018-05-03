@@ -140,8 +140,6 @@
         window.addEventListener('blur', customSubmit, false);
 
         function customSubmit(){
-        	 document.getElementById('min').value = min;
-        	 document.getElementById('sec').value = sec;
         	 document.getElementById('questionForm').submit();
         	 }
 
@@ -267,7 +265,7 @@
 
 
                 <div style="padding-left: 35%;">
-                    <button type="submit" form="question_form" value="Submit" id="sub_btn" onclick="customSubmit()">
+                    <button type="button" form="question_form" value="Submit" id="sub_btn" onclick="customSubmit()">
                         <strong>Submit Test</strong>
                     </button>
                     <br>

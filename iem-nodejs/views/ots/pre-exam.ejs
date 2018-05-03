@@ -7,8 +7,13 @@
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
     <link rel="stylesheet" href="/index/css/test_homepage.css" media="screen" type="text/css" />
     <script>
+        <% if(test === 'start'){ %>
         window.open('/online-test/start', '_blank', 'titlebar=0,status=0,toolbar=0,menubar=0');
         window.open('/online-test', '_self');
+        <% } else if(test === 'end'){ %>
+        window.close()
+        <% } %>
+
     </script>
 
 </head>

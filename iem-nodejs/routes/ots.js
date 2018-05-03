@@ -69,9 +69,18 @@ router.post('/:sem([1-6])/:subcode(\\w+)/', function(req, res, next) {
     var sub_code = req.body.sub_key;
     var date = new Date();
     var test_no = req.body.test_no;
-    req.session.test = {sub_code: sub_code, test_no: test_no, startTime: date.getTime(), endTime: new Date(date.setMinutes(date.getMinutes()+33)).getTime() };
-    console.log(req.session);
-    res.render('ots/pre-exam', {user: user})
+    var test_key = sub_code + '_' + test_no;
+    db.query("SELECT * FROM test_questions WHERE test_key = ?", test_key, function (err, questions) {
+        req.session.test = {
+            sub_code: sub_code,
+            test_no: test_no,
+            startTime: date.getTime(),
+            endTime: new Date(date.setMinutes(date.getMinutes() + questions.length +1 )).getTime()
+        };
+        console.log(req.session);
+        res.render('ots/pre-exam', {user: user, test: 'start'})
+    });
+
 });
 
 router.get('/start', function(req, res, next) {
@@ -87,11 +96,31 @@ router.get('/start', function(req, res, next) {
 router.post('/start', function(req, res, next) {
     var user = checkSession(req);
     var test_key = req.session.test.sub_code + '_' + req.session.test.test_no;
-    // db.query("SELECT * FROM test_questions WHERE test_key = ?", test_key, function (err, result)
-    // {
-    //     res.render('ots/exam', {title: 'IEM', user: user, question: result});
-    // });
-    res.redirect('/');
+    var date = new Date();
+    if(req.session.test.endTime < date.getTime()){
+    res.render('message', {user: user, message: 'Unknown error occurred'});
+        return;
+    }
+    db.query("SELECT * FROM test_questions WHERE test_key = ?", test_key, function (err, questions)
+    {
+        var total = questions.length;
+        var answers = req.body.answers;
+        var score = 0;
+        for(var i=0; i<total; i++){
+            console.log(answers[i] + questions[i].Solution);
+            if(answers[i] === questions[i].Solution){
+                score++;
+                console.log(score);
+            }
+        }
+        var resultQuery = 'Insert into results(u_id,test_key,score,total) VALUES (\''+req.session.u_id+ '\',\''+ test_key+'\','+score+','+total+')';
+        console.log(resultQuery);
+        db.query(resultQuery, function (err, result){
+           if(err) throw err;
+           req.session.test = {};
+           res.render('ots/pre-exam', {user: user, test: 'end'});
+        });
+    });
 });
 
 /* Route for showing result to students */
