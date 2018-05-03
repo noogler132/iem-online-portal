@@ -2,12 +2,119 @@
 <html lang="en">
 
 <head>
-    <%- include('../header', {user: user}); %>
-        <hr style="height: 2px;"
-        <link rel='stylesheet' href='http://codepen.io/assets/libs/fullpage/jquery-ui.css'>
-        <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-    </head>
-    <body>
-        <
-    </body>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- Custom Theme files -->
+    <link href="/index/css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
+    <link href="/index/css/style.css" type="text/css" rel="stylesheet" media="all">
+    <link href="/index/css/font-awesome.css" rel="stylesheet">
+    <!-- font-awesome icons -->
+    <!-- //Custom Theme files -->
+    <!-- js -->
+    <script src="/index/js/jquery-2.2.3.min.js"></script>
+    <!-- //js -->
+    <!-- web-fonts -->
+    <link href="//fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+    <!-- //web-fonts -->
+    <style>
+        #view_btn:active {
+            background-color: #3b84c9;
+            box-shadow: 0 5px #666;
+            transform: translateX(2px);
+        }
+
+        .login {
+            text-align: center;
+            font-size: 14px;
+            font-family: 'Arial', sans-serif;
+            font-weight: 700;
+            height: 36px;
+            padding: 0 8px;
+            /* border-radius: 3px; */
+            /* -webkit-user-select: none;
+            user-select: none; */
+        }
+
+        .login-submit {
+            /* border: 1px solid #3079ed; */
+            border: 0px;
+            color: #fff;
+            text-shadow: 0 1px rgba(0, 0, 0, 0.1);
+            background-color: #4d90fe;
+            width: 130px;
+            height: 40.5px;
+            margin-left: 10px;
+            border-radius: 10px;
+            /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#4787ed)); */
+        }
+
+        .login-submit:hover {
+            /* border: 1px solid #2f5bb7; */
+            border: 0px;
+            text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+            background-color: #357ae8;
+            /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#357ae8)); */
+        }
+    </style>
+
+    <!-- header -->
+    <div class="header">
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header navbar-left wthree" id="test_details" style="width: 20%">
+                    <h4 style="padding-top: 55px;">
+                        <span>Subject Code:
+
+                        </span>
+                        <br>
+                        <span>Test Number:
+
+                        </span>
+                    </h4>
+                </div>
+                <div class="navbar-header navbar-center wthree" style="padding-left: 220px;">
+                    <h1>
+                        <a href="/">IEM
+                            <span>Good Education. Good Jobs.</span>
+                        </a>
+                    </h1>
+                    <!--<a href="index.html"><img src="/images/IEM.jpg" style="width: 300px; height: 200px; padding-top: 50px;"></a>-->
+
+                </div>
+
+            </div>
+        </nav>
+    </div>
+    <hr style="height: 2px;">
+</head>
+
+<body>
+    <div class="row" style="height: 100px; padding-top: 2.5%;">
+        <button type="submit" name="add_subject" class="login login-submit" id="view_btn" style="float: right; margin-right: 10%;">View Solutions</button>
+    </div>
+    <div class="row" style="height: 270px;">
+        <center>
+            <h2>
+                <span id="marks">Marks: marks/total</span>
+            </h2>
+            <br><br>
+            <h4>
+                <span id="no_of_ques">Total number of questions: <h3>10</h3></span>
+            </h4>
+            <br>
+            <h4>
+                <span id="no_of_answered">Number of Answered Questions: <h3>6</h3></span>
+            </h4>
+            <br>
+            <h4>
+                <span id="no_of_unanswered">Number of Unanswered Questions: <h3>4</h3></span>
+            </h4>
+        </center>
+    </div>
+</body>
+
 </html>
