@@ -5,7 +5,18 @@ module.exports = function (req){
         details = {isLoggedIn: false, username: '', as: '', sem: 0}
     }
     else{
-        details = {isLoggedIn: true, username: req.session.username, as: req.session.as, sem: req.session.sem}
+        if(req.session.as === 'stu'){
+            details = {isLoggedIn: true, username: req.session.username, as: req.session.as, sem: req.session.sem}
+        }
+        else if(req.session.as === 'tch'){
+            details = {isLoggedIn: true, username: req.session.username, as: req.session.as, sem: 0}
+        }
+        else if(req.session.as === 'admin'){
+            details = {isLoggedIn: true, username: req.session.username, as: req.session.as, sem: 0}
+        }
+        else{
+            details = {isLoggedIn: false, username: '', as: '', sem: 0}
+        }
     }
     console.log(details);
     return details;
