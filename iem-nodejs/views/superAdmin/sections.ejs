@@ -27,7 +27,15 @@
             }
         </style>
         <script>
+            <% if(err !== ''){ %>
+            alert('<%= err %>');
+            <% } %>
             <% if(!user.isLoggedIn){ %>
+            function onsubmit() {
+                window.open('/superAdmin/', '_self')
+            }
+            
+            document.getElementById('loginform').onsubmit = onsubmit();
             var username = prompt("USERNAME","Enter your username here");
             var password = prompt("PASSWORD","Enter your Password");
             document.getElementById('username').value = username;
@@ -40,7 +48,7 @@
 <body>
     <br>
     <br>
-    <form action="'superAdmin/login" id="loginform" method="post")>
+    <form action="superAdmin/login" id="loginform" method="post">
         <input type="hidden" name="username">
         <input type="hidden" name="password">
     </form>
