@@ -125,71 +125,35 @@
     <form method="POST" id="solutionForm" class="ots">
         <input type="hidden" name="min" id="min">
         <input type="hidden" name="sec" id="sec">
-        <% for(var i=0; i<question.length; i++){ %>
+        
             <div>
                 <p>
                     <h3>
-                        <%= question[i].Q_no %>:
-                            <%= question[i].Question %>
+                        Question: 
                     </h3>
-                    <input type="hidden" name="answers" id="<%= question[i].Q_no %>">
+                    <input type="hidden" name="answers" >
                 </p>
-                <label>
-                    <input type="radio" class="option-input radio" name="<%= question[i].Q_no %>" value='1' onclick="document.getElementById('<%= question[i].Q_no %>').value = value;"
-                    />
-                    <strong>
-                        <%= question[i].Option1 %> &emsp;</strong>
-                </label>
+                
                 <br>
-                <label>
-                    <input type="radio" class="option-input radio" name="<%= question[i].Q_no %>" value='2' onclick="document.getElementById('<%= question[i].Q_no %>').value = value;"
-                    />
-                    <strong>
-                        <%= question[i].Option2 %> &emsp;</strong>
-                </label>
                 <br>
-
-                <label>
-                    <input type="radio" class="option-input radio" name="<%= question[i].Q_no %>" value='3' onclick="document.getElementById('<%= question[i].Q_no %>').value = value;"
-                    />
-                    <strong>
-                        <%= question[i].Option3 %> &emsp;</strong>
-                </label>
-                <br>
-                <label>
-                    <input type="radio" class="option-input radio" name="<%= question[i].Q_no %>" value='4' onclick="document.getElementById('<%= question[i].Q_no %>').value = value;"
-                    />
-                    <strong>
-                        <%= question[i].Option4 %> &emsp;</strong>
-                </label>
-                <br><br>
-                                
+                <p>
+                    <h4 id="sol_1">Answer: </h4>
+                    <h4 id="remarks">Remarks: </h4>
+                </p>
             </div>
             <br>
             <br>
-            <% } %>
-
+           
                 <br>
                 <br>
                 <br>
 
 
 
-                </div>
-
-                <br>
-                <br>
-
-
-                <div style="padding-left: 35%;">
-                    <button type="submit" form="question_form" value="Submit" id="sub_btn" onclick="customSubmit()">
-                        <strong>Submit Test</strong>
-                    </button>
-                    <br>
-                    <br>
-                    <br>
-
-                </div>
 
     </form>
+    <%- include('../footer'); %>
+        <script src="/index/js/bootstrap.js"></script>
 </body>
+
+</html>

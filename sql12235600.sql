@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: sql12.freemysqlhosting.net
--- Generation Time: Apr 30, 2018 at 06:05 PM
+-- Generation Time: May 03, 2018 at 11:01 AM
 -- Server version: 5.5.58-0ubuntu0.14.04.1
 -- PHP Version: 7.0.28-0ubuntu0.16.04.1
 
@@ -45,7 +45,8 @@ INSERT INTO `active_tests` (`sub_code`, `test_no`, `is_active`, `test_key`) VALU
 ('BCA694', 1, 1, 'BCA694_1'),
 ('BCA694', 2, 1, 'BCA694_2'),
 ('BCA101', 2, 1, 'BCA101_2'),
-('BCA101', 1, 1, 'BCA101_1');
+('BCA101', 1, 1, 'BCA101_1'),
+('BCA101', 3, 1, 'BCA101_3');
 
 -- --------------------------------------------------------
 
@@ -104,7 +105,20 @@ CREATE TABLE `auth` (
 
 INSERT INTO `auth` (`u_id`, `email`, `password`, `log_as`) VALUES
 ('10401215076', 'sachinagarwal132@gmail.com', '$2a$08$mVxsmqHsoOwh123H2ErmSOdkCT52M43.1ViNTCMEx1tFAdxlDbISG', 'stu'),
-('SD', 'sachinagarwal141@gmail.com', '$2a$08$mVxsmqHsoOwh123H2ErmSOdkCT52M43.1ViNTCMEx1tFAdxlDbISG', 'tch');
+('SD', 'soumi.it@gmail.com', '$2a$08$mVxsmqHsoOwh123H2ErmSOdkCT52M43.1ViNTCMEx1tFAdxlDbISG', 'tch'),
+('10401215073', 'sachinagarwal141@gmail.com', '$2a$08$mVxsmqHsoOwh123H2ErmSOdkCT52M43.1ViNTCMEx1tFAdxlDbISG', 'stu'),
+('ABH', 'abh@gmail.com', '$2a$08$mVxsmqHsoOwh123H2ErmSOdkCT52M43.1ViNTCMEx1tFAdxlDbISG', 'tch'),
+('10401215071', '10401215071@gmail.com', '', 'stu'),
+('10401215113', 'sumankanrar25@gmail.com', '$2a$08$mVxsmqHsoOwh123H2ErmSOdkCT52M43.1ViNTCMEx1tFAdxlDbISG', 'stu'),
+('10401215070', '10401215070@gmail.com', '', 'stu'),
+('10401215114', 'surbhi.kapsime214@gmail.com', '$2a$08$mVxsmqHsoOwh123H2ErmSOdkCT52M43.1ViNTCMEx1tFAdxlDbISG', 'stu'),
+('AB', 'ankan.bhowmick@gmail.com', '$2a$08$mVxsmqHsoOwh123H2ErmSOdkCT52M43.1ViNTCMEx1tFAdxlDbISG', 'tch'),
+('SKD', 'sumanta.deb@gmail.com', '$2a$08$mVxsmqHsoOwh123H2ErmSOdkCT52M43.1ViNTCMEx1tFAdxlDbISG', 'tch'),
+('KR', 'krishnendu.rarhi@gmail.com', '$2a$08$mVxsmqHsoOwh123H2ErmSOdkCT52M43.1ViNTCMEx1tFAdxlDbISG', 'tch'),
+('10301215076', 'subit.bose@gmail.com', '$2a$08$mVxsmqHsoOwh123H2ErmSOdkCT52M43.1ViNTCMEx1tFAdxlDbISG', 'stu'),
+('10301215113', 'rahul.banerjee@gmail.com', '$2a$08$mVxsmqHsoOwh123H2ErmSOdkCT52M43.1ViNTCMEx1tFAdxlDbISG', 'stu'),
+('SNS', 'soumindra.sanyal@gmail.com', '$2a$08$mVxsmqHsoOwh123H2ErmSOdkCT52M43.1ViNTCMEx1tFAdxlDbISG', 'tch'),
+('admin', 'admin@admin.com', '$2a$08$mVxsmqHsoOwh123H2ErmSOdkCT52M43.1ViNTCMEx1tFAdxlDbISG', 'adm');
 
 -- --------------------------------------------------------
 
@@ -116,6 +130,13 @@ CREATE TABLE `otp_store` (
   `u_id` varchar(11) NOT NULL,
   `OTP` varchar(200) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `otp_store`
+--
+
+INSERT INTO `otp_store` (`u_id`, `OTP`) VALUES
+('10401215114', '$2a$08$5kfcTQ5KWfZVv.NUTAjtTOuVkhsFeyUcNrfl8U4OHqBbqMC5lwLfy');
 
 -- --------------------------------------------------------
 
@@ -164,54 +185,90 @@ INSERT INTO `student_details` (`u_roll`, `email`, `u_reg`, `f_name`, `l_name`, `
 CREATE TABLE `subjects` (
   `sem_code` int(1) NOT NULL,
   `sub_code` varchar(10) NOT NULL,
-  `sub_name` varchar(100) NOT NULL
+  `sub_name` varchar(100) NOT NULL,
+  `dept` varchar(10) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `subjects`
 --
 
-INSERT INTO `subjects` (`sem_code`, `sub_code`, `sub_name`) VALUES
-(1, 'BCA101', 'Digital Electronics'),
-(1, 'BCA102', 'Business Systems and Applications'),
-(1, 'BCA103', 'Introduction to Programming'),
-(1, 'BM101', 'Mathematics'),
-(1, 'BCA104', 'PC Software'),
-(1, 'BCA194', 'PC Software Lab'),
-(1, 'BCA193', 'Programming Lab (C/ Pascal)'),
-(2, 'BCA201', 'Computer Architecture and Systems Software'),
-(2, 'BCA202', 'Information Systems Analysis & Design'),
-(2, 'BCA203', 'Computer Programming'),
-(2, 'BM201', 'Mathematics'),
-(2, 'HU201', 'English Language and Communication'),
-(2, 'BCA293', 'Programming Lab (Visual Basic)'),
-(2, 'HU 291', 'Business Presentation and Language Lab'),
-(3, 'BCA301', 'Operating Systems'),
-(3, 'BCA302', 'Data Structures with C'),
-(3, 'BCA303', 'Graphics & Internet'),
-(3, 'BM301', 'Mathematics for Computing'),
-(3, 'BBA301', 'Management & Accounting'),
-(3, 'BCA393', 'Internet & Computer Graphics Lab'),
-(3, 'BCA392', 'Programming Lab  (Data Structure with C)'),
-(4, 'BCA401', 'Data Base Management System'),
-(4, 'BCA402', 'Object-Oriented Programming with C++'),
-(4, 'BCA403', 'Software Project Management and Quality Assurance'),
-(4, 'BM401', ' Statistics, Numerical Methods & Algorithms'),
-(4, 'HU401', 'Environment and Ecology'),
-(4, 'BCA491', 'Database Lab (Oracle)'),
-(4, 'BM491', 'Computing Lab'),
-(5, 'BCA501', 'Data Communication & Computer Networks'),
-(5, 'BCA502', 'Unix and Shell Programming'),
-(5, 'BCA503', 'Windows Programming'),
-(5, 'BCA E501/A', 'Elective 1'),
-(5, 'HU501', 'Values and Ethics of Profession'),
-(5, 'BCA591', 'Unix & Networking'),
-(5, 'BCA592', 'Minor Project'),
-(6, 'E601/A/B/C', 'Elective 2'),
-(6, 'E602/A/B/C', 'Elective 3'),
-(6, 'BCA693', 'Major project'),
-(6, 'BCA694', 'Seminar'),
-(6, 'BCA 695', 'Comprehensive Viva-Voce');
+INSERT INTO `subjects` (`sem_code`, `sub_code`, `sub_name`, `dept`) VALUES
+(1, 'BCA101', 'Digital Electronics', 'BCA'),
+(1, 'BCA102', 'Business Systems and Applications', 'BCA'),
+(1, 'BCA103', 'Introduction to Programming', 'BCA'),
+(1, 'BM101', 'Mathematics', 'BCA'),
+(1, 'BCA104', 'PC Software', 'BCA'),
+(1, 'BCA194', 'PC Software Lab', 'BCA'),
+(1, 'BCA193', 'Programming Lab (C/ Pascal)', 'BCA'),
+(2, 'BCA201', 'Computer Architecture and Systems Software', 'BCA'),
+(2, 'BCA202', 'Information Systems Analysis & Design', 'BCA'),
+(2, 'BCA203', 'Computer Programming', 'BCA'),
+(2, 'BM201', 'Mathematics', 'BCA'),
+(2, 'HU201', 'English Language and Communication', 'BCA'),
+(2, 'BCA293', 'Programming Lab (Visual Basic)', 'BCA'),
+(2, 'HU 291', 'Business Presentation and Language Lab', 'BCA'),
+(3, 'BCA301', 'Operating Systems', 'BCA'),
+(3, 'BCA302', 'Data Structures with C', 'BCA'),
+(3, 'BCA303', 'Graphics & Internet', 'BCA'),
+(3, 'BM301', 'Mathematics for Computing', 'BCA'),
+(3, 'BBA301', 'Management & Accounting', 'BCA'),
+(3, 'BCA393', 'Internet & Computer Graphics Lab', 'BCA'),
+(3, 'BCA392', 'Programming Lab  (Data Structure with C)', 'BCA'),
+(4, 'BCA401', 'Data Base Management System', 'BCA'),
+(4, 'BCA402', 'Object-Oriented Programming with C++', 'BCA'),
+(4, 'BCA403', 'Software Project Management and Quality Assurance', 'BCA'),
+(4, 'BM401', ' Statistics, Numerical Methods & Algorithms', 'BCA'),
+(4, 'HU401', 'Environment and Ecology', 'BCA'),
+(4, 'BCA491', 'Database Lab (Oracle)', 'BCA'),
+(4, 'BM491', 'Computing Lab', 'BCA'),
+(5, 'BCA501', 'Data Communication & Computer Networks', 'BCA'),
+(5, 'BCA502', 'Unix and Shell Programming', 'BCA'),
+(5, 'BCA503', 'Windows Programming', 'BCA'),
+(5, 'BCA E501/A', 'Elective 1', 'BCA'),
+(5, 'HU501', 'Values and Ethics of Profession', 'BCA'),
+(5, 'BCA591', 'Unix & Networking', 'BCA'),
+(5, 'BCA592', 'Minor Project', 'BCA'),
+(6, 'E601/A/B/C', 'Elective 2', 'BCA'),
+(6, 'E602/A/B/C', 'Elective 3', 'BCA'),
+(6, 'BCA693', 'Major project', 'BCA'),
+(6, 'BCA694', 'Seminar', 'BCA'),
+(6, 'BCA 695', 'Comprehensive Viva-Voce', 'BCA'),
+(1, 'BBA - 101', 'English –I', 'BBA'),
+(1, 'BBA - 102', 'Mathematics – I', 'BBA'),
+(1, 'BBA - 103', 'Statistics – I', 'BBA'),
+(1, 'BBA - 104', 'Economics - I', 'BBA'),
+(1, 'BBA - 105', 'Indian Society & Culture', 'BBA'),
+(1, 'BBA - 106', 'Computer Applications– I', 'BBA'),
+(2, 'BBA - 201', 'English –II', 'BBA'),
+(2, 'BBA - 202', 'Mathematics – II', 'BBA'),
+(2, 'BBA - 203', 'Statistics – II', 'BBA'),
+(2, 'BBA - 204', 'Economics - II', 'BBA'),
+(2, 'BBA - 205', 'Psychology', 'BBA'),
+(2, 'BBA - 206', 'Computer Applications – II', 'BBA'),
+(3, 'BBA - 301', 'Principles of Management', 'BBA'),
+(3, 'BBA - 302', 'Business Environment', 'BBA'),
+(3, 'BBA - 303', 'Business Regulatory Framework', 'BBA'),
+(3, 'BBA - 304', 'Business Economics', 'BBA'),
+(3, 'BBA - 305', 'Business Communication', 'BBA'),
+(3, 'BBA - 306', 'Financial Accounting', 'BBA'),
+(4, 'BBA - 401', 'Production Management', 'BBA'),
+(4, 'BBA - 402', 'Materials Management', 'BBA'),
+(4, 'BBA - 403', 'Financial Management-I', 'BBA'),
+(4, 'BBA - 404', 'Marketing Management-I', 'BBA'),
+(4, 'BBA - 405', 'Human Resource Management-I', 'BBA'),
+(4, 'BBA - 406', 'Management Information Systems', 'BBA'),
+(5, 'BBA - 501', 'Financial Management-II', 'BBA'),
+(5, 'BBA - 502', 'Marketing Management-II', 'BBA'),
+(5, 'BBA - 503', 'Human Resource Management-II', 'BBA'),
+(5, 'BBA - 504', 'Fundamentals of Entrepreneurship', 'BBA'),
+(5, 'BBA - 505', 'Environment Management', 'BBA'),
+(5, 'BBA - 506', 'Transport Management', 'BBA'),
+(6, 'BBA - 601', 'Financial Management-III', 'BBA'),
+(6, 'BBA - 602', 'Marketing Management-III', 'BBA'),
+(6, 'BBA - 603', 'Human Resource Management-III', 'BBA'),
+(6, 'BBA - 604', 'Health Care Management', 'BBA'),
+(6, 'BBA - 605', 'Social Research Methods', 'BBA');
 
 -- --------------------------------------------------------
 
@@ -225,20 +282,20 @@ CREATE TABLE `teacher_details` (
   `l_name` varchar(50) NOT NULL,
   `contact` bigint(10) NOT NULL,
   `email` varchar(100) NOT NULL,
+  `dob` date NOT NULL,
   `facebook_id` varchar(100) NOT NULL,
   `googleplus_id` varchar(100) NOT NULL,
-  `designation` varchar(10) NOT NULL,
-  `is_admin` tinyint(1) NOT NULL
+  `designation` varchar(10) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `teacher_details`
 --
 
-INSERT INTO `teacher_details` (`tch_id`, `f_name`, `l_name`, `contact`, `email`, `facebook_id`, `googleplus_id`, `designation`, `is_admin`) VALUES
-('SD', 'Soumi', 'Dutta', 9230266400, 'soumi.it@gmail.com', '', '', 'Asst. Prof', 1),
-('ABH', 'Abhishek', 'Bhattacharya', 1234567890, 'abhishek.bhattacharya@iemcal.com', '', '', 'HOD', 1),
-('AS', 'Abhijit', 'Sarkar', 9874563210, 'abhijit.sarkar@iemcal.com', '', '', 'Asst. Prof', 0);
+INSERT INTO `teacher_details` (`tch_id`, `f_name`, `l_name`, `contact`, `email`, `dob`, `facebook_id`, `googleplus_id`, `designation`) VALUES
+('SD', 'Soumi', 'Dutta', 9230266400, 'soumi.it@gmail.com', '0000-00-00', '', '', 'Asst. Prof'),
+('ABH', 'ABHISHEK', 'Bhattacharya', 9903149600, 'abh@gmail.com', '2018-12-31', '', '', 'HOD'),
+('AS', 'Abhijit', 'Sarkar', 9874563210, 'abhijit.sarkar@iemcal.com', '0000-00-00', '', '', 'Asst. Prof');
 
 -- --------------------------------------------------------
 
@@ -293,16 +350,13 @@ INSERT INTO `test_questions` (`test_key`, `Q_no`, `Question`, `Option1`, `Option
 ('BCA693_2', '8', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '3', 'Op3 is right because..'),
 ('BCA693_2', '9', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '2', 'Op2 is right because..'),
 ('BCA693_2', '10', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '3', 'Op3 is right because..'),
-('BCA101_2', '1', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '2', 'Op2 is right because..'),
-('BCA101_2', '2', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '3', 'Op3 is right because..'),
-('BCA101_2', '3', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '2', 'Op2 is right because..'),
-('BCA101_2', '4', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '3', 'Op3 is right because..'),
-('BCA101_2', '5', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '2', 'Op2 is right because..'),
-('BCA101_2', '6', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '3', 'Op3 is right because..'),
-('BCA101_2', '7', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '2', 'Op2 is right because..'),
-('BCA101_2', '8', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '3', 'Op3 is right because..'),
-('BCA101_2', '9', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '2', 'Op2 is right because..'),
-('BCA101_2', '10', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '3', 'Op3 is right because..'),
+('BCA101_2', '7', 'Question 7', 'Option1', 'Option2', 'Option3', 'Option4', '3', 'Op3 is right because..'),
+('BCA101_2', '6', 'Question 6', 'Option1', 'Option2', 'Option3', 'Option4', '3', 'Op3 is right because..'),
+('BCA101_2', '5', 'Question 5', 'Option1', 'Option2', 'Option3', 'Option4', '3', 'Op3 is right because..'),
+('BCA101_2', '4', 'Question 4', 'Option1', 'Option2', 'Option3', 'Option4', '3', 'Op3 is right because..'),
+('BCA101_2', '3', 'Question 3', 'Option1', 'Option2', 'Option3', 'Option4', '3', 'Op3 is right because..'),
+('BCA101_2', '2', 'Question 2', 'Option1', 'Option2', 'Option3', 'Option4', '3', 'Op3 is right because..'),
+('BCA101_2', '1', 'Question 1', 'Option1', 'Option2', 'Option3', 'Option4', '3', 'Op3 is right because..'),
 ('BCA694_1', '1', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '2', 'Op2 is right because..'),
 ('BCA694_1', '2', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '3', 'Op3 is right because..'),
 ('BCA694_1', '3', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '2', 'Op2 is right because..'),
@@ -322,7 +376,20 @@ INSERT INTO `test_questions` (`test_key`, `Q_no`, `Question`, `Option1`, `Option
 ('BCA694_2', '7', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '2', 'Op2 is right because..'),
 ('BCA694_2', '8', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '3', 'Op3 is right because..'),
 ('BCA694_2', '9', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '2', 'Op2 is right because..'),
-('BCA694_2', '10', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '3', 'Op3 is right because..');
+('BCA694_2', '10', 'Question1 ', 'Op1', 'Op2', 'Op3', 'Op4', '3', 'Op3 is right because..'),
+('BCA101_2', '8', 'Question 8', 'Option1', 'Option2', 'Option3', 'Option4', '3', 'Op3 is right because..'),
+('BCA101_2', '9', 'Question 9', 'Option1', 'Option2', 'Option3', 'Option4', '3', 'Op3 is right because..'),
+('BCA101_2', '10', 'Question 10', 'Option1', 'Option2', 'Option3', 'Option4', '3', 'Op3 is right because..'),
+('BCA101_3', '1', 'Question 1', 'Option1', 'Option2', 'Option3', 'Option4', '3', 'Op3 is right because..'),
+('BCA101_3', '2', 'Question 2', 'Option1', 'Option2', 'Option3', 'Option4', '3', 'Op3 is right because..'),
+('BCA101_3', '3', 'Question 3', 'Option1', 'Option2', 'Option3', 'Option4', '3', 'Op3 is right because..'),
+('BCA101_3', '4', 'Question 4', 'Option1', 'Option2', 'Option3', 'Option4', '3', 'Op3 is right because..'),
+('BCA101_3', '5', 'Question 5', 'Option1', 'Option2', 'Option3', 'Option4', '3', 'Op3 is right because..'),
+('BCA101_3', '6', 'Question 6', 'Option1', 'Option2', 'Option3', 'Option4', '3', 'Op3 is right because..'),
+('BCA101_3', '7', 'Question 7', 'Option1', 'Option2', 'Option3', 'Option4', '3', 'Op3 is right because..'),
+('BCA101_3', '8', 'Question 8', 'Option1', 'Option2', 'Option3', 'Option4', '3', 'Op3 is right because..'),
+('BCA101_3', '9', 'Question 9', 'Option1', 'Option2', 'Option3', 'Option4', '3', 'Op3 is right because..'),
+('BCA101_3', '10', 'Question 10', 'Option1', 'Option2', 'Option3', 'Option4', '3', 'Op3 is right because..');
 
 --
 -- Indexes for dumped tables
