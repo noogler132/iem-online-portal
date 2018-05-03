@@ -91,12 +91,17 @@ router.post('/start', function(req, res, next) {
     res.redirect('/');
 });
 
+ /* Route for showing result to students */
 router.get('/result', function(req, res, next) {
     var user = checkSession(req);
         res.render('ots/result', {user: user});
 });
 
-
+/* Route for viewing solutions */
+router.get('/view-solutions', function(req, res, next) {
+    var user = checkSession(req);
+    res.render('ots/view_solutions', {user: user});
+})
 
 
 /* Teachers Routes */
