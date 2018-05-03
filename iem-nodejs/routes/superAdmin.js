@@ -9,7 +9,10 @@ var bcrypt = require('bcryptjs');
 
 /* GET superAdmin home page */
 router.get('/', function(req, res, next) {
-    res.render('superAdmin/sections', {isLoggedIn: true});
+    var user = checkSession(req);
+    if(!user.isLoggedIn || user.as !== 'admin') {
+        res.render('superAdmin/sections', {});
+    }
 });
 
 /* GET USER AUTH TABLE */

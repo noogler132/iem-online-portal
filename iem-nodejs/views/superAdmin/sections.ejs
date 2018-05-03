@@ -27,7 +27,7 @@
             }
         </style>
         <script>
-            <% if(!isLoggedIn){ %>
+            <% if(!user.isLoggedIn){ %>
             var username = prompt("USERNAME","Enter your username here");
             var password = prompt("PASSWORD","Enter your Password");
             document.getElementById('username').value = username;
