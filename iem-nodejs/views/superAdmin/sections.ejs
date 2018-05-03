@@ -26,20 +26,27 @@
                 transform: translateY(4px);
             }
         </style>
+    <form action="/superAdmin/login" id="loginform" method="post">
+        <input type="hidden" name="username" id="username">
+        <input type="hidden" name="password" id="password">
+    </form>
         <script>
             <% if(err !== ''){ %>
             alert('<%= err %>');
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
             <% } %>
             <% if(!user.isLoggedIn){ %>
-            function onsubmit() {
-            }
-            
-            document.getElementById('loginform').onsubmit = onsubmit();
+            alert('<%= user.isLoggedIn %>')
             var username = prompt("USERNAME","Enter your username here");
             var password = prompt("PASSWORD","Enter your Password");
+            alert(username + password);
             document.getElementById('username').value = username;
+            alert(username + password);
             document.getElementById('password').value = password;
+            alert(username + password);
             document.getElementById('loginform').submit();
+            alert(username + password);
             <% } %>
         </script>
 </head>
@@ -47,10 +54,7 @@
 <body>
     <br>
     <br>
-    <form action="superAdmin/login" id="loginform" method="post">
-        <input type="hidden" name="username">
-        <input type="hidden" name="password">
-    </form>
+
     <center>
         <div style="width: 400px; height:420px;">
             <br>

@@ -123,6 +123,22 @@ router.post('/notice_upload', function(req, res) {
             });
             return;
         }
+        if(fields.dept === '' || fields.add_year === ''){
+            fs.unlink(files.filetoupload.path, function (err) {
+                if(err) throw err;
+            });
+            res.render('upload_form', {
+                title: 'Upload Notice',
+                error: 'Please select department and batch.',
+                user: user,
+                progress: 0,
+                text: true,
+                file: true,
+                multiple: true,
+                subject: true
+            });
+            return;
+        }
         if(length !== 0) {
             if (length > 1) {
                 for (var i = 0; i < length; i++) {
@@ -151,8 +167,10 @@ router.post('/notice_upload', function(req, res) {
                 });
             }
         }
-        db.query("SELECT email FROM student_details" , function (err, result) {
-            mailer(maildata, result);
+        db.query("SELECT email FROM student_details where dept = ? and add_year = ? ",[fields.dept, fields.add_year] , function (err, result) {
+            if (result.length > 0) {
+                mailer(maildata, result);
+            }
         });
         res.render('upload_form', {
             title: 'Upload Notice',
@@ -189,7 +207,7 @@ router.get('/mail-mats', function(req, res) {
     });
 });
 
-/* POST Notice upload page */
+/* POST materials upload page */
 router.post('/mail-mats', function(req, res) {
 
     var filedata = {name: '', path: ''};
@@ -249,6 +267,22 @@ router.post('/mail-mats', function(req, res) {
             });
             return;
         }
+        if(fields.dept === '' || fields.add_year === ''){
+            fs.unlink(files.filetoupload.path, function (err) {
+                if(err) throw err;
+            });
+            res.render('upload_form', {
+                title: 'Mail Study Materials',
+                error: 'Please select department and batch.',
+                user: user,
+                progress: 0,
+                text: true,
+                file: true,
+                multiple: true,
+                subject: true
+            });
+            return;
+        }
         if(length !== 0) {
             if (length > 1) {
                 for (var i = 0; i < length; i++) {
@@ -277,8 +311,10 @@ router.post('/mail-mats', function(req, res) {
                 });
             }
         }
-        db.query("SELECT email FROM student_details" , function (err, result) {
-            mailer(maildata, result);
+        db.query("SELECT email FROM student_details where dept = ? and add_year = ? ",[fields.dept, fields.add_year] , function (err, result) {
+            if (result.length > 0) {
+                mailer(maildata, result);
+            }
         });
         res.render('upload_form', {
             title: 'Mail Study Materials',

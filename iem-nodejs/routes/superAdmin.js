@@ -10,9 +10,9 @@ var bcrypt = require('bcryptjs');
 /* GET superAdmin home page */
 router.get('/', function(req, res, next) {
     var user = checkSession(req);
-    if(user.isLoggedIn && user.as !== 'admin') {
-        res.render('message', {user: user, message: 'Only Admins are allowed to access this page'})
-    }
+    // if(user.isLoggedIn && user.as !== 'adm') {
+    //     res.render('message', {user: user, message: 'Only Admins are allowed to access this page'})
+    // }
     res.render('superAdmin/sections', {user: user, err: ''});
 });
 
@@ -211,7 +211,7 @@ router.get('/subjects', function(req, res, next) {
 
 
 
-/* POST students login page. */
+/* POST admin login page. */
 router.post('/login', function(req, res, next) {
     var user = checkSession(req);
     if (user.isLoggedIn) {
@@ -223,9 +223,10 @@ router.post('/login', function(req, res, next) {
         }
         return;
     }
+    console.log('post');
     var username = req.body.username;
     var pass = req.body.password;
-    db.query("SELECT * FROM auth WHERE u_id = ? and log_as = 'admin' ", username, function (err, result) {
+    db.query("SELECT * FROM auth WHERE u_id = ? and log_as = 'adm' ", username, function (err, result) {
         if (err) throw err;
         if (result.length === 0) {
             res.render('superAdmin/sections', {user: user, err:'Incorrect Username or Password'});
@@ -243,7 +244,7 @@ router.post('/login', function(req, res, next) {
                         return;
                     }
                     else {
-                        res.redirect('/');
+                        res.redirect('/superAdmin');
                         return;
                     }
                 }

@@ -11,7 +11,7 @@ module.exports = function (req){
         else if(req.session.as === 'tch'){
             details = {isLoggedIn: true, username: req.session.username, as: req.session.as, sem: 0}
         }
-        else if(req.session.as === 'admin'){
+        else if(req.session.as === 'adm'){
             details = {isLoggedIn: true, username: req.session.username, as: req.session.as, sem: 0}
         }
         else{

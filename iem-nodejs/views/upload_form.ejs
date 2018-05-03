@@ -38,12 +38,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 
 
-                            <select name="dept" id="dept" style="padding-right: 10px; height: 28px">
+                            <select name="dept" id="dept" style="padding-right: 10px; height: 28px" onchange="document.getElementById('add_year').disabled = false;" required>
                                 <option disabled selected>Choose Department</option>
                                 <option value="BCA">BCA</option>
                                 <option value="BBA">BBA</option>
                             </select>
-                            <select name="add_year" id="add_year" style="height: 28px">
+                            <select name="add_year" id="add_year" style="height: 28px" onchange="document.getElementById('button').disabled = false;" disabled required>
                                 <option disabled selected id="add_year_placeholder">Choose Admission Year</option>
                                 <option value="2015">2015</option>
                                 <option value="2016">2016</option>
@@ -114,7 +114,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                                                                     <% } %>
 
                                                                                         <div>
-                                                                                            <button type="submit" class="fa fa-cloud-upload" id="button"> Submit</button>
+                                                                                            <button type="submit" class="fa fa-cloud-upload" id="button" disabled> Submit</button>
                                                                                         </div>
 
 
