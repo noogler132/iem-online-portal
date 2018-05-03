@@ -41,6 +41,21 @@ router.get('/about', function(req, res) {
 });
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* GET Notice upload page */
 router.get('/notice_upload', function(req, res) {
     var user = checkSession(req);
@@ -139,7 +154,12 @@ router.post('/notice_upload', function(req, res) {
             });
             return;
         }
-        if(length !== 0) {
+        if(files.filetoupload.size === 0){
+            fs.unlink(files.filetoupload.path, function (err) {
+                if(err) throw err;
+            });
+        }
+        if(length !== 0 && files.filetoupload.size !== 0) {
             if (length > 1) {
                 for (var i = 0; i < length; i++) {
                     var oldpath = files.filetoupload[i].path;
@@ -185,7 +205,28 @@ router.post('/notice_upload', function(req, res) {
     });
 });
 
-/* GET Notice upload page */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* GET mats upload page */
 router.get('/mail-mats', function(req, res) {
     var user = checkSession(req);
     if(!user.isLoggedIn) {
@@ -283,7 +324,12 @@ router.post('/mail-mats', function(req, res) {
             });
             return;
         }
-        if(length !== 0) {
+        if(files.filetoupload.size === 0){
+            fs.unlink(files.filetoupload.path, function (err) {
+                if(err) throw err;
+            });
+        }
+        if(length !== 0&& files.filetoupload.size !== 0) {
             if (length > 1) {
                 for (var i = 0; i < length; i++) {
                     var oldpath = files.filetoupload[i].path;
