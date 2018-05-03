@@ -34,7 +34,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         </div>
                         <% } %>
 
-                             <select name="dept" id="dept" style="padding-right: 10px;">
+                            <select name="dept" id="dept" style="padding-right: 10px;">
                                 <option disabled selected>Choose Department</option>
                                 <option value="BCA">BCA</option>
                                 <option value="BBA">BBA</option>
@@ -44,23 +44,25 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 <option value="2015">2015</option>
                                 <option value="2016">2016</option>
                                 <option value="2017">2017</option>
-                            </select> <br><br>
+                            </select>
+                            <br>
+                            <br>
 
                             <% if(subject){ %>
-                                <span class="input-group-addon" id="sizing-addon1" style="">Enter the subject here</span>
+                                <span class="input-group-addon" id="sizing-addon1" style="width: 450px;">Enter the subject here</span>
                                 <br>
                                 <div>
 
                                     <!--<input type="text" class="form-control" placeholder="Subject" aria-describedby="sizing-addon1" name="subject" autofocus="autofocus">-->
-                                    <input type="text" name="subject" autofocus="autofocus" class="form-control" placeholder="Subject" aria-describedby="sizing-addon1">
+                                    <input type="text" name="subject" autofocus="autofocus" class="form-control" placeholder="Subject" aria-describedby="sizing-addon1" style="width: 450px;">
                                 </div>
                                 <% } %>
                                     <BR>
                                     <% if(text){ %>
-                                        <span class="input-group-addon" id="sizing-addon1" style="">Enter the details here</span>
+                                        <span class="input-group-addon" id="sizing-addon1" style="width: 450px;">Enter the details here</span>
                                         <br>
                                         <div>
-                                            <textarea name="text" class="form-control" placeholder="Text" aria-describedby="sizing-addon1"></textarea>
+                                            <textarea name="text" class="form-control" placeholder="Text" aria-describedby="sizing-addon1" style="width: 450px;"></textarea>
                                         </div>
                                         <% } %>
                                             <br>
