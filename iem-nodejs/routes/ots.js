@@ -92,7 +92,8 @@ router.post('/start', function(req, res, next) {
 });
 
 router.get('/result', function(req, res, next) {
-        res.render('ots/result', {});
+    var user = checkSession(req);
+        res.render('ots/result', {user: user});
 });
 
 
