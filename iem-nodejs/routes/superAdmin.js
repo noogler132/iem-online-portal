@@ -9,7 +9,7 @@ var bcrypt = require('bcryptjs');
 
 /* GET superAdmin home page */
 router.get('/', function(req, res, next) {
-    res.render('superAdmin/sections', {});
+    res.render('superAdmin/sections', {isLoggedIn: true});
 });
 
 /* GET USER AUTH TABLE */
