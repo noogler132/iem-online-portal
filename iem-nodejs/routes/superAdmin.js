@@ -177,8 +177,8 @@ router.get('/update-teacher', function(req, res, next) {
 });
 
 /* GET SUBJECT UPDATE PAGE */
-router.get('/update-subject', function(req, res, next) {
-    res.render('superAdmin/subject_update');
+router.get('/add-subject', function(req, res, next) {
+    res.render('superAdmin/add-subject');
 });
 
 /* GET SUBJECT UPDATE PAGE */

@@ -6,88 +6,121 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <%- include('header', {user: user}); %>
-    <link rel='stylesheet' href='http://codepen.io/assets/libs/fullpage/jquery-ui.css'>
-    <link rel="stylesheet" href="/index/css/loginStyle.css" media="screen" type="text/css" />
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+        <link rel='stylesheet' href='http://codepen.io/assets/libs/fullpage/jquery-ui.css'>
+        <link rel="stylesheet" href="/index/css/loginStyle.css" media="screen" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 </head>
+
 <body>
-<hr>
-<center>
-    <div style="height: inherit">
-        <h1><%= title %></h1>
-        <br><br><br>
-        <div style="width: 50%">
-            <form method="post" enctype="multipart/form-data">
-                <% if( progress !== 404 && error !== ''){ %>
-                <div class="alert alert-danger" role="alert" style="width: 350px">
-                    <strong>Error:</strong> <%= error %>
-                </div>
-                <% } %>
-                <% if(subject){ %>
-                <span class="input-group-addon" id="sizing-addon1" style="">Enter the subject here</span><br>
-                <div>
+    <hr>
+    <center>
+        <div style="height: inherit">
+            <h1>
+                <%= title %>
+            </h1>
+            <br>
+            <br>
+            <br>
+            <div style="width: 50%">
+                <form method="post" enctype="multipart/form-data">
 
-                    <!--<input type="text" class="form-control" placeholder="Subject" aria-describedby="sizing-addon1" name="subject" autofocus="autofocus">-->
-                    <input type="text" name="subject" autofocus="autofocus" class="form-control" placeholder="Subject" aria-describedby="sizing-addon1">
-                </div>
-                <% } %>
-                <BR>
-                <% if(text){ %>
-                <span class="input-group-addon" id="sizing-addon1" style="">Enter the details here</span><br>
-                <div>
-                    <textarea name="text" class="form-control" placeholder="Text" aria-describedby="sizing-addon1"></textarea>
-                </div>
-                <% } %>
-                <br><br>
-                <% if(file){ %>
-                <div class="upload_section" style="width: 70%">
-
-                    <!--<form method="post" enctype="multipart/form-data">-->
-                        <div>
-                            <label for="file"><strong>Choose file to upload</strong></label><br><br>
-                        </div>
-
-
-                        <% if( progress === 404){ %>
-                        <div class="alert alert-danger" role="alert" style="width: 60%">
-                            <strong>Error:</strong> <%= error %>
+                    <% if( progress !== 404 && error !== ''){ %>
+                        <div class="alert alert-danger" role="alert" style="width: 350px">
+                            <strong>Error:</strong>
+                            <%= error %>
                         </div>
                         <% } %>
 
+                            <!-- <select name="dept" id="dept" style="padding-right: 10px;">
+                                <option disabled selected>Choose Department</option>
+                                <option value="BCA">BCA</option>
+                                <option value="BBA">BBA</option>
+                            </select>
+                            <select name="add_year" id="add_year">
+                                <option disabled selected id="add_year_placeholder">Choose Admission Year</option>
+                                <option value="2015">2015</option>
+                                <option value="2016">2016</option>
+                                <option value="2017">2017</option>
+                            </select> -->
 
-                        <% if( progress > 0 && progress !== 404  ){ %>
-                    <br>
-                    <div class="progress" style="width: 60%">
-                        <div class="progress-bar progress-bar-success" style="width: 100%">File Uploaded 100%</div>
-                    </div><br>
+                            <% if(subject){ %>
+                                <span class="input-group-addon" id="sizing-addon1" style="">Enter the subject here</span>
+                                <br>
+                                <div>
 
-                    <% } %>
+                                    <!--<input type="text" class="form-control" placeholder="Subject" aria-describedby="sizing-addon1" name="subject" autofocus="autofocus">-->
+                                    <input type="text" name="subject" autofocus="autofocus" class="form-control" placeholder="Subject" aria-describedby="sizing-addon1">
+                                </div>
+                                <% } %>
+                                    <BR>
+                                    <% if(text){ %>
+                                        <span class="input-group-addon" id="sizing-addon1" style="">Enter the details here</span>
+                                        <br>
+                                        <div>
+                                            <textarea name="text" class="form-control" placeholder="Text" aria-describedby="sizing-addon1"></textarea>
+                                        </div>
+                                        <% } %>
+                                            <br>
+                                            <br>
+                                            <% if(file){ %>
+                                                <div class="upload_section" style="width: 70%">
+
+                                                    <!--<form method="post" enctype="multipart/form-data">-->
+                                                    <div>
+                                                        <label for="file">
+                                                            <strong>Choose file to upload</strong>
+                                                        </label>
+                                                        <br>
+                                                        <br>
+                                                    </div>
 
 
-                        <% if(multiple){ %>
-                    <input type="file" id="file" name="filetoupload" class="btn btn-default dropdown-toggle" multiple style="width: inherit"><br>
-                    <% } %>
-                        <% if(!multiple){ %>
-                    <input type="file" id="file" name="filetoupload" class="btn btn-default dropdown-toggle" style="width: inherit">
-                    <% } %>
-
-                        <% } %>
-
-                        <div>
-                    <button type="submit" class="fa fa-cloud-upload" id="button"> Submit</button>
-                </div>
+                                                    <% if( progress === 404){ %>
+                                                        <div class="alert alert-danger" role="alert" style="width: 60%">
+                                                            <strong>Error:</strong>
+                                                            <%= error %>
+                                                        </div>
+                                                        <% } %>
 
 
-                    <!--</form>-->
-                </div>
-            </form>
+                                                            <% if( progress > 0 && progress !== 404  ){ %>
+                                                                <br>
+                                                                <div class="progress" style="width: 60%">
+                                                                    <div class="progress-bar progress-bar-success" style="width: 100%">File Uploaded 100%</div>
+                                                                </div>
+                                                                <br>
+
+                                                                <% } %>
+
+
+                                                                    <% if(multiple){ %>
+                                                                        <input type="file" id="file" name="filetoupload" class="btn btn-default dropdown-toggle" multiple style="width: inherit">
+                                                                        <br>
+                                                                        <% } %>
+                                                                            <% if(!multiple){ %>
+                                                                                <input type="file" id="file" name="filetoupload" class="btn btn-default dropdown-toggle" style="width: inherit">
+                                                                                <% } %>
+
+                                                                                    <% } %>
+
+                                                                                        <div>
+                                                                                            <button type="submit" class="fa fa-cloud-upload" id="button"> Submit</button>
+                                                                                        </div>
+
+
+                                                                                        <!--</form>-->
+                                                </div>
+                </form>
+            </div>
         </div>
-    </div>
-</center>
-<br><br>
-<%- include('footer'); %>
-<script src="/index/js/bootstrap.js"></script>
+    </center>
+    <br>
+    <br>
+    <%- include('footer'); %>
+        <script src="/index/js/bootstrap.js"></script>
 </body>
+
 </html>
