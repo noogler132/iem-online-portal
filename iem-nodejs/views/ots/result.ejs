@@ -99,19 +99,19 @@
     <div class="row" style="height: 270px;">
         <center>
             <h2>
-                <span id="marks">Marks: marks/total</span>
+                <span id="marks">Marks: <%= result[0].score %>/<%= result[0].total %></span>
             </h2>
             <br><br>
             <h4>
-                <span id="no_of_ques">Total number of questions: <h3>10</h3></span>
+                <span id="no_of_ques">Total number of questions: <h3><%= result[0].total %></h3></span>
             </h4>
             <br>
             <h4>
-                <span id="no_of_answered">Number of Answered Questions: <h3>6</h3></span>
+                <span id="no_of_answered">Number of Correctly Answered Questions: <h3><%= result[0].score %></h3></span>
             </h4>
             <br>
             <h4>
-                <span id="no_of_unanswered">Number of Unanswered Questions: <h3>4</h3></span>
+                <span id="no_of_unanswered">Number of Wrong or Unanswered Questions: <h3><%= result[0].total - result[0].score %></h3></span>
             </h4>
         </center>
     </div>

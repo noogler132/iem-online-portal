@@ -18,6 +18,14 @@
                 document.getElementById('test_form').submit();
             }
 
+            function view_result(test_no) {
+                var form = document.getElementById('test_form');
+                form.setAttribute('action', '/online-test/result' );
+                document.getElementById('test_no').setAttribute('value', test_no);
+                document.getElementById('sub_key').setAttribute('value', '<%= subcode %>');
+                document.getElementById('test_form').submit();
+            }
+
         </script>
         <style>
             .table-row .col-3 {
@@ -62,10 +70,20 @@
                                 <%= tests[i].test_no %>
                             </div>
                             <div class="col col-2" data-label="Status">Pending</div>
-                            <div class="col col-3" data-label="Give Test">
-                                <button class="button" style="padding-top: 2px;" onclick="form_submit(<%= tests[i].test_no %>)">
+                            <div class="col col-3" data-label="Give Test" id="button_<%= tests[i].test_no %>">
+                                <button class="button" style="padding-top: 2px;" onclick="form_submit(<%= tests[i].test_no %>)" >
                                     <span>Go to Test</span>
                                 </button>
+                                <% for(var j = 0; j<results.length; j++){ %>
+                                <% if(tests[i].test_key === results[j].test_key){ %>
+                                <script>
+                                    document.getElementById('button_<%= tests[i].test_no %>').innerHTML =
+                                        '<button class="button" style="padding-top: 2px;" onclick="view_result(<%= tests[i].test_no %>)" >\n' +
+                                        '<span>View Result</span>\n' +
+                                        '</button>'
+                                </script>
+                                <% } %>
+                                <% } %>
                             </div>
                         </li>
                         <% } %>

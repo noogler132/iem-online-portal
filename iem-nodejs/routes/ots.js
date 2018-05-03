@@ -46,18 +46,21 @@ router.post('/', function(req, res, next) {
 router.get('/:sem([1-6])/:subcode(\\w+)/', function(req, res, next) {
     var user = checkSession(req);
     var sem = req.params.sem;
-    if(user.isLoggedIn && user.as === 'tch'){
-        res.redirect('/online-test/edit');
-        return;
-    }
+    // if(user.isLoggedIn && user.as === 'tch'){
+    //     res.redirect('/online-test/edit');
+    //     return;
+    // }
     var subcode = req.params.subcode;
-    if(!user.isLoggedIn && user.as !== 'stu' && user.sem !== sem){
-        res.redirect('/404');
-        return;
-    }
-    db.query("SELECT * FROM active_tests WHERE sub_code = ? AND is_active = 1", req.params.subcode, function (err, result)
+    // if(!user.isLoggedIn && user.as !== 'stu' && user.sem !== sem){
+    //     res.redirect('/404');
+    //     return;
+    // }
+    db.query("SELECT * FROM active_tests WHERE sub_code = ? AND is_active = 1", subcode, function (err, tests)
     {
-        res.render('ots/select_test', {title: 'IEM', user: user, subcode: subcode ,sem: sem, tests: result});
+        var query = 'SELECT * FROM results WHERE test_key LIKE \'' + req.params.subcode + '%\' and u_id = ' + '10401215076';
+        db.query(query, function (err, result) {
+            res.render('ots/select_test', {title: 'IEM', user: user, subcode: subcode, sem: sem, tests: tests, results: result});
+        });
     });
 });
 
@@ -91,17 +94,21 @@ router.post('/start', function(req, res, next) {
     res.redirect('/');
 });
 
- /* Route for showing result to students */
-router.get('/result', function(req, res, next) {
+/* Route for showing result to students */
+router.post('/result', function(req, res, next) {
     var user = checkSession(req);
-        res.render('ots/result', {user: user});
+    var query = 'SELECT * FROM results WHERE test_key = \'' + req.body.sub_key + '_'+ req.body.test_no+ '\' and u_id = ' + '10401215076';
+    db.query(query, function (err, result) {
+        res.render('ots/result', {user: user, result: result});
+    });
+
 });
 
 /* Route for viewing solutions */
 router.get('/view-solutions', function(req, res, next) {
     var user = checkSession(req);
     res.render('ots/view_solutions', {user: user});
-})
+});
 
 
 /* Teachers Routes */
