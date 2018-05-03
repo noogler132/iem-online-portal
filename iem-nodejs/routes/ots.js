@@ -77,7 +77,7 @@ router.get('/start', function(req, res, next) {
     console.log(req.session);
     db.query("SELECT * FROM test_questions WHERE test_key = ?", test_key, function (err, result)
     {
-        res.render('ots/exam', {title: 'IEM', user: user, question: result});
+        res.render('ots/exam', {title: 'IEM', user: user, question: result, sub_code:req.session.test.sub_code, test_no:req.session.test.test_no });
     });
 });
 

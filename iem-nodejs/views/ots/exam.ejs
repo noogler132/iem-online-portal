@@ -185,9 +185,9 @@
             <div class="container">
                 <div class="navbar-header navbar-left wthree" id="test_details" style="width: 20%">
                     <h4 style="padding-top: 55px;">
-                        <span>Subject Code: </span>
+                        <span>Subject Code: <%= sub_code %></span>
                         <br>
-                        <span>Test Number: </span>
+                        <span>Test Number: <%= test_no %></span>
                     </h4>
                 </div>
                 <div class="navbar-header navbar-center wthree" style="padding-left: 220px;">
@@ -225,26 +225,26 @@
                     <input type="hidden" name="answers" id="<%= question[i].Q_no %>">
                 </p>
                 <label>
-                    <input type="radio" class="option-input radio" name="example" value='1' onclick="document.getElementById('<%= question[i].Q_no %>').value = value;"/>
+                    <input type="radio" class="option-input radio" name="<%= question[i].Q_no %>" value='1' onclick="document.getElementById('<%= question[i].Q_no %>').value = value;"/>
                     <strong>
                         <%= question[i].Option1 %> &emsp;</strong>
                 </label>
                 <br>
                 <label>
-                    <input type="radio" class="option-input radio" name="example"  value='2' onclick="document.getElementById('<%= question[i].Q_no %>').value = value;"/>
+                    <input type="radio" class="option-input radio" name="<%= question[i].Q_no %>"  value='2' onclick="document.getElementById('<%= question[i].Q_no %>').value = value;"/>
                     <strong>
                         <%= question[i].Option2 %> &emsp;</strong>
                 </label>
                 <br>
 
                 <label>
-                    <input type="radio" class="option-input radio" name="example"  value='3' onclick="document.getElementById('<%= question[i].Q_no %>').value = value;"/>
+                    <input type="radio" class="option-input radio" name="<%= question[i].Q_no %>"  value='3' onclick="document.getElementById('<%= question[i].Q_no %>').value = value;"/>
                     <strong>
                         <%= question[i].Option3 %> &emsp;</strong>
                 </label>
                 <br>
                 <label>
-                    <input type="radio" class="option-input radio" name="example"  value='4' onclick="document.getElementById('<%= question[i].Q_no %>').value = value;"/>
+                    <input type="radio" class="option-input radio" name="<%= question[i].Q_no %>"  value='4' onclick="document.getElementById('<%= question[i].Q_no %>').value = value;"/>
                     <strong>
                         <%= question[i].Option4 %> &emsp;</strong>
                 </label>
