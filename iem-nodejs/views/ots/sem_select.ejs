@@ -68,13 +68,13 @@
             }
 
             function toggle(test_key, action) {
-                alert('called');
                 document.getElementById('test_key').value = test_key;
-                alert('setkey');
                 document.getElementById('action').value = action;
-                alert('setaction');
                 if (action === 'delete') {
                     document.getElementById(test_key).style.display = 'none';
+                }
+                if (action === 'result') {
+                    document.getElementById('form').action= '/online-test/view-all-result';
                 }
                 document.getElementById('form').submit();
             }
@@ -162,7 +162,7 @@
                                                     </button>
                                                 </div>
                                                 <div class="col col-4" data-label="View Result">
-                                                    <button class="button" style="padding-top: 2px;">
+                                                    <button class="button" style="padding-top: 2px;" onclick="toggle('<%= active[j].test_key %>', 'result')">
                                                         <span>Result </span>
                                                     </button>
                                                 </div>

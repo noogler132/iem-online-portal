@@ -35,6 +35,7 @@ router.get('/', function(req, res, next) {
         });
 });
 
+
 router.post('/', function(req, res, next) {
     var user = checkSession(req);
     var sem = req.body.sem_key;
@@ -42,6 +43,7 @@ router.post('/', function(req, res, next) {
     var redirect_var = '/online-test/'+sem+'/'+sub_code+'/';
     res.redirect(redirect_var);
 });
+
 
 router.get('/:sem([1-6])/:subcode(\\w+)/', function(req, res, next) {
     var user = checkSession(req);
@@ -64,6 +66,7 @@ router.get('/:sem([1-6])/:subcode(\\w+)/', function(req, res, next) {
     });
 });
 
+
 router.post('/:sem([1-6])/:subcode(\\w+)/', function(req, res, next) {
     var user = checkSession(req);
     var sub_code = req.body.sub_key;
@@ -83,6 +86,13 @@ router.post('/:sem([1-6])/:subcode(\\w+)/', function(req, res, next) {
 
 });
 
+
+
+
+
+
+
+
 router.get('/start', function(req, res, next) {
     var user = checkSession(req);
     var test_key = req.session.test.sub_code + '_' + req.session.test.test_no;
@@ -92,6 +102,7 @@ router.get('/start', function(req, res, next) {
         res.render('ots/exam', {title: 'IEM', user: user, question: result, sub_code:req.session.test.sub_code, test_no:req.session.test.test_no });
     });
 });
+
 
 router.post('/start', function(req, res, next) {
     var user = checkSession(req);
@@ -133,11 +144,25 @@ router.post('/result', function(req, res, next) {
 
 });
 
+
+
+
+
+
+
+
+
 /* Route for viewing solutions */
 router.get('/view-solutions', function(req, res, next) {
     var user = checkSession(req);
     res.render('ots/view_solutions', {user: user});
 });
+
+
+
+
+
+
 
 
 /* Teachers Routes */
@@ -205,6 +230,9 @@ router.post('/edit', function(req, res, next)
 
 });
 
+
+
+
 /* Delete or toggle tests */
 function takeAction(action, test_key) {
     var query = '';
@@ -244,10 +272,24 @@ function takeAction(action, test_key) {
     }
 }
 
-/* View Test results of all students of a particular test */
-router.get('/view-all-result', function(req, res, next) {
+
+router.post('/view-all-result', function(req, res, next) {
     var user = checkSession(req);
-    res.render('ots/view_all_result', {user: user});
+    var test_key = req.body.test_key;
+    // var action = req.body.action;
+    var query = '';
+    if(req.body.dept === undefined || req.body.add_year === undefined){
+        query = 'Select * from results where test_key = \''+ test_key + '\' ;';
+    }
+    else{
+        query = 'SELECT * FROM results, student_details where results.u_id = student_details.u_roll and results.test_key= \''+test_key+ '\' and  \n' +
+            'student_details.dept = \''+req.body.dept+'\' and add_year = \''+req.body.add_year+'\';'
+    }
+    console.log(query);
+    db.query(query, function (err, results) {
+        console.log(results);
+        res.render('ots/view_all_result', {user: user, results: results});
+    });
 });
 
 
