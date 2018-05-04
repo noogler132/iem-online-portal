@@ -148,34 +148,54 @@
 <body>
 
     <center>
-        <div style="height: 100px; background-color: aquamarine;">
+        <form id="filterForm" method="post" action="/online-test/view-all-result">
+        <select name="dept" id="dept" style="padding-right: 10px; height: 28px" onchange="document.getElementById('add_year').disabled = false;" required>
+            <option disabled selected>Choose Department</option>
+            <option value="BCA">BCA</option>
+            <option value="BBA">BBA</option>
+        </select>
+        <select name="add_year" id="add_year" style="height: 28px" onchange="document.getElementById('filterForm').submit();" disabled required>
+            <option disabled selected id="add_year_placeholder">Choose Admission Year</option>
+            <option value="2015">2015</option>
+            <option value="2016">2016</option>
+            <option value="2017">2017</option>
+        </select>
+            <input type="hidden" name="test_key" value="<%= results[0].test_key %>">
+        </form>
+        <br>
+        <br>
+        <div style="height: inherit; background-color: aquamarine;">
             <br>
             <span>
-                <h3>Subject Code: BCA101</h3>
+                <h3>Subject Code: <%= results[0].test_key.split('_', 1)%></h3>
+            </span>
+<br>
+            <span>
+                <h3>Test Number: <%= results[0].test_key.split('_', 2)[1]%></h3>
             </span>
             <br>
-            <span>
-                <h3>Test ID: 10</h3>
-            </span>
         </div>
-        <br><br>
+        <br>
         <div style="height: inherit; width: 400px;">
-
+            <span>
+                <h3>Total Marks: <%= results[0].total %></h3>
+            </span>
             <ul class="responsive-table" id="tests_ul">
                 <li class="table-header">
-                    <div class="col col-1">Student Name</div>
-                    <div class="col col-2">Marks</div>
+                    <div class="col col-1">Student ID</div>
+                    <div class="col col-2">Scored</div>
                 </li>
-
+                <% for(var i=0; i<results.length; i++){ %>
                 <li class="table-row">
                     <div class="col col-1" data-label="Student Name">
-                        <span>Suman Kanrar</span>
+                        <span><%= results[i].u_id %></span>
                     </div>
 
                     <div class="col col-2" data-label="Marks">
-                        <span id="marks_obtained">76</span>
+                        <span id="marks_obtained"><%= results[i].score %></span>
                     </div>
                 </li>
+                <% } %>
             </ul>
 
         </div>

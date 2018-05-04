@@ -48,6 +48,7 @@
             function body_load() {
                 <% if (dept !== '') { %>
                 document.getElementById('dept').value = '<%= dept %>';
+                changedept();
                 <% } %>
                 <% if (sem !== 0) { %>
                     document.getElementById('sem').value = '<%= sem %>';
@@ -65,16 +66,24 @@
                 sem.disabled = false;
                 sem.selected = true;
                 sem.disabled = 'disabled';
+                document.getElementById('sem').innerHTML = '<option id="semPlaceholder" disabled selected>Select Semester</option>\n' +
+                    '<option id="sem_1" value="1">First</option>\n' +
+                    '<option id="sem_2" value="2">Second</option>\n' +
+                    '<option id="sem_3" value="3">Third</option>\n' +
+                    '<option id="sem_4" value="4">Fourth</option>\n' +
+                    '<option id="sem_5" value="5">Fifth</option>\n' +
+                    '<option id="sem_6" value="6">Sixth</option>';
+                document.getElementById('sub_code').innerHTML = '<option id="subPlaceholder" disabled selected>Select Subject</option>\n';
             }
 
             function toggle(test_key, action) {
-                alert('called');
                 document.getElementById('test_key').value = test_key;
-                alert('setkey');
                 document.getElementById('action').value = action;
-                alert('setaction');
                 if (action === 'delete') {
                     document.getElementById(test_key).style.display = 'none';
+                }
+                if (action === 'result') {
+                    document.getElementById('form').action= '/online-test/view-all-result';
                 }
                 document.getElementById('form').submit();
             }
@@ -87,26 +96,24 @@
         <div class="row">
             <center>
             <div class="column">
-                <select name="dept" id="dept" title="Select Department" onchange="changedept()">
+                <select name="dept" id="dept" title="Select Department" onchange="changedept()" required>
                     <option disabled selected>Select Department</option>
                     <option id="BCA" value="BCA">BCA</option>
                     <option id="BBA" value="BBA">BBA</option>
                 </select>
                 <select name="sem" id="sem" title="Select Semester" onchange="subject_display(value)" onclick="document.getElementById('semPlaceholder')"
-                        style="">
+                        style="" required>
                     <option id="semPlaceholder" disabled selected>Select Semester</option>
-                    <option id="sem_1" value="1">First</option>
-                    <option id="sem_2" value="2">Second</option>
-                    <option id="sem_3" value="3">Third</option>
-                    <option id="sem_4" value="4">Fourth</option>
-                    <option id="sem_5" value="5">Fifth</option>
-                    <option id="sem_6" value="6">Sixth</option>
+                    <!--<option id="sem_1" value="1">First</option>-->
+                    <!--<option id="sem_2" value="2">Second</option>-->
+                    <!--<option id="sem_3" value="3">Third</option>-->
+                    <!--<option id="sem_4" value="4">Fourth</option>-->
+                    <!--<option id="sem_5" value="5">Fifth</option>-->
+                    <!--<option id="sem_6" value="6">Sixth</option>-->
                 </select>
 
-            <!--</div>-->
-            <!--<div class="column" style="padding-left: 2%;">-->
                 <select name="sub_code" id="sub_code" title="Select Subject Code" onchange="document.getElementById('form').submit()"
-                        style="margin-bottom: 5%;">
+                        style="margin-bottom: 5%;" required>
                     <option id="subPlaceholder" disabled selected>Select Subject</option>
                 </select>
                 <button class="button" style="">
@@ -115,6 +122,11 @@
             </div>
             </center>
         </div>
+        <% if(err){ %>
+        <div class="alert alert-danger" role="alert" style="width: 350px">
+            <strong><%= err %></strong>
+        </div>
+        <% } %>
         <% if(active !== undefined){ %>
             <div class="row">
                 <center>
@@ -162,7 +174,7 @@
                                                     </button>
                                                 </div>
                                                 <div class="col col-4" data-label="View Result">
-                                                    <button class="button" style="padding-top: 2px;">
+                                                    <button class="button" style="padding-top: 2px;" onclick="toggle('<%= active[j].test_key %>', 'result')">
                                                         <span>Result </span>
                                                     </button>
                                                 </div>

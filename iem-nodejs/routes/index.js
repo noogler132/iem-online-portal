@@ -78,6 +78,16 @@ router.get('/notice_upload', function(req, res) {
 /* POST Notice upload page */
 router.post('/notice_upload', function(req, res) {
 
+    var user = checkSession(req);
+    if(!user.isLoggedIn) {
+        req.session.redirect = '/notice_upload';
+        res.redirect('/login');
+        return;
+    }
+    else if(user.as !== 'tch'){
+        res.render('message', {user: user, message: 'Only Teachers has access to this page'});
+        return;
+    }
     var filedata = {name: '', path: ''};
     var maildata = {
         subject: '',
@@ -85,10 +95,7 @@ router.post('/notice_upload', function(req, res) {
         sendfile: 0,
         file: []
     };
-
-
     var moment = require('moment');
-    var user = checkSession(req);
     var form = new formidable.IncomingForm();
     var mailer = require('../supporting_codes/mailer');
 
@@ -97,32 +104,23 @@ router.post('/notice_upload', function(req, res) {
     form.uploadDir = 'D:\\iem-package\\iem-nodejs\\Uploads\\';
     form.multiples = true;
 
-    console.log('time to parse------');
-
     form.parse(req, function (err, fields, files) {
-
-        var length = 0;
-
-        if(files.filetoupload.size === 0)
-        {
-            length = 0;
-            console.log(length);
-        }
-        else if(files.filetoupload.length === undefined)
-        {
-            length = 1;
-        }
-        else {
-            length = files.filetoupload.length;
-        }
-        maildata.subject = fields.subject;
-        maildata.text = fields.text;
-        maildata.sendfile = length;
-        maildata.file.length = length;
-        if(maildata.subject === '' || maildata.text === ''){
-            fs.unlink(files.filetoupload.path, function (err) {
-                if(err) throw err;
+        if(fields.subject === undefined || fields.text === undefined || fields.dept === undefined || fields.add_year === undefined){
+            fs.unlink(files.filetoupload.path, function (err) {});
+            res.render('upload_form', {
+                title: 'Upload Notice',
+                error: 'Unknown Error Occured Please Retry',
+                user: user,
+                progress: 0,
+                text: true,
+                file: true,
+                multiple: true,
+                subject: true
             });
+            return;
+        }
+        if(fields.subject === '' || fields.text === ''){
+            fs.unlink(files.filetoupload.path, function (err) {});
             res.render('upload_form', {
                 title: 'Upload Notice',
                 error: 'Subject and Details fields are compulsory.',
@@ -137,7 +135,6 @@ router.post('/notice_upload', function(req, res) {
         }
         if(fields.dept === '' || fields.add_year === ''){
             fs.unlink(files.filetoupload.path, function (err) {
-                if(err) throw err;
             });
             res.render('upload_form', {
                 title: 'Upload Notice',
@@ -151,9 +148,24 @@ router.post('/notice_upload', function(req, res) {
             });
             return;
         }
+        var length = 0;
+        if(files.filetoupload.size === 0)
+        {
+            length = 0;
+        }
+        else if(files.filetoupload.length === undefined)
+        {
+            length = 1;
+        }
+        else {
+            length = files.filetoupload.length;
+        }
+        maildata.subject = fields.subject;
+        maildata.text = fields.text;
+        maildata.sendfile = length;
+        maildata.file.length = length;
         if(files.filetoupload.size === 0){
             fs.unlink(files.filetoupload.path, function (err) {
-                if(err) throw err;
             });
         }
         if(length !== 0 && files.filetoupload.size !== 0) {
@@ -248,6 +260,16 @@ router.get('/mail-mats', function(req, res) {
 /* POST materials upload page */
 router.post('/mail-mats', function(req, res) {
 
+    var user = checkSession(req);
+    if(!user.isLoggedIn) {
+        req.session.redirect = '/notice_upload';
+        res.redirect('/login');
+        return;
+    }
+    else if(user.as !== 'tch'){
+        res.render('message', {user: user, message: 'Only Teachers has access to this page'});
+        return;
+    }
     var filedata = {name: '', path: ''};
     var maildata = {
         subject: '',
@@ -267,31 +289,23 @@ router.post('/mail-mats', function(req, res) {
     form.uploadDir = 'D:\\iem-package\\iem-nodejs\\Uploads\\';
     form.multiples = true;
 
-    console.log('time to parse------');
-
     form.parse(req, function (err, fields, files) {
-
-        var length = 0;
-
-        if(files.filetoupload.size === 0)
-        {
-            length = 0;
-            console.log(length);
+        if(fields.subject === undefined || fields.text === undefined || fields.dept === undefined || fields.add_year === undefined){
+            fs.unlink(files.filetoupload.path, function (err) {});
+            res.render('upload_form', {
+                title: 'Upload Notice',
+                error: 'Unknown Error Occured Please Retry',
+                user: user,
+                progress: 0,
+                text: true,
+                file: true,
+                multiple: true,
+                subject: true
+            });
+            return;
         }
-        else if(files.filetoupload.length === undefined)
-        {
-            length = 1;
-        }
-        else {
-            length = files.filetoupload.length;
-        }
-        maildata.subject = fields.subject;
-        maildata.text = fields.text;
-        maildata.sendfile = length;
-        maildata.file.length = length;
-        if(maildata.subject === '' || maildata.text === ''){
+        if(fields.subject === '' || fields.text === ''){
             fs.unlink(files.filetoupload.path, function (err) {
-                if(err) throw err;
             });
             res.render('upload_form', {
                 title: 'Mail Study Materials',
@@ -307,7 +321,6 @@ router.post('/mail-mats', function(req, res) {
         }
         if(fields.dept === '' || fields.add_year === ''){
             fs.unlink(files.filetoupload.path, function (err) {
-                if(err) throw err;
             });
             res.render('upload_form', {
                 title: 'Mail Study Materials',
@@ -321,9 +334,26 @@ router.post('/mail-mats', function(req, res) {
             });
             return;
         }
+        var length = 0;
+
+        if(files.filetoupload.size === 0)
+        {
+            length = 0;
+        }
+        else if(files.filetoupload.length === undefined)
+        {
+            length = 1;
+        }
+        else {
+            length = files.filetoupload.length;
+        }
+        maildata.subject = fields.subject;
+        maildata.text = fields.text;
+        maildata.sendfile = length;
+        maildata.file.length = length;
+
         if(files.filetoupload.size === 0){
             fs.unlink(files.filetoupload.path, function (err) {
-                if(err) throw err;
             });
         }
         if(length !== 0&& files.filetoupload.size !== 0) {
@@ -337,7 +367,6 @@ router.post('/mail-mats', function(req, res) {
 
 
                     fs.rename(oldpath, newpath, function (err) {
-                        if (err) throw err;
                     });
                 }
             }
@@ -350,7 +379,6 @@ router.post('/mail-mats', function(req, res) {
 
 
                 fs.rename(oldpath, newpath, function (err) {
-                    if (err) throw err;
                 });
             }
         }

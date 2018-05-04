@@ -19,6 +19,11 @@ router.get('/', function(req, res, next) {
 
 /* POST registration page. */
 router.post('/', function(req, res, next) {
+    if(!user.isLoggedIn) {
+        req.session.redirect = '/register';
+        res.redirect('/login');
+        return;
+    }
     var user = checkSession(req);
     var u_id = req.session.u_id;
     var email = req.session.email;
@@ -37,14 +42,36 @@ router.post('/', function(req, res, next) {
         dept = req.body.dept;
         add_year = req.body.add_year;
         u_reg = req.body.u_reg;
+        if (u_id === undefined || email === undefined || u_reg === undefined || f_name === undefined || l_name === undefined || dob === undefined ||
+            dept === undefined || add_year === undefined || contact === undefined) {
+            res.render('login/register', {
+                err: 'All fields are mandatory',
+                title: 'IEM',
+                user: user,
+                email: req.session.email,
+                u_id: req.session.u_id,
+                as: req.session.as
+            });
+            return;
+        }
     }
     else if (req.session.as === 'tch') {
         facebook_id = req.body.facebook_id;
         googleplus_id = req.body.googleplus_id;
         designation = req.body.designation;
+        if (u_id=== undefined || email=== undefined || f_name=== undefined || l_name=== undefined || dob=== undefined ||
+            facebook_id=== undefined || googleplus_id=== undefined || contact=== undefined || designation === undefined) {
+            res.render('login/register', {
+                err: 'All fields are mandatory',
+                title: 'IEM',
+                user: user,
+                email: req.session.email,
+                u_id: req.session.u_id,
+                as: req.session.as
+            });
+            return;
+        }
     }
-
-
     if (u_id === '' || email === '' || u_reg === '' || f_name === '' || l_name === '' || dob === '' || dept === '' || add_year === ''
         || contact === '' || designation === '') {
         res.render('login/register', {
