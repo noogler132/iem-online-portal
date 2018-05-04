@@ -5,16 +5,6 @@ var checkSession = require('./isLoggedIn');
 // var passwordValidator = require('password-validator');
 
 
-/* GET temp test. */
-router.get('/temp', function(req, res, next) {
-    if(req.session.u_id) {
-        res.render('login/temp');
-    }
-    else{
-        res.redirect('/login');
-    }
-});
-
 /* GET students login page. */
 router.get('/', function(req, res, next) {
     var user = checkSession(req);
@@ -35,6 +25,8 @@ router.get('/', function(req, res, next) {
 /* POST students login page. */
 router.post('/', function(req, res, next) {
     var user = checkSession(req);
+    var session_user = checkSession(req);
+
     if(user.isLoggedIn) {
         if(req.session.redirect !== ''){
             res.redirect(req.session.redirect)
@@ -46,9 +38,15 @@ router.post('/', function(req, res, next) {
     }
     var user = req.body.username;
     var pass = req.body.password;
-    var session_user = checkSession(req);
+    if(user === undefined || pass === undefined){
+        res.render('login/login', {title: 'the Portal', isLoggedIn: false, user: session_user, err: 'Incorrect Username or Password' });
+        return;
+    }
+    if(user === '' || pass === ''){
+        res.render('login/login', {title: 'the Portal', isLoggedIn: false, user: session_user, err: 'Incorrect Username or Password' });
+        return;
+    }
     db.query("SELECT * FROM auth WHERE u_id = ?", user, function (err, result) {
-        if (err) throw err;
         if (result.length === 0)
         {
             res.render('login/login', {title: 'the Portal', isLoggedIn: false, user: session_user, err: 'Incorrect Username or Password' });
@@ -208,12 +206,9 @@ router.post('/', function(req, res, next) {
 
 /* GET logout page. */
 router.get('/logout', function(req, res, next) {
-    console.log(req.session);
     req.session.destroy(function(err) {
         // cannot access session here
-        if(err) throw err;
     });
-    console.log(req.session);
     res.redirect('/');
 });
 
