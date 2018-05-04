@@ -26,6 +26,13 @@ router.get('/timetable', function(req, res) {
 
 });
 
+/* GET Academic Calendar Page */
+router.get('/calendar', function(req, res) {
+    var user = checkSession(req);
+    res.render('index/calendar', {title: 'IEM', user: user});
+});
+
+
 /* GET contact us page */
 router.get('/contact_us', function(req, res) {
     var user = checkSession(req);
@@ -39,16 +46,6 @@ router.get('/about', function(req, res) {
     console.log(req.session);
     res.render('index/about', { title: 'IEM', user: user });
 });
-
-
-
-
-
-
-
-
-
-
 
 
 

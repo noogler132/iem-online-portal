@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../header', {user: user}); %>
+        <hr style="height: 2px;">
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+</head>
+
+<body>
+    <div>
+        <center>
+            <h2><span>Academic Calendar 2018-19</span></h2>
+            <br><br>
+            <img src="/index/images/even_semester_calendar.png" height="800px;" width="800px;" alt="Even Semester Calendar">
+        </center>
+    </div>
+    <div style="height: 100px;"></div>
+    <div>
+        <center>
+            <img src="/index/images/odd_semester_calendar.png" height="800px;" width="800px;" alt="Odd Semester Calendar">
+        </center>
+    </div>
+
+    <br><br>
+    <%- include('../footer'); %>
+        <script src="/index/js/bootstrap.js"></script>
+</body>
+
+</html>
