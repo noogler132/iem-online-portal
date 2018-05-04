@@ -1,0 +1,185 @@
+<html>
+
+<head>
+    <%- include('../header', {user: user}); %>
+        <hr style="height: 2px;">
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+        <style>
+            .button {
+                display: inline-block;
+                border-radius: 4px;
+                background-color: #00b3fe;
+                border: none;
+                color: #FFFFFF;
+                text-align: center;
+                font-size: 13px;
+                padding: 5px;
+                width: 100px;
+                transition: all 0.5s;
+                cursor: pointer;
+                margin: 5px;
+                height: 25px;
+            }
+
+            .button span {
+                cursor: pointer;
+                display: inline-block;
+                position: relative;
+                transition: 0.5s;
+            }
+
+            .button span:after {
+                content: '\00bb';
+                position: absolute;
+                opacity: 0;
+                top: 0;
+                right: -20px;
+                transition: 0.5s;
+            }
+
+            .button:hover span {
+                padding-right: 25px;
+            }
+
+            .button:hover span:after {
+                opacity: 1;
+                right: 0;
+            }
+
+            .responsive-table {
+                align-content: center;
+                max-width: 800px;
+                box-shadow: 2px 2px 9px 5px rgba(0, 0, 0, 0.1);
+            }
+
+            .responsive-table li {
+                border-radius: 3px;
+                padding: 25px 30px;
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 10px;
+            }
+
+            .responsive-table .table-header {
+                /* background-color: #95A5A6; */
+                background-color: #00b3fe;
+                font-size: 14px;
+                color: #ffffff;
+                text-transform: uppercase;
+                letter-spacing: 0.03em;
+                font-weight: bold;
+            }
+
+            .responsive-table .table-row {
+                background-color: #ffffff;
+                box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
+                font-size: 13px;
+                font-family: 'Ubuntu';
+            }
+
+            .responsive-table .col-1 {
+                flex-basis: 50%;
+            }
+
+            .responsive-table .col-2 {
+                flex-basis: 50%;
+            }
+
+            .responsive-table .col-3 {
+                flex-basis: 20%;
+            }
+
+            .responsive-table .col-4 {
+                flex-basis: 20%;
+            }
+
+            .responsive-table .col-5 {
+                flex-basis: 20%;
+            }
+
+            .table-row .col-1 {
+                font-size: 16px;
+                padding-top: 0.25%;
+            }
+
+            .table-row .col-2 {
+                font-size: 16px;
+                padding-top: 0.25%;
+            }
+
+            .table-row .col-3 {
+                font-size: 16px;
+                padding-top: 0.50%;
+            }
+
+            .table-row .col-4 {
+                padding-top: 0.50%;
+            }
+
+            .table-row .col-5 {
+                margin: 0 auto;
+            }
+
+            @media all and (max-width: 767px) {
+                .responsive-table .table-header {
+                    display: none;
+                }
+                .responsive-table li {
+                    display: block;
+                }
+                .responsive-table .col {
+                    flex-basis: 100%;
+                }
+                .responsive-table .col {
+                    display: flex;
+                    padding: 10px 0;
+                }
+                .responsive-table .col:before {
+                    color: #6C7A89;
+                    padding-right: 10px;
+                    content: attr(data-label);
+                    flex-basis: 50%;
+                    text-align: right;
+                }
+            }
+        </style>
+</head>
+
+<body>
+
+    <center>
+        <div style="height: 100px; background-color: aquamarine;">
+            <br>
+            <span>
+                <h3>Subject Code: BCA101</h3>
+            </span>
+            <br>
+            <span>
+                <h3>Test ID: 10</h3>
+            </span>
+        </div>
+        <br><br>
+        <div style="height: inherit; width: 400px;">
+
+            <ul class="responsive-table" id="tests_ul">
+                <li class="table-header">
+                    <div class="col col-1">Student Name</div>
+                    <div class="col col-2">Marks</div>
+                </li>
+
+                <li class="table-row">
+                    <div class="col col-1" data-label="Student Name">
+                        <span>Suman Kanrar</span>
+                    </div>
+
+                    <div class="col col-2" data-label="Marks">
+                        <span id="marks_obtained">76</span>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+    </center>
+</body>
+
+</html>

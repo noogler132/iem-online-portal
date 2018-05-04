@@ -2,7 +2,10 @@
 
 <head>
     <%- include('./adminHeader', {}); %>
-    <hr>
+
+    <hr style="height: 2px;">
+    <link rel="stylesheet" href="/index/css/loginStyle.css" media="screen" type="text/css" />
+    
     <style>
         #sub_btn {
             padding: 20px 50px;
@@ -29,6 +32,37 @@
 </head>
 
 <body>
+    <center>
+        <div style="height: 550px">
+        <br>
+        
+        <div class="alert alert-danger" role="alert" style="width: 350px">
+            <strong>Error Message</strong>
+        </div>
+       
+        <div class="login-card">
+            <h2>SuperAdmin Log-in</h2><br>
+            <form method="POST">
+                <div class="input-group input-group-lg w3_w3layouts">
+                    <span class="input-group-addon" id="sizing-addon1">@</span>
+                    <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1" name="username" autofocus="autofocus">
+                </div>
+                <div class="input-group input-group-lg w3_w3layouts">
+                    <input type="password" class="form-control" placeholder="Password" aria-describedby="sizing-addon1" name="password">
+                    <span class="input-group-btn">
+                        <input type="submit" name="login" class="btn btn-default" value="Go!">
+                    </span>
+                </div>
+                
+            </form>
+            <div class="login-help">
+                 <a href="/password-reset">Forgot Password</a>
+            </div>
+            
+            <script src='http://codepen.io/assets/libs/fullpage/jquery_and_jqueryui.js'></script>
+        </div>
+    </div>
+</center>
 
 </body>
 

@@ -244,6 +244,12 @@ function takeAction(action, test_key) {
     }
 }
 
+/* View Test results of all students of a particular test */
+router.get('/view-all-result', function(req, res, next) {
+    var user = checkSession(req);
+    res.render('ots/view_all_result', {user: user});
+});
+
 
 /* GET upload page for teachers */
 router.get('/upload', function(req, res, next) {

@@ -283,11 +283,12 @@ select {
 
 .table-row .col-2 {
     margin: 0 auto;
+    padding-top: 0.25%;
 }
 
 .table-row .col-3 {
     font-size: 16px;
-    padding-top: 0.75%;
+    padding-top: 0.50%;
 }
 
 .table-row .col-4 {
