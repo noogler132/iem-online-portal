@@ -19,6 +19,7 @@ router.get('/', function(req, res, next) {
 
 /* POST registration page. */
 router.post('/', function(req, res, next) {
+    var user=checkSession(req);
     if(!user.isLoggedIn) {
         req.session.redirect = '/register';
         res.redirect('/login');
