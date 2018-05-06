@@ -191,8 +191,6 @@ router.post('/:sem([1-6])/:subcode(\\w+)/', function(req, res, next) {
 
 
 
-
-
 router.get('/start', function(req, res, next) {
     var user = checkSession(req);
     if(!validateStudent(user, req, res)){
