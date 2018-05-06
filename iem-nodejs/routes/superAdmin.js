@@ -372,7 +372,7 @@ router.post('/update-teacher/', function(req, res, next) {
                 console.log('deleted');
             });
             var arr = [u_id, email, f_name, l_name, facebook_id, googleplus_id, contact, designation];
-            db.query("Insert into teacher_details(u_id, email, f_name, l_name, facebook_id, googleplus_id, contact, designation) values (?,?,?,?,?,?,?,?)",
+            db.query("Insert into teacher_details(tch_id, email, f_name, l_name, facebook_id, googleplus_id, contact, designation) values (?,?,?,?,?,?,?,?)",
                 arr, function (err, result, fields) {
                     res.redirect('/superAdmin/students');
             });
