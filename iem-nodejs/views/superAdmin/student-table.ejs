@@ -19,6 +19,7 @@
          <% if(add_year !== ''&& add_year !== undefined){ %>
          document.getElementById('add_year').value = '<%= add_year %>';
          <% } %>
+         document.getElementById('action').value = '';
      }
 
      function setaction(u_roll, action) {
@@ -81,7 +82,7 @@
                 </li>
 
 
-                <% for( var i=0; i<student.length; i++){ %>
+                <% for( var i=0; i<student.length && student !== undefined; i++){ %>
                 <li class="table-row" style="font-family: 'Ubuntu';" id="<%= student[i].u_roll %>">
                     <div class="col col-1" data-label="Roll No.">
                         <%= student[i].u_roll %>
@@ -99,7 +100,9 @@
                         <%= student[i].l_name %>
                     </div>
                     <div class="col col-6" data-label="Date of Birth">
+                        <% if(student[i].dob  !== undefined){ %>
                         <%= student[i].dob.toDateString() %>
+                        <% } %>
                     </div>
                     <div class="col col-7" data-label="Department">
                         <%= student[i].dept %>

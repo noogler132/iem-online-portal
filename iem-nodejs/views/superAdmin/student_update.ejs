@@ -20,12 +20,14 @@
             </div>
             <% } %>
             <input type="text" id="roll" name="u_roll" value="<%= details[0].u_roll %>" required disabled>
-            <input type="hidden" id="roll" name="u_id" value="<%= details[0].u_roll %>" required>
+            <input type="hidden" name="u_id" value="<%= details[0].u_roll %>">
             <input type="email" id="emailAddress" name="email" value="<%= details[0].email %>" required>
             <input type="text" id="registration" name="u_reg" placeholder="University Registration Number" value="<%= details[0].u_reg %>" required>
             <input type="text" id="f_name" name="f_name" placeholder="First Name" value="<%= details[0].f_name %>" required>
             <input type="text" id="l_name" name="l_name" placeholder="Last Name" value="<%= details[0].l_name %>" required>
-            <input name="dob" placeholder="Date of Birth" class="form-control" type="text" value="<%= (details[0].dob.getMonth()+1) +'/' + details[0].dob.getDate() +'/'+details[0].dob.getFullYear() %>" onfocus="(this.type='date')" onblur="(this.type='text')" id="dob" required>
+            <input name="dob" placeholder="Date of Birth" class="form-control" type="text"
+                   value="<%= (details[0].dob.getMonth()+1) +'/' + details[0].dob.getDate() +'/'+details[0].dob.getFullYear() %>"
+                   onfocus="(this.type='date')" onblur="(this.type='text')" id="dob" required>
             <select id="dept" name="dept" style="color: gray;" value="<%= details[0].dept %>" required>
                 <option value="BCA">BCA</option>
                 <option value="BBA">BBA</option>

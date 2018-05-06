@@ -5,13 +5,29 @@
         <hr>
         <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
         <link rel="stylesheet" href="/index/css/admin_teachers.css" media="screen" type="text/css" />
+    <script>
+        function setaction(tch_id, action) {
+            document.getElementById('action').value = action;
+            document.getElementById('tch_id').value = tch_id;
+            if(action === 'delete'){
+                document.getElementById(tch_id).style.display = 'none';
+                document.getElementById('form').submit();
+            }
+            else if(action === 'update'){
+                document.getElementById('form').submit();
+            }
+        }
+    </script>
 </head>
 
 <body>
     <br>
     <br>
     <center>
-        
+        <form method="post" id="form">
+            <input type="hidden" name="action" id="action">
+            <input type="hidden" name="tch_id" id="tch_id">
+        </form>
         <div class="row" style="height: 50px;"></div>
         <div class="row" style="height: inherit; background-color: lightgray;">
 
@@ -29,7 +45,7 @@
                     <div class="col col-10">Delete</div>
                 </li>
 
-                <% for( var i=0; i<teacher.length; i++){ %>
+                <% for( var i=0; i<teacher.length && teacher !== undefined; i++){ %>
                 <li class="table-row" style="font-family: 'Ubuntu';" id="<%= teacher[i].tch_id %>">
                     <div class="col col-1" data-label="Teacher ID">
                         <%= teacher[i].tch_id %>
@@ -55,14 +71,14 @@
                     <div class="col col-8" data-label="Designation">
                         <%= teacher[i].designation %>
                     </div>
-                    <div class="col col-9" data-label="Update" style="padding-left: 5px;">
-                        <button class="button" style="padding-top: 2px;">
+                    <div class="col col-10" data-label="Update" style="padding-left: 5px;">
+                        <button class="button" style="padding-top: 2px;" onclick="setaction('<%= teacher[i].tch_id %>', 'update')">
                             <span>Update</span>
                         </button>
 
                     </div>
-                    <div class="col col-10" data-label="Delete" style="padding-left: 5px;">
-                        <button class="button" style="padding-top: 2px;">
+                    <div class="col col-11" data-label="Delete" style="padding-left: 5px;">
+                        <button class="button" style="padding-top: 2px;" onclick="setaction('<%= teacher[i].tch_id %>', 'delete')">
                             <span>Delete</span>
                         </button>
                     </div>

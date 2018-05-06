@@ -150,9 +150,9 @@ router.post('/add-user-uploadxls', function(req, res, next) {
 
 /* GET STUDENT DETAILS */
 router.get('/students', function(req, res, next) {
-    // if(!validateAdmin(req, res)){
-    //     return;
-    // }
+    if(!validateAdmin(req, res)){
+        return;
+    }
     db.query('Select * from student_details order by \'u_roll\'', function (err, result) {
         res.render('superAdmin/student-table',
             {
@@ -163,9 +163,9 @@ router.get('/students', function(req, res, next) {
 });
 
 router.post('/students', function(req, res, next) {
-    // if(!validateAdmin(req, res)){
-    //     return;
-    // }
+    if(!validateAdmin(req, res)){
+        return;
+    }
     var add_year = req.body.add_year;
     var dept = req.body.dept;
     if(req.body.action === 'update') {
@@ -174,7 +174,7 @@ router.post('/students', function(req, res, next) {
         }
     }
     else if(req.body.action === 'delete'){
-        deleteStudent(req);
+        deleteStudent(req.body.u_roll);
     }
     var query = '';
     if( add_year !== undefined && dept !== undefined){
@@ -188,10 +188,14 @@ router.post('/students', function(req, res, next) {
     }
     else{
         query = 'Select * from student_details order by \'u_roll\' ' ;
-
+        dept = '';
+        add_year = '';
     }
     db.query(query, function (err, result) {
-
+        if(result.length === 0){
+            dept = '';
+            add_year = '';
+        }
         res.render('superAdmin/student-table', {student: result, dept: dept, add_year: add_year});
     });
 });
@@ -204,11 +208,16 @@ function updateStudent(req, res) {
     return 1;
 }
 
+function deleteStudent(u_roll) {
+    db.query('delete from student_details where u_roll = ?', u_roll, function (err, result) {});
+    db.query('delete from auth where u_id = ?', u_roll, function (err, result) {});
+}
+
 /* POST STUDENT UPDATE PAGE */
 router.post('/update-student/', function(req, res, next) {
-    // if(!validateAdmin(req, res)){
-    //     return;
-    // }
+    if(!validateAdmin(req, res)){
+        return;
+    }
     var u_id = req.body.u_id;
     var email = req.body.email;
     var u_reg = req.body.u_reg;
@@ -234,32 +243,145 @@ router.post('/update-student/', function(req, res, next) {
         }
         var oldEmail = result[0].email;
         if(oldEmail !== email){
-            var ok = 0;
             var query = 'update auth set email = \''+email+'\' where u_id = ' + u_id;
-            db.query(query , function (err, result) {
-                if(result === undefined){
-                    ok = 1;
+            db.query(query , function (err, resultemail) {
+                if(resultemail === undefined){
+                    res.render('superAdmin/student_update', {details: result, err: 'This email is already in use.'});
+                }
+                else{
+                    db.query('delete from student_details where u_roll = ?', u_id, function (err, result) {
+                        console.log('deleted');
+                    });
+                    dob = new Date(dob);
+                    var arr = [u_id, email, u_reg, f_name, l_name, dob, dept, add_year, contact];
+                    db.query("Insert into student_details(u_roll, email, u_reg, f_name, l_name, dob, dept, add_year, contact) values (?,?,?,?,?,?,?,?,?)",
+                        arr, function (err, result, fields) {
+                            res.redirect('/superAdmin/students');
+                        });
                 }
             });
-            if(ok){
-                res.render('superAdmin/student_update', {details: result, err: 'This email is already in use.'});
-                return;
-            }
         }
-        dob = new Date(dob);
-        var arr = [u_id, email, u_reg, f_name, l_name, dob, dept, add_year, contact];
-        db.query("Insert into student_details(u_roll, email, u_reg, f_name, l_name, dob, dept, add_year, contact) values (?,?,?,?,?,?,?,?,?)",
-            arr, function (err, result, fields) {
-                res.redirect('/superAdmin/students');
+        else {
+            db.query('delete from student_details where u_roll = ?', u_id, function (err, result) {
+                console.log('deleted');
             });
+            dob = new Date(dob);
+            var arr = [u_id, email, u_reg, f_name, l_name, dob, dept, add_year, contact];
+            db.query("Insert into student_details(u_roll, email, u_reg, f_name, l_name, dob, dept, add_year, contact) values (?,?,?,?,?,?,?,?,?)",
+                arr, function (err, result, fields) {
+                    res.redirect('/superAdmin/students');
+                });
+        }
     });
 
 });
 
-/* GET TEACHER UPDATE PAGE */
-router.get('/update-teacher', function(req, res, next) {
-    res.render('superAdmin/teacher_update');
+
+
+
+
+
+/* GET TEACHERS DETAILS */
+router.get('/teachers', function(req, res, next) {
+    // if(!validateAdmin(req, res)){
+    //     return;
+    // }
+    db.query('Select * from teacher_details', function (err, result) {
+        res.render('superAdmin/teacher-table', {teacher: result});
+    });
 });
+
+/* POST TEACHERS DETAILS */
+router.post('/teachers', function(req, res, next) {
+    // if(!validateAdmin(req, res)){
+    //     return;
+    // }
+    if(req.body.action === 'update') {
+        if (updateTeacher(req, res)) {
+            return;
+        }
+    }
+    else if(req.body.action === 'delete'){
+        deleteTeacher(req.body.tch_id);
+    }
+    res.redirect('/superAdmin/teachers');
+});
+
+
+/* GET Teacher UPDATE PAGE */
+function updateTeacher(req, res) {
+    db.query('select * from teacher_details where tch_id = ?', req.body.tch_id, function (err, result) {
+        res.render('superAdmin/teacher_update', {details: result, err: ''});
+    });
+    return 1;
+}
+
+function deleteTeacher(tch_id) {
+    db.query('delete from teacher_details where tch_id = ?', tch_id, function (err, result) {});
+    db.query('delete from auth where u_id = ?', tch_id, function (err, result) {});
+}
+
+/* POST TEACHER UPDATE PAGE */
+router.post('/update-teacher/', function(req, res, next) {
+    // if(!validateAdmin(req, res)){
+    //     return;
+    // }
+    var u_id = req.body.u_id;
+    var email = req.body.email;
+    var f_name = req.body.f_name;
+    var l_name = req.body.l_name;
+    var contact = req.body.contact;
+    var facebook_id = req.body.facebook_id;
+    var googleplus_id = req.body.googleplus_id;
+    var designation = req.body.designation;
+    db.query('select * from teacher_details where tch_id = ?', u_id, function (err, result) {
+        if(result.length === 0){
+            res.render('superAdmin/teacher_update', {details: result, err: 'This user is not registered'});
+        }
+        if (u_id === undefined || email === undefined || designation === undefined || f_name === undefined || l_name === undefined ||
+            googleplus_id === undefined || facebook_id === undefined || contact === undefined) {
+            res.render('superAdmin/student_update', {details: result, err: 'All fields are mandatory'});
+            return;
+        }
+        if (u_id === '' || email === '' || designation === '' || f_name === '' || l_name === ''
+            || contact === '' ) {
+            res.render('superAdmin/teacher_update', {details: result, err: 'Please fill up required fields'});
+            return;
+        }
+        var oldEmail = result[0].email;
+        if(oldEmail !== email){
+            var query = 'update auth set email = \''+email+'\' where u_id = ' + u_id;
+            db.query(query , function (err, resultemail) {
+                if(resultemail === undefined){
+                    res.render('superAdmin/teacher_update', {details: result, err: 'This email is already in use.'});
+                }
+                else{
+                    db.query('delete from teacher_details where tch_id = ?', u_id, function (err, result) {
+                        console.log('deleted');
+                    });
+                    var arr = [u_id, email, f_name, l_name, facebook_id, googleplus_id, contact, designation];
+                    db.query("Insert into teacher_details(tch_id, email, f_name, l_name, facebook_id, googleplus_id, contact, designation) values (?,?,?,?,?,?,?,?)",
+                        arr, function (err, result, fields) {
+                            res.redirect('/superAdmin/students');
+                        });
+                }
+            });
+        }
+        else{
+            db.query('delete from teacher_details where tch_id = ?', u_id, function (err, result) {
+                console.log('deleted');
+            });
+            var arr = [u_id, email, f_name, l_name, facebook_id, googleplus_id, contact, designation];
+            db.query("Insert into teacher_details(u_id, email, f_name, l_name, facebook_id, googleplus_id, contact, designation) values (?,?,?,?,?,?,?,?)",
+                arr, function (err, result, fields) {
+                    res.redirect('/superAdmin/students');
+            });
+        }
+
+    });
+
+});
+
 
 /* GET SUBJECT UPDATE PAGE */
 router.get('/add-subject', function(req, res, next) {
@@ -277,16 +399,7 @@ router.get('/add-subject', function(req, res, next) {
     res.render('superAdmin/subject_add');
 });
 
-/* GET TEACHERS DETAILS */
-router.get('/teachers', function(req, res, next) {
-    if(!validateAdmin(req, res)){
-        return;
-    }
-    db.query('Select * from teacher_details', function (err, result) {
-        if(err) throw err;
-        res.render('superAdmin/teacher-table', {teacher: result});
-    });
-});
+
 
 
 router.get('/subjects', function(req, res, next) {
