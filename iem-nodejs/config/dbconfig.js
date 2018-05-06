@@ -23,11 +23,21 @@ var mysql = require('mysql');
 //     port: '3306'
 // });
 
+
 /* mysql workbench */
+// db = mysql.createConnection({
+//     host: 'localhost',
+//     user: 'root',
+//     password: 'mysql',
+//     database: 'iemweb-databse',
+//     port: '3306'
+// });
+
+/* WAMP */
 db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'mysql',
+    password: '',
     database: 'iemweb-databse',
     port: '3306'
 });
