@@ -137,6 +137,10 @@ router.get('/:sem([1-6])/:subcode(\\w+)/', function(req, res, next) {
     {
         var query = 'SELECT * FROM results WHERE test_key LIKE \'' + req.params.subcode + '%\' and u_id = ' + req.session.u_id;
         db.query(query, function (err, result) {
+            console.log(tests+result+query);
+            if(result === undefined){
+                result = '';
+            }
             res.render('ots/select_test', {
                 user: user,
                 subcode: sub_code,
