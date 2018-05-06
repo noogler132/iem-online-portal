@@ -14,21 +14,30 @@ var mysql = require('mysql');
 //     database: 'id5584948_iemweb_database'
 // });
 
+/* free mysql hosting */
+// db = mysql.createConnection({
+//     host: 'sql12.freemysqlhosting.net',
+//     user: 'sql12235600',
+//     password: 'lK4A8DH9zz',
+//     database: 'sql12235600',
+//     port: '3306'
+// });
+
+/* mysql workbench */
 db = mysql.createConnection({
-    host: 'sql12.freemysqlhosting.net',
-    user: 'sql12235600',
-    password: 'lK4A8DH9zz',
-    database: 'sql12235600',
+    host: 'localhost',
+    user: 'root',
+    password: 'mysql',
+    database: 'iemweb-databse',
     port: '3306'
 });
+
 
 db.connect(function(err) {
     if (err) throw err;
     console.log("Connected!");
 });
 
-//console.log(con);
-//app.con = con;
 
 module.exports = db;
 //
