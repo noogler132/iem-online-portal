@@ -1,0 +1,163 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- Custom Theme files -->
+    <link href="/index/css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
+    <link href="/index/css/style.css" type="text/css" rel="stylesheet" media="all">
+    <link href="/index/css/font-awesome.css" rel="stylesheet">
+    <!-- font-awesome icons -->
+    <!-- //Custom Theme files -->
+    <!-- js -->
+    <script src="/index/js/jquery-2.2.3.min.js"></script>
+    <!-- //js -->
+    <!-- web-fonts -->
+    <link href="//fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+    <!-- //web-fonts -->
+    <style>
+        .button {
+            display: inline-block;
+            border-radius: 10px;
+            background-color: #00b3fe;
+            border: none;
+            color: #FFFFFF;
+            text-align: center;
+            font-size: 20px;
+            padding: 5px;
+            width: 140px;
+            transition: all 0.5s;
+            cursor: pointer;
+            margin: 5px;
+            height: 45px;
+        }
+
+        .button span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+        }
+
+        .button span:after {
+            content: '\00bb';
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            right: -20px;
+            transition: 0.5s;
+        }
+
+        .button:hover span {
+            padding-right: 25px;
+        }
+
+        .button:hover span:after {
+            opacity: 1;
+            right: 0;
+        }
+    </style>
+
+    <!-- header -->
+    <div class="header">
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header navbar-left wthree" id="test_details" style="width: 20%">
+                    <h4 style="padding-top: 55px;">
+                        <span>Subject Code: BCA101
+                        </span>
+                        <br>
+                        <span>Test Number: 10
+                        </span>
+                    </h4>
+                </div>
+                <div class="navbar-header navbar-center wthree" style="padding-left: 220px;">
+                    <h1>
+                        <a href="/">IEM
+                            <span>Good Education. Good Jobs.</span>
+                        </a>
+                    </h1>
+                    <!--<a href="index.html"><img src="/images/IEM.jpg" style="width: 300px; height: 200px; padding-top: 50px;"></a>-->
+
+                </div>
+                <div class="navbar-header navbar-right wthree" style="width:200px;">
+                    <h4 style="padding-top: 55px;">
+                        <span id="showtime">Remaining Time : 10:00
+                        </span>
+                    </h4>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <hr style="height: 2px;">
+</head>
+
+<body>
+    <br>
+    <br>
+    <center>
+        <h1>
+            <span style="font-weight: bold; text-decoration: underline; text-decoration-color: lightseagreen;">INSTRUCTIONS</span>
+        </h1>
+    </center>
+    <div style="height: 50px;"></div>
+    <div style="padding-left: 20%; height: 300px;">
+        <ul>
+            <li id="no_of_ques">
+                <h3>
+                    <span>Total Number of Questions : <b>20</b></span>
+                </h3>
+            </li>
+            <br>
+            <li id="time">
+                <h3>
+                    <span>Time Alloted : <b>30</b> minutes</span>
+                </h3>
+            </li>
+            <br>
+            <li>
+                <h3>
+                    <span>Each Question Carries <b>1 Marks</b>, No negative marks</span>
+                </h3>
+            </li>
+            <br>
+            <li>
+                <h3>
+                    <span>DO NOT Refresh or Close the Page </span>
+                </h3>
+            </li>
+            <br>
+            <li>
+                <h3>
+                    <span>DO NOT open a new tab or window</span>
+                </h3>
+            </li>
+            <br>
+            <li>
+                <h3>
+                    <span>All the BEST</span>
+                </h3>
+            </li>
+        </ul>
+    </div>
+    <div>
+        <center>
+            <button class="button">
+                <span>Start Test</span>
+            </button>
+        </center>
+    </div>
+
+
+
+
+    <br>
+    <br><br><br>
+    <%- include('../footer'); %>
+        <script src="/index/js/bootstrap.js"></script>
+</body>
+
+</html>
