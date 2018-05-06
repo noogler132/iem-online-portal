@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
         }
         return;
     }
-    res.render('login/login', {title: 'the Portal', isLoggedIn: false, user: user, err: '' });
+    res.render('login/login', {isLoggedIn: false, user: user, err: '' });
 
 });
 
@@ -65,7 +65,6 @@ router.post('/', function(req, res, next) {
                         dbquery = "SELECT * FROM teacher_details WHERE  tch_id = ?";
                     }
                     db.query(dbquery, user, function (err, resultName) {
-                        console.log('-----'+ resultName.length);
                         if(result[0].log_as === 'stu' && (resultName.length !== 0)){
                             var add_year = resultName[0].add_year;
                             var date = new Date();

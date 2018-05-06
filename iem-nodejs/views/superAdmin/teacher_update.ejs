@@ -13,17 +13,19 @@
     <div class="login-card" style="width: 350px;">
         <h2>Update Teacher Data</h2>
         <br>
-        <form method="post">
+        <form method="post" action="/superAdmin/update-teacher">
 
-            <input type="text" id="f_name" name="first_name" placeholder="First Name" required>
-            <input type="text" id="l_name" name="last_name" placeholder="Last Name" required>
-            <input type="number" maxlength="10" id="contact" name="contact" placeholder="Phone NUmber" required>
-            <input type="email" id="emailAddress" name="email" placeholder="Email ID" required>
-            <input type="text" id="facebook" name="facebook" placeholder="Facebook ID">
-            <input type="text" id="linkedin" name="linkedin" placeholder="LinkedIn ID">
-            <input type="text" id="designation" name="designation" placeholder="Designation">                    
+            <input type="text" id="tch_id" name="tch_id" value="<%= details[0].tch_id %>" required disabled>
+            <input type="hidden" name="u_id" id="u_id" value="<%= details[0].tch_id %>" required>
+            <input type="email" id="emailAddress" name="email" value="<%= details[0].email %>" required>
+            <input type="text" id="f_name" name="f_name" placeholder="First Name" value="<%= details[0].f_name %>" required>
+            <input type="text" id="l_name" name="l_name" placeholder="Last Name" value="<%= details[0].l_name %>" required>
+            <input type="text" id="facebook_id" name="facebook_id" placeholder="Link to Facebook Id(Optional)">
+            <input type="text" id="googleplus_id" name="googleplus_id" placeholder="Link to Google Plus Id(Optional)"value="<%= details[0].goo %>">
+            <input type="text" id="designation" name="designation" placeholder="Designation"value="<%= details[0].designation %>">
+            <input type="text" id="phn_no" name="contact" placeholder="Your Contact Number" value="<%= details[0].contact %>" required>
             <input type="submit" value="Update" class="login login-submit">
-            
+            <input type="button" value="Cancel" class="login login-submit" style="float: right" onclick="location.refresh()">
         </form>
     </div>
 

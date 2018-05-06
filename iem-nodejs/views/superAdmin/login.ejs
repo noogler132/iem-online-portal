@@ -35,13 +35,13 @@
     <center>
         <div style="height: 550px">
         <br>
-        
+        <% if(err){ %>
         <div class="alert alert-danger" role="alert" style="width: 350px">
-            <strong>Error Message</strong>
+            <strong><%= err %></strong>
         </div>
-       
+       <% } %>
         <div class="login-card">
-            <h2>SuperAdmin Log-in</h2><br>
+            <h2>Admin Log-in</h2><br>
             <form method="POST">
                 <div class="input-group input-group-lg w3_w3layouts">
                     <span class="input-group-addon" id="sizing-addon1">@</span>

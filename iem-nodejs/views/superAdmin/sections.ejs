@@ -30,25 +30,25 @@
         <input type="hidden" name="username" id="username">
         <input type="hidden" name="password" id="password">
     </form>
-        <script>
-            <% if(err !== ''){ %>
-            alert('<%= err %>');
-            document.getElementById('username').value = '';
-            document.getElementById('password').value = '';
-            <% } %>
-            <% if(!user.isLoggedIn){ %>
-            alert('<%= user.isLoggedIn %>')
-            var username = prompt("USERNAME","Enter your username here");
-            var password = prompt("PASSWORD","Enter your Password");
-            alert(username + password);
-            document.getElementById('username').value = username;
-            alert(username + password);
-            document.getElementById('password').value = password;
-            alert(username + password);
-            document.getElementById('loginform').submit();
-            alert(username + password);
-            <% } %>
-        </script>
+        <!--<script>-->
+            <!--<% // if(err !== ''){ %>-->
+            <!--alert('<%= //err %>');-->
+            <!--document.getElementById('username').value = '';-->
+            <!--document.getElementById('password').value = '';-->
+            <!--<% // } %>-->
+            <!--<% // if(!user.isLoggedIn){ %>-->
+            <!--alert('<%=// user.isLoggedIn %>')-->
+            <!--var username = prompt("USERNAME","Enter your username here");-->
+            <!--var password = prompt("PASSWORD","Enter your Password");-->
+            <!--alert(username + password);-->
+            <!--document.getElementById('username').value = username;-->
+            <!--alert(username + password);-->
+            <!--document.getElementById('password').value = password;-->
+            <!--alert(username + password);-->
+            <!--document.getElementById('loginform').submit();-->
+            <!--alert(username + password);-->
+            <!--<% // } %>-->
+        <!--</script>-->
 </head>
 
 <body>

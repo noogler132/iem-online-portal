@@ -2,7 +2,7 @@
 
 <head>
     <%- include('./adminHeader', {}); %>
-        <hr>
+    <hr>
         <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
         <link rel="stylesheet" href="/index/css/admin_students.css" media="screen" type="text/css" />
     <style>
@@ -13,28 +13,27 @@
     <script>
         
      function loadbody() {
-         <% if(dept !== ''){ %>
+         <% if(dept !== '' && dept !== undefined){ %>
          document.getElementById('dept').value = '<%= dept %>';
          <% } %>
-         <% if(add_year !== ''){ %>
+         <% if(add_year !== ''&& add_year !== undefined){ %>
          document.getElementById('add_year').value = '<%= add_year %>';
          <% } %>
-         document.getElementById('update').style.display = 'none';
+         document.getElementById('action').value = '';
      }
 
-     function action(u_roll, action) {
-         // alert('called');
-         document.getElementById('update').style.display = 'block';
-         // alert('setkey');
+     function setaction(u_roll, action) {
          document.getElementById('action').value = action;
-         // alert('setaction');
+         document.getElementById('u_roll').value = u_roll;
          if(action === 'delete'){
              document.getElementById(u_roll).style.display = 'none';
+             document.getElementById('form').submit();
          }
-         document.getElementById('form').submit();
-
+         else if(action === 'update'){
+             // document.getElementById('form').action = '/superAdmin/update-student/'+u_roll;
+             document.getElementById('form').submit();
+         }
      }
-
     </script>
 </head>
 
@@ -47,19 +46,20 @@
             <div class="column">
             </div>
             <div class="column">
-
-                    <select name="dept" id="dept" style="padding-right: 10px; width: 36%;" onchange="document.getElementById('form').submit()">
+                <select name="dept" id="dept" style="padding-right: 10px; width: 36%;" onchange="document.getElementById('form').submit()">
                         <option disabled selected>Choose Department</option>
                         <option value="BCA">BCA</option>
                         <option value="BBA">BBA</option>
                     </select>
-                    <select name="add_year" id="add_year" style="width: 36%" onchange="document.getElementById('form').submit()">
+                <select name="add_year" id="add_year" style="width: 36%" onchange="document.getElementById('form').submit()">
                         <option disabled selected id="add_year_placeholder">Choose Admission Year</option>
                         <option value="2015">2015</option>
                         <option value="2016">2016</option>
                         <option value="2017">2017</option>
                     </select>
-                <!--<button type="submit" name="view" class="login login-submit" id="view_btn">View</button>-->
+                <input type="hidden" name="action" id="action">
+                <input type="hidden" name="u_roll" id="u_roll">
+
             </div>
             <div class="column">
             </div>
@@ -82,7 +82,7 @@
                 </li>
 
 
-                <% for( var i=0; i<student.length; i++){ %>
+                <% for( var i=0; i<student.length && student !== undefined; i++){ %>
                 <li class="table-row" style="font-family: 'Ubuntu';" id="<%= student[i].u_roll %>">
                     <div class="col col-1" data-label="Roll No.">
                         <%= student[i].u_roll %>
@@ -100,7 +100,9 @@
                         <%= student[i].l_name %>
                     </div>
                     <div class="col col-6" data-label="Date of Birth">
+                        <% if(student[i].dob  !== undefined){ %>
                         <%= student[i].dob.toDateString() %>
+                        <% } %>
                     </div>
                     <div class="col col-7" data-label="Department">
                         <%= student[i].dept %>
@@ -113,13 +115,13 @@
                     </div>
 
                     <div class="col col-10" data-label="Update" style="padding-left: 5px;">
-                        <button class="button" style="padding-top: 2px;" onclick="action('<%= student[i].u_roll %>', 'update')">
+                        <button class="button" style="padding-top: 2px;" onclick="setaction('<%= student[i].u_roll %>', 'update')">
                             <span>Update</span>
                         </button>
 
                     </div>
                     <div class="col col-11" data-label="Delete" style="padding-left: 5px;">
-                        <button class="button" style="padding-top: 2px;" onclick="action('<%= student[i].u_roll %>', 'delete')">
+                        <button class="button" style="padding-top: 2px;" onclick="setaction('<%= student[i].u_roll %>', 'delete')">
                             <span>Delete</span>
                         </button>
                     </div>

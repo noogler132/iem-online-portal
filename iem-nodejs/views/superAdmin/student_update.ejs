@@ -13,25 +13,33 @@
     <div class="login-card" style="width: 350px;">
         <h2>Update Student Data</h2>
         <br>
-        <form method="post">
-            <input type="text" id="regn_no" placeholder="Registration Number" required>
-            <input type="email" id="emailAddress" name="email" placeholder="Email ID" required>
-            <input type="text" id="f_name" name="first_name" placeholder="First Name" required>
-            <input type="text" id="l_name" name="last_name" placeholder="Last Name" required>
-            <input type="date" id="dob" name="DOB" placeholder="Date of Birth" style="color: gray;" required>
-            <select id="dept" name="department" style="color: gray;" required>
-                <option value="" disabled selected>Department</option>
+        <form method="post" action="/superAdmin/update-student">
+            <% if(err){ %>
+            <div class="alert alert-danger" role="alert" style="width: 350px">
+                <strong><%= err %></strong>
+            </div>
+            <% } %>
+            <input type="text" id="roll" name="u_roll" value="<%= details[0].u_roll %>" required disabled>
+            <input type="hidden" name="u_id" value="<%= details[0].u_roll %>">
+            <input type="email" id="emailAddress" name="email" value="<%= details[0].email %>" required>
+            <input type="text" id="registration" name="u_reg" placeholder="University Registration Number" value="<%= details[0].u_reg %>" required>
+            <input type="text" id="f_name" name="f_name" placeholder="First Name" value="<%= details[0].f_name %>" required>
+            <input type="text" id="l_name" name="l_name" placeholder="Last Name" value="<%= details[0].l_name %>" required>
+            <input name="dob" placeholder="Date of Birth" class="form-control" type="text"
+                   value="<%= (details[0].dob.getMonth()+1) +'/' + details[0].dob.getDate() +'/'+details[0].dob.getFullYear() %>"
+                   onfocus="(this.type='date')" onblur="(this.type='text')" id="dob" required>
+            <select id="dept" name="dept" style="color: gray;" value="<%= details[0].dept %>" required>
                 <option value="BCA">BCA</option>
                 <option value="BBA">BBA</option>
             </select>
-            <select id="adm_year" name="admission_year" style="color: gray;" required>
-                <option value="" disabled selected>Admission Year</option>
+            <select id="add_year" name="add_year" style="color: gray;" value="<%= details[0].add_year %>" required>
                 <option value="2015">2015</option>
                 <option value="2016">2016</option>
                 <option value="2017">2017</option>
             </select>
-            <input type="number" maxlength="10" id="contact" name="contact" placeholder="Phone NUmber" required>
+            <input type="text" id="phn_no" name="contact" placeholder="Your Contact Number" value="<%= details[0].contact %>" required>
             <input type="submit" value="Update" class="login login-submit">
+            <input type="button" value="Cancel" class="login login-submit" style="float: right" onclick="location.refresh()">
         </form>
         </div>
 </body>
