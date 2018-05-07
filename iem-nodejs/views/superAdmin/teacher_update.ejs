@@ -14,7 +14,11 @@
         <h2>Update Teacher Data</h2>
         <br>
         <form method="post" action="/superAdmin/update-teacher">
-
+            <% if(err){ %>
+            <div class="alert alert-danger" role="alert" style="width: 350px">
+                <strong><%= err %></strong>
+            </div>
+            <% } %>
             <input type="text" id="tch_id" name="tch_id" value="<%= details[0].tch_id %>" required disabled>
             <input type="hidden" name="u_id" id="u_id" value="<%= details[0].tch_id %>" required>
             <input type="email" id="emailAddress" name="email" value="<%= details[0].email %>" required>
