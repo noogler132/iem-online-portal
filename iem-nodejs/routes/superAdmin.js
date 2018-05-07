@@ -23,6 +23,25 @@ router.get('/view-user', function(req, res, next) {
         res.render('superAdmin/auth-table', {err: '', users: result});    });
 });
 
+/* POST USER AUTH TABLE */
+router.post('/view-user', function(req, res, next) {
+    if(!validateAdmin(req, res)){
+        return;
+    }
+    if(req.body.action === 'delete' && req.body.u_id !== '' && req.body.u_id !== undefined && req.body.as !== '' && req.body.as !== undefined){
+        db.query('delete from auth where u_id = ?', req.body.u_id, function (err, result) {});
+        if(req.body.as === 'stu'){
+            db.query('delete from student_details where u_roll = ?', req.body.u_id, function (err, result) {});
+        }
+        else if(req.body.as === 'tch'){
+            db.query('delete from teacher_details where tch_id = ?', req.body.u_id, function (err, result) {});
+        }
+    }
+    db.query('Select * from auth order by u_id', function (err, result) {
+        res.render('superAdmin/auth-table', {err: '', users: result});    });
+});
+
+
 /* GET ADD USER */
 router.get('/add-user', function(req, res, next) {
     if(!validateAdmin(req, res)){
@@ -411,14 +430,11 @@ router.post('/update-teacher/', function(req, res, next) {
 
 
 
-
-
-
 /* GET subject page */
 router.get('/subjects', function(req, res, next) {
-    // if(!validateAdmin(req, res)){
-    //     return;
-    // }
+    if(!validateAdmin(req, res)){
+        return;
+    }
     db.query('Select * from subjects', function (err, result) {
         var dept = '';
         var sem = '';
@@ -428,9 +444,9 @@ router.get('/subjects', function(req, res, next) {
 
 /* POST subject page */
 router.post('/subjects', function(req, res, next) {
-    // if(!validateAdmin(req, res)){
-    //     return;
-    // }
+    if(!validateAdmin(req, res)){
+        return;
+    }
     var sem = req.body.sem;
     var dept = req.body.dept;
     if(req.body.action === 'update') {
@@ -465,9 +481,9 @@ router.post('/subjects', function(req, res, next) {
 
 /* GET SUBJECT UPDATE PAGE */
 function updateSubject(req, res) {
-    // if(!validateAdmin(req, res)){
-    //     return;
-    // }
+    if(!validateAdmin(req, res)){
+        return;
+    }
     var sub_code = req.body.sub_code;
     if(sub_code === '' || sub_code === undefined){
         return 0;
@@ -485,9 +501,9 @@ function deleteSubject(sub_code) {
 
 /* GET SUBJECT UPDATE PAGE */
 router.post('/update-subject', function(req, res, next) {
-    // if(!validateAdmin(req, res)){
-    //     return;
-    // }
+    if(!validateAdmin(req, res)){
+        return;
+    }
     var sem_code = req.body.sem_code;
     var sub_name = req.body.sub_name;
     var sub_code = req.body.sub_code;
@@ -532,19 +548,18 @@ router.post('/update-subject', function(req, res, next) {
 
 /* GET SUBJECT ADD PAGE */
 router.get('/add-subject', function(req, res, next) {
-    // if(!validateAdmin(req, res)){
-    //     return;
-    // }
-
+    if(!validateAdmin(req, res)){
+        return;
+    }
     res.render('superAdmin/add-subject', {err: '', success: ''});
 });
 
 
 /* GET SUBJECT ADD PAGE */
 router.post('/add-subject', function(req, res, next) {
-    // if(!validateAdmin(req, res)){
-    //     return;
-    // }
+    if(!validateAdmin(req, res)){
+        return;
+    }
     var sem_code = req.body.sem_code;
     var sub_name = req.body.sub_name;
     var sub_code = req.body.sub_code;
