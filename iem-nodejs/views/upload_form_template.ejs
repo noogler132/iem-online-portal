@@ -20,7 +20,7 @@
         <!--<br><br><br>-->
         <!--<div>-->
             <!--<form method="post" enctype="multipart/form-data">-->
-                <% if( progress !== 404){ %>
+                <% if( progress !== 404 && error !== ''){ %>
                 <div class="alert alert-danger" role="alert" style="width: 350px">
                     <strong>Error:</strong> <%= error %>
                 </div>
