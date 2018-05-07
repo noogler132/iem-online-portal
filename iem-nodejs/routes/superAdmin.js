@@ -352,30 +352,37 @@ router.post('/update-teacher/', function(req, res, next) {
         if(oldEmail !== email){
             var query = 'update auth set email = \''+email+'\' where u_id = ' + u_id;
             db.query(query , function (err, resultemail) {
+                console.log(resultemail);
                 if(resultemail === undefined){
                     res.render('superAdmin/teacher_update', {details: result, err: 'This email is already in use.'});
                 }
                 else{
                     db.query('delete from teacher_details where tch_id = ?', u_id, function (err, result) {
-                        console.log('deleted');
-                    });
-                    var arr = [u_id, email, f_name, l_name, facebook_id, googleplus_id, contact, designation];
-                    db.query("Insert into teacher_details(tch_id, email, f_name, l_name, facebook_id, googleplus_id, contact, designation) values (?,?,?,?,?,?,?,?)",
-                        arr, function (err, result, fields) {
-                            res.redirect('/superAdmin/students');
+                        // var arr = [u_id, f_name, l_name, contact, email, facebook_id, googleplus_id, designation];
+                        var insertquery = 'INSERT INTO `iemweb-databse`.`teacher_details` (`tch_id`, `f_name`, `l_name`, `contact`, `email`, `facebook_id`, `googleplus_id`, `designation`) VALUES ' +
+                            '(\''+u_id+'\', \''+f_name+'\', \''+l_name+'\', \''+contact+'\', \''+email+'\', \''+facebook_id+'\', \''+googleplus_id+'\', \''+designation+'\');';
+                        // db.query("Insert into teacher_details(tch_id, email, f_name, l_name, facebook_id, googleplus_id, contact, designation) values (?,?,?,?,?,?,?,?)",
+                        db.query(insertquery, function (err, result, fields) {
+                            res.redirect('/superAdmin/teachers');
                         });
+                    });
+
                 }
             });
         }
         else{
             db.query('delete from teacher_details where tch_id = ?', u_id, function (err, result) {
                 console.log('deleted');
+                // var arr = [u_id, f_name, l_name, contact, email, facebook_id, googleplus_id, designation];
+                var query = 'INSERT INTO `iemweb-databse`.`teacher_details` (`tch_id`, `f_name`, `l_name`, `contact`, `email`, `facebook_id`, `googleplus_id`, `designation`) VALUES ' +
+                    '(\''+u_id+'\', \''+f_name+'\', \''+l_name+'\', \''+contact+'\', \''+email+'\', \''+facebook_id+'\', \''+googleplus_id+'\', \''+designation+'\');';
+                // db.query("Insert into teacher_details(tch_id, email, f_name, l_name, facebook_id, googleplus_id, contact, designation) values (?,?,?,?,?,?,?,?)",
+                db.query(query, function (err, result, fields) {
+                    res.redirect('/superAdmin/teachers');
+                });
             });
-            var arr = [u_id, email, f_name, l_name, facebook_id, googleplus_id, contact, designation];
-            db.query("Insert into teacher_details(tch_id, email, f_name, l_name, facebook_id, googleplus_id, contact, designation) values (?,?,?,?,?,?,?,?)",
-                arr, function (err, result, fields) {
-                    res.redirect('/superAdmin/students');
-            });
+
+
         }
 
     });

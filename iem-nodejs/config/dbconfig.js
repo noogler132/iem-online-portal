@@ -25,22 +25,22 @@ var mysql = require('mysql');
 
 
 /* mysql workbench */
-// db = mysql.createConnection({
-//     host: 'localhost',
-//     user: 'root',
-//     password: 'mysql',
-//     database: 'iemweb-databse',
-//     port: '3306'
-// });
+ db = mysql.createConnection({
+     host: 'localhost',
+     user: 'root',
+     password: 'mysql',
+     database: 'iemweb-databse',
+     port: '3306'
+ });
 
 /* WAMP */
-db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'iemweb-databse',
-    port: '3306'
-});
+//db = mysql.createConnection({
+//    host: 'localhost',
+//    user: 'root',
+//    password: '',
+//    database: 'iemweb-databse',
+//    port: '3306'
+//});
 
 
 db.connect(function(err) {
