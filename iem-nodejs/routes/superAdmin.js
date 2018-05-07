@@ -54,9 +54,7 @@ function insertQuery(u_id, email, log_as) {
     var password = Math.floor(Math.random() * 99999999) + 105555;
     /* Set new user password */
         var hash = bcrypt.hashSync(password.toString(), 8);
-    db.query('INSERT INTO auth(u_id, email, password, log_as) VALUES (?,?,?,?) ', [u_id, email, hash, log_as], function (err, result) {
-        if(err) throw err;
-    });
+    db.query('INSERT INTO auth(u_id, email, password, log_as) VALUES (?,?,?,?) ', [u_id, email, hash, log_as], function (err, result) {});
     doMail(email, password);
 }
 
@@ -119,10 +117,8 @@ router.post('/add-user-uploadxls', function(req, res, next) {
                 if(exceltocvs(newpath, files.filetoupload.name, dir)) {
                     /* Upload to Database */
                     var path = dir + files.filetoupload.name.split(".", 1) + ".csv";
-                    console.log(path);
                     fs.readFile(path, function (err, data) {
                         if (err) throw err;
-                        console.log(data);
                         uploadtodb('auth','', data);
                     });
                 }
@@ -250,7 +246,6 @@ router.post('/update-student/', function(req, res, next) {
                 }
                 else{
                     db.query('delete from student_details where u_roll = ?', u_id, function (err, result) {
-                        console.log('deleted');
                     });
                     dob = new Date(dob);
                     var arr = [u_id, email, u_reg, f_name, l_name, dob, dept, add_year, contact];
@@ -263,7 +258,6 @@ router.post('/update-student/', function(req, res, next) {
         }
         else {
             db.query('delete from student_details where u_roll = ?', u_id, function (err, result) {
-                console.log('deleted');
             });
             dob = new Date(dob);
             var arr = [u_id, email, u_reg, f_name, l_name, dob, dept, add_year, contact];
@@ -350,9 +344,8 @@ router.post('/update-teacher/', function(req, res, next) {
         }
         var oldEmail = result[0].email;
         if(oldEmail !== email){
-            var query = 'update auth set email = \''+email+'\' where u_id = ' + u_id;
+            var query = 'update auth set email = \''+email+'\' where u_id = \'' + u_id +'\'';
             db.query(query , function (err, resultemail) {
-                console.log(resultemail);
                 if(resultemail === undefined){
                     res.render('superAdmin/teacher_update', {details: result, err: 'This email is already in use.'});
                 }
@@ -372,7 +365,6 @@ router.post('/update-teacher/', function(req, res, next) {
         }
         else{
             db.query('delete from teacher_details where tch_id = ?', u_id, function (err, result) {
-                console.log('deleted');
                 // var arr = [u_id, f_name, l_name, contact, email, facebook_id, googleplus_id, designation];
                 var query = 'INSERT INTO `iemweb-databse`.`teacher_details` (`tch_id`, `f_name`, `l_name`, `contact`, `email`, `facebook_id`, `googleplus_id`, `designation`) VALUES ' +
                     '(\''+u_id+'\', \''+f_name+'\', \''+l_name+'\', \''+contact+'\', \''+email+'\', \''+facebook_id+'\', \''+googleplus_id+'\', \''+designation+'\');';
@@ -414,7 +406,6 @@ router.get('/subjects', function(req, res, next) {
         return;
     }
     db.query('Select * from subjects', function (err, result) {
-        if(err) throw err;
         res.render('superAdmin/subject-table', {subjects: result});
     });
 });
