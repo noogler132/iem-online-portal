@@ -39,9 +39,20 @@
     <br>
     <br>
     <center>
+        <% if(err){ %>
+        <div class="alert alert-danger" role="alert" style="width: 350px">
+            <strong><%= err %></strong>
+        </div>
+        <% } %>
+        <% if(success){ %>
+        <div class="alert alert-success" role="alert">
+            <strong>Well done!</strong> <%= success %>
+        </div>
+        <% } %>
         <div style="width:400px; height: inherit; padding:3% 3% 3% 3%;" class="login-card">
             <form method="post">
                 <br>
+
                 <label for="u_id">User Id</label>
                 <input type="text" id="u_id" name="u_id" placeholder="Your User ID here.." required>
                 <br>
