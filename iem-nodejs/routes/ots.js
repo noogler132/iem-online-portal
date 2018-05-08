@@ -191,7 +191,22 @@ router.post('/:sem([1-6])/:subcode(\\w+)/', function(req, res, next) {
 });
 
 
+router.get('/instructions', function(req, res, next) {
+    var user = checkSession(req);
+    if(!validateStudent(user, req, res)){
+        return;
+    }
+    if(req.session.test === undefined || req.session.test === ''){
+        res.redirect('/online-test');
+        return;
+    }
+    var test_key = req.session.test.sub_code + '_' + req.session.test.test_no;
+    db.query("SELECT * FROM test_questions WHERE test_key = ?", test_key, function (err, result)
+    {
+        res.render('ots/instructions', { sub_code: req.session.test.sub_code, test_no: req.session.test.test_no, total_questions: result.length});
+    });
 
+});
 
 
 
