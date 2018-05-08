@@ -160,25 +160,29 @@
             <option value="2016">2016</option>
             <option value="2017">2017</option>
         </select>
-            <input type="hidden" name="test_key" value="<%= results[0].test_key %>">
+            <input type="hidden" name="test_key" id="test_key" value="test_key">
         </form>
         <br>
         <br>
         <div style="height: inherit; background-color: aquamarine;">
             <br>
             <span>
-                <h3>Subject Code: <%= results[0].test_key.split('_', 1)%></h3>
+                <h3>Subject Code: <%= test_key.split('_', 1)%></h3>
             </span>
 <br>
             <span>
-                <h3>Test Number: <%= results[0].test_key.split('_', 2)[1]%></h3>
+                <h3>Test Number: <%= test_key.split('_', 2)[1]%></h3>
             </span>
             <br>
         </div>
         <br>
         <div style="height: inherit; width: 400px;">
             <span>
+                <% if(results.length > 0){%>
                 <h3>Total Marks: <%= results[0].total %></h3>
+                <% }else{%>
+                <h3>Total Marks: Unavailable</h3>
+                <% }%>
             </span>
             <ul class="responsive-table" id="tests_ul">
                 <li class="table-header">

@@ -8,8 +8,6 @@ var fs = require('fs');
 /* GET home page. */
 router.get('/', function(req, res) {
   var user = checkSession(req);
-  console.log('____________');
-  console.log( req.session);
   res.render('index/index', { title: 'IEM', user: user });
 });
 
@@ -43,7 +41,6 @@ router.get('/contact_us', function(req, res) {
 /* GET About us page */
 router.get('/about', function(req, res) {
     var user = checkSession(req);
-    console.log(req.session);
     res.render('index/about', { title: 'IEM', user: user });
 });
 
@@ -56,15 +53,15 @@ router.get('/about', function(req, res) {
 /* GET Notice upload page */
 router.get('/notice_upload', function(req, res) {
     var user = checkSession(req);
-    if(!user.isLoggedIn) {
-        req.session.redirect = '/notice_upload';
-        res.redirect('/login');
-        return;
-    }
-    else if(user.as !== 'tch'){
-        res.render('message', {user: user, message: 'Only Teachers has access to this page'});
-        return;
-    }
+    // if(!user.isLoggedIn) {
+    //     req.session.redirect = '/notice_upload';
+    //     res.redirect('/login');
+    //     return;
+    // }
+    // else if(user.as !== 'tch'){
+    //     res.render('message', {user: user, message: 'Only Teachers has access to this page'});
+    //     return;
+    // }
     res.render('upload_form', {
         title: 'Upload Notice',
         error: '',
@@ -79,15 +76,15 @@ router.get('/notice_upload', function(req, res) {
 router.post('/notice_upload', function(req, res) {
 
     var user = checkSession(req);
-    if(!user.isLoggedIn) {
-        req.session.redirect = '/notice_upload';
-        res.redirect('/login');
-        return;
-    }
-    else if(user.as !== 'tch'){
-        res.render('message', {user: user, message: 'Only Teachers has access to this page'});
-        return;
-    }
+    // if(!user.isLoggedIn) {
+    //     req.session.redirect = '/notice_upload';
+    //     res.redirect('/login');
+    //     return;
+    // }
+    // else if(user.as !== 'tch'){
+    //     res.render('message', {user: user, message: 'Only Teachers has access to this page'});
+    //     return;
+    // }
     var filedata = {name: '', path: ''};
     var maildata = {
         subject: '',
@@ -172,27 +169,22 @@ router.post('/notice_upload', function(req, res) {
             if (length > 1) {
                 for (var i = 0; i < length; i++) {
                     var oldpath = files.filetoupload[i].path;
-                    var newpath = '../Uploads/Notices/' + user.username + '_' + moment().format('YYYY-MM-DD') + '_' + files.filetoupload[i].name;
+                    var newpath = './Uploads/Notices/' + user.username + '_' + moment().format('YYYY-MM-DD') + '_' + files.filetoupload[i].name;
                     filedata.name = files.filetoupload[i].name;
                     filedata.path = newpath;
                     maildata.file[i] = filedata;
-
-
                     fs.rename(oldpath, newpath, function (err) {
-                        if (err) throw err;
                     });
                 }
             }
             else {
                 var oldpath = files.filetoupload.path;
-                var newpath = '../Uploads/Notices/' + user.username + '_' + moment().format('YYYY-MM-DD') + '_' + files.filetoupload.name;
+                var newpath = './Uploads/Notices/' + user.username + '_' + moment().format('YYYY-MM-DD') + '_' + files.filetoupload.name;
                 filedata.name = files.filetoupload.name;
                 filedata.path = newpath;
                 maildata.file[0] = filedata;
 
-
                 fs.rename(oldpath, newpath, function (err) {
-                    if (err) throw err;
                 });
             }
         }
@@ -360,7 +352,7 @@ router.post('/mail-mats', function(req, res) {
             if (length > 1) {
                 for (var i = 0; i < length; i++) {
                     var oldpath = files.filetoupload[i].path;
-                    var newpath = '../Uploads/Notices/' + user.username + '_' + moment().format('YYYY-MM-DD') + '_' + files.filetoupload[i].name;
+                    var newpath = './Uploads/Notices/' + user.username + '_' + moment().format('YYYY-MM-DD') + '_' + files.filetoupload[i].name;
                     filedata.name = files.filetoupload[i].name;
                     filedata.path = newpath;
                     maildata.file[i] = filedata;
@@ -372,7 +364,7 @@ router.post('/mail-mats', function(req, res) {
             }
             else {
                 var oldpath = files.filetoupload.path;
-                var newpath = '../Uploads/Notices/' + user.username + '_' + moment().format('YYYY-MM-DD') + '_' + files.filetoupload.name;
+                var newpath = './Uploads/Notices/' + user.username + '_' + moment().format('YYYY-MM-DD') + '_' + files.filetoupload.name;
                 filedata.name = files.filetoupload.name;
                 filedata.path = newpath;
                 maildata.file[0] = filedata;

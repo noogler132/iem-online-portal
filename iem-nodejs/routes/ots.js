@@ -423,7 +423,7 @@ router.post('/view-all-result', function(req, res, next) {
             'student_details.dept = \''+req.body.dept+'\' and add_year = \''+req.body.add_year+'\';'
     }
     db.query(query, function (err, results) {
-        res.render('ots/view_all_result', {user: user, results: results});
+        res.render('ots/view_all_result', {user: user, results: results, test_key: test_key});
     });
 });
 
@@ -501,6 +501,24 @@ router.post('/upload', function(req, res, next) {
                 multiple: false,
                 subject: false
             });
+            return;
+        }
+        if(db.query('select * from subjects where sub_code = ?', fields.sub_code, function (err, result) {
+            if(result.length === 0){
+                res.render('ots/tch_home', {
+                    title: 'Upload Excel File Here',
+                    error: 'Invalid Subject Code',
+                    user: user,
+                    progress: 404,
+                    file: true,
+                    text: false,
+                    multiple: false,
+                    subject: false
+                });
+                return 1;
+            }
+            else return 0;
+        })){
             return;
         }
         if(files.filetoupload.name.match(/\.(xls|xlsx)$/i)) //if file is an excel document
