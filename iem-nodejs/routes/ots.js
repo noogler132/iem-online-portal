@@ -223,6 +223,8 @@ router.post('/start', function(req, res, next) {
     }
     var test_key = req.session.test.sub_code + '_' + req.session.test.test_no;
     var date = new Date();
+    console.log(test_key);
+    console.log(req.session);
     if(req.session.test.endTime < date.getTime()){
     res.render('message', {user: user, message: 'Unknown error occurred'});
         return;
