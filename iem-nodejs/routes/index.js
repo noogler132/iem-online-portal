@@ -53,15 +53,15 @@ router.get('/about', function(req, res) {
 /* GET Notice upload page */
 router.get('/notice_upload', function(req, res) {
     var user = checkSession(req);
-    // if(!user.isLoggedIn) {
-    //     req.session.redirect = '/notice_upload';
-    //     res.redirect('/login');
-    //     return;
-    // }
-    // else if(user.as !== 'tch'){
-    //     res.render('message', {user: user, message: 'Only Teachers has access to this page'});
-    //     return;
-    // }
+    if(!user.isLoggedIn) {
+        req.session.redirect = '/notice_upload';
+        res.redirect('/login');
+        return;
+    }
+    else if(user.as !== 'tch'){
+        res.render('message', {user: user, message: 'Only Teachers has access to this page'});
+        return;
+    }
     res.render('upload_form', {
         title: 'Upload Notice',
         error: '',
@@ -76,15 +76,15 @@ router.get('/notice_upload', function(req, res) {
 router.post('/notice_upload', function(req, res) {
 
     var user = checkSession(req);
-    // if(!user.isLoggedIn) {
-    //     req.session.redirect = '/notice_upload';
-    //     res.redirect('/login');
-    //     return;
-    // }
-    // else if(user.as !== 'tch'){
-    //     res.render('message', {user: user, message: 'Only Teachers has access to this page'});
-    //     return;
-    // }
+    if(!user.isLoggedIn) {
+        req.session.redirect = '/notice_upload';
+        res.redirect('/login');
+        return;
+    }
+    else if(user.as !== 'tch'){
+        res.render('message', {user: user, message: 'Only Teachers has access to this page'});
+        return;
+    }
     var filedata = {name: '', path: ''};
     var maildata = {
         subject: '',
@@ -183,7 +183,6 @@ router.post('/notice_upload', function(req, res) {
                 filedata.name = files.filetoupload.name;
                 filedata.path = newpath;
                 maildata.file[0] = filedata;
-
                 fs.rename(oldpath, newpath, function (err) {
                 });
             }
