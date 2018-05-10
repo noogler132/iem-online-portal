@@ -191,7 +191,22 @@ router.post('/:sem([1-6])/:subcode(\\w+)/', function(req, res, next) {
 });
 
 
+router.get('/instructions', function(req, res, next) {
+    var user = checkSession(req);
+    if(!validateStudent(user, req, res)){
+        return;
+    }
+    if(req.session.test === undefined || req.session.test === ''){
+        res.redirect('/online-test');
+        return;
+    }
+    var test_key = req.session.test.sub_code + '_' + req.session.test.test_no;
+    db.query("SELECT * FROM test_questions WHERE test_key = ?", test_key, function (err, result)
+    {
+        res.render('ots/instructions', { sub_code: req.session.test.sub_code, test_no: req.session.test.test_no, total_questions: result.length});
+    });
 
+});
 
 
 
@@ -223,6 +238,8 @@ router.post('/start', function(req, res, next) {
     }
     var test_key = req.session.test.sub_code + '_' + req.session.test.test_no;
     var date = new Date();
+    console.log(test_key);
+    console.log(req.session);
     if(req.session.test.endTime < date.getTime()){
     res.render('message', {user: user, message: 'Unknown error occurred'});
         return;
@@ -423,7 +440,7 @@ router.post('/view-all-result', function(req, res, next) {
             'student_details.dept = \''+req.body.dept+'\' and add_year = \''+req.body.add_year+'\';'
     }
     db.query(query, function (err, results) {
-        res.render('ots/view_all_result', {user: user, results: results});
+        res.render('ots/view_all_result', {user: user, results: results, test_key: test_key});
     });
 });
 
@@ -501,6 +518,24 @@ router.post('/upload', function(req, res, next) {
                 multiple: false,
                 subject: false
             });
+            return;
+        }
+        if(db.query('select * from subjects where sub_code = ?', fields.sub_code, function (err, result) {
+            if(result.length === 0){
+                res.render('ots/tch_home', {
+                    title: 'Upload Excel File Here',
+                    error: 'Invalid Subject Code',
+                    user: user,
+                    progress: 404,
+                    file: true,
+                    text: false,
+                    multiple: false,
+                    subject: false
+                });
+                return 1;
+            }
+            else return 0;
+        })){
             return;
         }
         if(files.filetoupload.name.match(/\.(xls|xlsx)$/i)) //if file is an excel document

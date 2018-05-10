@@ -5,38 +5,62 @@
         <hr>
         <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
         <link rel="stylesheet" href="/index/css/admin_subjects.css" media="screen" type="text/css" />
+    <script>
+        function setaction(sub_code, action) {
+            document.getElementById('action').value = action;
+            document.getElementById('sub_code').value = sub_code;
+            if(action === 'delete'){
+                document.getElementById(sub_code).style.display = 'none';
+                document.getElementById('form').submit();
+            }
+            else if(action === 'update'){
+                document.getElementById('form').submit();
+            }
+        }
+
+        function loadbody() {
+            <% if(dept !== '' && dept !== undefined){ %>
+            document.getElementById('dept').value = '<%= dept %>';
+            <% } %>
+            <% if(sem !== ''&& sem !== undefined){ %>
+            document.getElementById('sem').value = '<%= sem %>';
+            <% } %>
+            document.getElementById('action').value = '';
+        }
+    </script>
 </head>
 
-<body>
+<body onload="loadbody()">
     <br>
     <br>
-    <form>
+    <form method="post" id="form">
         <center>
             <div style="height: inherit;" class="row">
                 <div class="column">
 
                 </div>
                 <div class="column">
-                    <select name="slct" id="department" style="padding-right: 10px; width: 32%;">
+                    <select name="dept" id="dept" style="padding-right: 10px; width: 32%;" onchange="document.getElementById('form').submit();">
                         <option id="semPlaceholder" disabled selected>Select Department</option>
-                        <option id="dept_bca" value="bca">BCA</option>
-                        <option id="dept_bba" value="bba">BBA</option>
+                        <option id="dept_bca" value="BCA">BCA</option>
+                        <option id="dept_bba" value="BBA">BBA</option>
                     </select>
 
-                    <select name="slct" id="sem" style="padding-right: 10px; width: 32%;">
+                    <select name="sem" id="sem" style="padding-right: 10px; width: 32%;" onchange="document.getElementById('form').submit()">
                         <option id="semPlaceholder" disabled selected>Select Semester</option>
-                        <option id="sem_1" value="1">First</option>
-                        <option id="sem_2" value="2">Second</option>
-                        <option id="sem_3" value="3">Third</option>
-                        <option id="sem_4" value="4">Fourth</option>
-                        <option id="sem_5" value="5">Fifth</option>
-                        <option id="sem_6" value="6">Sixth</option>
+                        <option id="1" value="1">First</option>
+                        <option id="2" value="2">Second</option>
+                        <option id="3" value="3">Third</option>
+                        <option id="4" value="4">Fourth</option>
+                        <option id="5" value="5">Fifth</option>
+                        <option id="6" value="6">Sixth</option>
                     </select>
-
+                    <input type="hidden" name="action" id="action">
+                    <input type="hidden" name="sub_code" id="sub_code">
 
                 </div>
                 <div class="column" style="float: right;padding-top: 2%; padding-left: 20%;">
-                    <button type="submit" name="add_subject" class="login login-submit" id="view_btn">Add Subject</button>
+                    <button type="button" name="add_subject" class="login login-submit" id="view_btn" onclick="window.open('/superAdmin/add-subject', '_self')">Add Subject</button>
                 </div>
             </div>
             <div class="row" style="height: 70px;"></div>
@@ -58,17 +82,17 @@
                                 <%= subjects[i].sub_code %>
                             </div>
                             <div class="col col-3" data-label="Subject Name">
-                                <%= subjects[i].sem_name %>
+                                <%= subjects[i].sub_name %>
                             </div>
 
                             <div class="col col-4" data-label="Update" style="padding-left: 5px;">
-                                <button class="button" style="padding-top: 2px;">
+                                <button class="button" style="padding-top: 2px;" onclick="setaction('<%= subjects[i].sub_code %>', 'update')">
                                     <span>Update</span>
                                 </button>
 
                             </div>
                             <div class="col col-5" data-label="Delete" style="padding-left: 5px;">
-                                <button class="button" style="padding-top: 2px;">
+                                <button class="button" style="padding-top: 2px;" onclick="setaction('<%= subjects[i].sub_code %>', 'delete')">
                                     <span>Delete</span>
                                 </button>
                             </div>

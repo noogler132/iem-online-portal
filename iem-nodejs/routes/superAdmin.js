@@ -23,12 +23,31 @@ router.get('/view-user', function(req, res, next) {
         res.render('superAdmin/auth-table', {err: '', users: result});    });
 });
 
+/* POST USER AUTH TABLE */
+router.post('/view-user', function(req, res, next) {
+    if(!validateAdmin(req, res)){
+        return;
+    }
+    if(req.body.action === 'delete' && req.body.u_id !== '' && req.body.u_id !== undefined && req.body.as !== '' && req.body.as !== undefined){
+        db.query('delete from auth where u_id = ?', req.body.u_id, function (err, result) {});
+        if(req.body.as === 'stu'){
+            db.query('delete from student_details where u_roll = ?', req.body.u_id, function (err, result) {});
+        }
+        else if(req.body.as === 'tch'){
+            db.query('delete from teacher_details where tch_id = ?', req.body.u_id, function (err, result) {});
+        }
+    }
+    db.query('Select * from auth order by u_id', function (err, result) {
+        res.render('superAdmin/auth-table', {err: '', users: result});    });
+});
+
+
 /* GET ADD USER */
 router.get('/add-user', function(req, res, next) {
     if(!validateAdmin(req, res)){
         return;
     }
-    res.render('superAdmin/add-user', {err: ''});
+    res.render('superAdmin/add-user', {err: '', success: ''});
 });
 
 /* POST ADD USER */
@@ -39,14 +58,30 @@ router.post('/add-user', function(req, res, next) {
     var u_id = req.body.u_id;
     var email = req.body.email;
     var log_as = req.body.log_as;
-    if(u_id === '' || email === '' || log_as !== 'stu' || log_as !== 'tch' ||
+    if(u_id === '' || email === '' ||
     u_id === undefined || email === undefined || log_as === undefined){
         var err = 'All fields are mandatory';
         res.render('superAdmin/add-user', {err: err});
         return;
     }
-    insertQuery(u_id, email, log_as);
-    res.render('superAdmin/add-user', {err: ''});
+    db.query('select * from auth where u_id = \''+u_id+'\' OR email = \''+email+'\'', function (err, result) {
+        if(result.length > 0){
+            if(result[0].email === email && result[0].u_id === u_id){
+                var err = 'This User ID and Email Id is already taken.';
+            }
+            else if(result[0].email === email) {
+                var err = 'This Email Id is already taken.';
+            }
+            else if(result[0].u_id === u_id) {
+                var err = 'This User Id is already taken.';
+            }
+            res.render('superAdmin/add-user', {err: err, success: ''});
+        }
+        else{
+            insertQuery(u_id, email, log_as);
+            res.render('superAdmin/add-user', {err: '', success: 'User Added Successfully'});
+        }
+    });
 });
 
 /* Send OTP */
@@ -54,9 +89,7 @@ function insertQuery(u_id, email, log_as) {
     var password = Math.floor(Math.random() * 99999999) + 105555;
     /* Set new user password */
         var hash = bcrypt.hashSync(password.toString(), 8);
-    db.query('INSERT INTO auth(u_id, email, password, log_as) VALUES (?,?,?,?) ', [u_id, email, hash, log_as], function (err, result) {
-        if(err) throw err;
-    });
+    db.query('INSERT INTO auth(u_id, email, password, log_as) VALUES (?,?,?,?) ', [u_id, email, hash, log_as], function (err, result) {});
     doMail(email, password);
 }
 
@@ -119,10 +152,8 @@ router.post('/add-user-uploadxls', function(req, res, next) {
                 if(exceltocvs(newpath, files.filetoupload.name, dir)) {
                     /* Upload to Database */
                     var path = dir + files.filetoupload.name.split(".", 1) + ".csv";
-                    console.log(path);
                     fs.readFile(path, function (err, data) {
                         if (err) throw err;
-                        console.log(data);
                         uploadtodb('auth','', data);
                     });
                 }
@@ -173,7 +204,7 @@ router.post('/students', function(req, res, next) {
             return;
         }
     }
-    else if(req.body.action === 'delete'){
+    else if(req.body.action === 'delete'  && req.body.u_roll !== '' && req.body.u_roll !== undefined){
         deleteStudent(req.body.u_roll);
     }
     var query = '';
@@ -227,6 +258,9 @@ router.post('/update-student/', function(req, res, next) {
     var contact = req.body.contact;
     var dept = req.body.dept;
     var add_year = req.body.add_year;
+    if(u_id === undefined){
+        u_id = '';
+    }
     db.query('select * from student_details where u_roll = ?', u_id, function (err, result) {
         if(result.length === 0){
             res.render('superAdmin/student_update', {details: result, err: 'This user is not registered'});
@@ -250,7 +284,6 @@ router.post('/update-student/', function(req, res, next) {
                 }
                 else{
                     db.query('delete from student_details where u_roll = ?', u_id, function (err, result) {
-                        console.log('deleted');
                     });
                     dob = new Date(dob);
                     var arr = [u_id, email, u_reg, f_name, l_name, dob, dept, add_year, contact];
@@ -263,7 +296,6 @@ router.post('/update-student/', function(req, res, next) {
         }
         else {
             db.query('delete from student_details where u_roll = ?', u_id, function (err, result) {
-                console.log('deleted');
             });
             dob = new Date(dob);
             var arr = [u_id, email, u_reg, f_name, l_name, dob, dept, add_year, contact];
@@ -283,9 +315,9 @@ router.post('/update-student/', function(req, res, next) {
 
 /* GET TEACHERS DETAILS */
 router.get('/teachers', function(req, res, next) {
-    // if(!validateAdmin(req, res)){
-    //     return;
-    // }
+    if(!validateAdmin(req, res)){
+        return;
+    }
     db.query('Select * from teacher_details', function (err, result) {
         res.render('superAdmin/teacher-table', {teacher: result});
     });
@@ -293,15 +325,15 @@ router.get('/teachers', function(req, res, next) {
 
 /* POST TEACHERS DETAILS */
 router.post('/teachers', function(req, res, next) {
-    // if(!validateAdmin(req, res)){
-    //     return;
-    // }
+    if(!validateAdmin(req, res)){
+        return;
+    }
     if(req.body.action === 'update') {
         if (updateTeacher(req, res)) {
             return;
         }
     }
-    else if(req.body.action === 'delete'){
+    else if(req.body.action === 'delete' && req.body.tch_id !== '' && req.body.tch_id !== undefined){
         deleteTeacher(req.body.tch_id);
     }
     res.redirect('/superAdmin/teachers');
@@ -323,9 +355,9 @@ function deleteTeacher(tch_id) {
 
 /* POST TEACHER UPDATE PAGE */
 router.post('/update-teacher/', function(req, res, next) {
-    // if(!validateAdmin(req, res)){
-    //     return;
-    // }
+    if(!validateAdmin(req, res)){
+        return;
+    }
     var u_id = req.body.u_id;
     var email = req.body.email;
     var f_name = req.body.f_name;
@@ -334,6 +366,9 @@ router.post('/update-teacher/', function(req, res, next) {
     var facebook_id = req.body.facebook_id;
     var googleplus_id = req.body.googleplus_id;
     var designation = req.body.designation;
+    if(u_id === undefined){
+        u_id = '';
+    }
     db.query('select * from teacher_details where tch_id = ?', u_id, function (err, result) {
         if(result.length === 0){
             res.render('superAdmin/teacher_update', {details: result, err: 'This user is not registered'});
@@ -350,9 +385,8 @@ router.post('/update-teacher/', function(req, res, next) {
         }
         var oldEmail = result[0].email;
         if(oldEmail !== email){
-            var query = 'update auth set email = \''+email+'\' where u_id = ' + u_id;
+            var query = 'update auth set email = \''+email+'\' where u_id = \'' + u_id +'\'';
             db.query(query , function (err, resultemail) {
-                console.log(resultemail);
                 if(resultemail === undefined){
                     res.render('superAdmin/teacher_update', {details: result, err: 'This email is already in use.'});
                 }
@@ -372,7 +406,6 @@ router.post('/update-teacher/', function(req, res, next) {
         }
         else{
             db.query('delete from teacher_details where tch_id = ?', u_id, function (err, result) {
-                console.log('deleted');
                 // var arr = [u_id, f_name, l_name, contact, email, facebook_id, googleplus_id, designation];
                 var query = 'INSERT INTO `iemweb-databse`.`teacher_details` (`tch_id`, `f_name`, `l_name`, `contact`, `email`, `facebook_id`, `googleplus_id`, `designation`) VALUES ' +
                     '(\''+u_id+'\', \''+f_name+'\', \''+l_name+'\', \''+contact+'\', \''+email+'\', \''+facebook_id+'\', \''+googleplus_id+'\', \''+designation+'\');';
@@ -390,34 +423,175 @@ router.post('/update-teacher/', function(req, res, next) {
 });
 
 
-/* GET SUBJECT UPDATE PAGE */
-router.get('/add-subject', function(req, res, next) {
-    if(!validateAdmin(req, res)){
-        return;
-    }
-    res.render('superAdmin/add-subject');
-});
-
-/* GET SUBJECT UPDATE PAGE */
-router.get('/add-subject', function(req, res, next) {
-    if(!validateAdmin(req, res)){
-        return;
-    }
-    res.render('superAdmin/subject_add');
-});
 
 
 
 
+
+
+
+/* GET subject page */
 router.get('/subjects', function(req, res, next) {
     if(!validateAdmin(req, res)){
         return;
     }
     db.query('Select * from subjects', function (err, result) {
-        if(err) throw err;
-        res.render('superAdmin/subject-table', {subjects: result});
+        var dept = '';
+        var sem = '';
+        res.render('superAdmin/subject-table', {subjects: result, dept: dept, sem: sem});
     });
 });
+
+/* POST subject page */
+router.post('/subjects', function(req, res, next) {
+    if(!validateAdmin(req, res)){
+        return;
+    }
+    var sem = req.body.sem;
+    var dept = req.body.dept;
+    if(req.body.action === 'update') {
+        if (updateSubject(req, res)) {
+            return;
+        }
+    }
+    else if(req.body.action === 'delete' && req.body.sub_code !== '' && req.body.sub_code !== undefined){
+        deleteSubject(req.body.sub_code);
+    }
+    var query = '';
+    if( sem !== undefined && dept !== undefined){
+        query = 'Select * from subjects where dept = \''+dept+'\' and sem_code = \''+sem+'\' order by \'sub_code\'';
+    }
+    else if(sem !== undefined && dept === undefined){
+        query = 'Select * from subjects where sem_code = \''+sem+'\' order by \'sub_code\'';
+        dept = '';
+    }
+    else if(sem === undefined && dept !== undefined){
+        query = 'Select * from subjects where dept = \'' + dept +'\' order by \'sub_code\' ' ;
+        sem = '';
+    }
+    else{
+        query = 'Select * from subjects order by \'sub_code\' ' ;
+        dept = '';
+        sem = '';
+    }
+    db.query(query, function (err, result) {
+        res.render('superAdmin/subject-table', {subjects: result, dept: dept, sem: sem});
+    });
+});
+
+/* GET SUBJECT UPDATE PAGE */
+function updateSubject(req, res) {
+    if(!validateAdmin(req, res)){
+        return;
+    }
+    var sub_code = req.body.sub_code;
+    if(sub_code === '' || sub_code === undefined){
+        return 0;
+    }
+    db.query('select * from subjects where sub_code = ?', sub_code, function (err, result) {
+        res.render('superAdmin/update-subject', {err: '', subject: result, success: ''});
+    });
+    return 1;
+}
+
+function deleteSubject(sub_code) {
+    db.query('delete from subjects where sub_code = ?', sub_code, function (err, result) {});
+}
+
+
+/* GET SUBJECT UPDATE PAGE */
+router.post('/update-subject', function(req, res, next) {
+    if(!validateAdmin(req, res)){
+        return;
+    }
+    var sem_code = req.body.sem_code;
+    var sub_name = req.body.sub_name;
+    var sub_code = req.body.sub_code;
+    var dept = req.body.dept;
+    if(sub_code === undefined){
+        sub_code = '';
+    }
+    db.query('select * from subjects where sub_code = ?', req.body.old_sub_code,function (err, subject) {
+        if(sem_code === '' || sub_code === '' || sub_name === '' || dept=== '' ||
+            sem_code === undefined || sub_code === undefined || sub_name === undefined || dept=== undefined){
+            res.render('superAdmin/update-subject', {err: 'All fields are mandatory', success: '', subject: subject});
+            return;
+        }
+        if (subject[0].sub_code !== sub_code) {
+            db.query('select * from subjects where sub_code = ?', sub_code,function (err, newsubject) {
+                if(newsubject.length > 0){
+                    res.render('superAdmin/update-subject', {err: 'This Subject Code is already present', success: '', subject: subject});
+                }
+                else{
+                    db.query('delete from subjects where sub_code = ?', req.body.old_sub_code, function (err, result) {
+                        var arr = [sem_code, sub_code, sub_name, dept];
+                        db.query('Insert into subjects(sem_code, sub_code, sub_name, dept) values (?,?,?,?)', arr,function (err, result) {
+                            // res.render('superAdmin/update-subject', {err: '', success: 'Subject '+sub_code+' was successfully added', subject: subject});
+                            res.redirect('/superAdmin/subjects')
+                        });
+                    });
+                }
+            });
+        }
+        else{
+            db.query('delete from subjects where sub_code = ?', sub_code, function (err, result) {
+                var arr = [sem_code, sub_code, sub_name, dept];
+                db.query('Insert into subjects(sem_code, sub_code, sub_name, dept) values (?,?,?,?)', arr,function (err, result) {
+                    // res.render('superAdmin/update-subject', {err: '', success: 'Subject '+sub_code+' was successfully added', subject: subject});
+                    res.redirect('/superAdmin/subjects')
+                });
+            });
+        }
+    });
+});
+
+
+/* GET SUBJECT ADD PAGE */
+router.get('/add-subject', function(req, res, next) {
+    if(!validateAdmin(req, res)){
+        return;
+    }
+    res.render('superAdmin/add-subject', {err: '', success: ''});
+});
+
+
+/* GET SUBJECT ADD PAGE */
+router.post('/add-subject', function(req, res, next) {
+    if(!validateAdmin(req, res)){
+        return;
+    }
+    var sem_code = req.body.sem_code;
+    var sub_name = req.body.sub_name;
+    var sub_code = req.body.sub_code;
+    var dept = req.body.dept;
+    if(sem_code === '' || sub_code === '' || sub_name === '' || dept=== '' ||
+        sem_code === undefined || sub_code === undefined || sub_name === undefined || dept=== undefined){
+        res.render('superAdmin/add-subject', {err: 'All fields are mandatory', success: ''});
+        return;
+    }
+    db.query('select * from subjects where sub_code = ?', sub_code,function (err, result) {
+        if(result.length > 0){
+            res.render('superAdmin/add-subject', {err: 'This Subject Code is already present', success: ''});
+            return;
+        }
+        var arr = [sem_code, sub_code, sub_name, dept];
+        db.query('Insert into subjects(sem_code, sub_code, sub_name, dept) values (?,?,?,?)', arr,function (err, result) {
+            res.render('superAdmin/add-subject', {err: '', success: 'Subject '+sub_code+' was successfully added'});
+        });
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* GET superAdmin login page */

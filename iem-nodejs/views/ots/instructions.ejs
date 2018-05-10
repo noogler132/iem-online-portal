@@ -67,10 +67,10 @@
             <div class="container">
                 <div class="navbar-header navbar-left wthree" id="test_details" style="width: 20%">
                     <h4 style="padding-top: 55px;">
-                        <span>Subject Code: BCA101
+                        <span>Subject Code: <%= sub_code%>
                         </span>
                         <br>
-                        <span>Test Number: 10
+                        <span>Test Number: <%= test_no%>
                         </span>
                     </h4>
                 </div>
@@ -85,7 +85,7 @@
                 </div>
                 <div class="navbar-header navbar-right wthree" style="width:200px;">
                     <h4 style="padding-top: 55px;">
-                        <span id="showtime">Remaining Time : 10:00
+                        <span id="showtime">Remaining Time : <%= total_questions %>:00
                         </span>
                     </h4>
                 </div>
@@ -108,13 +108,13 @@
         <ul>
             <li id="no_of_ques">
                 <h3>
-                    <span>Total Number of Questions : <b>20</b></span>
+                    <span>Total Number of Questions : <b><%= total_questions %></b></span>
                 </h3>
             </li>
             <br>
             <li id="time">
                 <h3>
-                    <span>Time Alloted : <b>30</b> minutes</span>
+                    <span>Time Alloted : <b><%= total_questions %></b> minutes</span>
                 </h3>
             </li>
             <br>
@@ -145,7 +145,7 @@
     </div>
     <div>
         <center>
-            <button class="button">
+            <button class="button" onclick="window.open('/online-test/start', '_self')">
                 <span>Start Test</span>
             </button>
         </center>
