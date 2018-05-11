@@ -26,7 +26,6 @@ module.exports = function (table, fixed_data, data) {
     console.log(options+ data);
     console.log('--------------database starting');
     cm.import(options, data, function (err, rows) {
-        if (err) throw err;
         console.log('--------------database done');
     });
 };

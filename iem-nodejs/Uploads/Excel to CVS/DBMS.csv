@@ -1,0 +1,11 @@
+`Q_no`,`Question`,`Option1`,`Option2`,`Option3`,`Option4`,`Solution`,`Remarks`
+`1`,`The DBMS acts as an interface between what two components of an enterprise-class database system?`,`Database application and the database`,`Data and the database`,`The user and the database application`,`Database application and SQL`,`2`,`Op3 is right because..`
+`2`,`Which of the following products was an early implementation of the relational model developed by E.F. Codd of IBM?`,`IDMS`,`DB2`,`dBase-II`,`R:base`,`3`,`Op3 is right because..`
+`3`,`The following are components of a database except ________ .`,`user data`,`metadata`,`reports`,`indexes`,`2`,`Op3 is right because..`
+`4`,`An application where only one user accesses the database at a given time is an example of a(n) ________ .`,`single-user database application`,`multiuser database application`,`e-commerce database application`,`data mining database application`,`3`,`Op3 is right because..`
+`5`,`An on-line commercial site such as Amazon.com is an example of a(n) ________ .`,`single-user database application`,`multiuser database application`,`e-commerce database application`,`data mining database application`,`2`,`Op3 is right because..`
+`6`,`Every time attribute A appears, it is matched with the same value of attribute B, but not the same value of attribute C. Therefore, it is true that:`,`A → B.`,`A → C.`,`A → (B,C).`,`(B,C) → A.`,`3`,`Op3 is right because..`
+`7`,`The different classes of relations created by the technique for preventing modification anomalies are called:`,`normal forms.`,`referential integrity constraints.`,`functional dependencies.`,`None of the above is correct.`,`2`,`Op3 is right because..`
+`8`,`A relation is in this form if it is in BCNF and has no multivalued dependencies:`,`second normal form.`,`third normal form.`,`fourth normal form.`,`domain/key normal form.`,`3`,`Op3 is right because..`
+`9`,`Row is synonymous with the term:`,`record.`,`relation.`,`column.`,`field.`,`2`,`Op3 is right because..`
+`10`,`The primary key is selected from the:`,`composite keys.`,`determinants.`,`candidate keys.`,`foreign keys.`,`3`,`Op3 is right because..`

@@ -220,7 +220,7 @@ router.get('/start', function(req, res, next) {
         return;
     }
     var test_key = req.session.test.sub_code + '_' + req.session.test.test_no;
-    db.query("SELECT * FROM test_questions WHERE test_key = ?", test_key, function (err, result)
+    db.query("SELECT * FROM test_questions WHERE test_key = ? order by Q_no", test_key, function (err, result)
     {
         res.render('ots/exam', {title: 'IEM', user: user, question: result, sub_code:req.session.test.sub_code, test_no:req.session.test.test_no });
     });
