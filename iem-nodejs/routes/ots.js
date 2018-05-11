@@ -568,6 +568,7 @@ router.post('/upload', function(req, res, next) {
 
 
                res.render('ots/tch_home', {
+                title: 'Upload Excel File Here',
                    error: '',
                    user: user,
                    progress: 100,
