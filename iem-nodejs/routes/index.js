@@ -98,7 +98,7 @@ router.post('/notice_upload', function(req, res) {
 
     form.encoding = 'utf-8';
     form.keepExtensions = true;
-    form.uploadDir = 'D:\\iem-package\\iem-nodejs\\Uploads\\';
+    form.uploadDir = './Uploads/';
     form.multiples = true;
 
     form.parse(req, function (err, fields, files) {
@@ -277,7 +277,7 @@ router.post('/mail-mats', function(req, res) {
 
     form.encoding = 'utf-8';
     form.keepExtensions = true;
-    form.uploadDir = 'D:\\iem-package\\iem-nodejs\\Uploads\\';
+    form.uploadDir = './Uploads/';
     form.multiples = true;
 
     form.parse(req, function (err, fields, files) {

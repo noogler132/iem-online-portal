@@ -425,6 +425,7 @@ router.post('/view-all-result', function(req, res, next) {
     }
     var test_key = req.body.test_key;
     var action = req.body.action;
+    console.log(test_key + action );
     if(test_key === undefined || action !== 'result'){
         res.render('message', {
             user: user, message: 'Unknown Error Occurred'
@@ -448,9 +449,9 @@ router.post('/view-all-result', function(req, res, next) {
 /* GET upload page for teachers */
 router.get('/upload', function(req, res, next) {
     var user = checkSession(req);
-    if(!validateTeacher(user, req, res)){
-        return;
-    }
+    // if(!validateTeacher(user, req, res)){
+    //     return;
+    // }
     res.render('ots/tch_home', {
         title: 'Upload Excel File Here',
         error:'',
@@ -467,9 +468,9 @@ router.get('/upload', function(req, res, next) {
 router.post('/upload', function(req, res, next) {
     var formidable = require('formidable');
     var user = checkSession(req);
-    if(!validateTeacher(user, req, res)){
-        return;
-    }
+    // if(!validateTeacher(user, req, res)){
+    //     return;
+    // }
     var form = new formidable.IncomingForm();
     var dir = '../iem-nodejs/Uploads/Excel to CVS/';
     var uploadtodb = require('../supporting_codes/csv-database');
@@ -480,6 +481,8 @@ router.post('/upload', function(req, res, next) {
     form.keepExtensions = true;
     form.uploadDir = '../iem-nodejs/Uploads/';
     form.parse(req, function (err, fields, files) {
+        console.log(fields);
+        console.log(files);
         if(fields.subcode === undefined || fields.test_no === undefined){
             res.render('ots/tch_home', {
                 title: 'Upload Excel File Here',
@@ -520,7 +523,8 @@ router.post('/upload', function(req, res, next) {
             });
             return;
         }
-        if(db.query('select * from subjects where sub_code = ?', fields.sub_code, function (err, result) {
+        var ret = 0;
+        db.query('select * from subjects where sub_code = ?', fields.subcode, function (err, result) {
             if(result.length === 0){
                 res.render('ots/tch_home', {
                     title: 'Upload Excel File Here',
@@ -532,22 +536,25 @@ router.post('/upload', function(req, res, next) {
                     multiple: false,
                     subject: false
                 });
-                return 1;
+                ret = 1;
             }
-            else return 0;
-        })){
+        });
+        if(ret === 1){
             return;
         }
         if(files.filetoupload.name.match(/\.(xls|xlsx)$/i)) //if file is an excel document
         {
+            console.log('ssss');
            var oldpath = files.filetoupload.path;
            var newpath = '../iem-nodejs/Uploads/' + files.filetoupload.name;
 
            fs.rename(oldpath, newpath, function (err)
            {
+            console.log('ssss');
                if (err) throw err;
 
                /* Transform to CSV */
+            
                exceltocvs(newpath, files.filetoupload.name, dir);
 
                /* Upload to Database */
@@ -560,7 +567,7 @@ router.post('/upload', function(req, res, next) {
                /* Database complete */
 
 
-               res.render('upload_form', {
+               res.render('ots/tch_home', {
                    error: '',
                    user: user,
                    progress: 100,
