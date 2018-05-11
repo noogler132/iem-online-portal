@@ -67,11 +67,11 @@
             <div class="container">
                 <div class="navbar-header navbar-left wthree" id="test_details" style="width: 20%">
                     <h4 style="padding-top: 55px;">
-                        <span>Subject Code:
+                        <span>Subject Code: <%= sub_code %>
 
                         </span>
                         <br>
-                        <span>Test Number:
+                        <span>Test Number: <%= test_no %>
 
                         </span>
                     </h4>
@@ -93,9 +93,13 @@
 </head>
 
 <body>
-    <div class="row" style="height: 100px; padding-top: 2.5%;">
-        <button type="submit" name="add_subject" class="login login-submit" id="view_btn" style="float: right; margin-right: 10%;">View Solutions</button>
-    </div>
+    <form method="POST" action="/online-test/view-solutions" id="form">
+    <input type="hidden" name="test_no" value="<%= test_no %>">
+    <input type="hidden" name="subcode" value="<%= sub_code %>">
+    </form>
+    <!-- <div class="row" style="height: 100px; padding-top: 2.5%;">
+        <button type="submit" name="add_subject" class="login login-submit" id="view_btn" style="float: right; margin-right: 10%;" onclick="document.getElementById('form').submit()">View Solutions</button>
+    </div> -->
     <div class="row" style="height: 270px;">
         <center>
             <h2>

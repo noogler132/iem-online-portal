@@ -283,7 +283,7 @@ router.post('/result', function(req, res, next) {
             });
             return;
         }
-        res.render('ots/result', {user: user, result: result});
+        res.render('ots/result', {user: user, result: result, sub_code: req.body.sub_key, test_no: req.body.test_no });
     });
 
 });
@@ -293,11 +293,13 @@ router.post('/result', function(req, res, next) {
 /* Route for viewing solutions */
 router.get('/view-solutions', function(req, res, next) {
     var user = checkSession(req);
-    if(!user.isLoggedIn){
-        req.session.redirect = '/online-test';
-        res.redirect('/login');
-        return 0;
-    }
+    // if(!user.isLoggedIn){
+    //     req.session.redirect = '/online-test';
+    //     res.redirect('/login');
+    //     return 0;
+    // }
+    console.log(req.body.subcode);
+    console.log(req.body.test_no);
     res.render('ots/view_solutions', {user: user});
 });
 
@@ -449,9 +451,9 @@ router.post('/view-all-result', function(req, res, next) {
 /* GET upload page for teachers */
 router.get('/upload', function(req, res, next) {
     var user = checkSession(req);
-    // if(!validateTeacher(user, req, res)){
-    //     return;
-    // }
+    if(!validateTeacher(user, req, res)){
+        return;
+    }
     res.render('ots/tch_home', {
         title: 'Upload Excel File Here',
         error:'',
@@ -468,9 +470,9 @@ router.get('/upload', function(req, res, next) {
 router.post('/upload', function(req, res, next) {
     var formidable = require('formidable');
     var user = checkSession(req);
-    // if(!validateTeacher(user, req, res)){
-    //     return;
-    // }
+    if(!validateTeacher(user, req, res)){
+        return;
+    }
     var form = new formidable.IncomingForm();
     var dir = '../iem-nodejs/Uploads/Excel to CVS/';
     var uploadtodb = require('../supporting_codes/csv-database');

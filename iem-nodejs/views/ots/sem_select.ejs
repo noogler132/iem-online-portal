@@ -138,6 +138,8 @@
                             <div class="col col-2">Active Status</div>
                             <div class="col col-3">Delete</div>
                             <div class="col col-4">View Result</div>
+                            <!-- <div class="col col-5">Solution</div> -->
+
                         </li>
                         <% for(var j=0; j<active.length; j++){%>
                             <li class="table-row" id="<%= active[j].test_key %>">
@@ -179,6 +181,7 @@
                                                     </button>
                                                 </div>
                                                 
+                                                
                             </li>
                             <% } %>
                     </ul>
@@ -189,6 +192,7 @@
                 <input type="hidden" name="test_key" id="test_key">
                 <input type="hidden" name="action" id="action">
     </form>
+  
     <!-- <div class="column" style=" padding-left: 2%;">
             <div class="dropdown">
                 <div class="select">
