@@ -37,8 +37,8 @@ var mysql = require('mysql');
 db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '',
-    database: 'iemweb-databse',
+    password: 'password',
+    database: 'iemweb-database',
     port: '3306'
 });
 
