@@ -1,3 +1,6 @@
+# Documentation #
+Documentation available in Documentation folder with name Final Documentation.
+
 # README #
 
 This README would normally document whatever steps are necessary to get your application up and running.
@@ -28,6 +31,3 @@ This README would normally document whatever steps are necessary to get your app
 * Repo owner or admin
 * Other community or team contact
 
-
-# Major Project
-rajdeep added
